@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Webinar PIE Maule 2026 — Open Cluster Tech</title>
+<meta name="description" content="Inscripción al webinar gratuito Tecnología para la Inclusión, dirigido a equipos PIE de la Región del Maule.">
+<meta property="og:title" content="Webinar PIE Maule 2026 — Tecnología para la Inclusión">
+<meta property="og:description" content="Inscríbete al webinar gratuito para equipos PIE de la Región del Maule.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --navy:#001a60; --sky:#06b3fd; --ltblue:#d6eeff; --pale:#eaf6ff;
+  --orange:#ff7e00; --orange-soft:#fff4ea; --orange-border:#ffd199;
+  --mgray:#DDE4ED; --text:#1a2535; --subtle:#64748b; --bg:#eef2f7;
+  --ok:#16a34a; --err:#e11d48;
+}
+html, body { margin:0; padding:0; }
+body {
+  font-family:'Open Sans', sans-serif; background:var(--bg); color:var(--text);
+  -webkit-font-smoothing:antialiased; line-height:1.5; min-height:100vh;
+}
+
+/* ── Header ── */
+.hero {
+  background:linear-gradient(135deg, var(--navy) 0%, #002b8c 100%);
+  color:white; padding:36px 20px 80px;
+  position:relative; overflow:hidden;
+}
+.hero::after {
+  content:''; position:absolute; left:0; right:0; bottom:-1px; height:60px;
+  background:var(--bg);
+  clip-path:polygon(0 100%, 100% 100%, 100% 50%, 0 100%);
+}
+.hero-inner { max-width:720px; margin:0 auto; position:relative; z-index:1; }
+.hero-brand {
+  display:inline-flex; align-items:center; gap:10px; margin-bottom:22px;
+  background:white; padding:10px 18px; border-radius:999px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.18);
+}
+.hero-brand img { height:30px; width:auto; display:block; }
+@media (max-width:520px) { .hero-brand img { height:26px; } }
+.hero h1 {
+  font-family:'Montserrat',sans-serif; font-weight:800; font-size:28px;
+  line-height:1.2; margin-bottom:8px;
+}
+.hero h1 .accent { color:var(--sky); }
+.hero h2 {
+  font-family:'Montserrat',sans-serif; font-weight:600; font-size:17px;
+  color:rgba(255,255,255,0.9); margin-bottom:14px;
+}
+.hero p.lead {
+  font-size:14.5px; color:rgba(255,255,255,0.78); max-width:560px;
+}
+.hero-meta {
+  display:flex; flex-wrap:wrap; gap:8px; margin-top:18px;
+}
+.chip {
+  display:inline-flex; align-items:center; gap:7px;
+  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2);
+  color:white; padding:6px 12px; border-radius:999px;
+  font-size:11.5px; font-weight:600; backdrop-filter:blur(6px);
+}
+.chip strong { color:var(--sky); }
+.chip svg { width:14px; height:14px; flex-shrink:0; opacity:0.9; }
+
+/* ── Container ── */
+.wrap { max-width:720px; margin:-44px auto 16px; padding:0 16px; position:relative; z-index:2; }
+
+/* ── Progress ── */
+.progress-bar {
+  background:white; border-radius:12px; padding:12px 16px;
+  box-shadow:0 6px 24px rgba(0,26,96,0.08); border:1px solid var(--mgray);
+  display:flex; align-items:center; gap:12px; margin-bottom:18px;
+  position:sticky; top:8px; z-index:5;
+}
+.progress-text { font-size:12px; color:var(--subtle); font-weight:600; flex-shrink:0; }
+.progress-text strong { color:var(--navy); font-size:13px; }
+.progress-track { flex:1; height:6px; background:var(--mgray); border-radius:3px; overflow:hidden; }
+.progress-fill {
+  height:100%; background:linear-gradient(90deg, var(--sky), var(--navy));
+  border-radius:3px; width:0%; transition:width .35s ease;
+}
+
+/* ── Sections ── */
+.section {
+  background:white; border-radius:14px; padding:24px 22px;
+  box-shadow:0 4px 18px rgba(0,26,96,0.06); border:1px solid var(--mgray);
+  margin-bottom:16px;
+}
+.section-head { display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.section-num {
+  width:38px; height:38px; border-radius:50%; flex-shrink:0;
+  background:linear-gradient(135deg, var(--sky), var(--navy));
+  color:white; font-family:'Montserrat',sans-serif; font-weight:800; font-size:15px;
+  display:flex; align-items:center; justify-content:center;
+}
+.section-title h3 {
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:17px;
+  color:var(--navy); line-height:1.2;
+}
+.section-title p { font-size:12.5px; color:var(--subtle); margin-top:2px; }
+
+/* sección destacada (pregunta al expositor) */
+.section.featured {
+  background:linear-gradient(180deg, var(--orange-soft) 0%, white 100%);
+  border:1.5px solid var(--orange-border);
+}
+.section.featured .section-num {
+  background:linear-gradient(135deg, #ff9d3d, var(--orange));
+}
+.section.featured .section-title h3 { color:#a14400; display:inline-flex; align-items:center; gap:9px; }
+.section.featured .section-title h3 svg { width:20px; height:20px; flex-shrink:0; }
+.featured-banner {
+  background:white; border:1px dashed var(--orange-border);
+  border-radius:8px; padding:10px 12px; margin-bottom:14px;
+  font-size:12.5px; color:#7a3a00; line-height:1.45;
+}
+.featured-banner strong { color:var(--orange); }
+
+/* ── Form fields ── */
+.field { margin-bottom:14px; }
+.field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:520px) { .field-row { grid-template-columns:1fr; } }
+.field label.lbl {
+  display:block; font-size:12px; font-weight:700; color:var(--text);
+  margin-bottom:6px; letter-spacing:0.2px;
+}
+.field label.lbl .req { color:var(--err); margin-left:2px; }
+.field .hint { font-size:11.5px; color:var(--subtle); margin-top:4px; }
+
+input[type=text], input[type=email], textarea, select {
+  width:100%; padding:11px 13px; border:1.5px solid var(--mgray); border-radius:8px;
+  font-family:'Open Sans',sans-serif; font-size:14px; color:var(--text);
+  outline:none; background:#F7F9FC; transition:all .18s;
+}
+input[type=text]:focus, input[type=email]:focus, textarea:focus, select:focus {
+  border-color:var(--sky); box-shadow:0 0 0 3px rgba(6,179,253,0.15); background:white;
+}
+textarea { resize:vertical; min-height:90px; line-height:1.55; font-family:inherit; }
+input.invalid, textarea.invalid, select.invalid { border-color:var(--err); background:#fff5f6; }
+.error-msg { font-size:11.5px; color:var(--err); margin-top:4px; display:none; font-weight:600; }
+.error-msg.show { display:block; }
+
+/* ── Comuna combobox ── */
+.combo { position:relative; }
+.combo input {
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2364748b' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 14px center; padding-right:34px;
+}
+.combo-list {
+  position:absolute; top:calc(100% + 4px); left:0; right:0;
+  background:white; border:1.5px solid var(--mgray); border-radius:8px;
+  max-height:220px; overflow-y:auto; box-shadow:0 8px 24px rgba(0,26,96,0.12);
+  z-index:50; display:none;
+}
+.combo-list.open { display:block; }
+.combo-list .item { padding:9px 13px; font-size:13.5px; cursor:pointer; }
+.combo-list .item:hover, .combo-list .item.active { background:var(--pale); color:var(--navy); }
+.combo-list .empty { padding:14px; font-size:12.5px; color:var(--subtle); text-align:center; }
+
+/* ── Radio / checkbox cards ── */
+.opts { display:flex; flex-direction:column; gap:8px; }
+.opts.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+@media (max-width:520px) { .opts.grid-2 { grid-template-columns:1fr; } }
+.opt {
+  display:flex; align-items:center; gap:10px;
+  padding:12px 14px; border:1.5px solid var(--mgray); border-radius:9px;
+  cursor:pointer; background:white; transition:all .15s;
+  font-size:14px; color:var(--text);
+}
+.opt:hover { border-color:var(--sky); background:var(--pale); }
+.opt input { accent-color:var(--sky); width:18px; height:18px; flex-shrink:0; cursor:pointer; }
+.opt input:checked ~ .opt-text { color:var(--navy); font-weight:600; }
+.opt:has(input:checked) { border-color:var(--sky); background:var(--pale); box-shadow:0 0 0 3px rgba(6,179,253,0.1); }
+.opt:has(input:checked) .opt-text { color:var(--navy); font-weight:600; }
+.opt-text { flex:1; }
+
+/* Variante con descripción debajo del título */
+.opt-rich { align-items:flex-start; padding:13px 14px; }
+.opt-rich input { margin-top:2px; }
+.opt-rich .opt-text strong {
+  display:block; font-weight:600; font-size:14px; color:var(--text);
+  line-height:1.35;
+}
+.opt-rich .opt-text small {
+  display:block; font-size:12.5px; color:var(--subtle); margin-top:4px;
+  line-height:1.5; font-weight:400;
+}
+.opt-rich:has(input:checked) .opt-text strong { color:var(--navy); }
+.opt-rich:has(input:checked) .opt-text small { color:#445064; }
+
+/* ── Submit ── */
+.submit-wrap { padding:8px 0 0; }
+.btn-submit {
+  width:100%; padding:16px; border:none; border-radius:10px;
+  background:linear-gradient(90deg, var(--sky), var(--navy));
+  color:white; font-family:'Montserrat',sans-serif; font-weight:700; font-size:15.5px;
+  letter-spacing:0.5px; cursor:pointer; transition:all .2s;
+  box-shadow:0 6px 20px rgba(0,26,96,0.25);
+}
+.btn-submit:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 10px 28px rgba(0,26,96,0.35); }
+.btn-submit:disabled { opacity:0.5; cursor:not-allowed; }
+.btn-submit .sp {
+  display:none; width:16px; height:16px; border:2px solid rgba(255,255,255,0.35);
+  border-top-color:white; border-radius:50%; animation:spin .7s linear infinite;
+  vertical-align:middle; margin-right:8px;
+}
+.btn-submit.loading .sp { display:inline-block; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* ── Honeypot ── */
+.hp { position:absolute; left:-9999px; opacity:0; pointer-events:none; }
+
+/* ── Footer ── */
+.foot {
+  text-align:center; padding:14px 16px 32px; color:var(--subtle); font-size:12px;
+}
+.foot img.foot-logo { height:42px; width:auto; opacity:0.95; margin-bottom:10px; display:inline-block; }
+.foot a { color:var(--navy); text-decoration:none; font-weight:600; }
+.foot a:hover { text-decoration:underline; }
+.foot .contact-card {
+  display:inline-block; background:white; border:1px solid var(--mgray);
+  border-radius:12px; padding:16px 22px; margin-top:4px;
+  box-shadow:0 4px 16px rgba(0,26,96,0.05); text-align:left;
+}
+.foot .contact-card .contact-name {
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:14px;
+  color:var(--navy); margin-bottom:2px;
+}
+.foot .contact-card .contact-role {
+  font-size:11.5px; color:var(--subtle); margin-bottom:10px;
+}
+.foot .contact-card .contact-line {
+  display:flex; align-items:center; gap:8px;
+  font-size:12.5px; color:var(--text); padding:3px 0;
+}
+.foot .contact-card .contact-line svg { width:14px; height:14px; color:var(--sky); flex-shrink:0; }
+.foot .contact-card .contact-line.wa svg { color:#25D366; }
+.foot .copy { margin-top:14px; font-size:11px; color:var(--subtle); }
+
+/* ── Thanks screen ── */
+.thanks { display:none; }
+.thanks.show { display:block; }
+.form-screen.hide { display:none; }
+.thanks-card {
+  background:white; border-radius:14px; padding:36px 24px;
+  text-align:center; box-shadow:0 10px 30px rgba(0,26,96,0.1);
+  border:1px solid var(--mgray);
+}
+.thanks-icon {
+  width:72px; height:72px; border-radius:50%; margin:0 auto 18px;
+  background:linear-gradient(135deg, var(--sky), var(--navy));
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 24px rgba(6,179,253,0.3);
+}
+.thanks-icon svg { width:36px; height:36px; }
+.thanks h2 {
+  font-family:'Montserrat',sans-serif; font-weight:800; font-size:24px;
+  color:var(--navy); margin-bottom:8px;
+}
+.thanks p { color:var(--subtle); font-size:14.5px; margin-bottom:18px; }
+.thanks p strong { color:var(--text); }
+.thanks-summary {
+  background:var(--pale); border-radius:10px; padding:14px 16px;
+  text-align:left; font-size:13px; color:var(--text); margin:18px 0;
+}
+.thanks-summary div { padding:4px 0; }
+.thanks-summary strong { color:var(--navy); }
+.thanks-share {
+  display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:14px;
+}
+.btn-share {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 16px; border-radius:8px; border:1.5px solid var(--mgray);
+  background:white; color:var(--navy); font-weight:700; font-size:13px;
+  cursor:pointer; transition:all .15s; font-family:inherit;
+}
+.btn-share svg { width:16px; height:16px; flex-shrink:0; }
+.btn-share:hover { border-color:var(--sky); background:var(--pale); }
+
+@media (max-width:560px) {
+  .hero { padding:28px 18px 70px; }
+  .hero h1 { font-size:23px; }
+  .hero h2 { font-size:15px; }
+  .section { padding:20px 16px; border-radius:12px; }
+  .section-num { width:34px; height:34px; font-size:14px; }
+  .section-title h3 { font-size:15.5px; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-brand">
+      <img src="assets/oct-logo.png" alt="Open Cluster Tech · Construyendo Inclusión">
+    </div>
+    <h1>Webinar PIE Maule 2026<br><span class="accent">Tecnología para la Inclusión</span></h1>
+    <h2>Herramientas para Equipos PIE</h2>
+    <p class="lead">
+      Estamos preparando un webinar gratuito para apoyar a los equipos PIE de la Región del Maule.
+      Tu opinión nos ayuda a definir la fecha, los temas y el contenido. Toma menos de 3 minutos.
+    </p>
+    <div class="hero-meta">
+      <div class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span><strong>Duración:</strong> 1 hora</span>
+      </div>
+      <div class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span><strong>Dirigido a:</strong> equipos PIE</span>
+      </div>
+      <div class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span><strong>Modalidad:</strong> Online</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- Form screen -->
+  <div class="form-screen" id="formScreen">
+
+    <div class="progress-bar">
+      <div class="progress-text">Avance <strong id="progressLabel">0%</strong></div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <form id="form" novalidate>
+
+      <!-- honeypot -->
+      <div class="hp" aria-hidden="true">
+        <label>No completar: <input type="text" name="website" id="hp_website" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <!-- ░░░ 1. IDENTIFICACIÓN ░░░ -->
+      <section class="section">
+        <div class="section-head">
+          <div class="section-num">1</div>
+          <div class="section-title">
+            <h3>Identificación</h3>
+            <p>Cuéntanos quién eres y desde dónde participas.</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="nombre">Nombre completo <span class="req">*</span></label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+          <div class="error-msg" data-for="nombre">Ingresa tu nombre completo.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="establecimiento">Establecimiento educacional <span class="req">*</span></label>
+          <input type="text" id="establecimiento" name="establecimiento" autocomplete="organization" required>
+          <div class="error-msg" data-for="establecimiento">Ingresa el nombre del establecimiento.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="comuna">Comuna <span class="req">*</span></label>
+          <div class="combo">
+            <input type="text" id="comuna" name="comuna" autocomplete="off" placeholder="Selecciona o escribe…" required>
+            <div class="combo-list" id="comunaList"></div>
+          </div>
+          <div class="error-msg" data-for="comuna">Selecciona una comuna del Maule.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl">Dependencia <span class="req">*</span></label>
+          <div class="opts grid-2">
+            <label class="opt"><input type="radio" name="dependencia" value="Municipal" required><span class="opt-text">Municipal</span></label>
+            <label class="opt"><input type="radio" name="dependencia" value="SLEP"><span class="opt-text">SLEP</span></label>
+            <label class="opt"><input type="radio" name="dependencia" value="Particular Subvencionado"><span class="opt-text">Particular Subvencionado</span></label>
+            <label class="opt"><input type="radio" name="dependencia" value="Particular Pagado"><span class="opt-text">Particular Pagado</span></label>
+          </div>
+          <div class="error-msg" data-for="dependencia">Selecciona una dependencia.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl">Cargo <span class="req">*</span></label>
+          <div class="opts grid-2">
+            <label class="opt"><input type="radio" name="cargo" value="Director/a PIE" required><span class="opt-text">Director/a PIE</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Encargado/a PIE"><span class="opt-text">Encargado/a PIE</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Encargado/a de Convivencia"><span class="opt-text">Encargado/a de Convivencia</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Otro" data-other="cargoOtro"><span class="opt-text">Otro</span></label>
+          </div>
+          <input type="text" id="cargoOtro" name="cargoOtro" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
+          <div class="error-msg" data-for="cargo">Selecciona tu cargo.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="email">Correo electrónico <span class="req">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="nombre@correo.cl" required>
+          <div class="hint">Te avisaremos por aquí cuando se confirme la fecha del webinar.</div>
+          <div class="error-msg" data-for="email">Ingresa un correo válido.</div>
+        </div>
+      </section>
+
+      <!-- ░░░ 2. INTERÉS TEMÁTICO ░░░ -->
+      <section class="section">
+        <div class="section-head">
+          <div class="section-num">2</div>
+          <div class="section-title">
+            <h3>Interés temático</h3>
+            <p>Puedes marcar más de una opción. <span class="req">*</span></p>
+          </div>
+        </div>
+
+        <div class="opts" id="temasGroup">
+          <label class="opt opt-rich">
+            <input type="checkbox" name="temas" value="CAA - Comunicación Aumentativa Alternativa">
+            <span class="opt-text">
+              <strong>CAA — Comunicación Aumentativa Alternativa</strong>
+              <small>Sistemas y ayudas técnicas que complementan o sustituyen el lenguaje oral, facilitando la comunicación funcional mediante tableros de comunicación y pictogramas.</small>
+            </span>
+          </label>
+          <label class="opt opt-rich">
+            <input type="checkbox" name="temas" value="Entorno Multisensorial">
+            <span class="opt-text">
+              <strong>Entorno Multisensorial</strong>
+              <small>Espacio estructurado con estímulos sensoriales controlados para favorecer la autorregulación y la integración sensorial.</small>
+            </span>
+          </label>
+          <label class="opt opt-rich">
+            <input type="checkbox" name="temas" value="Acceso al computador">
+            <span class="opt-text">
+              <strong>Acceso al computador</strong>
+              <small>Conjunto de tecnologías de apoyo y adaptaciones que permiten el uso funcional y autónomo de dispositivos computacionales.</small>
+            </span>
+          </label>
+          <label class="opt opt-rich">
+            <input type="checkbox" name="temas" value="Acceso universal de espacios educativos">
+            <span class="opt-text">
+              <strong>Acceso universal de espacios educativos</strong>
+              <small>Condiciones de infraestructura y diseño que aseguran que todos los estudiantes puedan acceder, desplazarse y participar plenamente en los espacios educativos.</small>
+            </span>
+          </label>
+          <label class="opt"><input type="checkbox" name="temas" value="Otros" data-other="temasOtro"><span class="opt-text">Otros (especificar)</span></label>
+        </div>
+        <input type="text" id="temasOtro" name="temasOtro" placeholder="¿Qué otro tema te interesaría?" style="margin-top:8px; display:none;">
+        <div class="error-msg" data-for="temas">Marca al menos un tema.</div>
+      </section>
+
+      <!-- ░░░ 3. DISPONIBILIDAD HORARIA ░░░ -->
+      <section class="section">
+        <div class="section-head">
+          <div class="section-num">3</div>
+          <div class="section-title">
+            <h3>Disponibilidad horaria</h3>
+            <p>El webinar dura 1 hora. ¿Cuándo te acomoda más?</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="lbl">Día de la semana preferido <span class="req">*</span></label>
+          <div class="opts grid-2">
+            <label class="opt"><input type="radio" name="dia" value="Lunes" required><span class="opt-text">Lunes</span></label>
+            <label class="opt"><input type="radio" name="dia" value="Martes"><span class="opt-text">Martes</span></label>
+            <label class="opt"><input type="radio" name="dia" value="Miércoles"><span class="opt-text">Miércoles</span></label>
+            <label class="opt"><input type="radio" name="dia" value="Jueves"><span class="opt-text">Jueves</span></label>
+            <label class="opt"><input type="radio" name="dia" value="Viernes"><span class="opt-text">Viernes</span></label>
+          </div>
+          <div class="error-msg" data-for="dia">Elige un día.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl">Franja horaria preferida <span class="req">*</span></label>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="franja" value="Mañana (antes de las 12:00)" required><span class="opt-text">Mañana (antes de las 12:00)</span></label>
+            <label class="opt"><input type="radio" name="franja" value="Mediodía (12:00–13:30)"><span class="opt-text">Mediodía (12:00–13:30)</span></label>
+            <label class="opt"><input type="radio" name="franja" value="Media tarde (14:00–16:00)"><span class="opt-text">Media tarde (14:00–16:00)</span></label>
+            <label class="opt"><input type="radio" name="franja" value="Vespertino (después de las 16:00)"><span class="opt-text">Vespertino (después de las 16:00)</span></label>
+          </div>
+          <div class="error-msg" data-for="franja">Elige una franja horaria.</div>
+        </div>
+      </section>
+
+      <!-- ░░░ 4. DIAGNÓSTICO ░░░ -->
+      <section class="section">
+        <div class="section-head">
+          <div class="section-num">4</div>
+          <div class="section-title">
+            <h3>Diagnóstico del establecimiento</h3>
+            <p>¿Cuentan con sala sensorial o equipamiento de apoyo especializado? <span class="req">*</span></p>
+          </div>
+        </div>
+
+        <div class="opts">
+          <label class="opt"><input type="radio" name="sala" value="Sí, equipada" required><span class="opt-text">Sí, equipada</span></label>
+          <label class="opt"><input type="radio" name="sala" value="Sí, pero falta equipamiento técnico"><span class="opt-text">Sí, pero falta equipamiento técnico</span></label>
+          <label class="opt"><input type="radio" name="sala" value="No, estamos en etapa de proyecto"><span class="opt-text">No, estamos en etapa de proyecto</span></label>
+          <label class="opt"><input type="radio" name="sala" value="No, pero nos interesa implementar una este 2026"><span class="opt-text">No, pero nos interesa implementar una este 2026</span></label>
+        </div>
+        <div class="error-msg" data-for="sala">Selecciona una opción.</div>
+      </section>
+
+      <!-- ░░░ 5. PREGUNTA AL EXPOSITOR (DESTACADA) ░░░ -->
+      <section class="section featured">
+        <div class="section-head">
+          <div class="section-num">5</div>
+          <div class="section-title">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              Pregunta para el expositor
+            </h3>
+            <p>Esta sección es la más valiosa.</p>
+          </div>
+        </div>
+
+        <div class="featured-banner">
+          <strong>Tu pregunta llega directo al expositor.</strong> La revisará antes del webinar para
+          adaptar los contenidos a las necesidades reales de los equipos PIE de la región.
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="pregunta">¿Cuál es el principal desafío que enfrenta hoy su equipo PIE con respecto a la Ley TEA? <span class="req">*</span></label>
+          <textarea id="pregunta" name="pregunta" rows="5" placeholder="Cuéntanos en tus palabras…" required></textarea>
+          <div class="error-msg" data-for="pregunta">Comparte al menos una pregunta o desafío.</div>
+        </div>
+      </section>
+
+      <!-- ░░░ 6. COMENTARIOS ░░░ -->
+      <section class="section">
+        <div class="section-head">
+          <div class="section-num">6</div>
+          <div class="section-title">
+            <h3>Comentarios adicionales</h3>
+            <p>¿Algo más que quieras compartir? (Opcional)</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="comentarios">Necesidades, ideas, contexto que quieras agregar</label>
+          <textarea id="comentarios" name="comentarios" rows="3" placeholder="Lo que quieras que sepamos…"></textarea>
+        </div>
+      </section>
+
+      <div class="submit-wrap">
+        <button type="submit" class="btn-submit" id="btnSubmit">
+          <span class="sp"></span><span class="lbl-txt">Enviar mi inscripción</span>
+        </button>
+      </div>
+
+      <input type="hidden" name="t_load" id="t_load">
+      <input type="hidden" name="origen" value="webinar-pie-maule-2026">
+    </form>
+  </div>
+
+  <!-- Thanks screen -->
+  <div class="thanks" id="thanks">
+    <div class="thanks-card">
+      <div class="thanks-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2>¡Gracias por inscribirte!</h2>
+      <p>Tu información llegó correctamente. Te escribiremos a <strong id="thanksEmail">tu correo</strong> apenas confirmemos la fecha y el horario del webinar.</p>
+
+      <div class="thanks-summary" id="thanksSummary"></div>
+
+      <p style="font-size:13px; margin-top:8px;">
+        ¿Conoces a otros equipos PIE del Maule? Comparte el link y ayúdanos a llegar a más establecimientos.
+      </p>
+      <div class="thanks-share">
+        <button class="btn-share" id="btnCopy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>Copiar link</span>
+        </button>
+        <a class="btn-share" id="btnWhatsApp" target="_blank" rel="noopener" style="text-decoration:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span>Compartir por WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="foot">
+  <img src="assets/oct-logo.png" alt="Open Cluster Tech · Construyendo Inclusión" class="foot-logo">
+  <div class="contact-card">
+    <div class="contact-name">William Marín</div>
+    <div class="contact-role">Ejecutivo Comercial · Departamento Comercial · OpenCluster Tech</div>
+    <div class="contact-line">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <a href="tel:+56942427631">+56 9 4242 7631</a>
+    </div>
+    <div class="contact-line wa">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l.46.731-.999 3.648 3.736-.984.482.273zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.521.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+      <a href="https://wa.me/56998748982?text=Hola%20William%2C%20te%20escribo%20por%20el%20Webinar%20PIE%20Maule%202026" target="_blank" rel="noopener">WhatsApp +56 9 9874 8982</a>
+    </div>
+    <div class="contact-line">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <a href="mailto:william.marin@opencluster-tech.cl">william.marin@opencluster-tech.cl</a>
+    </div>
+  </div>
+  <div class="copy">Open Cluster Tech · Campaña PIE Maule 2026</div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════════════════════
+   CONFIG
+   ════════════════════════════════════════════════════════ */
+const APPS_SCRIPT_URL = ''; // ← se completa cuando deploye el Apps Script
+
+const COMUNAS_MAULE = [
+  'Cauquenes','Chanco','Colbún','Constitución','Curepto','Curicó','Empedrado',
+  'Hualañé','Licantén','Linares','Longaví','Maule','Molina','Parral','Pelarco',
+  'Pelluhue','Pencahue','Rauco','Retiro','Río Claro','Romeral','Sagrada Familia',
+  'San Clemente','San Javier','San Rafael','Talca','Teno','Vichuquén','Villa Alegre',
+  'Yerbas Buenas'
+];
+
+const REQUIRED = ['nombre','establecimiento','comuna','dependencia','cargo','email','dia','franja','sala','pregunta'];
+// "temas" se valida aparte (es checkbox group)
+
+document.getElementById('t_load').value = Date.now();
+
+/* ════════════════════════════════════════════════════════
+   COMUNA COMBOBOX
+   ════════════════════════════════════════════════════════ */
+(function initComuna() {
+  const input = document.getElementById('comuna');
+  const list = document.getElementById('comunaList');
+
+  function render(filter) {
+    const f = (filter || '').toLowerCase().trim();
+    const matches = COMUNAS_MAULE.filter(c => c.toLowerCase().includes(f));
+    if (!matches.length) {
+      list.innerHTML = '<div class="empty">No encontramos esa comuna. Solo Región del Maule.</div>';
+    } else {
+      list.innerHTML = matches.map(c => `<div class="item" data-v="${c}">${c}</div>`).join('');
+    }
+  }
+
+  input.addEventListener('focus', () => { render(input.value); list.classList.add('open'); });
+  input.addEventListener('input', () => { render(input.value); list.classList.add('open'); });
+  input.addEventListener('blur', () => setTimeout(() => list.classList.remove('open'), 180));
+  list.addEventListener('mousedown', (e) => {
+    const item = e.target.closest('.item');
+    if (!item) return;
+    e.preventDefault();
+    input.value = item.dataset.v;
+    list.classList.remove('open');
+    clearError(input);
+    updateProgress();
+  });
+})();
+
+/* ════════════════════════════════════════════════════════
+   "OTRO" toggles
+   ════════════════════════════════════════════════════════ */
+document.querySelectorAll('input[data-other]').forEach(inp => {
+  inp.addEventListener('change', () => {
+    const other = document.getElementById(inp.dataset.other);
+    if (!other) return;
+    const groupName = inp.name;
+    const someOther = document.querySelector(`input[name="${groupName}"][data-other]:checked`);
+    other.style.display = someOther ? 'block' : 'none';
+    if (!someOther) other.value = '';
+  });
+});
+
+/* ════════════════════════════════════════════════════════
+   PROGRESS
+   ════════════════════════════════════════════════════════ */
+function isFilled(name) {
+  if (name === 'temas') return !!document.querySelector('input[name="temas"]:checked');
+  const els = document.querySelectorAll(`[name="${name}"]`);
+  if (!els.length) return false;
+  if (els[0].type === 'radio' || els[0].type === 'checkbox') {
+    return [...els].some(e => e.checked);
+  }
+  return els[0].value.trim().length > 0;
+}
+
+function updateProgress() {
+  const all = [...REQUIRED, 'temas'];
+  const done = all.filter(isFilled).length;
+  const pct = Math.round((done / all.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = pct + '%';
+}
+
+document.getElementById('form').addEventListener('input', updateProgress);
+document.getElementById('form').addEventListener('change', updateProgress);
+
+/* ════════════════════════════════════════════════════════
+   VALIDATION
+   ════════════════════════════════════════════════════════ */
+function showError(name, show) {
+  const msg = document.querySelector(`.error-msg[data-for="${name}"]`);
+  if (msg) msg.classList.toggle('show', !!show);
+  document.querySelectorAll(`[name="${name}"]`).forEach(el => {
+    if (el.type === 'text' || el.type === 'email' || el.tagName === 'TEXTAREA') {
+      el.classList.toggle('invalid', !!show);
+    }
+  });
+}
+function clearError(elOrName) {
+  const name = typeof elOrName === 'string' ? elOrName : elOrName.name;
+  showError(name, false);
+}
+
+['nombre','establecimiento','comuna','email','pregunta'].forEach(n => {
+  document.getElementById(n).addEventListener('input', () => clearError(n));
+});
+
+function validate() {
+  let ok = true;
+  REQUIRED.forEach(n => {
+    if (!isFilled(n)) { showError(n, true); ok = false; }
+  });
+  // temas (checkbox group)
+  if (!isFilled('temas')) { showError('temas', true); ok = false; }
+  // email
+  const email = document.getElementById('email').value.trim();
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email', true); ok = false; }
+  // comuna debe estar en lista
+  const c = document.getElementById('comuna').value.trim();
+  if (c && !COMUNAS_MAULE.includes(c)) { showError('comuna', true); ok = false; }
+  return ok;
+}
+
+/* ════════════════════════════════════════════════════════
+   SUBMIT
+   ════════════════════════════════════════════════════════ */
+document.getElementById('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  // anti-spam
+  if (document.getElementById('hp_website').value) return;
+  const tLoad = parseInt(document.getElementById('t_load').value, 10);
+  if (Date.now() - tLoad < 3000) {
+    alert('Por favor revisa tus datos antes de enviar.');
+    return;
+  }
+
+  if (!validate()) {
+    const firstErr = document.querySelector('.error-msg.show');
+    if (firstErr) firstErr.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  const btn = document.getElementById('btnSubmit');
+  btn.classList.add('loading');
+  btn.disabled = true;
+  btn.querySelector('.lbl-txt').textContent = 'Enviando…';
+
+  // recolectar payload
+  const fd = new FormData(e.target);
+  const data = {};
+  for (const [k,v] of fd.entries()) {
+    if (data[k] === undefined) data[k] = v;
+    else if (Array.isArray(data[k])) data[k].push(v);
+    else data[k] = [data[k], v];
+  }
+  // temas = array
+  data.temas = [...document.querySelectorAll('input[name="temas"]:checked')].map(i => i.value);
+  data.timestamp = new Date().toISOString();
+  data.userAgent = navigator.userAgent;
+
+  try {
+    if (APPS_SCRIPT_URL) {
+      // fire-and-forget para evitar CORS preflight
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {'Content-Type': 'text/plain;charset=utf-8'},
+        body: JSON.stringify({ action: 'guardar_inscripcion_webinar', data })
+      });
+    } else {
+      console.warn('APPS_SCRIPT_URL no configurada todavía. Datos:', data);
+    }
+    showThanks(data);
+  } catch (err) {
+    console.error(err);
+    btn.classList.remove('loading');
+    btn.disabled = false;
+    btn.querySelector('.lbl-txt').textContent = 'Enviar mi inscripción';
+    alert('Hubo un problema al enviar. Intenta nuevamente o escríbenos a contacto@opencluster-tech.cl');
+  }
+});
+
+/* ════════════════════════════════════════════════════════
+   THANKS SCREEN
+   ════════════════════════════════════════════════════════ */
+function showThanks(data) {
+  document.getElementById('formScreen').classList.add('hide');
+  document.getElementById('thanks').classList.add('show');
+  document.getElementById('thanksEmail').textContent = data.email || 'tu correo';
+
+  const summary = document.getElementById('thanksSummary');
+  summary.innerHTML = `
+    <div><strong>Establecimiento:</strong> ${escapeHtml(data.establecimiento)} · ${escapeHtml(data.comuna)}</div>
+    <div><strong>Cargo:</strong> ${escapeHtml(data.cargo)}${data.cargoOtro ? ' — ' + escapeHtml(data.cargoOtro) : ''}</div>
+    <div><strong>Tema(s):</strong> ${(data.temas||[]).map(escapeHtml).join(' · ')}</div>
+    <div><strong>Disponibilidad:</strong> ${escapeHtml(data.dia)} · ${escapeHtml(data.franja)}</div>
+  `;
+
+  // share
+  const url = window.location.href.split('?')[0];
+  const shareText = `Te recomiendo este webinar gratuito para equipos PIE de la Región del Maule: ${url}`;
+  document.getElementById('btnWhatsApp').href = 'https://wa.me/?text=' + encodeURIComponent(shareText);
+  document.getElementById('btnCopy').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      const b = document.getElementById('btnCopy');
+      const span = b.querySelector('span');
+      const old = span.textContent;
+      span.textContent = '¡Copiado!';
+      setTimeout(() => span.textContent = old, 1800);
+    } catch { prompt('Copia este link:', url); }
+  });
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function escapeHtml(s) {
+  return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+updateProgress();
+</script>
+</body>
+</html>

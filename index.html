@@ -29,36 +29,36 @@ body {
 /* ── Header ── */
 .hero {
   background:linear-gradient(135deg, var(--navy) 0%, #002b8c 100%);
-  color:white; padding:36px 20px 80px;
+  color:white; padding:22px 20px 56px;
   position:relative; overflow:hidden;
 }
 .hero::after {
-  content:''; position:absolute; left:0; right:0; bottom:-1px; height:60px;
+  content:''; position:absolute; left:0; right:0; bottom:-1px; height:40px;
   background:var(--bg);
   clip-path:polygon(0 100%, 100% 100%, 100% 50%, 0 100%);
 }
 .hero-inner { max-width:720px; margin:0 auto; position:relative; z-index:1; }
 .hero-brand {
-  display:inline-flex; align-items:center; gap:10px; margin-bottom:22px;
-  background:white; padding:10px 18px; border-radius:999px;
+  display:inline-flex; align-items:center; gap:10px; margin-bottom:14px;
+  background:white; padding:7px 14px; border-radius:999px;
   box-shadow:0 6px 20px rgba(0,0,0,0.18);
 }
-.hero-brand img { height:30px; width:auto; display:block; }
-@media (max-width:520px) { .hero-brand img { height:26px; } }
+.hero-brand img { height:24px; width:auto; display:block; }
+@media (max-width:520px) { .hero-brand img { height:22px; } }
 .hero h1 {
-  font-family:'Montserrat',sans-serif; font-weight:800; font-size:28px;
-  line-height:1.2; margin-bottom:8px;
+  font-family:'Montserrat',sans-serif; font-weight:800; font-size:24px;
+  line-height:1.2; margin-bottom:6px;
 }
 .hero h1 .accent { color:var(--sky); }
 .hero h2 {
-  font-family:'Montserrat',sans-serif; font-weight:600; font-size:17px;
-  color:rgba(255,255,255,0.9); margin-bottom:14px;
+  font-family:'Montserrat',sans-serif; font-weight:600; font-size:15px;
+  color:rgba(255,255,255,0.9); margin-bottom:10px;
 }
 .hero p.lead {
-  font-size:14.5px; color:rgba(255,255,255,0.78); max-width:560px;
+  font-size:13px; color:rgba(255,255,255,0.78); max-width:560px; line-height:1.45;
 }
 .hero-meta {
-  display:flex; flex-wrap:wrap; gap:8px; margin-top:18px;
+  display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;
 }
 .chip {
   display:inline-flex; align-items:center; gap:7px;
@@ -89,11 +89,11 @@ body {
 
 /* ── Sections ── */
 .section {
-  background:white; border-radius:14px; padding:24px 22px;
+  background:white; border-radius:14px; padding:18px 18px;
   box-shadow:0 4px 18px rgba(0,26,96,0.06); border:1px solid var(--mgray);
-  margin-bottom:16px;
+  margin-bottom:12px;
 }
-.section-head { display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+.section-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
 .section-num {
   width:38px; height:38px; border-radius:50%; flex-shrink:0;
   background:linear-gradient(135deg, var(--sky), var(--navy));
@@ -101,7 +101,7 @@ body {
   display:flex; align-items:center; justify-content:center;
 }
 .section-title h3 {
-  font-family:'Montserrat',sans-serif; font-weight:700; font-size:17px;
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:15.5px;
   color:var(--navy); line-height:1.2;
 }
 .section-title p { font-size:12.5px; color:var(--subtle); margin-top:2px; }
@@ -124,25 +124,25 @@ body {
 .featured-banner strong { color:var(--orange); }
 
 /* ── Form fields ── */
-.field { margin-bottom:14px; }
+.field { margin-bottom:10px; }
 .field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 @media (max-width:520px) { .field-row { grid-template-columns:1fr; } }
 .field label.lbl {
-  display:block; font-size:12px; font-weight:700; color:var(--text);
-  margin-bottom:6px; letter-spacing:0.2px;
+  display:block; font-size:11.5px; font-weight:700; color:var(--text);
+  margin-bottom:4px; letter-spacing:0.2px;
 }
 .field label.lbl .req { color:var(--err); margin-left:2px; }
 .field .hint { font-size:11.5px; color:var(--subtle); margin-top:4px; }
 
 input[type=text], input[type=email], textarea, select {
-  width:100%; padding:11px 13px; border:1.5px solid var(--mgray); border-radius:8px;
-  font-family:'Open Sans',sans-serif; font-size:14px; color:var(--text);
+  width:100%; padding:9px 12px; border:1.5px solid var(--mgray); border-radius:8px;
+  font-family:'Open Sans',sans-serif; font-size:13px; color:var(--text);
   outline:none; background:#F7F9FC; transition:all .18s;
 }
 input[type=text]:focus, input[type=email]:focus, textarea:focus, select:focus {
   border-color:var(--sky); box-shadow:0 0 0 3px rgba(6,179,253,0.15); background:white;
 }
-textarea { resize:vertical; min-height:90px; line-height:1.55; font-family:inherit; }
+textarea { resize:vertical; min-height:74px; line-height:1.5; font-family:inherit; }
 input.invalid, textarea.invalid, select.invalid { border-color:var(--err); background:#fff5f6; }
 .error-msg { font-size:11.5px; color:var(--err); margin-top:4px; display:none; font-weight:600; }
 .error-msg.show { display:block; }
@@ -165,14 +165,14 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 .combo-list .empty { padding:14px; font-size:12.5px; color:var(--subtle); text-align:center; }
 
 /* ── Radio / checkbox cards ── */
-.opts { display:flex; flex-direction:column; gap:8px; }
-.opts.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.opts { display:flex; flex-direction:column; gap:6px; }
+.opts.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
 @media (max-width:520px) { .opts.grid-2 { grid-template-columns:1fr; } }
 .opt {
-  display:flex; align-items:center; gap:10px;
-  padding:12px 14px; border:1.5px solid var(--mgray); border-radius:9px;
+  display:flex; align-items:center; gap:9px;
+  padding:9px 12px; border:1.5px solid var(--mgray); border-radius:9px;
   cursor:pointer; background:white; transition:all .15s;
-  font-size:14px; color:var(--text);
+  font-size:13px; color:var(--text);
 }
 .opt:hover { border-color:var(--sky); background:var(--pale); }
 .opt input { accent-color:var(--sky); width:18px; height:18px; flex-shrink:0; cursor:pointer; }
@@ -182,15 +182,15 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 .opt-text { flex:1; }
 
 /* Variante con descripción debajo del título */
-.opt-rich { align-items:flex-start; padding:13px 14px; }
+.opt-rich { align-items:flex-start; padding:10px 12px; }
 .opt-rich input { margin-top:2px; }
 .opt-rich .opt-text strong {
-  display:block; font-weight:600; font-size:14px; color:var(--text);
+  display:block; font-weight:600; font-size:13px; color:var(--text);
   line-height:1.35;
 }
 .opt-rich .opt-text small {
-  display:block; font-size:12.5px; color:var(--subtle); margin-top:4px;
-  line-height:1.5; font-weight:400;
+  display:block; font-size:11.5px; color:var(--subtle); margin-top:3px;
+  line-height:1.45; font-weight:400;
 }
 .opt-rich:has(input:checked) .opt-text strong { color:var(--navy); }
 .opt-rich:has(input:checked) .opt-text small { color:#445064; }
@@ -198,9 +198,9 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 /* ── Submit ── */
 .submit-wrap { padding:8px 0 0; }
 .btn-submit {
-  width:100%; padding:16px; border:none; border-radius:10px;
+  width:100%; padding:13px; border:none; border-radius:10px;
   background:linear-gradient(90deg, var(--sky), var(--navy));
-  color:white; font-family:'Montserrat',sans-serif; font-weight:700; font-size:15.5px;
+  color:white; font-family:'Montserrat',sans-serif; font-weight:700; font-size:14.5px;
   letter-spacing:0.5px; cursor:pointer; transition:all .2s;
   box-shadow:0 6px 20px rgba(0,26,96,0.25);
 }
@@ -285,9 +285,9 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 .btn-share:hover { border-color:var(--sky); background:var(--pale); }
 
 @media (max-width:560px) {
-  .hero { padding:28px 18px 70px; }
-  .hero h1 { font-size:23px; }
-  .hero h2 { font-size:15px; }
+  .hero { padding:18px 18px 48px; }
+  .hero h1 { font-size:20px; }
+  .hero h2 { font-size:13.5px; }
   .section { padding:20px 16px; border-radius:12px; }
   .section-num { width:34px; height:34px; font-size:14px; }
   .section-title h3 { font-size:15.5px; }
@@ -352,9 +352,9 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         </div>
 
         <div class="field">
-          <label class="lbl" for="nombre">Nombre completo <span class="req">*</span></label>
+          <label class="lbl" for="nombre">Nombre <span class="req">*</span></label>
           <input type="text" id="nombre" name="nombre" autocomplete="name" required>
-          <div class="error-msg" data-for="nombre">Ingresa tu nombre completo.</div>
+          <div class="error-msg" data-for="nombre">Ingresa tu nombre.</div>
         </div>
 
         <div class="field">
@@ -369,7 +369,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
             <input type="text" id="comuna" name="comuna" autocomplete="off" placeholder="Selecciona o escribe…" required>
             <div class="combo-list" id="comunaList"></div>
           </div>
-          <div class="error-msg" data-for="comuna">Selecciona una comuna del Maule.</div>
+          <div class="error-msg" data-for="comuna">Selecciona una comuna válida.</div>
         </div>
 
         <div class="field">
@@ -379,8 +379,27 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
             <label class="opt"><input type="radio" name="dependencia" value="SLEP"><span class="opt-text">SLEP</span></label>
             <label class="opt"><input type="radio" name="dependencia" value="Particular Subvencionado"><span class="opt-text">Particular Subvencionado</span></label>
             <label class="opt"><input type="radio" name="dependencia" value="Particular Pagado"><span class="opt-text">Particular Pagado</span></label>
+            <label class="opt"><input type="radio" name="dependencia" value="Administración Delegada"><span class="opt-text">Administración Delegada</span></label>
+            <label class="opt"><input type="radio" name="dependencia" value="Otro" data-other="dependenciaOtra"><span class="opt-text">Otro</span></label>
           </div>
+          <input type="text" id="dependenciaOtra" name="dependenciaOtra" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
           <div class="error-msg" data-for="dependencia">Selecciona una dependencia.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl">Tipo de establecimiento <span class="req">*</span></label>
+          <div class="opts grid-2">
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Educación Parvularia" required><span class="opt-text">Educación Parvularia (jardín / sala cuna)</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Básica"><span class="opt-text">Escuela Básica</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Liceo Humanista-Científico"><span class="opt-text">Liceo Humanista-Científico</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Liceo Técnico-Profesional"><span class="opt-text">Liceo Técnico-Profesional</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Especial"><span class="opt-text">Escuela Especial (discapacidad)</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Especial de Lenguaje"><span class="opt-text">Escuela Especial de Lenguaje (TEL)</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Educación de Adultos (CEIA)"><span class="opt-text">Educación de Adultos (CEIA)</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Otro" data-other="tipoOtro"><span class="opt-text">Otro</span></label>
+          </div>
+          <input type="text" id="tipoOtro" name="tipoOtro" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
+          <div class="error-msg" data-for="tipoEstablecimiento">Selecciona el tipo de establecimiento.</div>
         </div>
 
         <div class="field">
@@ -599,7 +618,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
     </div>
     <div class="contact-line">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      <a href="mailto:william.marin@opencluster-tech.cl">william.marin@opencluster-tech.cl</a>
+      <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=william.marin@opencluster-tech.cl&amp;su=Webinar%20PIE%20Maule%202026" target="_blank" rel="noopener">william.marin@opencluster-tech.cl</a>
     </div>
   </div>
   <div class="copy">Open Cluster Tech · Campaña PIE Maule 2026</div>
@@ -609,17 +628,29 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 /* ════════════════════════════════════════════════════════
    CONFIG
    ════════════════════════════════════════════════════════ */
-const APPS_SCRIPT_URL = ''; // ← se completa cuando deploye el Apps Script
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbws21oUtUYoOck3ScLpIFYybeLMz6QpfD-Tk2FtI-Iv69gTuEqzIRgmSLzuiarsiiK2MA/exec';
 
-const COMUNAS_MAULE = [
-  'Cauquenes','Chanco','Colbún','Constitución','Curepto','Curicó','Empedrado',
-  'Hualañé','Licantén','Linares','Longaví','Maule','Molina','Parral','Pelarco',
-  'Pelluhue','Pencahue','Rauco','Retiro','Río Claro','Romeral','Sagrada Familia',
-  'San Clemente','San Javier','San Rafael','Talca','Teno','Vichuquén','Villa Alegre',
-  'Yerbas Buenas'
+// 346 comunas oficiales de Chile (INE) — el webinar es del Maule pero permitimos profes de cualquier región
+const COMUNAS_CHILE = [
+  'Arica','Camarones','General Lagos','Putre',
+  'Alto Hospicio','Camiña','Colchane','Huara','Iquique','Pica','Pozo Almonte',
+  'Antofagasta','Calama','María Elena','Mejillones','Ollagüe','San Pedro de Atacama','Sierra Gorda','Taltal','Tocopilla',
+  'Alto del Carmen','Caldera','Chañaral','Copiapó','Diego de Almagro','Freirina','Huasco','Tierra Amarilla','Vallenar',
+  'Andacollo','Canela','Combarbalá','Coquimbo','Illapel','La Higuera','La Serena','Los Vilos','Monte Patria','Ovalle','Paiguano','Punitaqui','Río Hurtado','Salamanca','Vicuña',
+  'Algarrobo','Cabildo','Calera','Calle Larga','Cartagena','Casablanca','Catemu','Concón','El Quisco','El Tabo','Hijuelas','Isla de Pascua','Juan Fernández','La Cruz','La Ligua','Limache','Llaillay','Los Andes','Nogales','Olmué','Panquehue','Papudo','Petorca','Puchuncaví','Putaendo','Quillota','Quilpué','Quintero','Rinconada','San Antonio','San Esteban','San Felipe','Santa María','Santo Domingo','Valparaíso','Villa Alemana','Viña del Mar','Zapallar',
+  'Alhué','Buin','Calera de Tango','Cerrillos','Cerro Navia','Colina','Conchalí','Curacaví','El Bosque','El Monte','Estación Central','Huechuraba','Independencia','Isla de Maipo','La Cisterna','La Florida','La Granja','La Pintana','La Reina','Lampa','Las Condes','Lo Barnechea','Lo Espejo','Lo Prado','Macul','Maipú','María Pinto','Melipilla','Ñuñoa','Padre Hurtado','Paine','Pedro Aguirre Cerda','Peñaflor','Peñalolén','Pirque','Providencia','Pudahuel','Puente Alto','Quilicura','Quinta Normal','Recoleta','Renca','San Bernardo','San Joaquín','San José de Maipo','San Miguel','San Pedro','San Ramón','Santiago','Talagante','Tiltil','Vitacura',
+  'Chimbarongo','Chépica','Codegua','Coinco','Coltauco','Doñihue','Graneros','La Estrella','Las Cabras','Litueche','Lolol','Machalí','Malloa','Marchihue','Mostazal','Nancagua','Navidad','Olivar','Palmilla','Paredones','Peralillo','Peumo','Pichidegua','Pichilemu','Placilla','Pumanque','Quinta de Tilcoco','Rancagua','Rengo','Requínoa','San Fernando','San Vicente','Santa Cruz',
+  'Cauquenes','Chanco','Colbún','Constitución','Curepto','Curicó','Empedrado','Hualañé','Licantén','Linares','Longaví','Maule','Molina','Parral','Pelarco','Pelluhue','Pencahue','Rauco','Retiro','Río Claro','Romeral','Sagrada Familia','San Clemente','San Javier','San Rafael','Talca','Teno','Vichuquén','Villa Alegre','Yerbas Buenas',
+  'Bulnes','Chillán','Chillán Viejo','Cobquecura','Coelemu','Coihueco','El Carmen','Ninhue','Ñiquén','Pemuco','Pinto','Portezuelo','Quillón','Quirihue','Ránquil','San Carlos','San Fabián','San Ignacio','San Nicolás','Treguaco','Yungay',
+  'Alto Biobío','Antuco','Arauco','Cabrero','Cañete','Chiguayante','Concepción','Contulmo','Coronel','Curanilahue','Florida','Hualpén','Hualqui','Laja','Lebu','Los Álamos','Los Ángeles','Lota','Mulchén','Nacimiento','Negrete','Penco','Quilaco','Quilleco','San Pedro de la Paz','San Rosendo','Santa Bárbara','Santa Juana','Talcahuano','Tirúa','Tomé','Tucapel','Yumbel',
+  'Angol','Carahue','Cholchol','Collipulli','Cunco','Curacautín','Curarrehue','Ercilla','Freire','Galvarino','Gorbea','Lautaro','Loncoche','Lonquimay','Los Sauces','Lumaco','Melipeuco','Nueva Imperial','Padre Las Casas','Perquenco','Pitrufquén','Pucón','Purén','Renaico','Saavedra','Temuco','Teodoro Schmidt','Toltén','Traiguén','Victoria','Vilcún','Villarrica',
+  'Corral','Futrono','La Unión','Lago Ranco','Lanco','Los Lagos','Máfil','Mariquina','Paillaco','Panguipulli','Río Bueno','Valdivia',
+  'Ancud','Calbuco','Castro','Chaitén','Chonchi','Cochamó','Curaco de Vélez','Dalcahue','Fresia','Frutillar','Futaleufú','Hualaihué','Llanquihue','Los Muermos','Maullín','Osorno','Palena','Puerto Montt','Puerto Octay','Puerto Varas','Puqueldón','Purranque','Puyehue','Queilén','Quellón','Quemchi','Quinchao','Río Negro','San Juan de la Costa','San Pablo',
+  'Aysén','Chile Chico','Cisnes','Cochrane','Coyhaique','Guaitecas','Lago Verde','O\'Higgins','Río Ibáñez','Tortel',
+  'Antártica','Cabo de Hornos','Laguna Blanca','Natales','Porvenir','Primavera','Punta Arenas','Río Verde','San Gregorio','Timaukel','Torres del Paine'
 ];
 
-const REQUIRED = ['nombre','establecimiento','comuna','dependencia','cargo','email','dia','franja','sala','pregunta'];
+const REQUIRED = ['nombre','establecimiento','comuna','dependencia','tipoEstablecimiento','cargo','email','dia','franja','sala','pregunta'];
 // "temas" se valida aparte (es checkbox group)
 
 document.getElementById('t_load').value = Date.now();
@@ -633,9 +664,9 @@ document.getElementById('t_load').value = Date.now();
 
   function render(filter) {
     const f = (filter || '').toLowerCase().trim();
-    const matches = COMUNAS_MAULE.filter(c => c.toLowerCase().includes(f));
+    const matches = COMUNAS_CHILE.filter(c => c.toLowerCase().includes(f));
     if (!matches.length) {
-      list.innerHTML = '<div class="empty">No encontramos esa comuna. Solo Región del Maule.</div>';
+      list.innerHTML = '<div class="empty">No encontramos esa comuna. Verifica el nombre.</div>';
     } else {
       list.innerHTML = matches.map(c => `<div class="item" data-v="${c}">${c}</div>`).join('');
     }
@@ -726,7 +757,7 @@ function validate() {
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email', true); ok = false; }
   // comuna debe estar en lista
   const c = document.getElementById('comuna').value.trim();
-  if (c && !COMUNAS_MAULE.includes(c)) { showError('comuna', true); ok = false; }
+  if (c && !COMUNAS_CHILE.includes(c)) { showError('comuna', true); ok = false; }
   return ok;
 }
 
@@ -801,6 +832,7 @@ function showThanks(data) {
   const summary = document.getElementById('thanksSummary');
   summary.innerHTML = `
     <div><strong>Establecimiento:</strong> ${escapeHtml(data.establecimiento)} · ${escapeHtml(data.comuna)}</div>
+    <div><strong>Tipo:</strong> ${escapeHtml(data.tipoEstablecimiento)}${data.tipoOtro ? ' — ' + escapeHtml(data.tipoOtro) : ''} · ${escapeHtml(data.dependencia)}${data.dependenciaOtra ? ' — ' + escapeHtml(data.dependenciaOtra) : ''}</div>
     <div><strong>Cargo:</strong> ${escapeHtml(data.cargo)}${data.cargoOtro ? ' — ' + escapeHtml(data.cargoOtro) : ''}</div>
     <div><strong>Tema(s):</strong> ${(data.temas||[]).map(escapeHtml).join(' · ')}</div>
     <div><strong>Disponibilidad:</strong> ${escapeHtml(data.dia)} · ${escapeHtml(data.franja)}</div>

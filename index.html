@@ -369,7 +369,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
             <input type="text" id="comuna" name="comuna" autocomplete="off" placeholder="Selecciona o escribe…" required>
             <div class="combo-list" id="comunaList"></div>
           </div>
-          <div class="error-msg" data-for="comuna">Selecciona una comuna válida.</div>
+          <div class="error-msg" data-for="comuna">Selecciona una comuna de la Región del Maule.</div>
         </div>
 
         <div class="field">
@@ -405,7 +405,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         <div class="field">
           <label class="lbl">Cargo <span class="req">*</span></label>
           <div class="opts grid-2">
-            <label class="opt"><input type="radio" name="cargo" value="Director/a PIE" required><span class="opt-text">Director/a PIE</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Director/a" required><span class="opt-text">Director/a</span></label>
             <label class="opt"><input type="radio" name="cargo" value="Encargado/a PIE"><span class="opt-text">Encargado/a PIE</span></label>
             <label class="opt"><input type="radio" name="cargo" value="Encargado/a de Convivencia"><span class="opt-text">Encargado/a de Convivencia</span></label>
             <label class="opt"><input type="radio" name="cargo" value="Otro" data-other="cargoOtro"><span class="opt-text">Otro</span></label>
@@ -630,24 +630,13 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
    ════════════════════════════════════════════════════════ */
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbws21oUtUYoOck3ScLpIFYybeLMz6QpfD-Tk2FtI-Iv69gTuEqzIRgmSLzuiarsiiK2MA/exec';
 
-// 346 comunas oficiales de Chile (INE) — el webinar es del Maule pero permitimos profes de cualquier región
-const COMUNAS_CHILE = [
-  'Arica','Camarones','General Lagos','Putre',
-  'Alto Hospicio','Camiña','Colchane','Huara','Iquique','Pica','Pozo Almonte',
-  'Antofagasta','Calama','María Elena','Mejillones','Ollagüe','San Pedro de Atacama','Sierra Gorda','Taltal','Tocopilla',
-  'Alto del Carmen','Caldera','Chañaral','Copiapó','Diego de Almagro','Freirina','Huasco','Tierra Amarilla','Vallenar',
-  'Andacollo','Canela','Combarbalá','Coquimbo','Illapel','La Higuera','La Serena','Los Vilos','Monte Patria','Ovalle','Paiguano','Punitaqui','Río Hurtado','Salamanca','Vicuña',
-  'Algarrobo','Cabildo','Calera','Calle Larga','Cartagena','Casablanca','Catemu','Concón','El Quisco','El Tabo','Hijuelas','Isla de Pascua','Juan Fernández','La Cruz','La Ligua','Limache','Llaillay','Los Andes','Nogales','Olmué','Panquehue','Papudo','Petorca','Puchuncaví','Putaendo','Quillota','Quilpué','Quintero','Rinconada','San Antonio','San Esteban','San Felipe','Santa María','Santo Domingo','Valparaíso','Villa Alemana','Viña del Mar','Zapallar',
-  'Alhué','Buin','Calera de Tango','Cerrillos','Cerro Navia','Colina','Conchalí','Curacaví','El Bosque','El Monte','Estación Central','Huechuraba','Independencia','Isla de Maipo','La Cisterna','La Florida','La Granja','La Pintana','La Reina','Lampa','Las Condes','Lo Barnechea','Lo Espejo','Lo Prado','Macul','Maipú','María Pinto','Melipilla','Ñuñoa','Padre Hurtado','Paine','Pedro Aguirre Cerda','Peñaflor','Peñalolén','Pirque','Providencia','Pudahuel','Puente Alto','Quilicura','Quinta Normal','Recoleta','Renca','San Bernardo','San Joaquín','San José de Maipo','San Miguel','San Pedro','San Ramón','Santiago','Talagante','Tiltil','Vitacura',
-  'Chimbarongo','Chépica','Codegua','Coinco','Coltauco','Doñihue','Graneros','La Estrella','Las Cabras','Litueche','Lolol','Machalí','Malloa','Marchihue','Mostazal','Nancagua','Navidad','Olivar','Palmilla','Paredones','Peralillo','Peumo','Pichidegua','Pichilemu','Placilla','Pumanque','Quinta de Tilcoco','Rancagua','Rengo','Requínoa','San Fernando','San Vicente','Santa Cruz',
-  'Cauquenes','Chanco','Colbún','Constitución','Curepto','Curicó','Empedrado','Hualañé','Licantén','Linares','Longaví','Maule','Molina','Parral','Pelarco','Pelluhue','Pencahue','Rauco','Retiro','Río Claro','Romeral','Sagrada Familia','San Clemente','San Javier','San Rafael','Talca','Teno','Vichuquén','Villa Alegre','Yerbas Buenas',
-  'Bulnes','Chillán','Chillán Viejo','Cobquecura','Coelemu','Coihueco','El Carmen','Ninhue','Ñiquén','Pemuco','Pinto','Portezuelo','Quillón','Quirihue','Ránquil','San Carlos','San Fabián','San Ignacio','San Nicolás','Treguaco','Yungay',
-  'Alto Biobío','Antuco','Arauco','Cabrero','Cañete','Chiguayante','Concepción','Contulmo','Coronel','Curanilahue','Florida','Hualpén','Hualqui','Laja','Lebu','Los Álamos','Los Ángeles','Lota','Mulchén','Nacimiento','Negrete','Penco','Quilaco','Quilleco','San Pedro de la Paz','San Rosendo','Santa Bárbara','Santa Juana','Talcahuano','Tirúa','Tomé','Tucapel','Yumbel',
-  'Angol','Carahue','Cholchol','Collipulli','Cunco','Curacautín','Curarrehue','Ercilla','Freire','Galvarino','Gorbea','Lautaro','Loncoche','Lonquimay','Los Sauces','Lumaco','Melipeuco','Nueva Imperial','Padre Las Casas','Perquenco','Pitrufquén','Pucón','Purén','Renaico','Saavedra','Temuco','Teodoro Schmidt','Toltén','Traiguén','Victoria','Vilcún','Villarrica',
-  'Corral','Futrono','La Unión','Lago Ranco','Lanco','Los Lagos','Máfil','Mariquina','Paillaco','Panguipulli','Río Bueno','Valdivia',
-  'Ancud','Calbuco','Castro','Chaitén','Chonchi','Cochamó','Curaco de Vélez','Dalcahue','Fresia','Frutillar','Futaleufú','Hualaihué','Llanquihue','Los Muermos','Maullín','Osorno','Palena','Puerto Montt','Puerto Octay','Puerto Varas','Puqueldón','Purranque','Puyehue','Queilén','Quellón','Quemchi','Quinchao','Río Negro','San Juan de la Costa','San Pablo',
-  'Aysén','Chile Chico','Cisnes','Cochrane','Coyhaique','Guaitecas','Lago Verde','O\'Higgins','Río Ibáñez','Tortel',
-  'Antártica','Cabo de Hornos','Laguna Blanca','Natales','Porvenir','Primavera','Punta Arenas','Río Verde','San Gregorio','Timaukel','Torres del Paine'
+// 30 comunas de la Región del Maule (prueba inicial — el webinar es exclusivo Maule)
+const COMUNAS_MAULE = [
+  'Cauquenes','Chanco','Colbún','Constitución','Curepto','Curicó','Empedrado',
+  'Hualañé','Licantén','Linares','Longaví','Maule','Molina','Parral','Pelarco',
+  'Pelluhue','Pencahue','Rauco','Retiro','Río Claro','Romeral','Sagrada Familia',
+  'San Clemente','San Javier','San Rafael','Talca','Teno','Vichuquén','Villa Alegre',
+  'Yerbas Buenas'
 ];
 
 const REQUIRED = ['nombre','establecimiento','comuna','dependencia','tipoEstablecimiento','cargo','email','dia','franja','sala','pregunta'];
@@ -664,9 +653,9 @@ document.getElementById('t_load').value = Date.now();
 
   function render(filter) {
     const f = (filter || '').toLowerCase().trim();
-    const matches = COMUNAS_CHILE.filter(c => c.toLowerCase().includes(f));
+    const matches = COMUNAS_MAULE.filter(c => c.toLowerCase().includes(f));
     if (!matches.length) {
-      list.innerHTML = '<div class="empty">No encontramos esa comuna. Verifica el nombre.</div>';
+      list.innerHTML = '<div class="empty">No encontramos esa comuna. Solo Región del Maule.</div>';
     } else {
       list.innerHTML = matches.map(c => `<div class="item" data-v="${c}">${c}</div>`).join('');
     }
@@ -757,7 +746,7 @@ function validate() {
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email', true); ok = false; }
   // comuna debe estar en lista
   const c = document.getElementById('comuna').value.trim();
-  if (c && !COMUNAS_CHILE.includes(c)) { showError('comuna', true); ok = false; }
+  if (c && !COMUNAS_MAULE.includes(c)) { showError('comuna', true); ok = false; }
   return ok;
 }
 

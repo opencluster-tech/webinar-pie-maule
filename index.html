@@ -238,12 +238,22 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 .foot {
   text-align:center; padding:14px 16px 32px; color:var(--subtle); font-size:12px;
 }
-.foot img.foot-logo { height:42px; width:auto; opacity:0.95; margin-bottom:10px; display:inline-block; }
+.foot-row {
+  display:flex; align-items:center; justify-content:center;
+  gap:20px; flex-wrap:wrap;
+}
+.foot-logo-pill {
+  background:white; padding:12px 22px; border-radius:999px;
+  border:1px solid var(--mgray);
+  box-shadow:0 4px 16px rgba(0,26,96,0.05);
+  display:inline-flex; align-items:center;
+}
+.foot-logo-pill img { height:42px; width:auto; display:block; }
 .foot a { color:var(--navy); text-decoration:none; font-weight:600; }
 .foot a:hover { text-decoration:underline; }
 .foot .contact-card {
   display:inline-block; background:white; border:1px solid var(--mgray);
-  border-radius:12px; padding:16px 22px; margin-top:4px;
+  border-radius:12px; padding:16px 22px;
   box-shadow:0 4px 16px rgba(0,26,96,0.05); text-align:left;
 }
 .foot .contact-card .contact-name {
@@ -621,7 +631,8 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 </main>
 
 <footer class="foot">
-  <img src="assets/oct-logo.png" alt="Open Cluster Tech · Construyendo Inclusión" class="foot-logo">
+  <div class="foot-row">
+  <div class="foot-logo-pill"><img src="assets/oct-logo.png" alt="Open Cluster Tech · Construyendo Inclusión"></div>
   <div class="contact-card">
     <div class="contact-name">William Marín</div>
     <div class="contact-role">Ejecutivo Comercial · Departamento Comercial · OpenCluster Tech</div>
@@ -638,7 +649,8 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
       <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=william.marin@opencluster-tech.cl&amp;su=Webinar%20PIE%20Maule%202026" target="_blank" rel="noopener">william.marin@opencluster-tech.cl</a>
     </div>
   </div>
-  <div class="copy">Open Cluster Tech · Campaña PIE Maule 2026</div>
+  </div>
+  <div class="copy" style="margin-top:14px;">Open Cluster Tech · Campaña PIE Maule 2026</div>
 </footer>
 
 <script>

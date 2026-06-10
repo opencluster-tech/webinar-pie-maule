@@ -151,12 +151,12 @@ body {
 .field label.lbl .req { color:var(--err); margin-left:2px; }
 .field .hint { font-size:11.5px; color:var(--subtle); margin-top:4px; }
 
-input[type=text], input[type=email], textarea, select {
+input[type=text], input[type=email], input[type=tel], textarea, select {
   width:100%; padding:9px 12px; border:1.5px solid var(--mgray); border-radius:8px;
   font-family:'Open Sans',sans-serif; font-size:13px; color:var(--text);
   outline:none; background:#F7F9FC; transition:all .18s;
 }
-input[type=text]:focus, input[type=email]:focus, textarea:focus, select:focus {
+input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus, textarea:focus, select:focus {
   border-color:var(--sky); box-shadow:0 0 0 3px rgba(6,179,253,0.15); background:white;
 }
 textarea { resize:vertical; min-height:74px; line-height:1.5; font-family:inherit; }
@@ -447,6 +447,20 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
           <div class="hint">Te avisaremos por aquí cuando se confirme la fecha del webinar.</div>
           <div class="error-msg" data-for="email">Ingresa un correo válido.</div>
         </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label class="lbl" for="fijo">Teléfono fijo <span class="req">*</span></label>
+            <input type="tel" id="fijo" name="fijo" autocomplete="tel" inputmode="tel" placeholder="Ej: 71 2345 678" required>
+            <div class="error-msg" data-for="fijo">Ingresa un teléfono fijo válido.</div>
+          </div>
+          <div class="field">
+            <label class="lbl" for="celular">Celular / WhatsApp</label>
+            <input type="tel" id="celular" name="celular" autocomplete="tel" inputmode="tel" placeholder="Ej: 9 8765 4321">
+            <div class="hint">Opcional. Nos permite contactarte por WhatsApp.</div>
+            <div class="error-msg" data-for="celular">Ingresa un celular válido.</div>
+          </div>
+        </div>
       </section>
 
       <!-- ░░░ 2. INTERÉS TEMÁTICO ░░░ -->
@@ -668,7 +682,7 @@ const COMUNAS_MAULE = [
   'Yerbas Buenas'
 ];
 
-const REQUIRED = ['nombre','establecimiento','comuna','dependencia','tipoEstablecimiento','cargo','email','dia','franja','sala','pregunta'];
+const REQUIRED = ['nombre','establecimiento','comuna','dependencia','tipoEstablecimiento','cargo','email','fijo','dia','franja','sala','pregunta'];
 // "temas" se valida aparte (es checkbox group)
 
 document.getElementById('t_load').value = Date.now();
@@ -759,7 +773,7 @@ function clearError(elOrName) {
   showError(name, false);
 }
 
-['nombre','establecimiento','comuna','email','pregunta'].forEach(n => {
+['nombre','establecimiento','comuna','email','fijo','celular','pregunta'].forEach(n => {
   document.getElementById(n).addEventListener('input', () => clearError(n));
 });
 
@@ -776,6 +790,12 @@ function validate() {
   // comuna debe estar en lista
   const c = document.getElementById('comuna').value.trim();
   if (c && !COMUNAS_MAULE.includes(c)) { showError('comuna', true); ok = false; }
+  // teléfono fijo (requerido) — al menos 7 dígitos
+  const fijo = document.getElementById('fijo').value.trim();
+  if (fijo && fijo.replace(/\D/g,'').length < 7) { showError('fijo', true); ok = false; }
+  // celular / WhatsApp (opcional) — si lo completan, al menos 8 dígitos
+  const cel = document.getElementById('celular').value.trim();
+  if (cel && cel.replace(/\D/g,'').length < 8) { showError('celular', true); ok = false; }
   return ok;
 }
 
@@ -850,6 +870,7 @@ function showThanks(data) {
   const summary = document.getElementById('thanksSummary');
   summary.innerHTML = `
     <div><strong>Establecimiento:</strong> ${escapeHtml(data.establecimiento)} · ${escapeHtml(data.comuna)}</div>
+    <div><strong>Contacto:</strong> ${escapeHtml(data.fijo)}${data.celular ? ' · Cel ' + escapeHtml(data.celular) : ''}</div>
     <div><strong>Tipo:</strong> ${escapeHtml(data.tipoEstablecimiento)}${data.tipoOtro ? ' — ' + escapeHtml(data.tipoOtro) : ''} · ${escapeHtml(data.dependencia)}${data.dependenciaOtra ? ' — ' + escapeHtml(data.dependenciaOtra) : ''}</div>
     <div><strong>Cargo:</strong> ${escapeHtml(data.cargo)}${data.cargoOtro ? ' — ' + escapeHtml(data.cargoOtro) : ''}</div>
     <div><strong>Tema(s):</strong> ${(data.temas||[]).map(escapeHtml).join(' · ')}</div>

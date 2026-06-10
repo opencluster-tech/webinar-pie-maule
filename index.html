@@ -161,6 +161,15 @@ input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus, textarea
 }
 textarea { resize:vertical; min-height:74px; line-height:1.5; font-family:inherit; }
 input.invalid, textarea.invalid, select.invalid { border-color:var(--err); background:#fff5f6; }
+
+/* ── Teléfono con prefijo +56 ── */
+.tel-wrap { display:flex; align-items:stretch; }
+.tel-prefix {
+  display:flex; align-items:center; padding:0 12px; flex-shrink:0;
+  background:#eef2f7; border:1.5px solid var(--mgray); border-right:none;
+  border-radius:8px 0 0 8px; font-size:13px; font-weight:700; color:var(--text);
+}
+.tel-wrap input[type=tel] { border-radius:0 8px 8px 0; }
 .error-msg { font-size:11.5px; color:var(--err); margin-top:4px; display:none; font-weight:600; }
 .error-msg.show { display:block; }
 
@@ -451,12 +460,18 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         <div class="field-row">
           <div class="field">
             <label class="lbl" for="fijo">Teléfono fijo <span class="req">*</span></label>
-            <input type="tel" id="fijo" name="fijo" autocomplete="tel" inputmode="tel" placeholder="Ej: 71 2345 678" required>
+            <div class="tel-wrap">
+              <span class="tel-prefix">+56</span>
+              <input type="tel" id="fijo" name="fijo" autocomplete="tel" inputmode="numeric" placeholder="71 2345 678" required>
+            </div>
             <div class="error-msg" data-for="fijo">Ingresa un teléfono fijo válido.</div>
           </div>
           <div class="field">
             <label class="lbl" for="celular">Celular / WhatsApp</label>
-            <input type="tel" id="celular" name="celular" autocomplete="tel" inputmode="tel" placeholder="Ej: 9 8765 4321">
+            <div class="tel-wrap">
+              <span class="tel-prefix">+56</span>
+              <input type="tel" id="celular" name="celular" autocomplete="tel" inputmode="numeric" placeholder="9 8765 4321">
+            </div>
             <div class="hint">Opcional. Nos permite contactarte por WhatsApp.</div>
             <div class="error-msg" data-for="celular">Ingresa un celular válido.</div>
           </div>
@@ -834,6 +849,8 @@ document.getElementById('form').addEventListener('submit', async (e) => {
   }
   // temas = array
   data.temas = [...document.querySelectorAll('input[name="temas"]:checked')].map(i => i.value);
+  data.fijo = normalizarTel(data.fijo);
+  data.celular = normalizarTel(data.celular);
   data.timestamp = new Date().toISOString();
   data.userAgent = navigator.userAgent;
 
@@ -893,6 +910,14 @@ function showThanks(data) {
   });
 
   window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Deja el teléfono como +56 + dígitos pegados, sin importar cómo lo escribieron.
+function normalizarTel(v) {
+  let d = String(v || '').replace(/\D/g, '');        // solo dígitos
+  if (!d) return '';                                  // vacío (celular opcional)
+  if (d.length === 11 && d.slice(0, 2) === '56') d = d.slice(2); // por si pegaron el 56
+  return '+56' + d;
 }
 
 function escapeHtml(s) {

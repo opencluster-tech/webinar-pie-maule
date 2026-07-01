@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirma tu asistencia — Webinar PIE Maule 2026</title>
+<meta name="description" content="Confirma tu asistencia al Webinar PIE Maule 2026: El entorno multisensorial. Viernes 24 de julio, 15:00 h.">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --navy:#001a60; --sky:#06b3fd; --ltblue:#d6eeff; --pale:#eaf6ff;
+  --orange:#ff7e00; --mgray:#DDE4ED; --text:#1a2535; --subtle:#64748b;
+  --bg:#eef2f7; --err:#e11d48;
+}
+html, body { margin:0; padding:0; }
+body {
+  font-family:'Open Sans',Arial,sans-serif; background:var(--bg); color:var(--text);
+  -webkit-font-smoothing:antialiased; line-height:1.5; min-height:100vh;
+}
+
+/* Hero */
+.hero { background:linear-gradient(135deg,var(--navy) 0%,#002b8c 100%); color:#fff; padding:20px 20px 0; }
+.hero-inner { max-width:620px; margin:0 auto; }
+.hero-top { display:flex; align-items:center; justify-content:space-between; }
+.hero-top img { height:24px; width:auto; display:block; }
+.hero-eyebrow { font-family:'Montserrat',Arial,sans-serif; font-size:10.5px; font-weight:700; letter-spacing:1.5px; color:var(--sky); text-transform:uppercase; }
+.hero h1 { font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:24px; line-height:1.15; margin:18px 0 6px; }
+.hero p.sub { font-size:13px; color:rgba(255,255,255,0.82); max-width:520px; line-height:1.45; margin-bottom:18px; }
+.hero-img-wrap { max-width:620px; margin:0 auto; }
+.hero-img { display:block; width:100%; height:auto; }
+
+/* Wrap */
+.wrap { max-width:620px; margin:-1px auto 0; padding:0 16px 40px; }
+
+/* Card */
+.card {
+  background:#fff; border-radius:16px; padding:26px 26px 28px;
+  box-shadow:0 10px 30px rgba(0,26,96,0.10); border:1px solid var(--mgray);
+  margin-top:18px;
+}
+.event {
+  display:flex; align-items:center; gap:14px; background:var(--pale);
+  border-radius:12px; padding:14px 16px; margin-bottom:22px;
+}
+.event .d {
+  flex-shrink:0; width:58px; text-align:center; color:#fff;
+  background:linear-gradient(135deg,var(--sky),var(--navy)); border-radius:10px; padding:8px 6px;
+}
+.event .d .day { font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:22px; line-height:1; }
+.event .d .mon { font-size:10px; font-weight:700; letter-spacing:1px; margin-top:2px; }
+.event .t .tt { font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:14.5px; color:var(--navy); }
+.event .t .tm { font-size:12.5px; color:var(--text); margin-top:3px; }
+
+.card h2 { font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:20px; color:var(--navy); }
+.card .lead { font-size:14px; color:var(--text); margin-top:6px; margin-bottom:20px; line-height:1.55; }
+
+.field { margin-bottom:15px; }
+.field label { display:block; font-size:12px; font-weight:700; color:var(--text); margin-bottom:5px; }
+.field .req { color:var(--err); }
+.field input {
+  width:100%; padding:11px 13px; border:1.5px solid var(--mgray); border-radius:9px;
+  font-family:inherit; font-size:14px; color:var(--text); background:#F7F9FC; outline:none; transition:all .18s;
+}
+.field input:focus { border-color:var(--sky); box-shadow:0 0 0 3px rgba(6,179,253,0.15); background:#fff; }
+.field input.locked { background:#eef2f7; color:var(--subtle); font-weight:600; }
+.field input.invalid { border-color:var(--err); background:#fff5f6; }
+.field .hint { font-size:11.5px; color:var(--subtle); margin-top:5px; }
+.field .err { font-size:11.5px; color:var(--err); font-weight:600; margin-top:5px; display:none; }
+.field .err.show { display:block; }
+
+.tel { display:flex; }
+.tel .pfx {
+  display:flex; align-items:center; padding:0 13px; flex-shrink:0;
+  background:#eef2f7; border:1.5px solid var(--mgray); border-right:none;
+  border-radius:9px 0 0 9px; font-size:14px; font-weight:700; color:var(--text);
+}
+.tel input { border-radius:0 9px 9px 0; }
+
+.btn {
+  width:100%; margin-top:6px; padding:14px; border:none; border-radius:11px;
+  background:linear-gradient(90deg,var(--sky),#0a7fd6); color:#fff;
+  font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:15px; cursor:pointer;
+  transition:all .2s; box-shadow:0 8px 22px rgba(0,26,96,0.22);
+}
+.btn:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 12px 28px rgba(0,26,96,0.30); }
+.btn:disabled { opacity:.55; cursor:not-allowed; }
+.btn .sp { display:none; width:15px; height:15px; border:2px solid rgba(255,255,255,.4); border-top-color:#fff; border-radius:50%; animation:spin .7s linear infinite; vertical-align:middle; margin-right:8px; }
+.btn.loading .sp { display:inline-block; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* Éxito */
+.done { display:none; text-align:center; }
+.done.show { display:block; }
+.form-view.hide { display:none; }
+.done .ic {
+  width:66px; height:66px; border-radius:50%; margin:4px auto 16px;
+  background:linear-gradient(135deg,var(--sky),var(--navy));
+  display:flex; align-items:center; justify-content:center; box-shadow:0 8px 22px rgba(6,179,253,0.3);
+}
+.done .ic svg { width:32px; height:32px; }
+.done h2 { font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:22px; color:var(--navy); }
+.done p { color:var(--text); font-size:14px; margin-top:8px; line-height:1.55; }
+.done p .em { color:var(--navy); font-weight:700; }
+.share { margin-top:22px; padding-top:20px; border-top:1px solid var(--mgray); }
+.share .st { font-size:13.5px; color:var(--text); margin-bottom:12px; }
+.share-btns { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+.sbtn {
+  display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:9px;
+  border:1.5px solid var(--mgray); background:#fff; color:var(--navy); font-weight:700; font-size:13px;
+  cursor:pointer; transition:all .15s; font-family:inherit; text-decoration:none;
+}
+.sbtn svg { width:16px; height:16px; flex-shrink:0; }
+.sbtn:hover { border-color:var(--sky); background:var(--pale); }
+.sbtn.wa { border-color:#25D366; color:#128C3E; }
+.sbtn.wa:hover { background:#eafaf0; }
+
+.foot { text-align:center; padding:6px 16px 0; color:var(--subtle); font-size:11.5px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <img src="https://webinar.opencluster-tech.cl/assets/oct-logo.png" alt="Open Cluster Tech">
+      <span class="hero-eyebrow">Webinar · 2026</span>
+    </div>
+  </div>
+  <div class="hero-img-wrap">
+    <img class="hero-img" src="https://webinar.opencluster-tech.cl/assets/hero-entorno.jpg" alt="El entorno multisensorial — Cómo la estimulación sensorial mejora el desarrollo cognitivo y la experiencia de aprendizaje">
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="card">
+
+    <!-- Formulario de confirmación -->
+    <div class="form-view" id="formView">
+      <div class="event">
+        <div class="d"><div class="day">24</div><div class="mon">JUL</div></div>
+        <div class="t">
+          <div class="tt">Viernes 24 de julio</div>
+          <div class="tm">15:00 a 16:00 h&nbsp;&nbsp;·&nbsp;&nbsp;Online</div>
+        </div>
+      </div>
+
+      <h2>Confirma tu asistencia</h2>
+      <p class="lead">Estás a un paso. Confirma tus datos y te enviaremos tu invitación personal con el enlace de acceso.</p>
+
+      <form id="form" novalidate>
+        <div class="field">
+          <label for="nombre">Nombre <span class="req">*</span></label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Tu nombre">
+          <div class="err" id="err-nombre">Ingresa tu nombre.</div>
+        </div>
+
+        <div class="field">
+          <label for="email">Correo electrónico <span class="req">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="nombre@correo.cl">
+          <div class="hint" id="email-hint">Este es el correo con el que te inscribiste.</div>
+          <div class="err" id="err-email">Ingresa un correo válido.</div>
+        </div>
+
+        <div class="field">
+          <label for="celular">Celular personal (WhatsApp) <span class="req">*</span></label>
+          <div class="tel">
+            <span class="pfx">+56</span>
+            <input type="tel" id="celular" name="celular" inputmode="numeric" placeholder="9 8765 4321">
+          </div>
+          <div class="hint">Lo usamos solo para enviarte el enlace y recordarte el webinar.</div>
+          <div class="err" id="err-celular">Ingresa un celular válido.</div>
+        </div>
+
+        <button type="submit" class="btn" id="btn"><span class="sp"></span><span class="lbl">Confirmar mi asistencia</span></button>
+      </form>
+    </div>
+
+    <!-- Éxito -->
+    <div class="done" id="done">
+      <div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2>¡Asistencia confirmada!</h2>
+      <p id="doneLead" style="font-size:16px; color:var(--navy); font-weight:700; margin-top:8px;">Tu cupo está reservado. ¡Felicitaciones!</p>
+      <p style="font-size:14px; color:var(--subtle); margin-top:10px; line-height:1.6;">Muchas gracias por tu confirmación. Nos encantará que seas parte de este primer encuentro. Recibirás tu invitación personal en tu correo, para que tengas registro de los detalles del día del encuentro.</p>
+
+      <!-- Countdown en vivo -->
+      <div style="margin-top:24px;">
+        <div style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; color:var(--subtle); text-transform:uppercase;">Faltan para el webinar</div>
+        <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:12px auto 0;" id="cd"><tr>
+          <td style="padding:0 5px;"><div style="background:linear-gradient(135deg,#eaf6ff,#dcefff); border:1px solid var(--ltblue); border-radius:12px; padding:12px 4px; width:62px;"><div id="cd-d" style="font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:26px; color:var(--navy); line-height:1;">--</div><div style="font-size:9.5px; font-weight:700; color:var(--subtle); text-transform:uppercase; margin-top:5px;">Días</div></div></td>
+          <td style="padding:0 5px;"><div style="background:linear-gradient(135deg,#eaf6ff,#dcefff); border:1px solid var(--ltblue); border-radius:12px; padding:12px 4px; width:62px;"><div id="cd-h" style="font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:26px; color:var(--navy); line-height:1;">--</div><div style="font-size:9.5px; font-weight:700; color:var(--subtle); text-transform:uppercase; margin-top:5px;">Horas</div></div></td>
+          <td style="padding:0 5px;"><div style="background:linear-gradient(135deg,#eaf6ff,#dcefff); border:1px solid var(--ltblue); border-radius:12px; padding:12px 4px; width:62px;"><div id="cd-m" style="font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:26px; color:var(--navy); line-height:1;">--</div><div style="font-size:9.5px; font-weight:700; color:var(--subtle); text-transform:uppercase; margin-top:5px;">Min</div></div></td>
+          <td style="padding:0 5px;"><div style="background:linear-gradient(135deg,#eaf6ff,#dcefff); border:1px solid var(--ltblue); border-radius:12px; padding:12px 4px; width:62px;"><div id="cd-s" style="font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:26px; color:var(--navy); line-height:1;">--</div><div style="font-size:9.5px; font-weight:700; color:var(--subtle); text-transform:uppercase; margin-top:5px;">Seg</div></div></td>
+        </tr></table>
+        <div id="cd-done" style="display:none; font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:18px; color:var(--sky); margin-top:12px;">¡El webinar está por comenzar!</div>
+      </div>
+
+      <!-- Fecha / hora / modalidad -->
+      <table role="presentation" style="width:100%; margin-top:22px; border-top:1px solid var(--mgray); border-bottom:1px solid var(--mgray); border-collapse:collapse;"><tr>
+        <td style="padding:14px 6px; text-align:center; border-right:1px solid var(--mgray);"><div style="font-size:10.5px; color:#94a3b8; font-weight:700; letter-spacing:.5px;">FECHA</div><div style="font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:14px; color:var(--navy); margin-top:3px;">Vie 24 jul</div></td>
+        <td style="padding:14px 6px; text-align:center; border-right:1px solid var(--mgray);"><div style="font-size:10.5px; color:#94a3b8; font-weight:700; letter-spacing:.5px;">HORA</div><div style="font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:14px; color:var(--navy); margin-top:3px;">15:00–16:00</div></td>
+        <td style="padding:14px 6px; text-align:center;"><div style="font-size:10.5px; color:#94a3b8; font-weight:700; letter-spacing:.5px;">MODALIDAD</div><div style="font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:14px; color:var(--navy); margin-top:3px;">Online</div></td>
+      </tr></table>
+
+      <a class="btn btn-cal" id="calBtn" target="_blank" rel="noopener" style="display:block; width:100%; margin-top:14px; padding:12px; border:1.5px solid var(--mgray); border-radius:11px; background:#fff; color:var(--navy); font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:14px; text-decoration:none;">+ Agregar a mi calendario</a>
+
+      <!-- Lo que viviremos juntos -->
+      <div style="text-align:left; margin-top:28px;">
+        <div style="font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:17px; color:var(--navy); margin-bottom:12px;">Lo que viviremos juntos</div>
+        <div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;"><span style="color:var(--sky); font-weight:800;">•</span><span>Los sistemas sensoriales y su rol en el aula, con Hernán Mery.</span></div>
+        <div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;"><span style="color:var(--sky); font-weight:800;">•</span><span>Experiencias reales de implementación en escuelas, con Estefanie Neira.</span></div>
+        <div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;"><span style="color:var(--sky); font-weight:800;">•</span><span>Preguntas y respuestas: nuestros terapeutas darán sugerencias prácticas y responderán tus inquietudes.</span></div>
+      </div>
+
+      <!-- Concurso -->
+      <div style="text-align:left; margin-top:26px; background:linear-gradient(135deg,#001a60 0%,#012a86 100%); border-radius:16px; padding:22px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#06b3fd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+          <span style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; color:#06b3fd; text-transform:uppercase;">Concurso</span>
+        </div>
+        <div style="font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:18px; color:#fff; margin-top:12px; line-height:1.25;">Sortearemos dos licencias de TD Snap, software de comunicación aumentativa, para tus alumnos</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.85); margin-top:8px; line-height:1.55;">Entre todos los presentes, al final del webinar. Para participar:</div>
+        <div style="margin-top:14px; font-size:13.5px;">
+          <div style="display:flex; gap:12px; padding:5px 0; color:rgba(255,255,255,0.92); line-height:1.5;"><span style="color:#06b3fd; font-family:'Montserrat',Arial,sans-serif; font-weight:800;">1</span><span>Síguenos en Instagram: <a href="https://instagram.com/opencluster_tech" target="_blank" style="color:#06b3fd; font-weight:700; text-decoration:none;">@opencluster_tech</a></span></div>
+          <div style="display:flex; gap:12px; padding:5px 0; color:rgba(255,255,255,0.92); line-height:1.5;"><span style="color:#06b3fd; font-family:'Montserrat',Arial,sans-serif; font-weight:800;">2</span><span>Mantente atento/a las 24 horas antes del webinar: revisa nuestras publicaciones, ahí dejaremos una información clave que será la respuesta a la pregunta que haremos el día del sorteo.</span></div>
+          <div style="display:flex; gap:12px; padding:5px 0; color:rgba(255,255,255,0.92); line-height:1.5;"><span style="color:#06b3fd; font-family:'Montserrat',Arial,sans-serif; font-weight:800;">3</span><span>Quienes respondan correctamente la pregunta (no te preocupes, no será nada difícil) y hayan dado like a nuestras publicaciones en esas 24 horas, participarán del sorteo.</span></div>
+        </div>
+        <details style="margin-top:16px; border-top:1px solid rgba(255,255,255,0.15); padding-top:14px;">
+          <summary style="cursor:pointer; font-size:13px; font-weight:700; color:#06b3fd; list-style:none;">¿Sabes qué es el software TD Snap?</summary>
+          <div style="font-size:12.5px; color:rgba(255,255,255,0.8); margin-top:10px; line-height:1.6;">En simple: es un software de comunicación aumentativa (CAA) que, con pictogramas y texto convertidos en voz clara, le permite comunicarse a estudiantes con autismo, parálisis cerebral, síndrome de Down y otras condiciones. En el aula es un apoyo concreto para la inclusión.</div>
+        </details>
+      </div>
+
+      <!-- Invita a un colega -->
+      <div style="text-align:left; margin-top:26px; padding-top:24px; border-top:1px solid var(--mgray);">
+        <div style="font-size:14px; color:var(--text); line-height:1.55;">No te quedes solo con esta información. Piensa en alguien a quien pueda beneficiarle.</div>
+        <div style="font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:17px; color:var(--navy); margin-top:10px;">Invita a un colega</div>
+        <div style="font-size:13.5px; color:var(--text); margin-top:6px; line-height:1.55;">Cada aula tiene detrás un equipo dando todo por sus estudiantes neurodivergentes. Si conoces a otro colega que se beneficiaría de este webinar, invítalo a sumarse. Juntos construyamos inclusión.</div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
+          <a class="sbtn wa" id="waBtn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l.46.731-.999 3.648 3.736-.984.482.273z"/></svg>
+            <span>Compartir por WhatsApp</span>
+          </a>
+          <button class="sbtn" id="copyBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copiar enlace de inscripción</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="foot">Open Cluster Tech · Construyendo Inclusión</div>
+</main>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbws21oUtUYoOck3ScLpIFYybeLMz6QpfD-Tk2FtI-Iv69gTuEqzIRgmSLzuiarsiiK2MA/exec';
+const PREVIEW_MODE = false; // solo la vista previa lo pone en true para saltar el envío real
+// Enlace público del formulario de inscripción (para compartir con colegas)
+const INSCRIPCION_URL = 'https://webinar.opencluster-tech.cl/';
+
+function getParam(n){ return new URLSearchParams(location.search).get(n) || ''; }
+function b64urlDecode(s){
+  try { return decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/')))); }
+  catch(e){ return ''; }
+}
+
+// Prefill: enlace personal trae ?e=<email base64url> y ?n=<nombre>
+(function prefill(){
+  const emailParam = b64urlDecode(getParam('e')) || getParam('email');
+  const nameParam = getParam('n');
+  const emailInput = document.getElementById('email');
+  const nameInput = document.getElementById('nombre');
+  if (emailParam) {
+    emailInput.value = emailParam;
+    emailInput.readOnly = true;
+    emailInput.classList.add('locked');
+  } else {
+    document.getElementById('email-hint').textContent = 'Ingresa el mismo correo con el que te inscribiste.';
+  }
+  if (nameParam) nameInput.value = decodeURIComponent(nameParam);
+})();
+
+function normalizarTel(v){
+  let d = String(v||'').replace(/\D/g,'');
+  if (!d) return '';
+  if (d.length === 11 && d.slice(0,2) === '56') d = d.slice(2);
+  return '+56' + d;
+}
+function showErr(id, show){ document.getElementById('err-'+id).classList.toggle('show', !!show); document.getElementById(id).classList.toggle('invalid', !!show); }
+
+document.getElementById('form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const nombre = document.getElementById('nombre').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const cel = document.getElementById('celular').value.trim();
+
+  let ok = true;
+  if (!nombre) { showErr('nombre', true); ok = false; } else showErr('nombre', false);
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('email', true); ok = false; } else showErr('email', false);
+  if (cel.replace(/\D/g,'').length < 8) { showErr('celular', true); ok = false; } else showErr('celular', false);
+  if (!ok) return;
+
+  const btn = document.getElementById('btn');
+  btn.classList.add('loading'); btn.disabled = true; btn.querySelector('.lbl').textContent = 'Confirmando…';
+
+  const data = { nombre, email, celular: normalizarTel(cel), timestamp: new Date().toISOString(), origen: 'confirmacion-webinar-pie-maule-2026' };
+
+  try {
+    if (!PREVIEW_MODE) {
+      await fetch(APPS_SCRIPT_URL, {
+        method:'POST', mode:'no-cors',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body: JSON.stringify({ action:'confirmar_asistencia', data })
+      });
+    }
+    document.getElementById('doneLead').textContent = (nombre ? nombre + ', tu' : 'Tu') + ' cupo está reservado. ¡Felicitaciones!';
+    document.getElementById('formView').classList.add('hide');
+    document.getElementById('done').classList.add('show');
+    window.scrollTo({top:0, behavior:'smooth'});
+  } catch (err) {
+    btn.classList.remove('loading'); btn.disabled = false; btn.querySelector('.lbl').textContent = 'Confirmar mi asistencia';
+    alert('Hubo un problema al confirmar. Intenta nuevamente o escríbenos a william.marin@opencluster-tech.cl');
+  }
+});
+
+// Agregar a calendario + compartir (pantalla de éxito)
+const CAL_URL = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Webinar%20PIE%20Maule%202026%20-%20El%20entorno%20multisensorial&dates=20260724T150000/20260724T160000&ctz=America/Santiago&details=Webinar%20gratuito%20para%20equipos%20PIE.%20El%20enlace%20de%20acceso%20llegar%C3%A1%20a%20tu%20correo.&location=Online';
+document.getElementById('calBtn').href = CAL_URL;
+
+// Cuenta regresiva en vivo (24 julio 2026, 15:00 hora de Chile)
+const CD_TARGET = new Date('2026-07-24T15:00:00-04:00').getTime();
+function cdPad(x){ return String(x).padStart(2,'0'); }
+function cdTick(){
+  let diff = CD_TARGET - Date.now();
+  if (diff <= 0) {
+    document.getElementById('cd').style.display = 'none';
+    document.getElementById('cd-done').style.display = 'block';
+    return;
+  }
+  const d = Math.floor(diff/86400000); diff -= d*86400000;
+  const h = Math.floor(diff/3600000); diff -= h*3600000;
+  const m = Math.floor(diff/60000); diff -= m*60000;
+  const s = Math.floor(diff/1000);
+  document.getElementById('cd-d').textContent = d;
+  document.getElementById('cd-h').textContent = cdPad(h);
+  document.getElementById('cd-m').textContent = cdPad(m);
+  document.getElementById('cd-s').textContent = cdPad(s);
+}
+cdTick(); setInterval(cdTick, 1000);
+const shareText = 'Te invito a este webinar gratuito para equipos PIE: "El entorno multisensorial" (viernes 24 de julio, 15:00 h). Inscríbete aquí: ' + INSCRIPCION_URL;
+document.getElementById('waBtn').href = 'https://wa.me/?text=' + encodeURIComponent(shareText);
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(INSCRIPCION_URL);
+    const s = document.getElementById('copyBtn').querySelector('span'); const old = s.textContent;
+    s.textContent = '¡Enlace copiado!'; setTimeout(()=> s.textContent = old, 1800);
+  } catch { prompt('Copia este enlace:', INSCRIPCION_URL); }
+});
+</script>
+</body>
+</html>

@@ -209,8 +209,8 @@ body {
       <!-- Lo que viviremos juntos -->
       <div style="text-align:left; margin-top:28px;">
         <div style="font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:17px; color:var(--navy); margin-bottom:12px;">Lo que viviremos juntos</div>
-        <div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;"><span style="color:var(--sky); font-weight:800;">•</span><span>Los sistemas sensoriales y su rol en el aula, con Hernán Mery.</span></div>
-        <div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;"><span style="color:var(--sky); font-weight:800;">•</span><span>Experiencias reales de implementación en escuelas, con Estefanie Neira.</span></div>
+        <div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;"><span style="color:var(--sky); font-weight:800;">•</span><span>Los sistemas sensoriales y su rol en el aula, con Hernán Mery, terapeuta ocupacional.</span></div>
+        <div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;"><span style="color:var(--sky); font-weight:800;">•</span><span>Experiencias reales de implementación en escuelas, con Estefanie Neira, terapeuta ocupacional.</span></div>
         <div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;"><span style="color:var(--sky); font-weight:800;">•</span><span>Preguntas y respuestas: nuestros terapeutas darán sugerencias prácticas y responderán tus inquietudes.</span></div>
       </div>
 
@@ -275,8 +275,7 @@ function b64urlDecode(s){
   const nameInput = document.getElementById('nombre');
   if (emailParam) {
     emailInput.value = emailParam;
-    emailInput.readOnly = true;
-    emailInput.classList.add('locked');
+    document.getElementById('email-hint').textContent = 'Precargamos el correo con el que te inscribiste. Puedes cambiarlo si prefieres recibir la invitación en otro.';
   } else {
     document.getElementById('email-hint').textContent = 'Ingresa el mismo correo con el que te inscribiste.';
   }

@@ -848,6 +848,15 @@ document.getElementById('t_load').value = Date.now();
   if (src) document.getElementById('origen').value = src.trim().slice(0, 60);
 })();
 
+// Registro PRIVADO de aperturas de página (no muestra nada al público).
+// No cuenta visitantes únicos: cada carga de la página suma 1.
+(function registrarVisita() {
+  if (!APPS_SCRIPT_URL) return;
+  const src = new URLSearchParams(window.location.search).get('src') || '';
+  fetch(APPS_SCRIPT_URL + '?action=registrar_visita&webinar=PIE_Maule_2026&src=' + encodeURIComponent(src.trim().slice(0, 60)), { mode: 'no-cors' })
+    .catch(() => {});
+})();
+
 /* ════════════════════════════════════════════════════════
    COMUNA COMBOBOX
    ════════════════════════════════════════════════════════ */

@@ -94,27 +94,36 @@ body {
 
 /* ── Bloque de introducción (contexto + qué aprenderás + para quién es) ── */
 .intro-card {
-  background:white; border-radius:14px; padding:22px 22px;
+  background:white; border-radius:14px; overflow:hidden;
   box-shadow:0 6px 24px rgba(0,26,96,0.08); border:1px solid var(--mgray);
   margin-bottom:18px;
 }
-.intro-lead { font-size:14px; line-height:1.65; color:var(--text); }
-.intro-divider { height:1px; background:var(--mgray); margin:18px 0; }
+.intro-hook { background:var(--pale); border-left:4px solid var(--sky); padding:22px 24px 20px; }
+.intro-hook p { font-size:14px; line-height:1.65; color:var(--navy); margin:0; }
+.intro-wave { display:block; width:100%; height:16px; }
+.intro-body { padding:22px 24px 24px; }
+.intro-grid { display:grid; grid-template-columns:1fr; gap:22px; }
+@media (min-width:640px) { .intro-grid { grid-template-columns:1.3fr 1fr; } }
 .intro-sub h3 {
   font-family:'Montserrat',sans-serif; font-weight:700; font-size:14.5px;
-  color:var(--navy); margin-bottom:8px;
+  color:var(--navy); margin-bottom:10px;
 }
-.intro-sub + .intro-sub { margin-top:16px; }
-.intro-sub p { font-size:13.5px; line-height:1.5; color:var(--text); }
-.intro-list { list-style:none; padding:0; margin:0; }
-.intro-list li {
-  position:relative; padding-left:20px; margin-bottom:7px;
-  font-size:13.5px; line-height:1.5; color:var(--text);
+.intro-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:11px; }
+.intro-list li { display:flex; align-items:flex-start; gap:10px; font-size:13.5px; line-height:1.5; color:var(--text); }
+.intro-list .ico {
+  flex-shrink:0; width:24px; height:24px; margin-top:1px; border-radius:50%;
+  background:linear-gradient(135deg, var(--sky), var(--navy));
+  display:flex; align-items:center; justify-content:center;
 }
-.intro-list li::before {
-  content:''; position:absolute; left:0; top:7px; width:7px; height:7px;
-  border-radius:50%; background:var(--sky);
+.intro-list .ico svg { width:13px; height:13px; stroke:white; }
+.audience-chips { display:flex; flex-wrap:wrap; gap:8px; }
+.audience-chip {
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--pale); color:var(--navy); border:1px solid var(--ltblue);
+  border-radius:20px; padding:6px 12px; font-size:12.5px; font-weight:600;
 }
+.audience-chip svg { width:12px; height:12px; stroke:var(--sky); flex-shrink:0; }
+.intro-sub .audience-note { font-size:12px; color:var(--subtle); margin-top:10px; line-height:1.5; }
 
 /* ── Tarjeta fecha confirmada ── */
 .event-card {
@@ -426,23 +435,49 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 
     <!-- Introducción: contexto + qué aprenderás + para quién es -->
     <div class="intro-card">
-      <p class="intro-lead">Sabemos lo que significa el día a día del equipo PIE: las desregulaciones emocionales y conductuales que llegan sin aviso, no contar con un espacio adecuado para la contención, y sentir que la responsabilidad de la inclusión recae solo en ustedes, el equipo PIE. Este webinar surgió para ayudarlos a enfrentar esa realidad: te compartiremos estrategias concretas de entorno multisensorial para que no solo tengan la teoría, sino que puedan lograr una aplicación real en sus aulas.</p>
-
-      <div class="intro-divider"></div>
-
-      <div class="intro-sub">
-        <h3>¿Qué vas a aprender?</h3>
-        <ul class="intro-list">
-          <li>Qué es la sensorialidad y cómo afecta el comportamiento en el aula, con Hernán Mery, terapeuta ocupacional</li>
-          <li>Estrategias reales de integración sensorial, pensadas para aplicarse en el aula</li>
-          <li>Cómo se ve un espacio sensorial funcionando en una escuela real, con Estefanie Neira</li>
-          <li>Espacio para tus preguntas directas a los expositores</li>
-        </ul>
+      <div class="intro-hook">
+        <p>Sabemos lo que significa el día a día del equipo PIE: las desregulaciones emocionales y conductuales que llegan sin aviso, no contar con un espacio adecuado para la contención, y sentir que la responsabilidad de la inclusión recae solo en ustedes, el equipo PIE. Este webinar surgió para ayudarlos a enfrentar esa realidad: te compartiremos estrategias concretas de entorno multisensorial para que no solo tengan la teoría, sino que puedan lograr una aplicación real en sus aulas.</p>
       </div>
 
-      <div class="intro-sub">
-        <h3>¿Para quién es?</h3>
-        <p>Directores/as, encargados/as PIE, docentes y asistentes de la educación de la Región del Maule que trabajan día a día con estudiantes con NEE.</p>
+      <svg class="intro-wave" viewBox="0 0 400 16" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,8 C50,-2 50,18 100,8 C150,-2 150,18 200,8 C250,-2 250,18 300,8 C350,-2 350,18 400,8" fill="none" style="stroke:var(--ltblue)" stroke-width="2"/>
+      </svg>
+
+      <div class="intro-body">
+        <div class="intro-grid">
+          <div class="intro-sub">
+            <h3>¿Qué vas a aprender?</h3>
+            <ul class="intro-list">
+              <li>
+                <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+                <span>Qué es la sensorialidad y cómo afecta el comportamiento en el aula, con Hernán Mery, terapeuta ocupacional</span>
+              </li>
+              <li>
+                <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+                <span>Estrategias reales de integración sensorial, pensadas para aplicarse en el aula</span>
+              </li>
+              <li>
+                <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+                <span>Cómo se ve un espacio sensorial funcionando en una escuela real, con Estefanie Neira</span>
+              </li>
+              <li>
+                <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
+                <span>Espacio para tus preguntas directas a los expositores</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="intro-sub">
+            <h3>¿Para quién es?</h3>
+            <div class="audience-chips">
+              <span class="audience-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Directores/as</span>
+              <span class="audience-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Encargados/as PIE</span>
+              <span class="audience-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Docentes</span>
+              <span class="audience-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Asistentes de la educación</span>
+            </div>
+            <p class="audience-note">De la Región del Maule, que trabajan día a día con estudiantes con NEE.</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -453,7 +488,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         <div class="ev-mon">Jul</div>
       </div>
       <div class="ev-info">
-        <div class="ev-title">Webinar PIE Maule 2026 · El entorno multisensorial</div>
+        <div class="ev-title">Reserva tu cupo</div>
         <div class="ev-meta">
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Viernes 24 de julio</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>15:00 a 16:00 h</span>

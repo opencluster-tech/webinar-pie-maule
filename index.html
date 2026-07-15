@@ -92,6 +92,30 @@ body {
 /* ── Container ── */
 .wrap { max-width:720px; margin:-44px auto 16px; padding:0 16px; position:relative; z-index:2; }
 
+/* ── Bloque de introducción (contexto + qué aprenderás + para quién es) ── */
+.intro-card {
+  background:white; border-radius:14px; padding:22px 22px;
+  box-shadow:0 6px 24px rgba(0,26,96,0.08); border:1px solid var(--mgray);
+  margin-bottom:18px;
+}
+.intro-lead { font-size:14px; line-height:1.65; color:var(--text); }
+.intro-divider { height:1px; background:var(--mgray); margin:18px 0; }
+.intro-sub h3 {
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:14.5px;
+  color:var(--navy); margin-bottom:8px;
+}
+.intro-sub + .intro-sub { margin-top:16px; }
+.intro-sub p { font-size:13.5px; line-height:1.5; color:var(--text); }
+.intro-list { list-style:none; padding:0; margin:0; }
+.intro-list li {
+  position:relative; padding-left:20px; margin-bottom:7px;
+  font-size:13.5px; line-height:1.5; color:var(--text);
+}
+.intro-list li::before {
+  content:''; position:absolute; left:0; top:7px; width:7px; height:7px;
+  border-radius:50%; background:var(--sky);
+}
+
 /* ── Tarjeta fecha confirmada ── */
 .event-card {
   background:white; border-radius:14px; padding:16px 18px;
@@ -400,6 +424,28 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
   <!-- Form screen -->
   <div class="form-screen" id="formScreen">
 
+    <!-- Introducción: contexto + qué aprenderás + para quién es -->
+    <div class="intro-card">
+      <p class="intro-lead">Sabemos lo que significa el día a día del equipo PIE: las desregulaciones emocionales y conductuales que llegan sin aviso, no contar con un espacio adecuado para la contención, y sentir que la responsabilidad de la inclusión recae solo en ustedes, el equipo PIE. Este webinar surgió para ayudarlos a enfrentar esa realidad: te compartiremos estrategias concretas de entorno multisensorial para que no solo tengan la teoría, sino que puedan lograr una aplicación real en sus aulas.</p>
+
+      <div class="intro-divider"></div>
+
+      <div class="intro-sub">
+        <h3>¿Qué vas a aprender?</h3>
+        <ul class="intro-list">
+          <li>Qué es la sensorialidad y cómo afecta el comportamiento en el aula, con Hernán Mery, terapeuta ocupacional</li>
+          <li>Estrategias reales de integración sensorial, pensadas para aplicarse en el aula</li>
+          <li>Cómo se ve un espacio sensorial funcionando en una escuela real, con Estefanie Neira</li>
+          <li>Espacio para tus preguntas directas a los expositores</li>
+        </ul>
+      </div>
+
+      <div class="intro-sub">
+        <h3>¿Para quién es?</h3>
+        <p>Directores/as, encargados/as PIE, docentes y asistentes de la educación de la Región del Maule que trabajan día a día con estudiantes con NEE.</p>
+      </div>
+    </div>
+
     <!-- Tarjeta fecha confirmada -->
     <div class="event-card">
       <div class="ev-date">
@@ -434,7 +480,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
           <div class="section-num">1</div>
           <div class="section-title">
             <h3>Identificación</h3>
-            <p>Cuéntanos quién eres y desde dónde participas.</p>
+            <p>Cuéntanos quién eres y desde dónde participas. Queremos conocerte a ti y a tu equipo — ese es el primer paso para que esto se vuelva algo real.</p>
           </div>
         </div>
 

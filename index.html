@@ -520,20 +520,21 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 
         <div class="field-row">
           <div class="field">
-            <label class="lbl" for="fijo">Teléfono fijo <span class="req">*</span></label>
+            <label class="lbl" for="fijo">Teléfono fijo</label>
             <div class="tel-wrap">
               <span class="tel-prefix">+56</span>
-              <input type="tel" id="fijo" name="fijo" autocomplete="tel" inputmode="numeric" placeholder="71 2345 678" required>
+              <input type="tel" id="fijo" name="fijo" autocomplete="tel" inputmode="numeric" placeholder="71 2345 678">
             </div>
+            <div class="hint">Opcional.</div>
             <div class="error-msg" data-for="fijo">Ingresa un teléfono fijo válido.</div>
           </div>
           <div class="field">
-            <label class="lbl" for="celular">Celular / WhatsApp</label>
+            <label class="lbl" for="celular">Celular / WhatsApp <span class="req">*</span></label>
             <div class="tel-wrap">
               <span class="tel-prefix">+56</span>
-              <input type="tel" id="celular" name="celular" autocomplete="tel" inputmode="numeric" placeholder="9 8765 4321">
+              <input type="tel" id="celular" name="celular" autocomplete="tel" inputmode="numeric" placeholder="9 8765 4321" required>
             </div>
-            <div class="hint">Opcional. Nos permite contactarte por WhatsApp.</div>
+            <div class="hint">Te enviaremos por aquí recordatorios del webinar.</div>
             <div class="error-msg" data-for="celular">Ingresa un celular válido.</div>
           </div>
         </div>
@@ -612,7 +613,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
               Pregunta para el expositor
             </h3>
-            <p>Esta sección es la más valiosa.</p>
+            <p>Opcional, pero muy valiosa.</p>
           </div>
         </div>
 
@@ -622,8 +623,8 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         </div>
 
         <div class="field">
-          <label class="lbl" for="pregunta">¿Cuál es el principal desafío que enfrenta hoy su equipo docente respecto a la implementación de la Ley TEA o a la inclusión de alumnos con necesidades educativas especiales? <span class="req">*</span></label>
-          <textarea id="pregunta" name="pregunta" rows="5" placeholder="Cuéntanos en tus palabras…" required></textarea>
+          <label class="lbl" for="pregunta">¿Qué desafío enfrenta hoy tu equipo con la Ley TEA o la inclusión de estudiantes con NEE?</label>
+          <textarea id="pregunta" name="pregunta" rows="3" placeholder="Cuéntanos en pocas palabras (opcional)…"></textarea>
           <div class="error-msg" data-for="pregunta">Comparte al menos una pregunta o desafío.</div>
         </div>
       </section>
@@ -724,7 +725,7 @@ const COMUNAS_MAULE = [
   'Yerbas Buenas'
 ];
 
-const REQUIRED = ['nombre','establecimiento','comuna','dependencia','tipoEstablecimiento','cargo','email','fijo','sala','pregunta'];
+const REQUIRED = ['nombre','establecimiento','comuna','dependencia','tipoEstablecimiento','cargo','email','celular','sala'];
 // "temas" se valida aparte (es checkbox group)
 
 document.getElementById('t_load').value = Date.now();
@@ -852,10 +853,10 @@ function validate() {
     const reg = document.getElementById('region').value.trim();
     if (!reg) { showError('region', true); ok = false; }
   }
-  // teléfono fijo (requerido) — al menos 7 dígitos
+  // teléfono fijo (opcional) — si lo completan, al menos 7 dígitos
   const fijo = document.getElementById('fijo').value.trim();
   if (fijo && fijo.replace(/\D/g,'').length < 7) { showError('fijo', true); ok = false; }
-  // celular / WhatsApp (opcional) — si lo completan, al menos 8 dígitos
+  // celular / WhatsApp (requerido) — al menos 8 dígitos
   const cel = document.getElementById('celular').value.trim();
   if (cel && cel.replace(/\D/g,'').length < 8) { showError('celular', true); ok = false; }
   return ok;

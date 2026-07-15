@@ -651,7 +651,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
       </div>
 
       <input type="hidden" name="t_load" id="t_load">
-      <input type="hidden" name="origen" value="webinar-pie-maule-2026-inscripcion">
+      <input type="hidden" name="origen" id="origen" value="webinar-pie-maule-2026-inscripcion">
     </form>
   </div>
 
@@ -728,6 +728,13 @@ const REQUIRED = ['nombre','establecimiento','comuna','dependencia','tipoEstable
 // "temas" se valida aparte (es checkbox group)
 
 document.getElementById('t_load').value = Date.now();
+
+// Si el link trae ?src=... (ej. invitación por colega, Instagram), lo usamos como Origen.
+// Si no trae nada, queda el valor por defecto (inscripción directa desde el link principal).
+(function capturarOrigen() {
+  const src = new URLSearchParams(window.location.search).get('src');
+  if (src) document.getElementById('origen').value = src.trim().slice(0, 60);
+})();
 
 /* ════════════════════════════════════════════════════════
    COMUNA COMBOBOX

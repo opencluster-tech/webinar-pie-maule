@@ -158,7 +158,6 @@ body {
         <div class="field">
           <label for="email">Correo electrónico <span class="req">*</span></label>
           <input type="email" id="email" name="email" autocomplete="email" placeholder="nombre@correo.cl">
-          <div class="hint" id="email-hint">Este es el correo con el que te inscribiste.</div>
           <div class="err" id="err-email">Ingresa un correo válido.</div>
         </div>
 
@@ -168,7 +167,6 @@ body {
             <span class="pfx">+56</span>
             <input type="tel" id="celular" name="celular" inputmode="numeric" placeholder="9 8765 4321">
           </div>
-          <div class="hint">Lo usamos solo para enviarte el enlace y recordarte el webinar.</div>
           <div class="err" id="err-celular">Ingresa un celular válido.</div>
         </div>
 
@@ -267,19 +265,17 @@ function b64urlDecode(s){
   catch(e){ return ''; }
 }
 
-// Prefill: enlace personal trae ?e=<email base64url> y ?n=<nombre>
+// Prefill: enlace personal trae ?e=<email base64url> &n=<nombre> &c=<celular sin +56>
 (function prefill(){
   const emailParam = b64urlDecode(getParam('e')) || getParam('email');
   const nameParam = getParam('n');
+  const celParam = getParam('c');
   const emailInput = document.getElementById('email');
   const nameInput = document.getElementById('nombre');
-  if (emailParam) {
-    emailInput.value = emailParam;
-    document.getElementById('email-hint').textContent = 'Precargamos el correo con el que te inscribiste. Puedes cambiarlo si prefieres recibir la invitación en otro.';
-  } else {
-    document.getElementById('email-hint').textContent = 'Ingresa el mismo correo con el que te inscribiste.';
-  }
+  const celularInput = document.getElementById('celular');
+  if (emailParam) emailInput.value = emailParam;
   if (nameParam) nameInput.value = decodeURIComponent(nameParam);
+  if (celParam) celularInput.value = celParam.replace(/^\+?56/, '');
 })();
 
 function normalizarTel(v){
@@ -326,7 +322,7 @@ document.getElementById('form').addEventListener('submit', async (e) => {
 });
 
 // Agregar a calendario + compartir (pantalla de éxito)
-const CAL_URL = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Webinar%20PIE%20Maule%202026%20-%20El%20entorno%20multisensorial&dates=20260724T150000/20260724T160000&ctz=America/Santiago&details=Webinar%20gratuito%20para%20equipos%20PIE.%0A%0AUnete%20por%20Zoom%3A%0Ahttps%3A%2F%2Fus06web.zoom.us%2Fj%2F83225367774%3Fpwd%3DTr4aZbsfpzOZZdBOvuJGmVh4cgy9Wt.1%0A%0AID%20de%20reunion%3A%20832%202536%207774%0ACodigo%20de%20acceso%3A%2024072026%0A%0AAl%20ingresar%2C%20escribe%20tu%20nombre%20asi%3A%20Nombre%20-%20Escuela%20(ejemplo%3A%20Andres%20-%20Escuela%20Amapolas).&location=https%3A%2F%2Fus06web.zoom.us%2Fj%2F83225367774%3Fpwd%3DTr4aZbsfpzOZZdBOvuJGmVh4cgy9Wt.1';
+const CAL_URL = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Webinar%20PIE%20Maule%202026%20-%20El%20entorno%20multisensorial&dates=20260724T150000/20260724T160000&ctz=America/Santiago&details=Webinar%20gratuito%20para%20equipos%20PIE%20%2F%20Escuelas%20Especiales.%0A%0AUnete%20por%20Zoom%3A%0Ahttps%3A%2F%2Fus06web.zoom.us%2Fj%2F83225367774%3Fpwd%3DTr4aZbsfpzOZZdBOvuJGmVh4cgy9Wt.1%0A%0AID%20de%20reunion%3A%20832%202536%207774%0ACodigo%20de%20acceso%3A%2024072026%0A%0AAl%20ingresar%2C%20escribe%20tu%20nombre%20asi%3A%20Nombre%20-%20Escuela%20(ejemplo%3A%20Andres%20-%20Escuela%20Amapolas).&location=https%3A%2F%2Fus06web.zoom.us%2Fj%2F83225367774%3Fpwd%3DTr4aZbsfpzOZZdBOvuJGmVh4cgy9Wt.1';
 document.getElementById('calBtn').href = CAL_URL;
 
 // Cuenta regresiva en vivo (24 julio 2026, 15:00 hora de Chile)
@@ -349,7 +345,7 @@ function cdTick(){
   document.getElementById('cd-s').textContent = cdPad(s);
 }
 cdTick(); setInterval(cdTick, 1000);
-const shareText = 'Te invito a este webinar gratuito para equipos PIE: "El entorno multisensorial" (viernes 24 de julio, 15:00 h). Inscríbete aquí: ' + INSCRIPCION_URL;
+const shareText = 'Te invito a este webinar gratuito para equipos PIE / Escuelas Especiales: "El entorno multisensorial" (viernes 24 de julio, 15:00 h). Inscríbete aquí: ' + INSCRIPCION_URL;
 document.getElementById('waBtn').href = 'https://wa.me/?text=' + encodeURIComponent(shareText);
 document.getElementById('copyBtn').addEventListener('click', async () => {
   try {

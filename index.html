@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<!-- Google tag (gtag.js) — pedido por el equipo de marketing, va justo después de <head> -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GT-NS9R6LXK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GT-NS9R6LXK');
+  gtag('config', 'G-M9QJGP0Q5L');
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -855,6 +864,30 @@ document.getElementById('t_load').value = Date.now();
   const src = new URLSearchParams(window.location.search).get('src') || '';
   fetch(APPS_SCRIPT_URL + '?action=registrar_visita&webinar=PIE_Maule_2026&src=' + encodeURIComponent(src.trim().slice(0, 60)), { mode: 'no-cors' })
     .catch(() => {});
+})();
+
+// Registro PRIVADO de cuánto tiempo estuvo abierta la página (aproximado, en segundos).
+// No es 100% exacto (los navegadores no siempre avisan al cerrar, sobre todo en celular),
+// pero da una buena aproximación. Se manda al cambiar de pestaña o cerrar (lo que ocurra primero).
+(function medirTiempoEnPagina() {
+  if (!APPS_SCRIPT_URL) return;
+  const inicio = Date.now();
+  const src = new URLSearchParams(window.location.search).get('src') || '';
+  let enviado = false;
+  function enviarTiempo() {
+    if (enviado) return;
+    enviado = true;
+    const segundos = Math.round((Date.now() - inicio) / 1000);
+    const payload = JSON.stringify({
+      action: 'registrar_tiempo',
+      data: { webinar: 'PIE_Maule_2026', src: src.trim().slice(0, 60), segundos: segundos }
+    });
+    navigator.sendBeacon(APPS_SCRIPT_URL, new Blob([payload], { type: 'text/plain;charset=UTF-8' }));
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') enviarTiempo();
+  });
+  window.addEventListener('pagehide', enviarTiempo);
 })();
 
 /* ════════════════════════════════════════════════════════

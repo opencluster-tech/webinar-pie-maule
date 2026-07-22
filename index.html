@@ -108,11 +108,18 @@ body {
   margin-bottom:18px;
 }
 .intro-hook { background:var(--pale); border-left:4px solid var(--sky); padding:22px 24px 20px; }
-.intro-hook h3 {
-  font-family:'Montserrat',sans-serif; font-weight:700; font-size:14.5px;
-  color:var(--navy); margin-bottom:10px;
+.intro-hook summary {
+  cursor:pointer; list-style:none;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
 }
-.intro-hook p { font-size:14px; line-height:1.65; color:var(--navy); margin:0; }
+.intro-hook summary::-webkit-details-marker { display:none; }
+.intro-hook summary h3 {
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:14.5px;
+  color:var(--navy); margin-bottom:0;
+}
+.intro-hook summary .chev { flex-shrink:0; width:19px; height:19px; stroke:var(--navy); transition:transform .2s ease; }
+.intro-hook[open] summary .chev { transform:rotate(180deg); }
+.intro-hook p { font-size:14px; line-height:1.65; color:var(--navy); margin:12px 0 0; }
 .intro-wave { display:block; width:100%; height:16px; }
 .intro-body { padding:22px 24px 24px; }
 .intro-grid { display:grid; grid-template-columns:1fr; gap:22px; }
@@ -174,11 +181,11 @@ body {
 
 /* ── Sections ── */
 .section {
-  background:white; border-radius:14px; padding:18px 18px;
+  background:white; border-radius:14px; padding:16px 18px;
   box-shadow:0 4px 18px rgba(0,26,96,0.06); border:1px solid var(--mgray);
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
-.section-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.section-head { display:flex; align-items:center; gap:12px; margin-bottom:10px; }
 .section-num {
   width:38px; height:38px; border-radius:50%; flex-shrink:0;
   background:linear-gradient(135deg, var(--sky), var(--navy));
@@ -209,7 +216,7 @@ body {
 .featured-banner strong { color:var(--orange); }
 
 /* ── Form fields ── */
-.field { margin-bottom:10px; }
+.field { margin-bottom:6px; }
 .field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
 @media (max-width:520px) { .field-row { grid-template-columns:1fr; } }
 .field label.lbl {
@@ -418,10 +425,6 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
     <div class="hero-inner-content">
     <h1>Webinar PIE Maule 2026<br><span class="accent">El entorno multisensorial</span></h1>
     <h2>Cómo la estimulación sensorial mejora el desarrollo cognitivo y la experiencia de aprendizaje</h2>
-    <p class="lead">
-      Webinar gratuito y online, parte de la serie Tecnología para la Inclusión, para apoyar a los equipos PIE / Escuelas Especiales de la Región del Maule.
-      Inscríbete y reserva tu cupo. La inscripción toma menos de 3 minutos.
-    </p>
     <div class="hero-meta">
       <div class="chip chip-date">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -433,7 +436,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
       </div>
       <div class="chip">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        <span><strong>Modalidad:</strong> Online</span>
+        <span><strong>Online</strong> - Gratuito</span>
       </div>
     </div>
     </div>
@@ -448,10 +451,13 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 
     <!-- Introducción: contexto + qué aprenderás + para quién es -->
     <div class="intro-card">
-      <div class="intro-hook">
-        <h3>¿Por qué creamos este webinar?</h3>
+      <details class="intro-hook">
+        <summary>
+          <h3>¿Por qué creamos este webinar?</h3>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
         <p>Porque llevamos 16 años trabajando arduamente por la inclusión, y sabemos lo que significa el día a día del equipo PIE: las desregulaciones emocionales y conductuales que llegan sin aviso, no contar con un espacio adecuado para la contención, y sentir que la responsabilidad de la inclusión recae solo en ustedes, el equipo PIE. Este webinar surgió para ayudarlos a enfrentar esa realidad: te compartiremos estrategias concretas de entorno multisensorial para que no solo tengan la teoría, sino que puedan lograr una aplicación real en sus aulas.</p>
-      </div>
+      </details>
 
       <svg class="intro-wave" viewBox="0 0 400 16" preserveAspectRatio="none" aria-hidden="true">
         <path d="M0,8 C50,-2 50,18 100,8 C150,-2 150,18 200,8 C250,-2 250,18 300,8 C350,-2 350,18 400,8" fill="none" style="stroke:var(--ltblue)" stroke-width="2"/>
@@ -578,43 +584,46 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         </div>
 
         <div class="field">
-          <label class="lbl">Dependencia <span class="req">*</span></label>
-          <div class="opts grid-2">
-            <label class="opt"><input type="radio" name="dependencia" value="Municipal" required><span class="opt-text">Municipal</span></label>
-            <label class="opt"><input type="radio" name="dependencia" value="SLEP"><span class="opt-text">SLEP</span></label>
-            <label class="opt"><input type="radio" name="dependencia" value="Particular Subvencionado"><span class="opt-text">Particular Subvencionado</span></label>
-            <label class="opt"><input type="radio" name="dependencia" value="Particular Pagado"><span class="opt-text">Particular Pagado</span></label>
-            <label class="opt"><input type="radio" name="dependencia" value="Administración Delegada"><span class="opt-text">Administración Delegada</span></label>
-            <label class="opt"><input type="radio" name="dependencia" value="Otro" data-other="dependenciaOtra"><span class="opt-text">Otro</span></label>
-          </div>
+          <label class="lbl" for="dependencia">Dependencia <span class="req">*</span></label>
+          <select id="dependencia" name="dependencia" required data-other-target="dependenciaOtra">
+            <option value="">Selecciona una opción…</option>
+            <option value="Municipal">Municipal</option>
+            <option value="SLEP">SLEP</option>
+            <option value="Particular Subvencionado">Particular Subvencionado</option>
+            <option value="Particular Pagado">Particular Pagado</option>
+            <option value="Administración Delegada">Administración Delegada</option>
+            <option value="Otro">Otro</option>
+          </select>
           <input type="text" id="dependenciaOtra" name="dependenciaOtra" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
           <div class="error-msg" data-for="dependencia">Selecciona una dependencia.</div>
         </div>
 
         <div class="field">
-          <label class="lbl">Tipo de establecimiento <span class="req">*</span></label>
-          <div class="opts grid-2">
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Educación Parvularia" required><span class="opt-text">Educación Parvularia (jardín / sala cuna)</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Básica"><span class="opt-text">Escuela Básica</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Liceo Humanista-Científico"><span class="opt-text">Liceo Humanista-Científico</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Liceo Técnico-Profesional"><span class="opt-text">Liceo Técnico-Profesional</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Especial"><span class="opt-text">Escuela Especial (discapacidad)</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Especial de Lenguaje"><span class="opt-text">Escuela Especial de Lenguaje (TEL)</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Educación de Adultos (CEIA)"><span class="opt-text">Educación de Adultos (CEIA)</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Otro" data-other="tipoOtro"><span class="opt-text">Otro</span></label>
-          </div>
+          <label class="lbl" for="tipoEstablecimiento">Tipo de establecimiento <span class="req">*</span></label>
+          <select id="tipoEstablecimiento" name="tipoEstablecimiento" required data-other-target="tipoOtro">
+            <option value="">Selecciona una opción…</option>
+            <option value="Educación Parvularia">Educación Parvularia (jardín / sala cuna)</option>
+            <option value="Escuela Básica">Escuela Básica</option>
+            <option value="Liceo Humanista-Científico">Liceo Humanista-Científico</option>
+            <option value="Liceo Técnico-Profesional">Liceo Técnico-Profesional</option>
+            <option value="Escuela Especial">Escuela Especial (discapacidad)</option>
+            <option value="Escuela Especial de Lenguaje">Escuela Especial de Lenguaje (TEL)</option>
+            <option value="Educación de Adultos (CEIA)">Educación de Adultos (CEIA)</option>
+            <option value="Otro">Otro</option>
+          </select>
           <input type="text" id="tipoOtro" name="tipoOtro" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
           <div class="error-msg" data-for="tipoEstablecimiento">Selecciona el tipo de establecimiento.</div>
         </div>
 
         <div class="field">
-          <label class="lbl">Cargo <span class="req">*</span></label>
-          <div class="opts grid-2">
-            <label class="opt"><input type="radio" name="cargo" value="Director/a" required><span class="opt-text">Director/a</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Encargado/a PIE"><span class="opt-text">Encargado/a PIE</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Encargado/a de Convivencia"><span class="opt-text">Encargado/a de Convivencia</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Otro" data-other="cargoOtro"><span class="opt-text">Otro</span></label>
-          </div>
+          <label class="lbl" for="cargo">Cargo <span class="req">*</span></label>
+          <select id="cargo" name="cargo" required data-other-target="cargoOtro">
+            <option value="">Selecciona una opción…</option>
+            <option value="Director/a">Director/a</option>
+            <option value="Encargado/a PIE">Encargado/a PIE</option>
+            <option value="Encargado/a de Convivencia">Encargado/a de Convivencia</option>
+            <option value="Otro">Otro</option>
+          </select>
           <input type="text" id="cargoOtro" name="cargoOtro" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
           <div class="error-msg" data-for="cargo">Selecciona tu cargo.</div>
         </div>
@@ -648,74 +657,32 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         </div>
       </section>
 
-      <!-- ░░░ 2. INTERÉS TEMÁTICO ░░░ -->
+      <!-- ░░░ 2. DIAGNÓSTICO ░░░ -->
       <section class="section">
         <div class="section-head">
           <div class="section-num">2</div>
-          <div class="section-title">
-            <h3>Temas para un próximo webinar</h3>
-            <p>El tema de este webinar ya está definido. Si pudieras elegir el de un próximo encuentro, ¿cuál sería de tu interés? Puedes marcar más de una opción. <span class="req">*</span></p>
-          </div>
-        </div>
-
-        <div class="opts" id="temasGroup">
-          <label class="opt opt-rich">
-            <input type="checkbox" name="temas" value="CAA - Comunicación Aumentativa Alternativa">
-            <span class="opt-text">
-              <strong>CAA — Comunicación Aumentativa Alternativa</strong>
-              <small>Sistemas y ayudas técnicas que complementan o sustituyen el lenguaje oral, facilitando la comunicación funcional mediante tableros de comunicación y pictogramas.</small>
-            </span>
-          </label>
-          <label class="opt opt-rich">
-            <input type="checkbox" name="temas" value="Entorno Multisensorial">
-            <span class="opt-text">
-              <strong>Entorno Multisensorial</strong>
-              <small>Espacio estructurado con estímulos sensoriales controlados para favorecer la autorregulación y la integración sensorial.</small>
-            </span>
-          </label>
-          <label class="opt opt-rich">
-            <input type="checkbox" name="temas" value="Acceso al computador">
-            <span class="opt-text">
-              <strong>Acceso al computador</strong>
-              <small>Conjunto de tecnologías de apoyo y adaptaciones que permiten el uso funcional y autónomo de dispositivos computacionales.</small>
-            </span>
-          </label>
-          <label class="opt opt-rich">
-            <input type="checkbox" name="temas" value="Acceso universal de espacios educativos">
-            <span class="opt-text">
-              <strong>Acceso universal de espacios educativos</strong>
-              <small>Condiciones de infraestructura y diseño que aseguran que todos los estudiantes puedan acceder, desplazarse y participar plenamente en los espacios educativos.</small>
-            </span>
-          </label>
-          <label class="opt"><input type="checkbox" name="temas" value="Otros" data-other="temasOtro"><span class="opt-text">Otros (especificar)</span></label>
-        </div>
-        <input type="text" id="temasOtro" name="temasOtro" placeholder="¿Qué otro tema te interesaría?" style="margin-top:8px; display:none;">
-        <div class="error-msg" data-for="temas">Marca al menos un tema.</div>
-      </section>
-
-      <!-- ░░░ 3. DIAGNÓSTICO ░░░ -->
-      <section class="section">
-        <div class="section-head">
-          <div class="section-num">3</div>
           <div class="section-title">
             <h3>Diagnóstico del establecimiento</h3>
             <p>¿Cuentan con sala sensorial o equipamiento de apoyo especializado? <span class="req">*</span></p>
           </div>
         </div>
 
-        <div class="opts">
-          <label class="opt"><input type="radio" name="sala" value="Sí, equipada" required><span class="opt-text">Sí, equipada</span></label>
-          <label class="opt"><input type="radio" name="sala" value="Sí, pero falta equipamiento técnico"><span class="opt-text">Sí, pero falta equipamiento técnico</span></label>
-          <label class="opt"><input type="radio" name="sala" value="No, estamos en etapa de proyecto"><span class="opt-text">No, estamos en etapa de proyecto</span></label>
-          <label class="opt"><input type="radio" name="sala" value="No, pero nos interesa implementar una este 2026"><span class="opt-text">No, pero nos interesa implementar una este 2026</span></label>
+        <div class="field">
+          <select id="sala" name="sala" required>
+            <option value="">Selecciona una opción…</option>
+            <option value="Sí, equipada">Sí, equipada</option>
+            <option value="Sí, pero falta equipamiento técnico">Sí, pero falta equipamiento técnico</option>
+            <option value="No, estamos en etapa de proyecto">No, estamos en etapa de proyecto</option>
+            <option value="No, pero nos interesa implementar una este 2026">No, pero nos interesa implementar una este 2026</option>
+          </select>
         </div>
         <div class="error-msg" data-for="sala">Selecciona una opción.</div>
       </section>
 
-      <!-- ░░░ 4. PREGUNTA AL EXPOSITOR (DESTACADA) ░░░ -->
+      <!-- ░░░ 3. PREGUNTA AL EXPOSITOR (DESTACADA) ░░░ -->
       <section class="section featured">
         <div class="section-head">
-          <div class="section-num">4</div>
+          <div class="section-num">3</div>
           <div class="section-title">
             <h3>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
@@ -743,10 +710,10 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         </div>
       </section>
 
-      <!-- ░░░ 5. COMENTARIOS ░░░ -->
+      <!-- ░░░ 4. COMENTARIOS ░░░ -->
       <section class="section">
         <div class="section-head">
-          <div class="section-num">5</div>
+          <div class="section-num">4</div>
           <div class="section-title">
             <h3>Comentarios adicionales</h3>
             <p>¿Algo más que quieras compartir? (Opcional)</p>
@@ -846,7 +813,6 @@ const COMUNAS_MAULE = [
 ];
 
 const REQUIRED = ['nombre','establecimiento','comuna','dependencia','tipoEstablecimiento','cargo','email','celular','sala'];
-// "temas" se valida aparte (es checkbox group)
 
 document.getElementById('t_load').value = Date.now();
 
@@ -943,11 +909,20 @@ document.querySelectorAll('input[data-other]').forEach(inp => {
   });
 });
 
+document.querySelectorAll('select[data-other-target]').forEach(sel => {
+  sel.addEventListener('change', () => {
+    const other = document.getElementById(sel.dataset.otherTarget);
+    if (!other) return;
+    const isOther = sel.value === 'Otro';
+    other.style.display = isOther ? 'block' : 'none';
+    if (!isOther) other.value = '';
+  });
+});
+
 /* ════════════════════════════════════════════════════════
    PROGRESS
    ════════════════════════════════════════════════════════ */
 function isFilled(name) {
-  if (name === 'temas') return !!document.querySelector('input[name="temas"]:checked');
   const els = document.querySelectorAll(`[name="${name}"]`);
   if (!els.length) return false;
   if (els[0].type === 'radio' || els[0].type === 'checkbox') {
@@ -957,7 +932,7 @@ function isFilled(name) {
 }
 
 function updateProgress() {
-  const all = [...REQUIRED, 'temas'];
+  const all = REQUIRED;
   const done = all.filter(isFilled).length;
   const pct = Math.round((done / all.length) * 100);
   document.getElementById('progressFill').style.width = pct + '%';
@@ -974,7 +949,7 @@ function showError(name, show) {
   const msg = document.querySelector(`.error-msg[data-for="${name}"]`);
   if (msg) msg.classList.toggle('show', !!show);
   document.querySelectorAll(`[name="${name}"]`).forEach(el => {
-    if (el.type === 'text' || el.type === 'email' || el.tagName === 'TEXTAREA') {
+    if (el.type === 'text' || el.type === 'email' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
       el.classList.toggle('invalid', !!show);
     }
   });
@@ -993,8 +968,6 @@ function validate() {
   REQUIRED.forEach(n => {
     if (!isFilled(n)) { showError(n, true); ok = false; }
   });
-  // temas (checkbox group)
-  if (!isFilled('temas')) { showError('temas', true); ok = false; }
   // email
   const email = document.getElementById('email').value.trim();
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email', true); ok = false; }
@@ -1048,8 +1021,6 @@ document.getElementById('form').addEventListener('submit', async (e) => {
     else if (Array.isArray(data[k])) data[k].push(v);
     else data[k] = [data[k], v];
   }
-  // temas = array
-  data.temas = [...document.querySelectorAll('input[name="temas"]:checked')].map(i => i.value);
   data.fijo = normalizarTel(data.fijo);
   data.celular = normalizarTel(data.celular);
   data.timestamp = new Date().toISOString();
@@ -1145,7 +1116,6 @@ function showThanks(data) {
     <div><strong>Contacto:</strong> ${escapeHtml(data.fijo)}${data.celular ? ' · Cel ' + escapeHtml(data.celular) : ''}</div>
     <div><strong>Tipo:</strong> ${escapeHtml(data.tipoEstablecimiento)}${data.tipoOtro ? ' — ' + escapeHtml(data.tipoOtro) : ''} · ${escapeHtml(data.dependencia)}${data.dependenciaOtra ? ' — ' + escapeHtml(data.dependenciaOtra) : ''}</div>
     <div><strong>Cargo:</strong> ${escapeHtml(data.cargo)}${data.cargoOtro ? ' — ' + escapeHtml(data.cargoOtro) : ''}</div>
-    <div><strong>Tema(s):</strong> ${(data.temas||[]).map(escapeHtml).join(' · ')}</div>
   `;
 
   // share

@@ -184,21 +184,6 @@ body {
 .promo-text strong { color:var(--orange); }
 .promo-text a { color:var(--navy); font-weight:700; text-decoration:underline; }
 
-/* ── Progress ── */
-.progress-bar {
-  background:white; border-radius:12px; padding:12px 16px;
-  box-shadow:0 6px 24px rgba(0,26,96,0.08); border:1px solid var(--mgray);
-  display:flex; align-items:center; gap:12px; margin-bottom:18px;
-  position:sticky; top:8px; z-index:5;
-}
-.progress-text { font-size:12px; color:var(--subtle); font-weight:600; flex-shrink:0; }
-.progress-text strong { color:var(--navy); font-size:13px; }
-.progress-track { flex:1; height:6px; background:var(--mgray); border-radius:3px; overflow:hidden; }
-.progress-fill {
-  height:100%; background:linear-gradient(90deg, var(--sky), var(--navy));
-  border-radius:3px; width:0%; transition:width .35s ease;
-}
-
 /* ── Sections ── */
 .section {
   background:white; border-radius:14px; padding:16px 18px;
@@ -245,6 +230,16 @@ body {
 }
 .field label.lbl .req { color:var(--err); margin-left:2px; }
 .field .hint { font-size:11.5px; color:var(--subtle); margin-top:4px; }
+
+/* sección 1 más compacta (muchos campos cortos, uno debajo del otro) */
+.section-compact { padding-top:12px; padding-bottom:12px; }
+.section-compact .field { margin-bottom:2px; }
+.section-compact .field label.lbl { margin-bottom:2px; }
+.section-compact input[type=text], .section-compact input[type=email], .section-compact input[type=tel], .section-compact select {
+  padding:7px 12px;
+}
+.section-compact .hint { margin-top:2px; }
+.section-compact .field-row { gap:12px; }
 
 input[type=text], input[type=email], input[type=tel], textarea, select {
   width:100%; padding:9px 12px; border:1.5px solid var(--mgray); border-radius:8px;
@@ -543,14 +538,9 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
       </div>
       <div class="promo-info">
-        <div class="promo-title">Sorteamos 2 licencias TD Snap</div>
-        <div class="promo-text">Estaremos sorteando 2 licencias TD Snap el día del webinar. <strong>¡Inscríbete y participa!</strong> El premio será para la escuela que representas.</div>
+        <div class="promo-title">Sorteamos 2 licencias del Software de Comunicación Aumentativa y Alternativa TD Snap</div>
+        <div class="promo-text">Estaremos sorteando dos licencias del Software de Comunicación Aumentativa y Alternativa TD Snap el día del webinar. <strong>¡Inscríbete y participa!</strong> El premio será para la escuela que representas.</div>
       </div>
-    </div>
-
-    <div class="progress-bar">
-      <div class="progress-text">Avance <strong id="progressLabel">0%</strong></div>
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
     </div>
 
     <form id="form" novalidate>
@@ -561,7 +551,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
       </div>
 
       <!-- ░░░ 1. IDENTIFICACIÓN ░░░ -->
-      <section class="section">
+      <section class="section section-compact">
         <div class="section-head">
           <div class="section-num">1</div>
           <div class="section-title">
@@ -920,7 +910,6 @@ document.getElementById('t_load').value = Date.now();
       rf.style.display = 'none';
       if (reg) reg.value = '';
     }
-    updateProgress();
   });
 })();
 
@@ -959,17 +948,6 @@ function isFilled(name) {
   }
   return els[0].value.trim().length > 0;
 }
-
-function updateProgress() {
-  const all = REQUIRED;
-  const done = all.filter(isFilled).length;
-  const pct = Math.round((done / all.length) * 100);
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressLabel').textContent = pct + '%';
-}
-
-document.getElementById('form').addEventListener('input', updateProgress);
-document.getElementById('form').addEventListener('change', updateProgress);
 
 /* ════════════════════════════════════════════════════════
    VALIDATION
@@ -1177,8 +1155,6 @@ function normalizarTel(v) {
 function escapeHtml(s) {
   return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
-
-updateProgress();
 </script>
 </body>
 </html>

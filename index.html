@@ -1052,6 +1052,11 @@ document.getElementById('form').addEventListener('submit', async (e) => {
     } else {
       console.warn('APPS_SCRIPT_URL no configurada todavía. Datos:', data);
     }
+    // Evento de conversión para GA4: permite ver la tasa de inscripción real por canal
+    // (Adquisición > Eventos clave), no solo las visitas a la página.
+    if (typeof gtag === 'function') {
+      gtag('event', 'sign_up', { method: data.origen || 'directo' });
+    }
     showThanks(data);
   } catch (err) {
     console.error(err);

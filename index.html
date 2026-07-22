@@ -835,19 +835,26 @@ const REQUIRED = ['nombre','establecimiento','comuna','dependencia','tipoEstable
 
 document.getElementById('t_load').value = Date.now();
 
-// Si el link trae ?src=... (ej. invitación por colega, Instagram), lo usamos como Origen.
-// Si no trae nada, queda el valor por defecto (inscripción directa desde el link principal).
+// Origen del visitante: primero busca ?src=... (nuestro parámetro propio).
+// Si no viene, usa ?utm_source=... (estándar de campañas) como respaldo,
+// para no tener que taguear cada link dos veces distintas.
+// Si no trae ninguno, queda vacío (inscripción directa desde el link principal).
+function obtenerOrigen() {
+  const params = new URLSearchParams(window.location.search);
+  const src = params.get('src') || params.get('utm_source') || '';
+  return src.trim().slice(0, 60);
+}
+
 (function capturarOrigen() {
-  const src = new URLSearchParams(window.location.search).get('src');
-  if (src) document.getElementById('origen').value = src.trim().slice(0, 60);
+  const origen = obtenerOrigen();
+  if (origen) document.getElementById('origen').value = origen;
 })();
 
 // Registro PRIVADO de aperturas de página (no muestra nada al público).
 // No cuenta visitantes únicos: cada carga de la página suma 1.
 (function registrarVisita() {
   if (!APPS_SCRIPT_URL) return;
-  const src = new URLSearchParams(window.location.search).get('src') || '';
-  fetch(APPS_SCRIPT_URL + '?action=registrar_visita&webinar=PIE_Maule_2026&src=' + encodeURIComponent(src.trim().slice(0, 60)), { mode: 'no-cors' })
+  fetch(APPS_SCRIPT_URL + '?action=registrar_visita&webinar=PIE_Maule_2026&src=' + encodeURIComponent(obtenerOrigen()), { mode: 'no-cors' })
     .catch(() => {});
 })();
 
@@ -857,7 +864,7 @@ document.getElementById('t_load').value = Date.now();
 (function medirTiempoEnPagina() {
   if (!APPS_SCRIPT_URL) return;
   const inicio = Date.now();
-  const src = new URLSearchParams(window.location.search).get('src') || '';
+  const src = obtenerOrigen();
   let enviado = false;
   function enviarTiempo() {
     if (enviado) return;
@@ -865,7 +872,7 @@ document.getElementById('t_load').value = Date.now();
     const segundos = Math.round((Date.now() - inicio) / 1000);
     const payload = JSON.stringify({
       action: 'registrar_tiempo',
-      data: { webinar: 'PIE_Maule_2026', src: src.trim().slice(0, 60), segundos: segundos }
+      data: { webinar: 'PIE_Maule_2026', src: src, segundos: segundos }
     });
     navigator.sendBeacon(APPS_SCRIPT_URL, new Blob([payload], { type: 'text/plain;charset=UTF-8' }));
   }

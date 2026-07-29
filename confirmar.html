@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Confirma tu asistencia — Webinar PIE Maule 2026</title>
-<meta name="description" content="Confirma tu asistencia al Webinar PIE Maule 2026: El entorno multisensorial. Viernes 24 de julio, 15:00 h.">
+<title>Confirma tu asistencia — Webinar PIE</title>
+<meta name="description" content="Confirma tu asistencia al Webinar PIE de Open Cluster Tech.">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -124,11 +124,11 @@ body {
   <div class="hero-inner">
     <div class="hero-top">
       <img src="https://webinar.opencluster-tech.cl/assets/oct-logo.png" alt="Open Cluster Tech">
-      <span class="hero-eyebrow">Webinar · 2026</span>
+      <span class="hero-eyebrow" id="cfgEyebrow">Webinar · 2026</span>
     </div>
   </div>
   <div class="hero-img-wrap">
-    <img class="hero-img" src="https://webinar.opencluster-tech.cl/assets/hero-entorno.jpg" alt="El entorno multisensorial — Cómo la estimulación sensorial mejora el desarrollo cognitivo y la experiencia de aprendizaje">
+    <img class="hero-img" id="cfgHeroImg" src="https://webinar.opencluster-tech.cl/assets/hero-entorno.jpg" alt="Webinar PIE de Open Cluster Tech">
   </div>
 </header>
 
@@ -138,10 +138,10 @@ body {
     <!-- Formulario de confirmación -->
     <div class="form-view" id="formView">
       <div class="event">
-        <div class="d"><div class="day">24</div><div class="mon">JUL</div></div>
+        <div class="d"><div class="day" id="cfgDia">--</div><div class="mon" id="cfgMes">---</div></div>
         <div class="t">
-          <div class="tt">Viernes 24 de julio</div>
-          <div class="tm">15:00 a 16:00 h&nbsp;&nbsp;·&nbsp;&nbsp;Online</div>
+          <div class="tt" id="cfgFechaLarga">Por confirmar</div>
+          <div class="tm"><span id="cfgHora">Por confirmar</span>&nbsp;&nbsp;·&nbsp;&nbsp;Online</div>
         </div>
       </div>
 
@@ -197,8 +197,8 @@ body {
 
       <!-- Fecha / hora / modalidad -->
       <table role="presentation" style="width:100%; margin-top:22px; border-top:1px solid var(--mgray); border-bottom:1px solid var(--mgray); border-collapse:collapse;"><tr>
-        <td style="padding:14px 6px; text-align:center; border-right:1px solid var(--mgray);"><div style="font-size:10.5px; color:#94a3b8; font-weight:700; letter-spacing:.5px;">FECHA</div><div style="font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:14px; color:var(--navy); margin-top:3px;">Vie 24 jul</div></td>
-        <td style="padding:14px 6px; text-align:center; border-right:1px solid var(--mgray);"><div style="font-size:10.5px; color:#94a3b8; font-weight:700; letter-spacing:.5px;">HORA</div><div style="font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:14px; color:var(--navy); margin-top:3px;">15:00–16:00</div></td>
+        <td style="padding:14px 6px; text-align:center; border-right:1px solid var(--mgray);"><div style="font-size:10.5px; color:#94a3b8; font-weight:700; letter-spacing:.5px;">FECHA</div><div style="font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:14px; color:var(--navy); margin-top:3px;" id="cfgFechaCorta">--</div></td>
+        <td style="padding:14px 6px; text-align:center; border-right:1px solid var(--mgray);"><div style="font-size:10.5px; color:#94a3b8; font-weight:700; letter-spacing:.5px;">HORA</div><div style="font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:14px; color:var(--navy); margin-top:3px;" id="cfgHoraCorta">--</div></td>
         <td style="padding:14px 6px; text-align:center;"><div style="font-size:10.5px; color:#94a3b8; font-weight:700; letter-spacing:.5px;">MODALIDAD</div><div style="font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:14px; color:var(--navy); margin-top:3px;">Online</div></td>
       </tr></table>
 
@@ -207,18 +207,16 @@ body {
       <!-- Lo que viviremos juntos -->
       <div style="text-align:left; margin-top:28px;">
         <div style="font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:17px; color:var(--navy); margin-bottom:12px;">Lo que viviremos juntos</div>
-        <div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;"><span style="color:var(--sky); font-weight:800;">•</span><span>Los sistemas sensoriales y su rol en el aula, con Hernán Mery, terapeuta ocupacional.</span></div>
-        <div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;"><span style="color:var(--sky); font-weight:800;">•</span><span>Experiencias reales de implementación en escuelas, con Estefanie Neira, terapeuta ocupacional.</span></div>
-        <div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;"><span style="color:var(--sky); font-weight:800;">•</span><span>Preguntas y respuestas: nuestros terapeutas darán sugerencias prácticas y responderán tus inquietudes.</span></div>
+        <div id="cfgTemas"></div>
       </div>
 
       <!-- Concurso -->
-      <div style="text-align:left; margin-top:26px; background:linear-gradient(135deg,#001a60 0%,#012a86 100%); border-radius:16px; padding:22px;">
+      <div id="cfgConcurso" style="text-align:left; margin-top:26px; background:linear-gradient(135deg,#001a60 0%,#012a86 100%); border-radius:16px; padding:22px;">
         <div style="display:flex; align-items:center; gap:10px;">
           <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#06b3fd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
           <span style="font-family:'Montserrat',Arial,sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; color:#06b3fd; text-transform:uppercase;">Concurso</span>
         </div>
-        <div style="font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:18px; color:#fff; margin-top:12px; line-height:1.25;">Sortearemos dos licencias de TD Snap, software de comunicación aumentativa, para tus alumnos</div>
+        <div id="cfgPremio" style="font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:18px; color:#fff; margin-top:12px; line-height:1.25;"></div>
         <div style="font-size:13px; color:rgba(255,255,255,0.85); margin-top:8px; line-height:1.55;">Entre todos los presentes, al final del webinar. Para participar:</div>
         <div style="margin-top:14px; font-size:13.5px;">
           <div style="display:flex; gap:12px; padding:5px 0; color:rgba(255,255,255,0.92); line-height:1.5;"><span style="color:#06b3fd; font-family:'Montserrat',Arial,sans-serif; font-weight:800;">1</span><span>Síguenos en Instagram: <a href="https://instagram.com/opencluster_tech" target="_blank" style="color:#06b3fd; font-weight:700; text-decoration:none;">@opencluster_tech</a></span></div>
@@ -254,12 +252,171 @@ body {
 </main>
 
 <script>
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbws21oUtUYoOck3ScLpIFYybeLMz6QpfD-Tk2FtI-Iv69gTuEqzIRgmSLzuiarsiiK2MA/exec';
-const PREVIEW_MODE = false; // solo la vista previa lo pone en true para saltar el envío real
-// Enlace público del formulario de inscripción (para compartir con colegas)
-const INSCRIPCION_URL = 'https://webinar.opencluster-tech.cl/';
+/* ============================================================
+   CONFIGURACION DE LOS WEBINARS
+   ------------------------------------------------------------
+   Esta pagina sirve para TODOS los webinars. Elige cual mostrar
+   segun el parametro ?w= del enlace. Ejemplos:
+     confirmar.html?w=maule
+     confirmar.html?w=nuble
+   Si el enlace no trae ?w=, usa WEBINAR_POR_DEFECTO (asi siguen
+   funcionando los enlaces antiguos del Maule ya enviados).
+
+   PARA AGREGAR UN WEBINAR NUEVO: copia un bloque completo,
+   cambiale la clave y los datos. No hay que tocar nada mas.
+
+   OJO con "backend": es la direccion del Apps Script que recibe
+   la confirmacion. Cada ejecutivo apunta su webinar a SU motor.
+   Debe terminar en /exec (la /dev no funciona para el publico).
+   ============================================================ */
+const WEBINARS = {
+
+  maule: {
+    region: 'Región del Maule',
+    titulo: 'El entorno multisensorial',
+    dia: '24', mes: 'JUL',
+    fechaLarga: 'Viernes 24 de julio',
+    fechaCorta: 'Vie 24 jul',
+    hora: '15:00 a 16:00 h',
+    horaCorta: '15:00-16:00',
+    inicio: '2026-07-24T15:00:00-04:00',
+    calFechas: '20260724T150000/20260724T160000',
+    zoomUrl: 'https://us06web.zoom.us/j/83225367774?pwd=Tr4aZbsfpzOZZdBOvuJGmVh4cgy9Wt.1',
+    zoomId: '832 2536 7774',
+    zoomClave: '24072026',
+    heroImg: 'https://webinar.opencluster-tech.cl/assets/hero-entorno.jpg',
+    inscripcion: 'https://webinar.opencluster-tech.cl/',
+    backend: 'https://script.google.com/macros/s/AKfycbws21oUtUYoOck3ScLpIFYybeLMz6QpfD-Tk2FtI-Iv69gTuEqzIRgmSLzuiarsiiK2MA/exec',
+    origen: 'confirmacion-webinar-pie-maule-2026',
+    contacto: 'william.marin@opencluster-tech.cl',
+    temas: [
+      'Los sistemas sensoriales y su rol en el aula, con Hernán Mery, terapeuta ocupacional.',
+      'Experiencias reales de implementación en escuelas, con Estefanie Neira, terapeuta ocupacional.',
+      'Preguntas y respuestas: nuestros terapeutas darán sugerencias prácticas y responderán tus inquietudes.'
+    ],
+    premio: 'Sortearemos dos licencias de TD Snap, software de comunicación aumentativa, para tus alumnos'
+  },
+
+  nuble: {
+    region: 'Región de Ñuble',
+    titulo: 'Webinar PIE',
+    dia: '', mes: '',
+    fechaLarga: 'Fecha por confirmar',
+    fechaCorta: 'Por confirmar',
+    hora: 'Horario por confirmar',
+    horaCorta: 'Por confirmar',
+    inicio: '',
+    calFechas: '',
+    zoomUrl: '',
+    zoomId: '',
+    zoomClave: '',
+    heroImg: 'https://webinar.opencluster-tech.cl/assets/hero-entorno.jpg',
+    inscripcion: 'https://webinar.opencluster-tech.cl/nuble.html',
+    backend: 'https://script.google.com/macros/s/AKfycbws21oUtUYoOck3ScLpIFYybeLMz6QpfD-Tk2FtI-Iv69gTuEqzIRgmSLzuiarsiiK2MA/exec',
+    origen: 'confirmacion-webinar-pie-nuble-2026',
+    contacto: 'william.marin@opencluster-tech.cl',
+    temas: [],
+    premio: ''
+  },
+
+  biobio: {
+    region: 'Región del Biobío',
+    titulo: 'Webinar PIE',
+    dia: '', mes: '',
+    fechaLarga: 'Fecha por confirmar',
+    fechaCorta: 'Por confirmar',
+    hora: 'Horario por confirmar',
+    horaCorta: 'Por confirmar',
+    inicio: '',
+    calFechas: '',
+    zoomUrl: '',
+    zoomId: '',
+    zoomClave: '',
+    heroImg: 'https://webinar.opencluster-tech.cl/assets/hero-entorno.jpg',
+    inscripcion: 'https://webinar.opencluster-tech.cl/biobio.html',
+    backend: 'https://script.google.com/macros/s/AKfycbws21oUtUYoOck3ScLpIFYybeLMz6QpfD-Tk2FtI-Iv69gTuEqzIRgmSLzuiarsiiK2MA/exec',
+    origen: 'confirmacion-webinar-pie-biobio-2026',
+    contacto: 'william.marin@opencluster-tech.cl',
+    temas: [],
+    premio: ''
+  },
+
+  metropolitana: {
+    region: 'Región Metropolitana',
+    titulo: 'Webinar PIE',
+    dia: '', mes: '',
+    fechaLarga: 'Fecha por confirmar',
+    fechaCorta: 'Por confirmar',
+    hora: 'Horario por confirmar',
+    horaCorta: 'Por confirmar',
+    inicio: '',
+    calFechas: '',
+    zoomUrl: '',
+    zoomId: '',
+    zoomClave: '',
+    heroImg: 'https://webinar.opencluster-tech.cl/assets/hero-entorno.jpg',
+    inscripcion: 'https://webinar.opencluster-tech.cl/metropolitana.html',
+    backend: 'https://script.google.com/macros/s/AKfycbws21oUtUYoOck3ScLpIFYybeLMz6QpfD-Tk2FtI-Iv69gTuEqzIRgmSLzuiarsiiK2MA/exec',
+    origen: 'confirmacion-webinar-pie-rm-2026',
+    contacto: 'rayen.ogalde@opencluster-tech.cl',
+    temas: [],
+    premio: ''
+  }
+
+};
+const WEBINAR_POR_DEFECTO = 'maule';
+/* ================= FIN DE LA CONFIGURACION ================= */
 
 function getParam(n){ return new URLSearchParams(location.search).get(n) || ''; }
+
+// Elige el webinar segun ?w= (si no existe o no esta en la lista, usa el por defecto)
+const W = WEBINARS[(getParam('w') || '').toLowerCase()] || WEBINARS[WEBINAR_POR_DEFECTO];
+
+const APPS_SCRIPT_URL = W.backend;
+const PREVIEW_MODE = false; // solo la vista previa lo pone en true para saltar el envío real
+// Enlace público del formulario de inscripción (para compartir con colegas)
+const INSCRIPCION_URL = W.inscripcion;
+
+// Escribe en la pagina los datos del webinar elegido
+(function aplicarWebinar(){
+  const set = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+
+  document.title = 'Confirma tu asistencia — Webinar PIE ' + W.region;
+  const meta = document.querySelector('meta[name="description"]');
+  if (meta) meta.setAttribute('content', 'Confirma tu asistencia al Webinar PIE ' + W.region + '.');
+
+  set('cfgEyebrow', 'Webinar · ' + W.region);
+  set('cfgDia', W.dia || '·');
+  set('cfgMes', W.mes || '');
+  set('cfgFechaLarga', W.fechaLarga);
+  set('cfgHora', W.hora);
+  set('cfgFechaCorta', W.fechaCorta);
+  set('cfgHoraCorta', W.horaCorta);
+
+  const hero = document.getElementById('cfgHeroImg');
+  if (hero && W.heroImg) hero.src = W.heroImg;
+
+  // Temas ("Lo que viviremos juntos"): si no hay, se oculta la seccion completa
+  const cont = document.getElementById('cfgTemas');
+  if (cont) {
+    if (W.temas && W.temas.length) {
+      cont.innerHTML = W.temas.map(t =>
+        '<div style="display:flex; gap:10px; padding:6px 0; font-size:14px; color:var(--text); line-height:1.5;">' +
+        '<span style="color:var(--sky); font-weight:800;">•</span><span></span></div>'
+      ).join('');
+      cont.querySelectorAll('span:last-child').forEach((s, i) => { s.textContent = W.temas[i]; });
+    } else if (cont.parentElement) {
+      cont.parentElement.style.display = 'none';
+    }
+  }
+
+  // Concurso: si el webinar no tiene premio, se oculta la tarjeta entera
+  const concurso = document.getElementById('cfgConcurso');
+  if (concurso) {
+    if (W.premio) set('cfgPremio', W.premio);
+    else concurso.style.display = 'none';
+  }
+})();
 function b64urlDecode(s){
   try { return decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/')))); }
   catch(e){ return ''; }
@@ -301,7 +458,7 @@ document.getElementById('form').addEventListener('submit', async (e) => {
   const btn = document.getElementById('btn');
   btn.classList.add('loading'); btn.disabled = true; btn.querySelector('.lbl').textContent = 'Confirmando…';
 
-  const data = { nombre, email, celular: normalizarTel(cel), timestamp: new Date().toISOString(), origen: 'confirmacion-webinar-pie-maule-2026' };
+  const data = { nombre, email, celular: normalizarTel(cel), timestamp: new Date().toISOString(), origen: W.origen };
 
   try {
     if (!PREVIEW_MODE) {
@@ -317,16 +474,33 @@ document.getElementById('form').addEventListener('submit', async (e) => {
     window.scrollTo({top:0, behavior:'smooth'});
   } catch (err) {
     btn.classList.remove('loading'); btn.disabled = false; btn.querySelector('.lbl').textContent = 'Confirmar mi asistencia';
-    alert('Hubo un problema al confirmar. Intenta nuevamente o escríbenos a william.marin@opencluster-tech.cl');
+    alert('Hubo un problema al confirmar. Intenta nuevamente o escríbenos a ' + W.contacto);
   }
 });
 
-// Agregar a calendario + compartir (pantalla de éxito)
-const CAL_URL = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Webinar%20PIE%20Maule%202026%20-%20El%20entorno%20multisensorial&dates=20260724T150000/20260724T160000&ctz=America/Santiago&details=Webinar%20gratuito%20para%20equipos%20PIE%20%2F%20Escuelas%20Especiales.%0A%0AUnete%20por%20Zoom%3A%0Ahttps%3A%2F%2Fus06web.zoom.us%2Fj%2F83225367774%3Fpwd%3DTr4aZbsfpzOZZdBOvuJGmVh4cgy9Wt.1%0A%0AID%20de%20reunion%3A%20832%202536%207774%0ACodigo%20de%20acceso%3A%2024072026%0A%0AAl%20ingresar%2C%20escribe%20tu%20nombre%20asi%3A%20Nombre%20-%20Escuela%20(ejemplo%3A%20Andres%20-%20Escuela%20Amapolas).&location=https%3A%2F%2Fus06web.zoom.us%2Fj%2F83225367774%3Fpwd%3DTr4aZbsfpzOZZdBOvuJGmVh4cgy9Wt.1';
-document.getElementById('calBtn').href = CAL_URL;
+// Agregar a calendario: se arma con los datos del webinar elegido.
+// Si el webinar todavia no tiene fecha, el boton se oculta.
+(function armarCalendario(){
+  const btn = document.getElementById('calBtn');
+  if (!btn) return;
+  if (!W.calFechas) { btn.style.display = 'none'; return; }
+  let detalle = 'Webinar gratuito para equipos PIE / Escuelas Especiales.';
+  if (W.zoomUrl) {
+    detalle += '\n\nUnete por Zoom:\n' + W.zoomUrl;
+    if (W.zoomId) detalle += '\n\nID de reunion: ' + W.zoomId;
+    if (W.zoomClave) detalle += '\nCodigo de acceso: ' + W.zoomClave;
+  }
+  detalle += '\n\nAl ingresar, escribe tu nombre asi: Nombre - Escuela (ejemplo: Andres - Escuela Amapolas).';
+  btn.href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+    + '&text=' + encodeURIComponent('Webinar PIE ' + W.region + ' - ' + W.titulo)
+    + '&dates=' + W.calFechas
+    + '&ctz=America/Santiago'
+    + '&details=' + encodeURIComponent(detalle)
+    + (W.zoomUrl ? '&location=' + encodeURIComponent(W.zoomUrl) : '');
+})();
 
-// Cuenta regresiva en vivo (24 julio 2026, 15:00 hora de Chile)
-const CD_TARGET = new Date('2026-07-24T15:00:00-04:00').getTime();
+// Cuenta regresiva en vivo (hora de Chile). Sin fecha definida, no se muestra.
+const CD_TARGET = W.inicio ? new Date(W.inicio).getTime() : 0;
 function cdPad(x){ return String(x).padStart(2,'0'); }
 function cdTick(){
   let diff = CD_TARGET - Date.now();
@@ -344,8 +518,11 @@ function cdTick(){
   document.getElementById('cd-m').textContent = cdPad(m);
   document.getElementById('cd-s').textContent = cdPad(s);
 }
-cdTick(); setInterval(cdTick, 1000);
-const shareText = 'Te invito a este webinar gratuito para equipos PIE / Escuelas Especiales: "El entorno multisensorial" (viernes 24 de julio, 15:00 h). Inscríbete aquí: ' + INSCRIPCION_URL;
+if (CD_TARGET) { cdTick(); setInterval(cdTick, 1000); }
+else { const cd = document.getElementById('cd'); if (cd && cd.parentElement) cd.parentElement.style.display = 'none'; }
+
+const shareCuando = W.inicio ? ' (' + W.fechaLarga.toLowerCase() + ', ' + W.hora + ')' : '';
+const shareText = 'Te invito a este webinar gratuito para equipos PIE / Escuelas Especiales: "' + W.titulo + '"' + shareCuando + '. Inscríbete aquí: ' + INSCRIPCION_URL;
 document.getElementById('waBtn').href = 'https://wa.me/?text=' + encodeURIComponent(shareText);
 document.getElementById('copyBtn').addEventListener('click', async () => {
   try {

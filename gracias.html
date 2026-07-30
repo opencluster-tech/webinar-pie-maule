@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Gracias por responder — Webinar PIE Maule 2026 · OpenCluster Tech</title>
+<link rel="icon" href="/assets/oct-logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; }
+  body {
+    margin:0; padding:24px 12px; background:#f4f8fc;
+    font-family:'Open Sans',Arial,Helvetica,sans-serif; color:#1a2535;
+    -webkit-font-smoothing:antialiased;
+  }
+  .card {
+    width:100%; max-width:660px; margin:0 auto; background:#ffffff;
+    border-radius:18px; overflow:hidden; box-shadow:0 10px 34px rgba(0,26,96,.10);
+  }
+  .hd {
+    background:#001a60; background:linear-gradient(135deg,#001a60 0%,#002b8c 100%);
+    padding:30px 36px 34px;
+  }
+  .hd .rule { width:44px; height:3px; background:#06b3fd; border-radius:2px; margin-bottom:16px; }
+  .hd .kicker {
+    font-family:'Montserrat',Arial,sans-serif; font-size:11px; font-weight:700;
+    letter-spacing:2px; color:#06b3fd; text-transform:uppercase;
+  }
+  .hd h1 {
+    font-family:'Montserrat',Arial,sans-serif; font-size:29px; font-weight:800;
+    line-height:1.15; color:#ffffff; margin:8px 0 0;
+  }
+  .hd .sub { font-size:14px; font-weight:600; color:#cfe8ff; margin-top:8px; line-height:1.45; }
+  .bd { padding:30px 40px 34px; }
+
+  /* Línea de respuesta ya registrada */
+  .reg { display:flex; align-items:flex-start; gap:14px; }
+  .reg + .reg { margin-top:16px; }
+  .reg .tick {
+    flex:0 0 auto; width:40px; height:40px; border-radius:50%; background:#eaf6ff;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .reg .txt { padding-top:2px; }
+  .reg .rot {
+    font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase;
+    color:#94a3b8; font-family:'Montserrat',Arial,sans-serif;
+  }
+  .reg p { margin:3px 0 0; font-size:14.5px; line-height:1.55; }
+  .reg .valor { font-family:'Montserrat',Arial,sans-serif; font-weight:700; color:#0a7fd6; }
+
+  h2.titulo {
+    font-family:'Montserrat',Arial,sans-serif; font-size:20px; font-weight:800;
+    color:#001a60; margin:0 0 14px; line-height:1.25;
+  }
+
+  .sep { height:1px; background:#e6edf5; margin:26px 0; }
+
+  /* Preguntas pendientes, respondibles aquí mismo */
+  #pend-intro { display:none; font-size:13.5px; color:#5b6b7f; line-height:1.55; margin:0 0 18px; }
+  .pend h3 {
+    font-family:'Montserrat',Arial,sans-serif; font-size:16px; font-weight:800;
+    color:#001a60; margin:0 0 12px; line-height:1.3;
+  }
+  .pend + .pend { margin-top:26px; }
+  .opciones { display:flex; flex-wrap:wrap; gap:8px; }
+  .opciones button.opt {
+    width:auto; margin:0; background:#ffffff; border:1.5px solid #DDE4ED; color:#001a60;
+    font-family:'Montserrat',Arial,sans-serif; font-size:13.5px; font-weight:700;
+    padding:11px 18px; border-radius:10px; cursor:pointer; line-height:1.3;
+  }
+  .opciones button.opt:hover { border-color:#06b3fd; background:#f6fbff; }
+  .opciones button.opt:disabled { opacity:.45; cursor:default; }
+  .pend .fallo { display:none; margin-top:12px; font-size:13px; color:#a14400; line-height:1.55; }
+
+  /* Campo abierto */
+  .abierta h3 {
+    font-family:'Montserrat',Arial,sans-serif; font-size:16px; font-weight:800;
+    color:#001a60; margin:0 0 6px;
+  }
+  .abierta p.intro { margin:0 0 14px; font-size:13.5px; line-height:1.6; color:#1a2535; }
+  textarea {
+    width:100%; min-height:110px; resize:vertical; padding:14px;
+    border:1.5px solid #cdd8e6; border-radius:12px;
+    font-family:'Open Sans',Arial,sans-serif; font-size:15px; line-height:1.6; color:#1a2535;
+    background:#ffffff;
+  }
+  textarea:focus { outline:none; border-color:#06b3fd; box-shadow:0 0 0 3px rgba(6,179,253,.15); }
+  .contador { font-size:12px; color:#94a3b8; margin-top:6px; text-align:right; }
+  .contador.tope { color:#a14400; font-weight:600; }
+  .quien { font-size:12.5px; color:#5b6b7f; line-height:1.55; margin-top:12px; }
+  .quien b { font-family:'Montserrat',Arial,sans-serif; color:#001a60; font-weight:700; }
+  button.enviar {
+    margin-top:16px; width:100%; border:0; cursor:pointer;
+    background:#06b3fd; background:linear-gradient(90deg,#06b3fd,#0a7fd6);
+    color:#ffffff; font-family:'Montserrat',Arial,sans-serif; font-size:15px; font-weight:700;
+    padding:15px 24px; border-radius:12px;
+  }
+  button.enviar:hover { background:#0596d6; }
+  button.enviar:disabled { background:#b8c6d8; cursor:default; }
+  .error { display:none; margin-top:14px; font-size:13.5px; color:#a14400; line-height:1.55; }
+  .error a { color:#0a7fd6; }
+  .cerrar { margin-top:16px; font-size:12.5px; color:#94a3b8; text-align:center; line-height:1.55; }
+
+  /* Gracias por el comentario */
+  .ok { display:none; text-align:center; padding:6px 0 0; }
+  .ok h3 {
+    font-family:'Montserrat',Arial,sans-serif; font-size:20px; font-weight:800;
+    color:#001a60; margin:0 0 12px;
+  }
+  .ok p { font-size:14.5px; line-height:1.6; margin:0 0 10px; }
+  .ok a { color:#0a7fd6; font-weight:700; text-decoration:none; }
+
+  .ft {
+    border-top:1px solid #e6edf5; margin:26px 40px 0; padding:18px 0 26px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .ft div { font-size:11.5px; color:#94a3b8; line-height:1.5; }
+  .ft img { height:22px; width:auto; opacity:.65; }
+
+  @media (max-width:560px) {
+    .bd { padding:24px 22px 28px; }
+    .hd { padding:26px 22px 30px; }
+    .hd h1 { font-size:24px; }
+    .ft { margin:22px 22px 0; }
+    .opciones { flex-direction:column; align-items:stretch; }
+    .opciones button.opt { width:100%; text-align:left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="hd">
+    <div class="rule"></div>
+    <div class="kicker">Webinar PIE Maule 2026</div>
+    <h1>El entorno multisensorial</h1>
+    <div class="sub">Gracias por acompañarnos. Te escuchamos.</div>
+  </div>
+
+  <div class="bd" id="cuerpo">
+
+    <h2 class="titulo" id="titulo">Listo, quedó registrado</h2>
+
+    <!-- Respuestas ya registradas: se van apilando aquí -->
+    <div id="registradas"></div>
+
+    <div class="sep" id="sep1" style="display:none;"></div>
+
+    <!-- Las preguntas que faltan, respondibles sin salir de aquí. Se arman solas:
+         un bloque por cada una que la persona todavía no ha contestado. Desde el
+         2026-07-30 el botón del correo no precarga respuesta, así que lo normal
+         es que lleguen las dos. -->
+    <p id="pend-intro">Son de un clic: eliges una opción y se registra sola.</p>
+    <div id="pendientes"></div>
+
+    <div class="sep" id="sep2"></div>
+
+    <!-- Campo abierto: la pregunta a los expositores -->
+    <div class="abierta" id="abierta">
+      <h3>Hazle tu pregunta a los expositores</h3>
+      <p class="intro">Eso que quedaste con ganas de preguntar durante el webinar. Se la llevamos a los terapeutas que expusieron y <strong>te respondemos por correo</strong>. Si prefieres dejarnos un comentario en vez de una pregunta, también lo leemos.</p>
+
+      <textarea id="comentario" maxlength="500" placeholder="Escribe aquí tu pregunta..."></textarea>
+      <div class="contador"><span id="cuenta">0</span> / 500</div>
+
+      <div class="quien" id="quien"></div>
+
+      <button class="enviar" id="enviar" type="button">Enviar mi pregunta</button>
+      <div class="error" id="error"></div>
+      <div class="cerrar" id="cerrar">Si no quieres preguntar nada, ya puedes cerrar esta pestaña: lo que respondiste arriba ya quedó guardado.</div>
+    </div>
+
+    <!-- Gracias por la pregunta -->
+    <div class="ok" id="gracias">
+      <h3>Recibimos tu pregunta</h3>
+      <p id="gracias-detalle"></p>
+      <p>Ya puedes cerrar esta pestaña. Si quieres agregar algo más, escríbenos a <a href="mailto:william.marin@opencluster-tech.cl">william.marin@opencluster-tech.cl</a>.</p>
+    </div>
+
+  </div>
+
+  <div class="ft">
+    <div>Open Cluster Tech<br>Campaña PIE Maule 2026</div>
+    <img src="/assets/oct-logo.png" alt="Open Cluster Tech">
+  </div>
+
+</div>
+
+<script>
+(function () {
+  // Dirección PÚBLICA del backend (termina en /exec). Tiene que ser la misma que
+  // usa confirmar.html y la misma que EXEC_URL en Código.gs. Se copia de
+  // Apps Script → Implementar → Gestionar implementaciones. NUNCA la /dev.
+  var BACKEND = 'https://script.google.com/macros/s/AKfycbz8TGcjzlDkFvsQGT9WWv9ZJKgUiqZlWyBFDz_f07jF4Kb-BHjsRMeCJjjkuwi43aQPwQ/exec';
+
+  var LIMITE = 500;
+
+  // Las mismas preguntas y etiquetas que FEEDBACK_OPCIONES en Código.gs. Aquí
+  // están solo para MOSTRARLAS; lo que se guarda lo decide el backend.
+  var PREGUNTAS = {
+    util: {
+      rotulo: 'Utilidad',
+      titulo: '¿Qué tan útil te resultó para tu trabajo en el aula?',
+      frase: function (v) { return 'Anotamos que el webinar te resultó <span class="valor">' + v + '</span>.'; },
+      opciones: [['mucho', 'Muy útil'], ['ok', 'Útil'], ['poco', 'Esperaba más']]
+    },
+    tema: {
+      rotulo: 'Próximo tema',
+      titulo: '¿Qué tema te gustaría que tratemos en el próximo webinar?',
+      frase: function (v) { return 'Anotamos que te interesa <span class="valor">' + v + '</span> para el próximo webinar.'; },
+      opciones: [
+        ['caa', 'Comunicación aumentativa (CAA)'],
+        ['sala', 'Cómo implementar una sala multisensorial'],
+        ['regulacion', 'Regulación sensorial en el aula']
+      ]
+    }
+  };
+
+  var ORDEN = ['util', 'tema'];
+
+  var params = new URLSearchParams(window.location.search);
+
+  function decodificarEmail(v) {
+    if (!v) return '';
+    try {
+      var b64 = v.replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4) { b64 += '='; }
+      return decodeURIComponent(escape(window.atob(b64)));
+    } catch (x) { return ''; }
+  }
+
+  function limpio(s) { return String(s || '').replace(/[<>&]/g, ''); }
+
+  function etiquetaDe(pregunta, valor) {
+    var p = PREGUNTAS[pregunta];
+    if (!p) return '';
+    for (var i = 0; i < p.opciones.length; i++) {
+      if (p.opciones[i][0] === valor) return p.opciones[i][1];
+    }
+    return '';
+  }
+
+  // Copiado tal cual de confirmar.html, que es la página ya probada con gente
+  // real. Dos detalles que NO hay que "mejorar":
+  //  · Content-Type text/plain evita el preflight CORS, que Apps Script no responde.
+  //  · mode:'no-cors' es obligatorio: sin él el navegador bloquea la llamada.
+  // Consecuencia de no-cors: la respuesta es opaca, NO se puede leer. Así que no
+  // hay forma de saber desde aquí si el backend guardó bien. Se asume que sí, y
+  // se verifica en la planilla. Un reintento "por si acaso" NO sirve: la
+  // petición ya salió, y volver a mandarla duplicaría la fila.
+  function enviarAlBackend(cuerpo) {
+    return fetch(BACKEND, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(cuerpo)
+    });
+  }
+
+  // Memoria local por persona: solo sirve para no volver a preguntar lo mismo
+  // si vuelve al correo y hace clic otra vez. Nunca impide que se registre.
+  var email  = decodificarEmail(params.get('e'));
+  var nombre = params.get('n') || '';
+  var CLAVE  = 'ocpw_' + (email || 'anon');
+
+  function leerMemoria() {
+    try { return JSON.parse(window.localStorage.getItem(CLAVE) || '{}') || {}; }
+    catch (x) { return {}; }
+  }
+  function guardarMemoria(m) {
+    try { window.localStorage.setItem(CLAVE, JSON.stringify(m)); } catch (x) { /* modo privado */ }
+  }
+
+  var memoria = leerMemoria();
+
+  var $titulo      = document.getElementById('titulo');
+  var $registradas = document.getElementById('registradas');
+  var $sep1        = document.getElementById('sep1');
+  var $pendIntro   = document.getElementById('pend-intro');
+  var $pendientes  = document.getElementById('pendientes');
+  var $cerrar      = document.getElementById('cerrar');
+
+  /** Pinta una respuesta ya registrada como línea con visto. */
+  function pintarRegistrada(pregunta, etiqueta) {
+    var p = PREGUNTAS[pregunta];
+    var div = document.createElement('div');
+    div.className = 'reg';
+    div.innerHTML =
+      '<div class="tick">' +
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#06b3fd" stroke-width="3" ' +
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<polyline points="20 6 9 17 4 12"></polyline></svg>' +
+      '</div>' +
+      '<div class="txt"><div class="rot">' + p.rotulo + '</div>' +
+      '<p>' + p.frase(limpio(etiqueta)) + '</p></div>';
+    $registradas.appendChild(div);
+    $sep1.style.display = 'block';
+  }
+
+  /**
+   * Agrega UNA pregunta pendiente, respondible aquí mismo. Se llama una vez por
+   * cada pregunta sin contestar, así que pueden quedar las dos en pantalla a la
+   * vez. `numero` va solo cuando hay más de una (si no, numerar confunde).
+   */
+  function agregarPendiente(pregunta, numero) {
+    var p = PREGUNTAS[pregunta];
+
+    var bloque = document.createElement('div');
+    bloque.className = 'pend';
+
+    var h3 = document.createElement('h3');
+    h3.textContent = (numero ? numero + '. ' : '') + p.titulo;
+    bloque.appendChild(h3);
+
+    var opciones = document.createElement('div');
+    opciones.className = 'opciones';
+    bloque.appendChild(opciones);
+
+    var fallo = document.createElement('div');
+    fallo.className = 'fallo';
+    fallo.textContent = 'No pudimos guardar esa respuesta. Inténtalo de nuevo.';
+    bloque.appendChild(fallo);
+
+    p.opciones.forEach(function (par) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt';
+      b.textContent = par[1];
+      b.addEventListener('click', function () {
+        var botones = opciones.querySelectorAll('button');
+        for (var i = 0; i < botones.length; i++) { botones[i].disabled = true; }
+        b.textContent = 'Guardando...';
+        fallo.style.display = 'none';
+
+        enviarAlBackend({
+          action: 'guardar_feedback',
+          data: { email: email, nombre: nombre, pregunta: pregunta, valor: par[0] }
+        })
+        .then(function () {
+          // La respuesta es opaca (no-cors): que la petición salga es todo lo
+          // que podemos comprobar desde aquí.
+          memoria[pregunta] = par[1];
+          guardarMemoria(memoria);
+          bloque.parentNode.removeChild(bloque);
+          pintarRegistrada(pregunta, par[1]);
+          // Ya hay algo guardado: el aviso de "puedes cerrar" pasa a ser cierto.
+          $cerrar.style.display = 'block';
+          if ($pendientes.querySelector('.pend')) {
+            $titulo.textContent = 'Listo, quedó registrado';
+            $pendIntro.textContent = 'Ya que estás aquí, queda esta. También es de un clic.';
+          } else {
+            $titulo.textContent = 'Listo, eso es todo';
+            $pendIntro.style.display = 'none';
+          }
+        })
+        ['catch'](function () {
+          // Solo entra aquí si falló la red (sin conexión, dominio caído).
+          for (var j = 0; j < botones.length; j++) { botones[j].disabled = false; }
+          b.textContent = par[1];
+          fallo.style.display = 'block';
+        });
+      });
+      opciones.appendChild(b);
+    });
+
+    $pendientes.appendChild(bloque);
+    $pendIntro.style.display = 'block';
+  }
+
+  // ── 1. Registrar la respuesta con la que llegó, lo PRIMERO que hace la página ──
+  var pregunta = (params.get('q') || '').trim();
+  var valor    = (params.get('v') || '').trim();
+  var etiqueta = etiquetaDe(pregunta, valor);
+
+  if (etiqueta) {
+    // Si ya habíamos registrado exactamente esta respuesta en este navegador, no
+    // la volvemos a mandar: recargar la página duplicaría la fila en la planilla.
+    // Si cambió de opinión (otra opción), memoria no coincide y sí se manda.
+    if (memoria[pregunta] !== etiqueta) {
+      enviarAlBackend({
+        action: 'guardar_feedback',
+        data: { email: email, nombre: nombre, pregunta: pregunta, valor: valor }
+      })['catch'](function () { /* si falla, no le arruinamos la pantalla a la persona */ });
+
+      memoria[pregunta] = etiqueta;
+      guardarMemoria(memoria);
+    }
+  }
+
+  // ── 2. Pintar todo lo que ya está respondido (incluido lo de una visita anterior) ──
+  ORDEN.forEach(function (q) {
+    if (memoria[q]) pintarRegistrada(q, memoria[q]);
+  });
+
+  // ── 3. Ofrecer TODAS las que faltan, aquí mismo. Este era el hoyo: antes se
+  //       mostraba solo una, y al contestarla la otra nunca aparecía. Con el
+  //       botón único del correo eso dejaba la pregunta 2 sin respuestas. ──
+  var faltan = ORDEN.filter(function (q) { return !memoria[q]; });
+
+  if (faltan.length === 0) {
+    $titulo.textContent = 'Listo, eso es todo';
+  } else {
+    // Nada respondido todavía: es el caso normal desde el 2026-07-30, porque el
+    // botón del correo llega sin `q` ni `v` (no elige respuesta por la persona).
+    if (Object.keys(memoria).length === 0) {
+      $titulo.textContent = 'Cuéntanos cómo te fue';
+      $cerrar.style.display = 'none';
+    }
+    faltan.forEach(function (q, i) {
+      agregarPendiente(q, faltan.length > 1 ? i + 1 : 0);
+    });
+  }
+
+  // ── 4. El campo de texto, siempre disponible ──
+  var $texto   = document.getElementById('comentario');
+  var $cuenta  = document.getElementById('cuenta');
+  var $cont    = $cuenta.parentNode;
+  var $boton   = document.getElementById('enviar');
+  var $error   = document.getElementById('error');
+  var $abierta = document.getElementById('abierta');
+  var $gracias = document.getElementById('gracias');
+
+  // Con la respuesta garantizada, el correo dejó de ser un detalle: si no viene
+  // en el enlace, hay que pedirlo o la promesa del correo no se puede cumplir.
+  if (email) {
+    document.getElementById('quien').innerHTML =
+      'Te responderemos a <b>' + limpio(email) + '</b>' + (nombre ? ', ' + limpio(nombre) : '') +
+      '. Queda guardado junto a tu inscripción.';
+  } else {
+    document.getElementById('quien').innerHTML =
+      'No pudimos identificar tu correo desde el enlace. <b>Escribe tu correo dentro del texto</b> ' +
+      'para que podamos responderte.';
+  }
+
+  $texto.addEventListener('input', function () {
+    $cuenta.textContent = $texto.value.length;
+    $cont.className = ($texto.value.length >= LIMITE) ? 'contador tope' : 'contador';
+  });
+
+  // El foco automático se deja para computador y solo si no queda una pregunta
+  // pendiente arriba: en móvil el teclado taparía justo lo que falta responder.
+  if (window.matchMedia('(min-width: 561px)').matches && faltan.length === 0) {
+    $texto.focus();
+  }
+
+  $boton.addEventListener('click', function () {
+    var texto = $texto.value.trim();
+    $error.style.display = 'none';
+
+    if (texto.length < 3) {
+      $error.textContent = 'Escribe tu pregunta antes de enviar.';
+      $error.style.display = 'block';
+      $texto.focus();
+      return;
+    }
+
+    $boton.disabled = true;
+    $boton.textContent = 'Enviando...';
+
+    enviarAlBackend({
+      action: 'guardar_comentario',
+      data: { email: email, nombre: nombre, comentario: texto, origen: 'pagina-gracias-post-webinar' }
+    })
+    .then(function () {
+      // Respuesta opaca (no-cors): no se puede confirmar el guardado desde aquí.
+      // textContent, no innerHTML: el correo viene del enlace y no se pinta crudo.
+      document.getElementById('gracias-detalle').textContent = email
+        ? 'Se la llevamos a los expositores y te respondemos a ' + email + '.'
+        : 'Se la llevamos a los expositores. Si dejaste tu correo dentro del texto, te respondemos ahí.';
+      $abierta.style.display = 'none';
+      document.getElementById('sep2').style.display = 'none';
+      $gracias.style.display = 'block';
+    })
+    ['catch'](function () {
+      // Solo entra aquí si falló la red, no si el backend rechazó el dato.
+      $boton.disabled = false;
+      $boton.textContent = 'Enviar mi pregunta';
+      $error.innerHTML = 'No pudimos enviar tu pregunta. Inténtalo de nuevo en un momento, ' +
+        'o escríbenos a <a href="mailto:william.marin@opencluster-tech.cl">william.marin@opencluster-tech.cl</a> ' +
+        '— no queremos que se pierda lo que escribiste.';
+      $error.style.display = 'block';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -80,13 +80,31 @@
   }
   .abierta p.intro { margin:0 0 14px; font-size:13.5px; line-height:1.6; color:#1a2535; }
 
-  /* Recordatorio de la licencia de prueba (pedido por Rayen el 2026-07-30) */
+  /* Recordatorio de la licencia de prueba (pedido por Rayen el 2026-07-30).
+     Vive en la pantalla final: aparece recién después de enviar la pregunta, así
+     que va centrado como el resto de ese panel. */
   .licencia {
-    background:#eaf6ff; border-left:3px solid #06b3fd; border-radius:0 10px 10px 0;
-    padding:13px 16px; margin:0 0 16px; font-size:13.5px; line-height:1.6; color:#001a60;
+    background:#eaf6ff; border-radius:12px; padding:14px 18px; margin:16px 0;
+    font-size:13.5px; line-height:1.6; color:#001a60; text-align:center;
   }
   .licencia a { color:#0a7fd6; font-weight:700; text-decoration:none; }
   .licencia a:hover { text-decoration:underline; }
+
+  /* Micrófono para dictar. El atributo `hidden` no basta cuando hay un display
+     explícito, de ahí la regla [hidden] de abajo. */
+  .bajo-texto { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:8px; }
+  button.mic {
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+    background:#ffffff; border:1.5px solid #cdd8e6; border-radius:10px; padding:8px 14px;
+    font-family:'Montserrat',Arial,sans-serif; font-size:12.5px; font-weight:700; color:#001a60;
+  }
+  button.mic[hidden] { display:none; }
+  button.mic:hover { border-color:#06b3fd; background:#f6fbff; }
+  button.mic svg { display:block; }
+  button.mic.oyendo { border-color:#c0392b; color:#c0392b; background:#fdf3f2; }
+  button.mic.oyendo svg { animation:pulso 1.2s ease-in-out infinite; }
+  @keyframes pulso { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+  .mic-aviso { display:none; margin-top:10px; font-size:12.5px; color:#a14400; line-height:1.55; }
   textarea {
     width:100%; min-height:110px; resize:vertical; padding:14px;
     border:1.5px solid #cdd8e6; border-radius:12px;
@@ -170,10 +188,20 @@
       <h3>Hazle tu pregunta a los expositores</h3>
       <p class="intro">Eso que quedaste con ganas de preguntar durante el webinar. Se la llevamos a los terapeutas que expusieron y <strong>te respondemos por correo</strong>. Si prefieres dejarnos un comentario en vez de una pregunta, también lo leemos.</p>
 
-      <div class="licencia">Y recuerda: si quieres una <strong>licencia de prueba de TD Snap</strong> para tu establecimiento, solo tienes que <a href="mailto:william.marin@opencluster-tech.cl?subject=Licencia%20de%20prueba%20de%20TD%20Snap">escribirme</a>.</div>
-
       <textarea id="comentario" maxlength="500" placeholder="Escribe aquí tu pregunta..."></textarea>
-      <div class="contador"><span id="cuenta">0</span> / 500</div>
+
+      <div class="bajo-texto">
+        <button class="mic" id="mic" type="button" hidden>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 1a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+            <path d="M19 10v1a7 7 0 0 1-14 0v-1"></path>
+            <line x1="12" y1="19" x2="12" y2="23"></line>
+          </svg>
+          <span id="mic-txt">Dictar</span>
+        </button>
+        <div class="contador"><span id="cuenta">0</span> / 500</div>
+      </div>
+      <div class="mic-aviso" id="mic-aviso"></div>
 
       <div class="quien" id="quien"></div>
 
@@ -186,6 +214,7 @@
     <div class="ok" id="gracias">
       <h3>Recibimos tu pregunta</h3>
       <p id="gracias-detalle"></p>
+      <div class="licencia">Y recuerda: si quieres una <strong>licencia de prueba de TD Snap</strong> para tu establecimiento, solo tienes que <a href="mailto:william.marin@opencluster-tech.cl?subject=Licencia%20de%20prueba%20de%20TD%20Snap">escribirme</a>.</div>
       <p>Ya puedes cerrar esta pestaña. Si quieres agregar algo más, escríbenos a <a href="mailto:william.marin@opencluster-tech.cl">william.marin@opencluster-tech.cl</a>.</p>
     </div>
 
@@ -493,6 +522,85 @@
       $error.style.display = 'block';
     });
   });
+
+  // ── 5. Micrófono para dictar, opcional (pedido por William el 2026-07-30) ──
+  //
+  // Web Speech API. Chrome y Edge la soportan; Firefox NO. Necesita HTTPS, así que
+  // en una vista previa local puede no arrancar: eso es esperado, no una falla.
+  // Si el navegador no la tiene, el botón NO se muestra — mejor que uno que no
+  // responde. Escribir a mano siempre sigue disponible.
+  //
+  // Ojo: en Chrome el audio se procesa en los servidores de Google, no en el
+  // dispositivo. Está dicho en el LEEME.
+  var Reconocimiento = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var $mic      = document.getElementById('mic');
+  var $micTxt   = document.getElementById('mic-txt');
+  var $micAviso = document.getElementById('mic-aviso');
+
+  if (Reconocimiento) {
+    var rec = new Reconocimiento();
+    rec.lang = 'es-CL';
+    rec.continuous = true;
+    rec.interimResults = false; // solo texto confirmado: si no, se escribe y se reescribe
+
+    var oyendo = false;
+    var base   = ''; // lo que había escrito antes de empezar a dictar
+
+    $mic.hidden = false;
+
+    // El tope de 500 hay que respetarlo a mano: `maxlength` solo limita el tecleo,
+    // no lo que se escribe por código.
+    function ponerTexto(s) {
+      $texto.value = s.slice(0, LIMITE);
+      $cuenta.textContent = $texto.value.length;
+      $cont.className = ($texto.value.length >= LIMITE) ? 'contador tope' : 'contador';
+    }
+
+    function detener() {
+      oyendo = false;
+      $mic.className = 'mic';
+      $micTxt.textContent = 'Dictar';
+      try { rec.stop(); } catch (x) { /* ya estaba detenido */ }
+    }
+
+    rec.onresult = function (e) {
+      var nuevo = '';
+      for (var i = e.resultIndex; i < e.results.length; i++) {
+        if (e.results[i].isFinal) nuevo += e.results[i][0].transcript;
+      }
+      if (!nuevo.trim()) return;
+      base = (base ? base.replace(/\s+$/, '') + ' ' : '') + nuevo.trim();
+      ponerTexto(base);
+    };
+
+    rec.onerror = function (e) {
+      detener();
+      $micAviso.textContent = (e.error === 'not-allowed' || e.error === 'service-not-allowed')
+        ? 'No nos diste permiso para usar el micrófono. Puedes escribir tu pregunta a mano.'
+        : 'No pudimos usar el micrófono en este navegador. Puedes escribir tu pregunta a mano.';
+      $micAviso.style.display = 'block';
+    };
+
+    // Chrome corta solo después de un silencio largo, aunque continuous sea true.
+    rec.onend = function () { if (oyendo) detener(); };
+
+    $mic.addEventListener('click', function () {
+      if (oyendo) { detener(); $texto.focus(); return; }
+      $micAviso.style.display = 'none';
+      base = $texto.value; // lo dictado se AGREGA a lo ya escrito, no lo reemplaza
+      try {
+        rec.start();
+        oyendo = true;
+        $mic.className = 'mic oyendo';
+        $micTxt.textContent = 'Escuchando… toca para parar';
+      } catch (x) {
+        detener();
+      }
+    });
+
+    // Si corrige a mano mientras dicta, la base pasa a ser lo que hay en pantalla.
+    $texto.addEventListener('input', function () { if (oyendo) base = $texto.value; });
+  }
 })();
 </script>
 

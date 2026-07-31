@@ -71,6 +71,22 @@
   }
   .opciones button.opt:hover { border-color:#06b3fd; background:#f6fbff; }
   .opciones button.opt:disabled { opacity:.45; cursor:default; }
+
+  /* Cuadro de texto de "Tema diferente" */
+  .libre { display:flex; gap:8px; flex-wrap:wrap; }
+  .libre input {
+    flex:1 1 260px; min-width:0; padding:11px 14px;
+    border:1.5px solid #cdd8e6; border-radius:10px; background:#ffffff;
+    font-family:'Open Sans',Arial,sans-serif; font-size:15px; color:#1a2535;
+  }
+  .libre input:focus { outline:none; border-color:#06b3fd; box-shadow:0 0 0 3px rgba(6,179,253,.15); }
+  .libre button {
+    flex:0 0 auto; border:0; cursor:pointer; padding:11px 22px; border-radius:10px;
+    background:#06b3fd; background:linear-gradient(90deg,#06b3fd,#0a7fd6); color:#ffffff;
+    font-family:'Montserrat',Arial,sans-serif; font-size:14px; font-weight:700;
+  }
+  .libre button:hover { background:#0596d6; }
+  .libre button:disabled { background:#b8c6d8; cursor:default; }
   .pend .fallo { display:none; margin-top:12px; font-size:13px; color:#a14400; line-height:1.55; }
 
   /* Campo abierto */
@@ -214,9 +230,13 @@
     <div class="ok" id="gracias">
       <h3>Recibimos tu pregunta</h3>
       <p id="gracias-detalle"></p>
-      <div class="licencia">Y recuerda: si quieres una <strong>licencia de prueba de TD Snap</strong> para tu establecimiento, solo tienes que <a href="mailto:william.marin@opencluster-tech.cl?subject=Licencia%20de%20prueba%20de%20TD%20Snap">escribirme</a>.</div>
       <p>Ya puedes cerrar esta pestaña. Si quieres agregar algo más, escríbenos a <a href="mailto:william.marin@opencluster-tech.cl">william.marin@opencluster-tech.cl</a>.</p>
     </div>
+
+    <!-- Recordatorio de la licencia. Vive fuera del panel de "gracias" porque el
+         correo de quienes no asistieron no tiene pregunta abierta, y ese panel
+         nunca aparecería. Se muestra al terminar de contestar. -->
+    <div class="licencia" id="licencia" style="display:none;">Y recuerda: si quieres una <strong>licencia de prueba de TD Snap</strong> para tu establecimiento, solo tienes que <a href="mailto:william.marin@opencluster-tech.cl?subject=Licencia%20de%20prueba%20de%20TD%20Snap">escribirme</a>.</div>
 
   </div>
 
@@ -249,23 +269,26 @@
       rotulo: 'Próximo tema',
       titulo: '¿Qué tema te gustaría que tratemos en el próximo webinar?',
       frase: function (v) { return 'Anotamos que te interesa <span class="valor">' + v + '</span> para el próximo webinar.'; },
+      // El tercer elemento marca la opción que NO registra al primer clic: abre un
+      // cuadro de texto para que la persona escriba el tema.
       opciones: [
         ['caa', 'Comunicación aumentativa (CAA)'],
         ['sala', 'Cómo implementar una sala multisensorial'],
-        ['regulacion', 'Regulación sensorial en el aula']
+        ['regulacion', 'Regulación sensorial en el aula'],
+        ['otro', 'Tema diferente', 'libre']
       ]
     },
     // Solo para el correo de quienes NO asistieron: la pregunta de utilidad no les
-    // sirve (no vieron el webinar) y esta la reemplaza.
-    motivo: {
-      rotulo: 'Por qué no asistió',
-      titulo: '¿Qué te impidió acompañarnos?',
+    // sirve (no vieron el webinar) y esta la reemplaza. Pregunta qué FACILITARÍA la
+    // asistencia, no qué la impidió: nadie tiene que justificar una ausencia.
+    facilita: {
+      rotulo: 'Qué facilitaría su asistencia',
+      titulo: '¿Qué facilitaría tu asistencia a un siguiente webinar?',
       frase: function (v) { return 'Anotamos tu respuesta: <span class="valor">' + v + '</span>.'; },
       opciones: [
-        ['cruce', 'Se me cruzó con otra cosa'],
-        ['tarde', 'Me enteré muy tarde'],
-        ['olvido', 'Se me olvidó'],
-        ['tecnico', 'Tuve un problema técnico']
+        ['manana', 'Horario de mañana'],
+        ['wsp', 'Un recordatorio por WhatsApp'],
+        ['ninguna', 'Ninguna de las dos']
       ]
     }
   };
@@ -277,10 +300,10 @@
   // siguen funcionando exactamente igual. `s=no` es el de quienes no asistieron.
   var SEGMENTOS = {
     '':   ['util', 'tema'],
-    'no': ['motivo', 'tema']
+    'no': ['facilita', 'tema']
   };
   var ORDEN = SEGMENTOS[(params.get('s') || '').trim()] || SEGMENTOS[''];
-  var esNoAsistio = (ORDEN[0] === 'motivo');
+  var esNoAsistio = (ORDEN[0] === 'facilita');
 
   function decodificarEmail(v) {
     if (!v) return '';
@@ -341,6 +364,7 @@
   var $pendIntro   = document.getElementById('pend-intro');
   var $pendientes  = document.getElementById('pendientes');
   var $cerrar      = document.getElementById('cerrar');
+  var $licencia    = document.getElementById('licencia');
 
   /** Pinta una respuesta ya registrada como línea con visto. */
   function pintarRegistrada(pregunta, etiqueta) {
@@ -383,28 +407,19 @@
     fallo.textContent = 'No pudimos guardar esa respuesta. Inténtalo de nuevo.';
     bloque.appendChild(fallo);
 
-    p.opciones.forEach(function (par) {
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'opt';
-      b.textContent = par[1];
-      b.addEventListener('click', function () {
-        var botones = opciones.querySelectorAll('button');
-        for (var i = 0; i < botones.length; i++) { botones[i].disabled = true; }
-        b.textContent = 'Guardando...';
-        fallo.style.display = 'none';
+    /** Registra una respuesta, venga de un botón o del cuadro de texto libre. */
+    function registrar(valor, texto, etiqueta, alFallar) {
+      var datos = { email: email, nombre: nombre, pregunta: pregunta, valor: valor };
+      if (texto) datos.texto = texto;
 
-        enviarAlBackend({
-          action: 'guardar_feedback',
-          data: { email: email, nombre: nombre, pregunta: pregunta, valor: par[0] }
-        })
+      return enviarAlBackend({ action: 'guardar_feedback', data: datos })
         .then(function () {
           // La respuesta es opaca (no-cors): que la petición salga es todo lo
           // que podemos comprobar desde aquí.
-          memoria[pregunta] = par[1];
+          memoria[pregunta] = etiqueta;
           guardarMemoria(memoria);
           bloque.parentNode.removeChild(bloque);
-          pintarRegistrada(pregunta, par[1]);
+          pintarRegistrada(pregunta, etiqueta);
           // Ya hay algo guardado: el aviso de "puedes cerrar" pasa a ser cierto.
           $cerrar.style.display = 'block';
           if ($pendientes.querySelector('.pend')) {
@@ -413,13 +428,75 @@
           } else {
             $titulo.textContent = 'Listo, eso es todo';
             $pendIntro.style.display = 'none';
+            // En el correo de quienes no asistieron no hay pantalla de "gracias por
+            // tu pregunta", así que el recordatorio de la licencia se muestra acá.
+            if (esNoAsistio) $licencia.style.display = 'block';
           }
         })
         ['catch'](function () {
           // Solo entra aquí si falló la red (sin conexión, dominio caído).
+          fallo.style.display = 'block';
+          if (alFallar) alFallar();
+        });
+    }
+
+    /** "Tema diferente": abre un cuadro de texto en vez de registrar de inmediato. */
+    function abrirCampoLibre() {
+      opciones.style.display = 'none';
+
+      var caja = document.createElement('div');
+      caja.className = 'libre';
+
+      var input = document.createElement('input');
+      input.type = 'text';
+      input.maxLength = 120;
+      input.placeholder = '¿Qué tema te gustaría?';
+
+      var enviar = document.createElement('button');
+      enviar.type = 'button';
+      enviar.textContent = 'Enviar';
+
+      function mandar() {
+        var t = input.value.trim();
+        if (t.length < 3) { input.focus(); return; }
+        input.disabled = true;
+        enviar.disabled = true;
+        enviar.textContent = 'Guardando...';
+        fallo.style.display = 'none';
+        registrar('otro', t, t, function () {
+          input.disabled = false;
+          enviar.disabled = false;
+          enviar.textContent = 'Enviar';
+        });
+      }
+
+      enviar.addEventListener('click', mandar);
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.keyCode === 13) { e.preventDefault(); mandar(); }
+      });
+
+      caja.appendChild(input);
+      caja.appendChild(enviar);
+      bloque.insertBefore(caja, fallo);
+      input.focus();
+    }
+
+    p.opciones.forEach(function (par) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt';
+      b.textContent = par[1];
+      b.addEventListener('click', function () {
+        if (par[2] === 'libre') { abrirCampoLibre(); return; }
+
+        var botones = opciones.querySelectorAll('button');
+        for (var i = 0; i < botones.length; i++) { botones[i].disabled = true; }
+        b.textContent = 'Guardando...';
+        fallo.style.display = 'none';
+
+        registrar(par[0], '', par[1], function () {
           for (var j = 0; j < botones.length; j++) { botones[j].disabled = false; }
           b.textContent = par[1];
-          fallo.style.display = 'block';
         });
       });
       opciones.appendChild(b);
@@ -461,6 +538,7 @@
 
   if (faltan.length === 0) {
     $titulo.textContent = 'Listo, eso es todo';
+    if (esNoAsistio) $licencia.style.display = 'block';
   } else {
     // Nada respondido todavía: es el caso normal desde el 2026-07-30, porque el
     // botón del correo llega sin `q` ni `v` (no elige respuesta por la persona).
@@ -482,15 +560,15 @@
   var $abierta = document.getElementById('abierta');
   var $gracias = document.getElementById('gracias');
 
-  // Quien no asistió no vio el webinar en vivo: la cabecera no puede agradecerle
-  // por acompañarnos, y el campo abierto se explica apuntando a la grabación.
+  // Quien no asistió no vio el webinar: no puede preguntarle nada a los expositores
+  // ni se le puede agradecer por acompañarnos. Se le quita el campo abierto completo
+  // (decisión de Rayen, 30-jul) y con él el micrófono, que vivía ahí.
   if (esNoAsistio) {
     document.getElementById('hd-sub').textContent = 'Te escuchamos.';
-    document.querySelector('#abierta p.intro').innerHTML =
-      'Lo que te haya quedado dando vueltas sobre entornos multisensoriales o ' +
-      'comunicación aumentativa. Se la llevamos a los ' +
-      'terapeutas que expusieron y <strong>te respondemos por correo</strong>. Si prefieres ' +
-      'dejarnos un comentario en vez de una pregunta, también lo leemos.';
+    $abierta.style.display = 'none';
+    document.getElementById('sep2').style.display = 'none';
+    $cerrar.textContent = 'Ya puedes cerrar esta pestaña: lo que respondiste arriba ya quedó guardado.';
+    return; // nada de lo que sigue aplica sin campo de texto
   }
 
   // Con la respuesta garantizada, el correo dejó de ser un detalle: si no viene
@@ -543,6 +621,7 @@
       $abierta.style.display = 'none';
       document.getElementById('sep2').style.display = 'none';
       $gracias.style.display = 'block';
+      $licencia.style.display = 'block';
     })
     ['catch'](function () {
       // Solo entra aquí si falló la red, no si el backend rechazó el dato.

@@ -162,7 +162,7 @@
     <div class="rule"></div>
     <div class="kicker">Webinar PIE Maule 2026</div>
     <h1>El entorno multisensorial</h1>
-    <div class="sub">Gracias por acompañarnos. Te escuchamos.</div>
+    <div class="sub" id="hd-sub">Gracias por acompañarnos. Te escuchamos.</div>
   </div>
 
   <div class="bd" id="cuerpo">
@@ -254,12 +254,33 @@
         ['sala', 'Cómo implementar una sala multisensorial'],
         ['regulacion', 'Regulación sensorial en el aula']
       ]
+    },
+    // Solo para el correo de quienes NO asistieron: la pregunta de utilidad no les
+    // sirve (no vieron el webinar) y esta la reemplaza.
+    motivo: {
+      rotulo: 'Por qué no asistió',
+      titulo: '¿Qué te impidió acompañarnos?',
+      frase: function (v) { return 'Anotamos tu respuesta: <span class="valor">' + v + '</span>.'; },
+      opciones: [
+        ['cruce', 'Se me cruzó con otra cosa'],
+        ['tarde', 'Me enteré muy tarde'],
+        ['olvido', 'Se me olvidó'],
+        ['tecnico', 'Tuve un problema técnico']
+      ]
     }
   };
 
-  var ORDEN = ['util', 'tema'];
-
   var params = new URLSearchParams(window.location.search);
+
+  // Qué preguntas se muestran, según de qué correo viene la persona.
+  // SIN `s=` es el correo de los asistentes: así los enlaces ya enviados a los 13
+  // siguen funcionando exactamente igual. `s=no` es el de quienes no asistieron.
+  var SEGMENTOS = {
+    '':   ['util', 'tema'],
+    'no': ['motivo', 'tema']
+  };
+  var ORDEN = SEGMENTOS[(params.get('s') || '').trim()] || SEGMENTOS[''];
+  var esNoAsistio = (ORDEN[0] === 'motivo');
 
   function decodificarEmail(v) {
     if (!v) return '';
@@ -444,7 +465,7 @@
     // Nada respondido todavía: es el caso normal desde el 2026-07-30, porque el
     // botón del correo llega sin `q` ni `v` (no elige respuesta por la persona).
     if (Object.keys(memoria).length === 0) {
-      $titulo.textContent = 'Cuéntanos cómo te fue';
+      $titulo.textContent = esNoAsistio ? 'Cuéntanos dos cosas' : 'Cuéntanos cómo te fue';
       $cerrar.style.display = 'none';
     }
     faltan.forEach(function (q, i) {
@@ -460,6 +481,16 @@
   var $error   = document.getElementById('error');
   var $abierta = document.getElementById('abierta');
   var $gracias = document.getElementById('gracias');
+
+  // Quien no asistió no vio el webinar en vivo: la cabecera no puede agradecerle
+  // por acompañarnos, y el campo abierto se explica apuntando a la grabación.
+  if (esNoAsistio) {
+    document.getElementById('hd-sub').textContent = 'Te escuchamos.';
+    document.querySelector('#abierta p.intro').innerHTML =
+      'Lo que te quede dando vueltas después de ver la grabación. Se la llevamos a los ' +
+      'terapeutas que expusieron y <strong>te respondemos por correo</strong>. Si prefieres ' +
+      'dejarnos un comentario en vez de una pregunta, también lo leemos.';
+  }
 
   // Con la respuesta garantizada, el correo dejó de ser un detalle: si no viene
   // en el enlace, hay que pedirlo o la promesa del correo no se puede cumplir.

@@ -1084,7 +1084,23 @@ function mostrarPaso(n) {
     }
   }
 
-  document.querySelector('.progress-bar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Subir al comienzo del paso nuevo. Antes esto era un scrollIntoView sobre la
+  // barra de progreso, y en el teléfono dejaba la pantalla abajo por dos razones:
+  //  · la barra es sticky, así que ya está pegada arriba y el navegador entiende
+  //    que no hay nada que desplazar;
+  //  · al venir de escribir el celular, el teclado sigue abierto y al cerrarse
+  //    cambia el alto de la ventana DESPUÉS del desplazamiento.
+  // Por eso ahora se cierra el teclado, se espera a que el navegador rehaga el
+  // dibujo (ya sin encabezado ni video) y recién ahí se calcula la posición.
+  if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  requestAnimationFrame(function () {
+    const barra = document.querySelector('.progress-bar');
+    const primeraSeccion = document.querySelector('.paso:not([hidden])') || barra;
+    if (!primeraSeccion) return;
+    const altoBarra = barra ? barra.getBoundingClientRect().height : 0;
+    const destino = primeraSeccion.getBoundingClientRect().top + window.pageYOffset - altoBarra - 24;
+    window.scrollTo({ top: Math.max(0, destino), behavior: 'smooth' });
+  });
 }
 
 /** Junta todo lo escrito hasta ahora. */

@@ -340,6 +340,24 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
   }
   .btn-atras:hover { border-color:#8fa6bf; color:#1a2535; }
   .nav-nota { margin-top:10px; text-align:right; font-size:12.5px; color:#7b8ca1; }
+  /* ── Micrófono para dictar ──
+     Solo aparece si el navegador sabe hacerlo (Chrome y Edge sí; Firefox no) y
+     únicamente sobre HTTPS. El atributo `hidden` no basta con display explícito,
+     de ahí la regla [hidden]. */
+  .bajo-texto { display:flex; align-items:center; gap:12px; margin-top:8px; }
+  button.mic {
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer;
+    background:#ffffff; border:1.5px solid #cdd8e6; border-radius:10px; padding:8px 14px;
+    font-family:'Montserrat',sans-serif; font-size:12.5px; font-weight:700; color:var(--navy);
+  }
+  button.mic[hidden] { display:none; }
+  button.mic:hover { border-color:var(--sky); background:#f6fbff; }
+  button.mic svg { display:block; }
+  button.mic.oyendo { border-color:#c0392b; color:#c0392b; background:#fdf3f2; }
+  button.mic.oyendo svg { animation:pulso 1.2s ease-in-out infinite; }
+  @keyframes pulso { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+  .mic-aviso { display:none; margin-top:8px; font-size:12.5px; color:#a14400; line-height:1.55; }
+
   /* Un paso puede tener varias secciones: solo la primera muestra el número. */
   .section-num.sin-num { visibility:hidden; }
   @media (max-width:520px) {
@@ -496,6 +514,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
             <input type="text" id="comuna" name="comuna" autocomplete="off" placeholder="Selecciona o escribe…">
             <div class="combo-list" id="comunaList"></div>
           </div>
+          <div class="hint">¿No aparece la tuya? Escríbela igual: se guarda tal como la escribas.</div>
           <div class="error-msg" data-for="comuna">Revisa la comuna.</div>
         </div>
 
@@ -643,6 +662,17 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         <div class="field">
           <label class="lbl" for="pregunta">¿Cuál es el principal desafío que enfrenta hoy su equipo docente respecto a la implementación de la Ley TEA o a la inclusión de alumnos con necesidades educativas especiales?</label>
           <textarea id="pregunta" name="pregunta" rows="5" placeholder="Cuéntanos en tus palabras…"></textarea>
+          <div class="bajo-texto">
+            <button class="mic" type="button" data-mic="pregunta" hidden>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 1a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                <path d="M19 10v1a7 7 0 0 1-14 0v-1"></path>
+                <line x1="12" y1="19" x2="12" y2="23"></line>
+              </svg>
+              <span class="mic-txt">Dictar</span>
+            </button>
+          </div>
+          <div class="mic-aviso" data-aviso="pregunta"></div>
           <div class="error-msg" data-for="pregunta">Comparte al menos una pregunta o desafío.</div>
         </div>
       </section>
@@ -659,6 +689,17 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         <div class="field">
           <label class="lbl" for="comentarios">Necesidades, ideas, contexto que quieras agregar</label>
           <textarea id="comentarios" name="comentarios" rows="3" placeholder="Lo que quieras que sepamos…"></textarea>
+          <div class="bajo-texto">
+            <button class="mic" type="button" data-mic="comentarios" hidden>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 1a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                <path d="M19 10v1a7 7 0 0 1-14 0v-1"></path>
+                <line x1="12" y1="19" x2="12" y2="23"></line>
+              </svg>
+              <span class="mic-txt">Dictar</span>
+            </button>
+          </div>
+          <div class="mic-aviso" data-aviso="comentarios"></div>
         </div>
       </section>
 
@@ -822,9 +863,12 @@ function comunasVigentes() {
   function render(filter) {
     const f = (filter || '').toLowerCase().trim();
     const matches = comunasVigentes().filter(c => c.toLowerCase().includes(f));
-    list.innerHTML = matches.length
+    // La nota del final va SIEMPRE, no solo cuando no hay coincidencias: la lista
+    // se filtra por región, así que alguien de otra comuna necesita ver la salida
+    // sin tener que adivinar que el campo acepta texto libre.
+    list.innerHTML = (matches.length
       ? matches.map(c => `<div class="item" data-v="${c}">${c}</div>`).join('')
-      : '<div class="empty">No está en la lista. Puedes escribirla igual.</div>';
+      : '') + '<div class="empty">¿Otra comuna? Escríbela y queda guardada.</div>';
   }
 
   input.addEventListener('focus', () => { render(input.value); list.classList.add('open'); });
@@ -839,10 +883,80 @@ function comunasVigentes() {
     clearError(input);
   });
   // Si cambia la región, la lista de comunas cambia con ella
-  document.querySelectorAll('input[name="region"]').forEach(r => {
-    r.addEventListener('change', () => { if (list.classList.contains('open')) render(input.value); });
-  });
+  // Región pasó a ser un desplegable el 31-jul-2026: antes esto escuchaba
+  // input[name="region"], que ya no existe, y la lista no se refrescaba al
+  // cambiar de región.
+  const selRegion = document.querySelector('select[name="region"]');
+  if (selRegion) {
+    selRegion.addEventListener('change', () => { if (list.classList.contains('open')) render(input.value); });
+  }
 })();
+
+// ── Dictar por micrófono ────────────────────────────────────────────
+// Sirve en Chrome y Edge; Firefox no lo soporta y ahí el botón no aparece.
+// Requiere HTTPS: abierto como archivo local no funciona.
+// Lo dictado se AGREGA a lo que ya esté escrito, nunca lo reemplaza.
+document.querySelectorAll('button[data-mic]').forEach(function (btn) {
+  const campo = btn.dataset.mic;
+  const texto = document.getElementById(campo);
+  const aviso = document.querySelector('[data-aviso="' + campo + '"]');
+  const etiqueta = btn.querySelector('.mic-txt');
+  const Reconocimiento = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!texto || !Reconocimiento) return; // navegador sin dictado: el botón queda oculto
+
+  const rec = new Reconocimiento();
+  rec.lang = 'es-CL';
+  rec.continuous = true;
+  rec.interimResults = false; // solo texto confirmado: si no, se escribe y se reescribe
+
+  let oyendo = false;
+  let base = '';
+  btn.hidden = false;
+
+  function detener() {
+    oyendo = false;
+    btn.className = 'mic';
+    etiqueta.textContent = 'Dictar';
+    try { rec.stop(); } catch (x) { /* ya estaba detenido */ }
+  }
+
+  rec.onresult = function (e) {
+    let nuevo = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) nuevo += e.results[i][0].transcript;
+    }
+    if (!nuevo.trim()) return;
+    base = (base ? base.replace(/\s+$/, '') + ' ' : '') + nuevo.trim();
+    texto.value = base;
+  };
+
+  rec.onerror = function (e) {
+    detener();
+    if (!aviso) return;
+    aviso.textContent = (e.error === 'not-allowed' || e.error === 'service-not-allowed')
+      ? 'No nos diste permiso para usar el micrófono. Puedes escribirlo a mano.'
+      : 'No pudimos usar el micrófono en este navegador. Puedes escribirlo a mano.';
+    aviso.style.display = 'block';
+  };
+
+  // Chrome corta solo tras un silencio largo, aunque continuous sea true.
+  rec.onend = function () { if (oyendo) detener(); };
+
+  btn.addEventListener('click', function () {
+    if (oyendo) { detener(); texto.focus(); return; }
+    if (aviso) aviso.style.display = 'none';
+    base = texto.value;
+    try {
+      rec.start();
+      oyendo = true;
+      btn.className = 'mic oyendo';
+      etiqueta.textContent = 'Escuchando… toca para parar';
+    } catch (x) { detener(); }
+  });
+
+  // Si corrige a mano mientras dicta, la base pasa a ser lo que hay en pantalla.
+  texto.addEventListener('input', function () { if (oyendo) base = texto.value; });
+});
 
 // ── Campos "¿Cuál?" de los DESPLEGABLES ──
 // La opción "Otro" lleva data-other con el id del campo de texto que revela.

@@ -340,6 +340,8 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
   }
   .btn-atras:hover { border-color:#8fa6bf; color:#1a2535; }
   .nav-nota { margin-top:10px; text-align:right; font-size:12.5px; color:#7b8ca1; }
+  /* Un paso puede tener varias secciones: solo la primera muestra el número. */
+  .section-num.sin-num { visibility:hidden; }
   @media (max-width:520px) {
     .nav-wrap { flex-direction:column-reverse; align-items:stretch; }
     .nav-wrap button { width:100%; }
@@ -350,7 +352,9 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
      Oculto por defecto: solo aparece si VIDEO_INVITACION_URL tiene un enlace.
      Angosto a propósito: un video 9:16 a todo el ancho empujaría el formulario
      fuera de la primera pantalla en computador. */
-  .video-invitacion { display:none; max-width:300px; margin:0 auto 18px; }
+  /* margin-top alto a propósito: .wrap sube 44px para montarse sobre el borde
+     diagonal del encabezado, y sin esto el video quedaba cruzado con esa diagonal. */
+  .video-invitacion { display:none; max-width:320px; margin:64px auto 20px; }
   .video-invitacion.show { display:block; }
   .video-card {
     background:#000; border-radius:16px; overflow:hidden;
@@ -359,7 +363,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
   .video-ratio { position:relative; width:100%; padding-bottom:177.78%; height:0; }
   .video-ratio iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
   .video-pie { text-align:center; font-size:12.5px; color:var(--subtle); margin-top:8px; }
-  @media (max-width:520px) { .video-invitacion { max-width:230px; } }
+  @media (max-width:520px) { .video-invitacion { max-width:250px; margin-top:56px; } }
 </style>
 </head>
 <body>
@@ -410,7 +414,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
   <div class="form-screen" id="formScreen">
 
     <div class="progress-bar">
-      <div class="progress-text" id="progressLabel">Paso 1 de 6</div>
+      <div class="progress-text" id="progressLabel">Paso 1 de 3</div>
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
     </div>
 
@@ -476,11 +480,12 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 
         <div class="field">
           <label class="lbl">Región</label>
-          <div class="opts grid-2" id="regionGroup">
-            <label class="opt"><input type="radio" name="region" value="Región del Biobío"><span class="opt-text">Región del Biobío</span></label>
-            <label class="opt"><input type="radio" name="region" value="Región de Ñuble"><span class="opt-text">Región de Ñuble</span></label>
-            <label class="opt"><input type="radio" name="region" value="Otra" data-other="regionOtra"><span class="opt-text">Otra región</span></label>
-          </div>
+          <select name="region" id="region">
+            <option value="">Selecciona una opción…</option>
+            <option value="Región del Biobío">Región del Biobío</option>
+            <option value="Región de Ñuble">Región de Ñuble</option>
+            <option value="Otra" data-other="regionOtra">Otra región</option>
+          </select>
           <input type="text" id="regionOtra" name="regionOtra" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
           <div class="hint">Viene marcada según la invitación que recibiste. Cámbiala si corresponde.</div>
         </div>
@@ -496,48 +501,51 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
 
         <div class="field">
           <label class="lbl">Dependencia</label>
-          <div class="opts grid-2">
-            <label class="opt"><input type="radio" name="dependencia" value="Municipal"><span class="opt-text">Municipal</span></label>
-            <label class="opt"><input type="radio" name="dependencia" value="SLEP"><span class="opt-text">SLEP</span></label>
-            <label class="opt"><input type="radio" name="dependencia" value="Particular Subvencionado"><span class="opt-text">Particular Subvencionado</span></label>
-            <label class="opt"><input type="radio" name="dependencia" value="Particular Pagado"><span class="opt-text">Particular Pagado</span></label>
-            <label class="opt"><input type="radio" name="dependencia" value="Administración Delegada"><span class="opt-text">Administración Delegada</span></label>
-            <label class="opt"><input type="radio" name="dependencia" value="Otro" data-other="dependenciaOtra"><span class="opt-text">Otro</span></label>
-          </div>
+          <select name="dependencia" id="dependencia">
+            <option value="">Selecciona una opción…</option>
+            <option value="Municipal">Municipal</option>
+            <option value="SLEP">SLEP</option>
+            <option value="Particular Subvencionado">Particular Subvencionado</option>
+            <option value="Particular Pagado">Particular Pagado</option>
+            <option value="Administración Delegada">Administración Delegada</option>
+            <option value="Otro" data-other="dependenciaOtra">Otro</option>
+          </select>
           <input type="text" id="dependenciaOtra" name="dependenciaOtra" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
           <div class="error-msg" data-for="dependencia">Selecciona una dependencia.</div>
         </div>
 
         <div class="field">
           <label class="lbl">Tipo de establecimiento</label>
-          <div class="opts grid-2">
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Educación Parvularia"><span class="opt-text">Educación Parvularia (jardín / sala cuna)</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Básica"><span class="opt-text">Escuela Básica</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Liceo Humanista-Científico"><span class="opt-text">Liceo Humanista-Científico</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Liceo Técnico-Profesional"><span class="opt-text">Liceo Técnico-Profesional</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Especial"><span class="opt-text">Escuela Especial (discapacidad)</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Especial de Lenguaje"><span class="opt-text">Escuela Especial de Lenguaje (TEL)</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Educación de Adultos (CEIA)"><span class="opt-text">Educación de Adultos (CEIA)</span></label>
-            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Otro" data-other="tipoOtro"><span class="opt-text">Otro</span></label>
-          </div>
+          <select name="tipoEstablecimiento" id="tipoEstablecimiento">
+            <option value="">Selecciona una opción…</option>
+            <option value="Educación Parvularia">Educación Parvularia (jardín / sala cuna)</option>
+            <option value="Escuela Básica">Escuela Básica</option>
+            <option value="Liceo Humanista-Científico">Liceo Humanista-Científico</option>
+            <option value="Liceo Técnico-Profesional">Liceo Técnico-Profesional</option>
+            <option value="Escuela Especial">Escuela Especial (discapacidad)</option>
+            <option value="Escuela Especial de Lenguaje">Escuela Especial de Lenguaje (TEL)</option>
+            <option value="Educación de Adultos (CEIA)">Educación de Adultos (CEIA)</option>
+            <option value="Otro" data-other="tipoOtro">Otro</option>
+          </select>
           <input type="text" id="tipoOtro" name="tipoOtro" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
           <div class="error-msg" data-for="tipoEstablecimiento">Selecciona el tipo de establecimiento.</div>
         </div>
 
         <div class="field">
           <label class="lbl">Cargo</label>
-          <div class="opts grid-2">
-            <label class="opt"><input type="radio" name="cargo" value="Director/a"><span class="opt-text">Director/a</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Encargado/a PIE"><span class="opt-text">Encargado/a PIE</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Encargado/a de Convivencia"><span class="opt-text">Encargado/a de Convivencia</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Educador/a diferencial"><span class="opt-text">Educador/a diferencial</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Docente"><span class="opt-text">Docente de aula</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Kinesiólogo/a"><span class="opt-text">Kinesiólogo/a</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Terapeuta ocupacional"><span class="opt-text">Terapeuta ocupacional</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Fonoaudiólogo/a"><span class="opt-text">Fonoaudiólogo/a</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Psicólogo/a"><span class="opt-text">Psicólogo/a</span></label>
-            <label class="opt"><input type="radio" name="cargo" value="Otro" data-other="cargoOtro"><span class="opt-text">Otro</span></label>
-          </div>
+          <select name="cargo" id="cargo">
+            <option value="">Selecciona una opción…</option>
+            <option value="Director/a">Director/a</option>
+            <option value="Encargado/a PIE">Encargado/a PIE</option>
+            <option value="Encargado/a de Convivencia">Encargado/a de Convivencia</option>
+            <option value="Educador/a diferencial">Educador/a diferencial</option>
+            <option value="Docente">Docente de aula</option>
+            <option value="Kinesiólogo/a">Kinesiólogo/a</option>
+            <option value="Terapeuta ocupacional">Terapeuta ocupacional</option>
+            <option value="Fonoaudiólogo/a">Fonoaudiólogo/a</option>
+            <option value="Psicólogo/a">Psicólogo/a</option>
+            <option value="Otro" data-other="cargoOtro">Otro</option>
+          </select>
           <input type="text" id="cargoOtro" name="cargoOtro" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
           <div class="error-msg" data-for="cargo">Selecciona tu cargo.</div>
         </div>
@@ -552,9 +560,9 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         </div>
       </section>
 
-      <section class="section paso" data-paso="3" hidden>
+      <section class="section paso" data-paso="2" hidden>
         <div class="section-head">
-          <div class="section-num">3</div>
+          <div class="section-num sin-num">2</div>
           <div class="section-title">
             <h3>Interés temático</h3>
             <p>Puedes marcar más de una opción.</p>
@@ -596,27 +604,28 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         <div class="error-msg" data-for="temas">Marca al menos un tema.</div>
       </section>
 
-      <section class="section paso" data-paso="4" hidden>
+      <section class="section paso" data-paso="2" hidden>
         <div class="section-head">
-          <div class="section-num">4</div>
+          <div class="section-num sin-num">2</div>
           <div class="section-title">
             <h3>Diagnóstico del establecimiento</h3>
             <p>¿Cuentan con sala sensorial o equipamiento de apoyo especializado?</p>
           </div>
         </div>
 
-        <div class="opts">
-          <label class="opt"><input type="radio" name="sala" value="Sí, equipada"><span class="opt-text">Sí, equipada</span></label>
-          <label class="opt"><input type="radio" name="sala" value="Sí, pero falta equipamiento técnico"><span class="opt-text">Sí, pero falta equipamiento técnico</span></label>
-          <label class="opt"><input type="radio" name="sala" value="No, estamos en etapa de proyecto"><span class="opt-text">No, estamos en etapa de proyecto</span></label>
-          <label class="opt"><input type="radio" name="sala" value="No, pero nos interesa implementar una este 2026"><span class="opt-text">No, pero nos interesa implementar una este 2026</span></label>
-        </div>
+        <select name="sala" id="sala">
+            <option value="">Selecciona una opción…</option>
+            <option value="Sí, equipada">Sí, equipada</option>
+            <option value="Sí, pero falta equipamiento técnico">Sí, pero falta equipamiento técnico</option>
+            <option value="No, estamos en etapa de proyecto">No, estamos en etapa de proyecto</option>
+            <option value="No, pero nos interesa implementar una este 2026">No, pero nos interesa implementar una este 2026</option>
+          </select>
         <div class="error-msg" data-for="sala">Selecciona una opción.</div>
       </section>
 
-      <section class="section featured paso" data-paso="5" hidden>
+      <section class="section featured paso" data-paso="3" hidden>
         <div class="section-head">
-          <div class="section-num">5</div>
+          <div class="section-num">3</div>
           <div class="section-title">
             <h3>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
@@ -638,9 +647,9 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
         </div>
       </section>
 
-      <section class="section paso" data-paso="6" hidden>
+      <section class="section paso" data-paso="3" hidden>
         <div class="section-head">
-          <div class="section-num">6</div>
+          <div class="section-num sin-num">3</div>
           <div class="section-title">
             <h3>Comentarios adicionales</h3>
             <p>¿Algo más que quieras compartir? (Opcional)</p>
@@ -659,7 +668,7 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
           <span class="sp"></span><span class="lbl-txt">Quiero mi cupo</span>
         </button>
       </div>
-      <div class="nav-nota" id="navNota">Paso 1 de 6 · solo cuatro campos</div>
+      <div class="nav-nota" id="navNota">Paso 1 de 3 · solo cuatro campos</div>
 
       <input type="hidden" name="t_load" id="t_load">
       <input type="hidden" name="origen" id="origen" value="webinar-pie-biobio-nuble-2026">
@@ -743,7 +752,7 @@ const VIDEO_INVITACION_URL = 'https://youtube.com/shorts/2e4Mv9aYBbI';
   var url = String(VIDEO_INVITACION_URL || '').trim();
   if (!url) return;
   var m = url.match(/(?:youtu\.be\/|v=|\/shorts\/|\/embed\/)([A-Za-z0-9_-]{6,})/);
-  var src = m ? 'https://www.youtube-nocookie.com/embed/' + m[1] + '?rel=0&modestbranding=1&playsinline=1' : url;
+  var src = m ? 'https://www.youtube-nocookie.com/embed/' + m[1] + '?rel=0&playsinline=1&enablejsapi=1' : url;
   var frame = document.getElementById('videoInvitacionFrame');
   var cont  = document.getElementById('videoInvitacion');
   if (!frame || !cont) return;
@@ -797,7 +806,7 @@ const COMUNAS = {
 };
 /** Comunas que se ofrecen según la región marcada (todas si es "Otra" o ninguna). */
 function comunasVigentes() {
-  const r = document.querySelector('input[name="region"]:checked');
+  const r = document.querySelector('select[name="region"]');
   const v = r ? r.value : '';
   return COMUNAS[v] || [].concat(COMUNAS['Región del Biobío'], COMUNAS['Región de Ñuble']);
 }
@@ -835,7 +844,25 @@ function comunasVigentes() {
   });
 })();
 
-// ── Campos "¿Cuál?" que aparecen al marcar "Otro" ──
+// ── Campos "¿Cuál?" de los DESPLEGABLES ──
+// La opción "Otro" lleva data-other con el id del campo de texto que revela.
+document.querySelectorAll('select').forEach(sel => {
+  const conExtra = [...sel.options].filter(o => o.dataset.other);
+  if (!conExtra.length) return;
+  const sincronizar = () => {
+    conExtra.forEach(o => {
+      const extra = document.getElementById(o.dataset.other);
+      if (!extra) return;
+      const activo = sel.value === o.value;
+      extra.style.display = activo ? 'block' : 'none';
+      if (!activo) extra.value = '';
+    });
+  };
+  sel.addEventListener('change', sincronizar);
+  sincronizar();
+});
+
+// ── Campos "¿Cuál?" que aparecen al marcar "Otro" (casillas de Interés temático) ──
 // (también se había perdido)
 document.querySelectorAll('input[data-other]').forEach(inp => {
   const extra = document.getElementById(inp.dataset.other);
@@ -857,8 +884,8 @@ document.querySelectorAll('input[data-other]').forEach(inp => {
   const mapa = { biobio: 'Región del Biobío', 'biobío': 'Región del Biobío', nuble: 'Región de Ñuble', 'ñuble': 'Región de Ñuble' };
   const valor = mapa[q];
   if (!valor) return; // sin parámetro no se premarca nada: la persona elige
-  const radio = [...document.querySelectorAll('input[name="region"]')].find(r => r.value === valor);
-  if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change', { bubbles: true })); }
+  const sel = document.querySelector('select[name="region"]');
+  if (sel) { sel.value = valor; sel.dispatchEvent(new Event('change', { bubbles: true })); }
 })();
 
 const OBLIGATORIOS = ['nombre','establecimiento','email','celular'];
@@ -919,27 +946,21 @@ function revisarFijo() {
 //  paso vuelve a guardar sobre la MISMA inscripción (el backend busca
 //  por correo y actualiza, no crea una fila nueva).
 // ════════════════════════════════════════════════════════════════════
-const TOTAL_PASOS = 6;
+const TOTAL_PASOS = 3;
 let pasoActual = 1;
 let yaInscrito = false;
 let guardando = false;
 let ultimoEnvio = null;
 
 const NOTAS = {
-  1: 'Paso 1 de 6 · solo cuatro campos',
-  2: 'Paso 2 de 6 · opcional',
-  3: 'Paso 3 de 6 · opcional',
-  4: 'Paso 4 de 6 · opcional',
-  5: 'Paso 5 de 6 · opcional',
-  6: 'Paso 6 de 6 · opcional'
+  1: 'Paso 1 de 3 · solo cuatro campos',
+  2: 'Paso 2 de 3 · opcional',
+  3: 'Paso 3 de 3 · opcional'
 };
 const ETIQUETAS = {
   1: 'Quiero mi cupo',
   2: 'Guardar y continuar',
-  3: 'Guardar y continuar',
-  4: 'Guardar y continuar',
-  5: 'Guardar y continuar',
-  6: 'Guardar y terminar'
+  3: 'Guardar y terminar'
 };
 
 function mostrarPaso(n) {
@@ -956,6 +977,21 @@ function mostrarPaso(n) {
   document.getElementById('progressLabel').textContent = yaInscrito
     ? 'Inscrito · paso ' + n + ' de ' + TOTAL_PASOS + ' (opcional)'
     : 'Paso ' + n + ' de ' + TOTAL_PASOS;
+
+  // El video acompaña la invitación: se ve solo en el paso 1. Al salir de ahí se
+  // oculta Y se pausa — si solo se ocultara, seguiría sonando de fondo.
+  const cajaVideo = document.getElementById('videoInvitacion');
+  if (cajaVideo) {
+    cajaVideo.style.display = (n === 1 && cajaVideo.classList.contains('show')) ? 'block' : 'none';
+    if (n !== 1) {
+      const marco = document.getElementById('videoInvitacionFrame');
+      if (marco && marco.contentWindow) {
+        try {
+          marco.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        } catch (e) { /* si el navegador lo bloquea, el video queda oculto igual */ }
+      }
+    }
+  }
 
   document.querySelector('.progress-bar').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

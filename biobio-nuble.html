@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Webinar PIE Biobío y Ñuble 2026 — El entorno multisensorial</title>
+<meta name="description" content="Webinar gratuito «El entorno multisensorial», viernes 14 de agosto. Para equipos PIE, escuelas especiales y profesionales del área de educación de Biobío y Ñuble.">
+<meta property="og:title" content="Webinar PIE Biobío y Ñuble 2026 — El entorno multisensorial">
+<meta property="og:description" content="Viernes 14 de agosto, 16:00 h. Online y gratuito.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --navy:#001a60; --sky:#06b3fd; --ltblue:#d6eeff; --pale:#eaf6ff;
+  --orange:#ff7e00; --orange-soft:#fff4ea; --orange-border:#ffd199;
+  --mgray:#DDE4ED; --text:#1a2535; --subtle:#64748b; --bg:#eef2f7;
+  --ok:#16a34a; --err:#e11d48;
+}
+html, body { margin:0; padding:0; }
+body {
+  font-family:'Open Sans', sans-serif; background:var(--bg); color:var(--text);
+  -webkit-font-smoothing:antialiased; line-height:1.5; min-height:100vh;
+}
+.hero {
+  background:linear-gradient(135deg, var(--navy) 0%, #002b8c 100%);
+  color:white; padding:22px 20px 56px;
+  position:relative; overflow:hidden;
+}
+.hero::after {
+  content:''; position:absolute; left:0; right:0; bottom:-1px; height:40px;
+  background:var(--bg);
+  clip-path:polygon(0 100%, 100% 100%, 100% 50%, 0 100%);
+}
+.hero-inner {
+  max-width:1180px; margin:0 auto; position:relative; z-index:2;
+  display:flex; align-items:flex-start; justify-content:center;
+  gap:36px;
+}
+.hero-inner-content { min-width:0; max-width:680px; }
+.hero-bg-logo {
+  width:280px; height:auto; flex-shrink:0; opacity:.96;
+  display:block; margin-top:-8px;
+}
+@media (max-width:1080px) {
+  .hero-bg-logo { width:220px; }
+  .hero-inner { gap:18px; }
+}
+@media (max-width:880px) {
+  .hero-bg-logo { display:none; }
+  .hero-inner { display:block; max-width:720px; }
+}
+.hero-brand {
+  display:inline-flex; align-items:center; gap:10px; margin-bottom:14px;
+  background:white; padding:7px 14px; border-radius:999px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.18);
+}
+.hero-brand img { height:24px; width:auto; display:block; }
+@media (max-width:520px) { .hero-brand img { height:22px; } }
+.hero h1 {
+  font-family:'Montserrat',sans-serif; font-weight:800; font-size:24px;
+  line-height:1.2; margin-bottom:6px;
+}
+.hero h1 .accent { color:var(--sky); }
+.hero h2 {
+  font-family:'Montserrat',sans-serif; font-weight:600; font-size:15px;
+  color:rgba(255,255,255,0.9); margin-bottom:10px;
+}
+.hero p.lead {
+  font-size:13px; color:rgba(255,255,255,0.78); max-width:560px; line-height:1.45;
+}
+.hero-meta {
+  display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;
+}
+.chip {
+  display:inline-flex; align-items:center; gap:7px;
+  background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2);
+  color:white; padding:6px 12px; border-radius:999px;
+  font-size:11.5px; font-weight:600; backdrop-filter:blur(6px);
+}
+.chip strong { color:var(--sky); }
+.chip svg { width:14px; height:14px; flex-shrink:0; opacity:0.9; }
+.wrap { max-width:720px; margin:-44px auto 16px; padding:0 16px; position:relative; z-index:2; }
+.progress-bar {
+  background:white; border-radius:12px; padding:12px 16px;
+  box-shadow:0 6px 24px rgba(0,26,96,0.08); border:1px solid var(--mgray);
+  display:flex; align-items:center; gap:12px; margin-bottom:18px;
+  position:sticky; top:8px; z-index:5;
+}
+.progress-text { font-size:12px; color:var(--subtle); font-weight:600; flex-shrink:0; }
+.progress-text strong { color:var(--navy); font-size:13px; }
+.progress-track { flex:1; height:6px; background:var(--mgray); border-radius:3px; overflow:hidden; }
+.progress-fill {
+  height:100%; background:linear-gradient(90deg, var(--sky), var(--navy));
+  border-radius:3px; width:0%; transition:width .35s ease;
+}
+.section {
+  background:white; border-radius:14px; padding:18px 18px;
+  box-shadow:0 4px 18px rgba(0,26,96,0.06); border:1px solid var(--mgray);
+  margin-bottom:12px;
+}
+.section-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+.section-num {
+  width:38px; height:38px; border-radius:50%; flex-shrink:0;
+  background:linear-gradient(135deg, var(--sky), var(--navy));
+  color:white; font-family:'Montserrat',sans-serif; font-weight:800; font-size:15px;
+  display:flex; align-items:center; justify-content:center;
+}
+.section-title h3 {
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:15.5px;
+  color:var(--navy); line-height:1.2;
+}
+.section-title p { font-size:12.5px; color:var(--subtle); margin-top:2px; }
+.section.featured {
+  background:linear-gradient(180deg, var(--orange-soft) 0%, white 100%);
+  border:1.5px solid var(--orange-border);
+}
+.section.featured .section-num {
+  background:linear-gradient(135deg, #ff9d3d, var(--orange));
+}
+.section.featured .section-title h3 { color:#a14400; display:inline-flex; align-items:center; gap:9px; }
+.section.featured .section-title h3 svg { width:20px; height:20px; flex-shrink:0; }
+.featured-banner {
+  background:white; border:1px dashed var(--orange-border);
+  border-radius:8px; padding:10px 12px; margin-bottom:14px;
+  font-size:12.5px; color:#7a3a00; line-height:1.45;
+}
+.featured-banner strong { color:var(--orange); }
+.field { margin-bottom:10px; }
+.field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media (max-width:520px) { .field-row { grid-template-columns:1fr; } }
+.field label.lbl {
+  display:block; font-size:11.5px; font-weight:700; color:var(--text);
+  margin-bottom:4px; letter-spacing:0.2px;
+}
+.field label.lbl .req { color:var(--err); margin-left:2px; }
+.field .hint { font-size:11.5px; color:var(--subtle); margin-top:4px; }
+input[type=text], input[type=email], input[type=tel], textarea, select {
+  width:100%; padding:9px 12px; border:1.5px solid var(--mgray); border-radius:8px;
+  font-family:'Open Sans',sans-serif; font-size:13px; color:var(--text);
+  outline:none; background:#F7F9FC; transition:all .18s;
+}
+input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus, textarea:focus, select:focus {
+  border-color:var(--sky); box-shadow:0 0 0 3px rgba(6,179,253,0.15); background:white;
+}
+textarea { resize:vertical; min-height:74px; line-height:1.5; font-family:inherit; }
+input.invalid, textarea.invalid, select.invalid { border-color:var(--err); background:#fff5f6; }
+.tel-wrap { display:flex; align-items:stretch; }
+.tel-prefix {
+  display:flex; align-items:center; padding:0 12px; flex-shrink:0;
+  background:#eef2f7; border:1.5px solid var(--mgray); border-right:none;
+  border-radius:8px 0 0 8px; font-size:13px; font-weight:700; color:var(--text);
+}
+.tel-wrap input[type=tel] { border-radius:0 8px 8px 0; }
+.error-msg { font-size:11.5px; color:var(--err); margin-top:4px; display:none; font-weight:600; }
+.error-msg.show { display:block; }
+.combo { position:relative; }
+.combo input {
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2364748b' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 14px center; padding-right:34px;
+}
+.combo-list {
+  position:absolute; top:calc(100% + 4px); left:0; right:0;
+  background:white; border:1.5px solid var(--mgray); border-radius:8px;
+  max-height:220px; overflow-y:auto; box-shadow:0 8px 24px rgba(0,26,96,0.12);
+  z-index:50; display:none;
+}
+.combo-list.open { display:block; }
+.combo-list .item { padding:9px 13px; font-size:13.5px; cursor:pointer; }
+.combo-list .item:hover, .combo-list .item.active { background:var(--pale); color:var(--navy); }
+.combo-list .empty { padding:14px; font-size:12.5px; color:var(--subtle); text-align:center; }
+.opts { display:flex; flex-direction:column; gap:6px; }
+.opts.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+@media (max-width:520px) { .opts.grid-2 { grid-template-columns:1fr; } }
+.opt {
+  display:flex; align-items:center; gap:9px;
+  padding:9px 12px; border:1.5px solid var(--mgray); border-radius:9px;
+  cursor:pointer; background:white; transition:all .15s;
+  font-size:13px; color:var(--text);
+}
+.opt:hover { border-color:var(--sky); background:var(--pale); }
+.opt input { accent-color:var(--sky); width:18px; height:18px; flex-shrink:0; cursor:pointer; }
+.opt input:checked ~ .opt-text { color:var(--navy); font-weight:600; }
+.opt:has(input:checked) { border-color:var(--sky); background:var(--pale); box-shadow:0 0 0 3px rgba(6,179,253,0.1); }
+.opt:has(input:checked) .opt-text { color:var(--navy); font-weight:600; }
+.opt-text { flex:1; }
+.opt-rich { align-items:flex-start; padding:10px 12px; }
+.opt-rich input { margin-top:2px; }
+.opt-rich .opt-text strong {
+  display:block; font-weight:600; font-size:13px; color:var(--text);
+  line-height:1.35;
+}
+.opt-rich .opt-text small {
+  display:block; font-size:11.5px; color:var(--subtle); margin-top:3px;
+  line-height:1.45; font-weight:400;
+}
+.opt-rich:has(input:checked) .opt-text strong { color:var(--navy); }
+.opt-rich:has(input:checked) .opt-text small { color:#445064; }
+.submit-wrap { padding:8px 0 0; }
+.btn-submit {
+  width:100%; padding:13px; border:none; border-radius:10px;
+  background:linear-gradient(90deg, var(--sky), var(--navy));
+  color:white; font-family:'Montserrat',sans-serif; font-weight:700; font-size:14.5px;
+  letter-spacing:0.5px; cursor:pointer; transition:all .2s;
+  box-shadow:0 6px 20px rgba(0,26,96,0.25);
+}
+.btn-submit:hover:not(:disabled) { transform:translateY(-1px); box-shadow:0 10px 28px rgba(0,26,96,0.35); }
+.btn-submit:disabled { opacity:0.5; cursor:not-allowed; }
+.btn-submit .sp {
+  display:none; width:16px; height:16px; border:2px solid rgba(255,255,255,0.35);
+  border-top-color:white; border-radius:50%; animation:spin .7s linear infinite;
+  vertical-align:middle; margin-right:8px;
+}
+.btn-submit.loading .sp { display:inline-block; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.hp { position:absolute; left:-9999px; opacity:0; pointer-events:none; }
+.foot {
+  text-align:center; padding:14px 16px 32px; color:var(--subtle); font-size:12px;
+}
+.foot-row {
+  display:flex; align-items:center; justify-content:center;
+  gap:20px; flex-wrap:wrap;
+}
+.foot-logo-pill {
+  background:white; padding:12px 22px; border-radius:999px;
+  border:1px solid var(--mgray);
+  box-shadow:0 4px 16px rgba(0,26,96,0.05);
+  display:inline-flex; align-items:center;
+}
+.foot-logo-pill img { height:42px; width:auto; display:block; }
+.foot a { color:var(--navy); text-decoration:none; font-weight:600; }
+.foot a:hover { text-decoration:underline; }
+.foot .contact-card {
+  display:inline-block; background:white; border:1px solid var(--mgray);
+  border-radius:12px; padding:16px 22px;
+  box-shadow:0 4px 16px rgba(0,26,96,0.05); text-align:left;
+}
+.foot .contact-card .contact-name {
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:14px;
+  color:var(--navy); margin-bottom:2px;
+}
+.foot .contact-card .contact-role {
+  font-size:11.5px; color:var(--subtle); margin-bottom:10px;
+}
+.foot .contact-card .contact-line {
+  display:flex; align-items:center; gap:8px;
+  font-size:12.5px; color:var(--text); padding:3px 0;
+}
+.foot .contact-card .contact-line svg { width:14px; height:14px; color:var(--sky); flex-shrink:0; }
+.foot .contact-card .contact-line.wa svg { color:#25D366; }
+.foot .copy { margin-top:14px; font-size:11px; color:var(--subtle); }
+.thanks { display:none; }
+.thanks.show { display:block; }
+.form-screen.hide { display:none; }
+.thanks-card {
+  background:white; border-radius:14px; padding:36px 24px;
+  text-align:center; box-shadow:0 10px 30px rgba(0,26,96,0.1);
+  border:1px solid var(--mgray);
+}
+.thanks-icon {
+  width:72px; height:72px; border-radius:50%; margin:0 auto 18px;
+  background:linear-gradient(135deg, var(--sky), var(--navy));
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 24px rgba(6,179,253,0.3);
+}
+.thanks-icon svg { width:36px; height:36px; }
+.thanks h2 {
+  font-family:'Montserrat',sans-serif; font-weight:800; font-size:24px;
+  color:var(--navy); margin-bottom:8px;
+}
+.thanks p { color:var(--subtle); font-size:14.5px; margin-bottom:18px; }
+.thanks p strong { color:var(--text); }
+.thanks-summary {
+  background:var(--pale); border-radius:10px; padding:14px 16px;
+  text-align:left; font-size:13px; color:var(--text); margin:18px 0;
+}
+.thanks-summary div { padding:4px 0; }
+.thanks-summary strong { color:var(--navy); }
+.thanks-share {
+  display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:14px;
+}
+.btn-share {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 16px; border-radius:8px; border:1.5px solid var(--mgray);
+  background:white; color:var(--navy); font-weight:700; font-size:13px;
+  cursor:pointer; transition:all .15s; font-family:inherit;
+}
+.btn-share svg { width:16px; height:16px; flex-shrink:0; }
+.btn-share:hover { border-color:var(--sky); background:var(--pale); }
+@media (max-width:560px) {
+  .hero { padding:18px 18px 48px; }
+  .hero h1 { font-size:20px; }
+  .hero h2 { font-size:13.5px; }
+  .section { padding:20px 16px; border-radius:12px; }
+  .section-num { width:34px; height:34px; font-size:14px; }
+  .section-title h3 { font-size:15.5px; }
+}
+</style>
+<style>
+  /* Llamada a la accion: boton del encabezado y boton flotante */
+  .btn-hero {
+    display:inline-block; margin-top:20px; padding:15px 40px; border-radius:12px;
+    background:#ff7e00; color:#001a60; font-weight:800; font-size:16px;
+    text-decoration:none; box-shadow:0 6px 18px rgba(0,0,0,.18);
+  }
+  .btn-hero:hover { background:#e86f00; }
+  .btn-flotante {
+    position:fixed; z-index:60; right:22px; bottom:22px;
+    padding:14px 26px; border-radius:999px;
+    background:#ff7e00; color:#001a60; font-weight:800; font-size:15px;
+    text-decoration:none; box-shadow:0 8px 24px rgba(0,0,0,.25);
+    opacity:0; visibility:hidden; transform:translateY(12px);
+    transition:opacity .25s, transform .25s, visibility .25s;
+  }
+  .btn-flotante.visible { opacity:1; visibility:visible; transform:translateY(0); }
+  .btn-flotante:hover { background:#e86f00; }
+  @media (max-width:520px) {
+    .btn-hero { display:block; text-align:center; }
+    .btn-flotante { right:14px; left:14px; bottom:14px; text-align:center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-flotante { transition:none; }
+  }
+
+  /* Formulario por pasos */
+  .paso[hidden] { display:none; }
+  .aviso-inscrito {
+    background:#e7f7ec; border:1px solid #b8e6c6; border-left:4px solid #2e7d32;
+    border-radius:10px; padding:14px 16px; margin-bottom:18px;
+    font-size:14px; line-height:1.6; color:#1a3d24;
+  }
+  .aviso-inscrito strong { color:#1b5e20; }
+  .nav-wrap { display:flex; gap:12px; align-items:center; justify-content:flex-end; margin-top:22px; flex-wrap:wrap; }
+  .btn-atras {
+    background:transparent; border:1.5px solid #c9d6e5; color:#41556e;
+    border-radius:12px; padding:13px 22px; font-size:15px; font-weight:600; cursor:pointer;
+  }
+  .btn-atras:hover { border-color:#8fa6bf; color:#1a2535; }
+  .nav-nota { margin-top:10px; text-align:right; font-size:12.5px; color:#7b8ca1; }
+  @media (max-width:520px) {
+    .nav-wrap { flex-direction:column-reverse; align-items:stretch; }
+    .nav-wrap button { width:100%; }
+    .nav-nota { text-align:center; }
+  }
+
+  /* ── Video de invitación (vertical) ──────────────────────────────
+     Oculto por defecto: solo aparece si VIDEO_INVITACION_URL tiene un enlace.
+     Angosto a propósito: un video 9:16 a todo el ancho empujaría el formulario
+     fuera de la primera pantalla en computador. */
+  .video-invitacion { display:none; max-width:300px; margin:0 auto 18px; }
+  .video-invitacion.show { display:block; }
+  .video-card {
+    background:#000; border-radius:16px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,26,96,0.18); border:1px solid var(--mgray);
+  }
+  .video-ratio { position:relative; width:100%; padding-bottom:177.78%; height:0; }
+  .video-ratio iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+  .video-pie { text-align:center; font-size:12.5px; color:var(--subtle); margin-top:8px; }
+  @media (max-width:520px) { .video-invitacion { max-width:230px; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-inner-content">
+    <h1>Webinar PIE Biobío y Ñuble 2026<br><span class="accent">El entorno multisensorial</span></h1>
+    <h2>Cómo la estimulación sensorial mejora el desarrollo cognitivo y la experiencia de aprendizaje</h2>
+    <p class="lead">
+      Webinar gratuito y online, el <strong>viernes 14 de agosto</strong>. Casos reales y un espacio de
+      preguntas y respuestas con nuestros terapeutas ocupacionales. Inscribirte toma menos de 2 minutos.
+    </p>
+    <a class="btn-hero" href="#formScreen">Quiero mi cupo</a>
+    <div class="hero-meta">
+      <div class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span><strong>Viernes 14 de agosto</strong></span>
+      </div>
+      <div class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span><strong>1 hora</strong> · equipos PIE, educación diferencial y profesionales del área</span>
+      </div>
+      <div class="chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span><strong>Online y gratuito</strong></span>
+      </div>
+    </div>
+    </div>
+    <img class="hero-bg-logo" src="assets/oct-banner-big.png" alt="OpenCluster Tech">
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- Video de invitación. Aparece solo si VIDEO_INVITACION_URL tiene un enlace. -->
+  <div class="video-invitacion" id="videoInvitacion">
+    <div class="video-card">
+      <div class="video-ratio">
+        <iframe id="videoInvitacionFrame" title="Invitación al webinar" loading="lazy"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="video-pie">De qué se trata este webinar, en un minuto</div>
+  </div>
+
+  <!-- Form screen -->
+  <div class="form-screen" id="formScreen">
+
+    <div class="progress-bar">
+      <div class="progress-text" id="progressLabel">Paso 1 de 6</div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="aviso-inscrito" id="avisoInscrito" hidden>
+      <strong>Tu cupo ya está reservado.</strong> Te enviamos un correo con los datos del webinar.
+      Lo que sigue es opcional: nos ayuda a preparar mejor el encuentro.
+    </div>
+
+    <form id="form" novalidate>
+
+      <!-- honeypot -->
+      <div class="hp" aria-hidden="true">
+        <label>No completar: <input type="text" name="website" id="hp_website" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <section class="section paso" data-paso="1">
+        <div class="section-head">
+          <div class="section-num">1</div>
+          <div class="section-title">
+            <h3>Identificación</h3>
+            <p>Con estos cuatro datos tu cupo queda reservado y te enviamos el enlace de acceso.</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="nombre">Nombre <span class="req">*</span></label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+          <div class="error-msg" data-for="nombre">Ingresa tu nombre.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="establecimiento">Establecimiento educacional <span class="req">*</span></label>
+          <input type="text" id="establecimiento" name="establecimiento" autocomplete="organization" required>
+          <div class="error-msg" data-for="establecimiento">Ingresa el nombre del establecimiento.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="email">Correo electrónico <span class="req">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="nombre@correo.cl" required>
+          <div class="hint">Aquí te llega el enlace de acceso, apenas te inscribas.</div>
+          <div class="error-msg" data-for="email">Ingresa un correo válido.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="celular">Celular / WhatsApp <span class="req">*</span></label>
+          <div class="tel-wrap">
+            <span class="tel-prefix">+56</span>
+            <input type="tel" id="celular" name="celular" autocomplete="tel" inputmode="numeric" placeholder="9 8765 4321" required>
+          </div>
+          <div class="hint">Lo usamos solo para avisarte del webinar.</div>
+          <div class="error-msg" data-for="celular">Ingresa tu celular (8 dígitos, sin el +56).</div>
+        </div>
+      </section>
+
+      <section class="section paso" data-paso="2" hidden>
+        <div class="section-head">
+          <div class="section-num">2</div>
+          <div class="section-title">
+            <h3>Identificación</h3>
+            <p>Estos datos son opcionales y nos ayudan a preparar mejor el webinar.</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="lbl">Región</label>
+          <div class="opts grid-2" id="regionGroup">
+            <label class="opt"><input type="radio" name="region" value="Región del Biobío"><span class="opt-text">Región del Biobío</span></label>
+            <label class="opt"><input type="radio" name="region" value="Región de Ñuble"><span class="opt-text">Región de Ñuble</span></label>
+            <label class="opt"><input type="radio" name="region" value="Otra" data-other="regionOtra"><span class="opt-text">Otra región</span></label>
+          </div>
+          <input type="text" id="regionOtra" name="regionOtra" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
+          <div class="hint">Viene marcada según la invitación que recibiste. Cámbiala si corresponde.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="comuna">Comuna</label>
+          <div class="combo">
+            <input type="text" id="comuna" name="comuna" autocomplete="off" placeholder="Selecciona o escribe…">
+            <div class="combo-list" id="comunaList"></div>
+          </div>
+          <div class="error-msg" data-for="comuna">Revisa la comuna.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl">Dependencia</label>
+          <div class="opts grid-2">
+            <label class="opt"><input type="radio" name="dependencia" value="Municipal"><span class="opt-text">Municipal</span></label>
+            <label class="opt"><input type="radio" name="dependencia" value="SLEP"><span class="opt-text">SLEP</span></label>
+            <label class="opt"><input type="radio" name="dependencia" value="Particular Subvencionado"><span class="opt-text">Particular Subvencionado</span></label>
+            <label class="opt"><input type="radio" name="dependencia" value="Particular Pagado"><span class="opt-text">Particular Pagado</span></label>
+            <label class="opt"><input type="radio" name="dependencia" value="Administración Delegada"><span class="opt-text">Administración Delegada</span></label>
+            <label class="opt"><input type="radio" name="dependencia" value="Otro" data-other="dependenciaOtra"><span class="opt-text">Otro</span></label>
+          </div>
+          <input type="text" id="dependenciaOtra" name="dependenciaOtra" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
+          <div class="error-msg" data-for="dependencia">Selecciona una dependencia.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl">Tipo de establecimiento</label>
+          <div class="opts grid-2">
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Educación Parvularia"><span class="opt-text">Educación Parvularia (jardín / sala cuna)</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Básica"><span class="opt-text">Escuela Básica</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Liceo Humanista-Científico"><span class="opt-text">Liceo Humanista-Científico</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Liceo Técnico-Profesional"><span class="opt-text">Liceo Técnico-Profesional</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Especial"><span class="opt-text">Escuela Especial (discapacidad)</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Escuela Especial de Lenguaje"><span class="opt-text">Escuela Especial de Lenguaje (TEL)</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Educación de Adultos (CEIA)"><span class="opt-text">Educación de Adultos (CEIA)</span></label>
+            <label class="opt"><input type="radio" name="tipoEstablecimiento" value="Otro" data-other="tipoOtro"><span class="opt-text">Otro</span></label>
+          </div>
+          <input type="text" id="tipoOtro" name="tipoOtro" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
+          <div class="error-msg" data-for="tipoEstablecimiento">Selecciona el tipo de establecimiento.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl">Cargo</label>
+          <div class="opts grid-2">
+            <label class="opt"><input type="radio" name="cargo" value="Director/a"><span class="opt-text">Director/a</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Encargado/a PIE"><span class="opt-text">Encargado/a PIE</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Encargado/a de Convivencia"><span class="opt-text">Encargado/a de Convivencia</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Educador/a diferencial"><span class="opt-text">Educador/a diferencial</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Docente"><span class="opt-text">Docente de aula</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Kinesiólogo/a"><span class="opt-text">Kinesiólogo/a</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Terapeuta ocupacional"><span class="opt-text">Terapeuta ocupacional</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Fonoaudiólogo/a"><span class="opt-text">Fonoaudiólogo/a</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Psicólogo/a"><span class="opt-text">Psicólogo/a</span></label>
+            <label class="opt"><input type="radio" name="cargo" value="Otro" data-other="cargoOtro"><span class="opt-text">Otro</span></label>
+          </div>
+          <input type="text" id="cargoOtro" name="cargoOtro" placeholder="¿Cuál?" style="margin-top:8px; display:none;">
+          <div class="error-msg" data-for="cargo">Selecciona tu cargo.</div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="fijo">Teléfono fijo</label>
+          <div class="tel-wrap">
+            <span class="tel-prefix">+56</span>
+            <input type="tel" id="fijo" name="fijo" autocomplete="tel" inputmode="numeric" placeholder="Código de área y número">
+          </div>
+          <div class="error-msg" data-for="fijo">Ingresa un teléfono fijo válido.</div>
+        </div>
+      </section>
+
+      <section class="section paso" data-paso="3" hidden>
+        <div class="section-head">
+          <div class="section-num">3</div>
+          <div class="section-title">
+            <h3>Interés temático</h3>
+            <p>Puedes marcar más de una opción.</p>
+          </div>
+        </div>
+
+        <div class="opts" id="temasGroup">
+          <label class="opt opt-rich">
+            <input type="checkbox" name="temas" value="CAA - Comunicación Aumentativa Alternativa">
+            <span class="opt-text">
+              <strong>CAA — Comunicación Aumentativa Alternativa</strong>
+              <small>Sistemas y ayudas técnicas que complementan o sustituyen el lenguaje oral, facilitando la comunicación funcional mediante tableros de comunicación y pictogramas.</small>
+            </span>
+          </label>
+          <label class="opt opt-rich">
+            <input type="checkbox" name="temas" value="Entorno Multisensorial">
+            <span class="opt-text">
+              <strong>Entorno Multisensorial</strong>
+              <small>Espacio estructurado con estímulos sensoriales controlados para favorecer la autorregulación y la integración sensorial.</small>
+            </span>
+          </label>
+          <label class="opt opt-rich">
+            <input type="checkbox" name="temas" value="Acceso al computador">
+            <span class="opt-text">
+              <strong>Acceso al computador</strong>
+              <small>Conjunto de tecnologías de apoyo y adaptaciones que permiten el uso funcional y autónomo de dispositivos computacionales.</small>
+            </span>
+          </label>
+          <label class="opt opt-rich">
+            <input type="checkbox" name="temas" value="Acceso universal de espacios educativos">
+            <span class="opt-text">
+              <strong>Acceso universal de espacios educativos</strong>
+              <small>Condiciones de infraestructura y diseño que aseguran que todos los estudiantes puedan acceder, desplazarse y participar plenamente en los espacios educativos.</small>
+            </span>
+          </label>
+          <label class="opt"><input type="checkbox" name="temas" value="Otros" data-other="temasOtro"><span class="opt-text">Otros (especificar)</span></label>
+        </div>
+        <input type="text" id="temasOtro" name="temasOtro" placeholder="¿Qué otro tema te interesaría?" style="margin-top:8px; display:none;">
+        <div class="error-msg" data-for="temas">Marca al menos un tema.</div>
+      </section>
+
+      <section class="section paso" data-paso="4" hidden>
+        <div class="section-head">
+          <div class="section-num">4</div>
+          <div class="section-title">
+            <h3>Diagnóstico del establecimiento</h3>
+            <p>¿Cuentan con sala sensorial o equipamiento de apoyo especializado?</p>
+          </div>
+        </div>
+
+        <div class="opts">
+          <label class="opt"><input type="radio" name="sala" value="Sí, equipada"><span class="opt-text">Sí, equipada</span></label>
+          <label class="opt"><input type="radio" name="sala" value="Sí, pero falta equipamiento técnico"><span class="opt-text">Sí, pero falta equipamiento técnico</span></label>
+          <label class="opt"><input type="radio" name="sala" value="No, estamos en etapa de proyecto"><span class="opt-text">No, estamos en etapa de proyecto</span></label>
+          <label class="opt"><input type="radio" name="sala" value="No, pero nos interesa implementar una este 2026"><span class="opt-text">No, pero nos interesa implementar una este 2026</span></label>
+        </div>
+        <div class="error-msg" data-for="sala">Selecciona una opción.</div>
+      </section>
+
+      <section class="section featured paso" data-paso="5" hidden>
+        <div class="section-head">
+          <div class="section-num">5</div>
+          <div class="section-title">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              Pregunta para el expositor
+            </h3>
+            <p>Esta sección es la más valiosa.</p>
+          </div>
+        </div>
+
+        <div class="featured-banner">
+          <strong>Tu pregunta llega directo al expositor.</strong> La revisará antes del webinar para
+          adaptar los contenidos a las necesidades reales de los equipos PIE de la región.
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="pregunta">¿Cuál es el principal desafío que enfrenta hoy su equipo docente respecto a la implementación de la Ley TEA o a la inclusión de alumnos con necesidades educativas especiales?</label>
+          <textarea id="pregunta" name="pregunta" rows="5" placeholder="Cuéntanos en tus palabras…"></textarea>
+          <div class="error-msg" data-for="pregunta">Comparte al menos una pregunta o desafío.</div>
+        </div>
+      </section>
+
+      <section class="section paso" data-paso="6" hidden>
+        <div class="section-head">
+          <div class="section-num">6</div>
+          <div class="section-title">
+            <h3>Comentarios adicionales</h3>
+            <p>¿Algo más que quieras compartir? (Opcional)</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="comentarios">Necesidades, ideas, contexto que quieras agregar</label>
+          <textarea id="comentarios" name="comentarios" rows="3" placeholder="Lo que quieras que sepamos…"></textarea>
+        </div>
+      </section>
+
+      <div class="nav-wrap">
+        <button type="button" class="btn-atras" id="btnAtras" hidden>Atrás</button>
+        <button type="button" class="btn-submit" id="btnSiguiente">
+          <span class="sp"></span><span class="lbl-txt">Quiero mi cupo</span>
+        </button>
+      </div>
+      <div class="nav-nota" id="navNota">Paso 1 de 6 · solo cuatro campos</div>
+
+      <input type="hidden" name="t_load" id="t_load">
+      <input type="hidden" name="origen" id="origen" value="webinar-pie-biobio-nuble-2026">
+    </form>
+  </div>
+
+  <!-- Thanks screen -->
+  <div class="thanks" id="thanks">
+    <div class="thanks-card">
+      <div class="thanks-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2>¡Tu cupo quedó reservado!</h2>
+      <p>Nos vemos el <strong>viernes 14 de agosto</strong>. No tienes que confirmar nada más: ya te enviamos a <strong id="thanksEmail">tu correo</strong> el <strong>enlace de acceso</strong> y todos los datos, para que los tengas guardados.</p>
+
+      <div class="thanks-summary" id="thanksSummary"></div>
+
+      <p style="font-size:13px; margin-top:8px;">
+        ¿Conoces a otros equipos que les sirva? Comparte el link y ayúdanos a llegar a más establecimientos.
+      </p>
+      <div class="thanks-share">
+        <button class="btn-share" id="btnCopy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>Copiar link</span>
+        </button>
+        <a class="btn-share" id="btnWhatsApp" target="_blank" rel="noopener" style="text-decoration:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span>Compartir por WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-row">
+  <div class="foot-logo-pill"><img src="assets/oct-logo.png" alt="Open Cluster Tech · Construyendo Inclusión"></div>
+  <div class="contact-card">
+    <div class="contact-name">William Marín</div>
+    <div class="contact-role">Ejecutivo Comercial · Departamento Comercial · OpenCluster Tech</div>
+    <div class="contact-line">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <a href="tel:+56966134738">+56 9 6613 4738</a>
+    </div>
+    <div class="contact-line wa">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l.46.731-.999 3.648 3.736-.984.482.273zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.521.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+      <a href="https://wa.me/56998748982?text=Hola%20William%2C%20te%20escribo%20por%20el%20Webinar%20PIE%20Biob%C3%ADo%20y%20%C3%91uble%202026" target="_blank" rel="noopener">WhatsApp +56 9 9874 8982</a>
+    </div>
+    <div class="contact-line">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=william.marin@opencluster-tech.cl&amp;su=Webinar%20PIE%20Biob%C3%ADo%20y%20%C3%91uble%202026" target="_blank" rel="noopener">william.marin@opencluster-tech.cl</a>
+    </div>
+  </div>
+  </div>
+  <div class="copy" style="margin-top:14px;">Open Cluster Tech · Campaña PIE Biobío y Ñuble 2026</div>
+</footer>
+
+<script>
+// ⚠ Dirección pública del backend (Apps Script). Si la campaña se implementa
+//   desde otra cuenta, esta dirección CAMBIA y hay que reemplazarla aquí, en
+//   confirmar.html y en la constante EXEC_URL de Codigo.gs. Tiene que ser la
+//   que termina en /exec, no la /dev del editor.
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzEPiPffPOaQNHveg-TSoMeayRpnmrafeMrRjBkVjVMNqwtit69qXJ-FR6uzrHOK3f97w/exec';
+
+/* ── VIDEO DE INVITACIÓN ──────────────────────────────────────────────
+   Pegar el enlace del video entre las comillas cuando exista. Sirve
+   cualquier formato de YouTube:
+     https://www.youtube.com/watch?v=XXXXXXXXXXX
+     https://youtu.be/XXXXXXXXXXX
+     https://www.youtube.com/shorts/XXXXXXXXXXX
+   MIENTRAS ESTÉ VACÍO (''), el bloque no se muestra y la página se ve
+   entera igual. Es a propósito: así, si llega el día de abrir la campaña y
+   el video no está listo, no queda un hueco ni un reproductor roto.
+   No arranca solo: la persona tiene que tocar play. */
+const VIDEO_INVITACION_URL = 'https://youtube.com/shorts/2e4Mv9aYBbI';
+
+(function montarVideoInvitacion(){
+  var url = String(VIDEO_INVITACION_URL || '').trim();
+  if (!url) return;
+  var m = url.match(/(?:youtu\.be\/|v=|\/shorts\/|\/embed\/)([A-Za-z0-9_-]{6,})/);
+  var src = m ? 'https://www.youtube-nocookie.com/embed/' + m[1] + '?rel=0&modestbranding=1&playsinline=1' : url;
+  var frame = document.getElementById('videoInvitacionFrame');
+  var cont  = document.getElementById('videoInvitacion');
+  if (!frame || !cont) return;
+  frame.src = src;
+  cont.classList.add('show');
+})();
+
+
+// Marca de tiempo de carga: la usa el filtro anti-robot para no aceptar un
+// formulario llenado en milisegundos.
+document.getElementById('t_load').value = Date.now();
+
+// ── Rastreo de origen ──
+// Primero ?src=... (nuestro parámetro), y si no viene, ?utm_source=... como
+// respaldo. Sin esto no se puede medir qué canal convierte: el enlace de los
+// correos trae ?src=correo-presentacion-975.
+function obtenerOrigen() {
+  const params = new URLSearchParams(window.location.search);
+  const src = params.get('src') || params.get('utm_source') || '';
+  return src.trim().slice(0, 60);
+}
+
+(function capturarOrigen() {
+  const origen = obtenerOrigen();
+  if (origen) document.getElementById('origen').value = origen;
+})();
+
+// Registra la visita a la página (aunque la persona no se inscriba), para poder
+// comparar cuántos correos se enviaron contra cuántos abrieron de verdad.
+(function registrarVisita() {
+  if (!APPS_SCRIPT_URL) return;
+  fetch(APPS_SCRIPT_URL + '?action=registrar_visita&webinar=PIE_Biobio_Nuble_2026&src=' + encodeURIComponent(obtenerOrigen()), { mode: 'no-cors' })
+    .catch(() => {});
+})();
+
+// Las 54 comunas de las dos regiones. Se muestran filtradas según la región
+// marcada; con "Otra región" se aceptan todas y también texto libre.
+const COMUNAS = {
+  'Región del Biobío': [
+    'Concepción','Talcahuano','Chiguayante','Hualqui','Penco','Tomé','Florida','Hualpén',
+    'San Pedro de la Paz','Santa Juana','Coronel','Lota',
+    'Arauco','Curanilahue','Lebu','Los Álamos','Cañete','Contulmo','Tirúa',
+    'Los Ángeles','Antuco','Cabrero','Laja','Mulchén','Nacimiento','Negrete','Quilaco',
+    'Quilleco','San Rosendo','Santa Bárbara','Tucapel','Yumbel','Alto Biobío'
+  ],
+  'Región de Ñuble': [
+    'Chillán','Bulnes','Chillán Viejo','El Carmen','Pemuco','Pinto','Quillón','San Ignacio','Yungay',
+    'Quirihue','Cobquecura','Coelemu','Ninhue','Portezuelo','Ránquil','Treguaco',
+    'San Carlos','Coihueco','Ñiquén','San Fabián','San Nicolás'
+  ]
+};
+/** Comunas que se ofrecen según la región marcada (todas si es "Otra" o ninguna). */
+function comunasVigentes() {
+  const r = document.querySelector('input[name="region"]:checked');
+  const v = r ? r.value : '';
+  return COMUNAS[v] || [].concat(COMUNAS['Región del Biobío'], COMUNAS['Región de Ñuble']);
+}
+
+
+// ── Autocompletado de comuna ──
+// (se había perdido al reordenar el formulario por pasos)
+(function initComuna() {
+  const input = document.getElementById('comuna');
+  const list = document.getElementById('comunaList');
+  if (!input || !list) return;
+
+  function render(filter) {
+    const f = (filter || '').toLowerCase().trim();
+    const matches = comunasVigentes().filter(c => c.toLowerCase().includes(f));
+    list.innerHTML = matches.length
+      ? matches.map(c => `<div class="item" data-v="${c}">${c}</div>`).join('')
+      : '<div class="empty">No está en la lista. Puedes escribirla igual.</div>';
+  }
+
+  input.addEventListener('focus', () => { render(input.value); list.classList.add('open'); });
+  input.addEventListener('input', () => { render(input.value); list.classList.add('open'); });
+  input.addEventListener('blur', () => setTimeout(() => list.classList.remove('open'), 180));
+  list.addEventListener('mousedown', (e) => {
+    const item = e.target.closest('.item');
+    if (!item) return;
+    e.preventDefault();
+    input.value = item.dataset.v;
+    list.classList.remove('open');
+    clearError(input);
+  });
+  // Si cambia la región, la lista de comunas cambia con ella
+  document.querySelectorAll('input[name="region"]').forEach(r => {
+    r.addEventListener('change', () => { if (list.classList.contains('open')) render(input.value); });
+  });
+})();
+
+// ── Campos "¿Cuál?" que aparecen al marcar "Otro" ──
+// (también se había perdido)
+document.querySelectorAll('input[data-other]').forEach(inp => {
+  const extra = document.getElementById(inp.dataset.other);
+  if (!extra) return;
+  const sincronizar = () => {
+    const activo = inp.type === 'checkbox'
+      ? inp.checked
+      : document.querySelector(`input[name="${inp.name}"]:checked`) === inp;
+    extra.style.display = activo ? 'block' : 'none';
+    if (!activo) extra.value = '';
+  };
+  document.querySelectorAll(`input[name="${inp.name}"]`).forEach(o => o.addEventListener('change', sincronizar));
+  sincronizar();
+});
+
+// ── Región premarcada según el enlace del correo (?region=biobio | nuble) ──
+(function regionDesdeUrl() {
+  const q = (new URLSearchParams(location.search).get('region') || '').toLowerCase().trim();
+  const mapa = { biobio: 'Región del Biobío', 'biobío': 'Región del Biobío', nuble: 'Región de Ñuble', 'ñuble': 'Región de Ñuble' };
+  const valor = mapa[q];
+  if (!valor) return; // sin parámetro no se premarca nada: la persona elige
+  const radio = [...document.querySelectorAll('input[name="region"]')].find(r => r.value === valor);
+  if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change', { bubbles: true })); }
+})();
+
+const OBLIGATORIOS = ['nombre','establecimiento','email','celular'];
+// Los demás campos son opcionales a propósito: la persona queda inscrita con
+// estos cuatro y todo lo que agregue después es un extra.
+
+function isFilled(name) {
+  if (name === 'temas') return !!document.querySelector('input[name="temas"]:checked');
+  const els = document.querySelectorAll(`[name="${name}"]`);
+  if (!els.length) return false;
+  if (els[0].type === 'radio' || els[0].type === 'checkbox') {
+    return [...els].some(e => e.checked);
+  }
+  return els[0].value.trim().length > 0;
+}
+
+function showError(name, show) {
+  const msg = document.querySelector(`.error-msg[data-for="${name}"]`);
+  if (msg) msg.classList.toggle('show', !!show);
+  document.querySelectorAll(`[name="${name}"]`).forEach(el => {
+    if (el.type === 'text' || el.type === 'email' || el.tagName === 'TEXTAREA') {
+      el.classList.toggle('invalid', !!show);
+    }
+  });
+}
+function clearError(elOrName) {
+  const name = typeof elOrName === 'string' ? elOrName : elOrName.name;
+  showError(name, false);
+}
+
+['nombre','establecimiento','comuna','email','fijo','celular','pregunta'].forEach(n => {
+  const el = document.getElementById(n);
+  if (el) el.addEventListener('input', () => clearError(n));
+});
+
+/** Valida SOLO los cuatro obligatorios (el resto nunca bloquea). */
+function validarObligatorios() {
+  let ok = true;
+  OBLIGATORIOS.forEach(n => { if (!isFilled(n)) { showError(n, true); ok = false; } });
+  const email = document.getElementById('email').value.trim();
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email', true); ok = false; }
+  const cel = document.getElementById('celular').value.trim();
+  if (cel && cel.replace(/\D/g,'').length < 8) { showError('celular', true); ok = false; }
+  return ok;
+}
+
+/** Avisa de un teléfono fijo mal escrito, pero sin bloquear: es opcional. */
+function revisarFijo() {
+  const fijo = document.getElementById('fijo');
+  if (!fijo) return;
+  const v = fijo.value.trim();
+  showError('fijo', !!v && v.replace(/\D/g,'').length < 7);
+}
+
+// ════════════════════════════════════════════════════════════════════
+//  NAVEGACIÓN POR PASOS
+//  La persona queda inscrita al pasar del paso 1 al 2. Desde ahí, cada
+//  paso vuelve a guardar sobre la MISMA inscripción (el backend busca
+//  por correo y actualiza, no crea una fila nueva).
+// ════════════════════════════════════════════════════════════════════
+const TOTAL_PASOS = 6;
+let pasoActual = 1;
+let yaInscrito = false;
+let guardando = false;
+let ultimoEnvio = null;
+
+const NOTAS = {
+  1: 'Paso 1 de 6 · solo cuatro campos',
+  2: 'Paso 2 de 6 · opcional',
+  3: 'Paso 3 de 6 · opcional',
+  4: 'Paso 4 de 6 · opcional',
+  5: 'Paso 5 de 6 · opcional',
+  6: 'Paso 6 de 6 · opcional'
+};
+const ETIQUETAS = {
+  1: 'Quiero mi cupo',
+  2: 'Guardar y continuar',
+  3: 'Guardar y continuar',
+  4: 'Guardar y continuar',
+  5: 'Guardar y continuar',
+  6: 'Guardar y terminar'
+};
+
+function mostrarPaso(n) {
+  pasoActual = n;
+  document.querySelectorAll('.paso').forEach(s => {
+    s.hidden = Number(s.dataset.paso) !== n;
+  });
+  document.getElementById('btnAtras').hidden = (n === 1);
+  document.getElementById('btnSiguiente').querySelector('.lbl-txt').textContent = ETIQUETAS[n];
+  document.getElementById('navNota').textContent = NOTAS[n];
+
+  const pct = Math.round((n / TOTAL_PASOS) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = yaInscrito
+    ? 'Inscrito · paso ' + n + ' de ' + TOTAL_PASOS + ' (opcional)'
+    : 'Paso ' + n + ' de ' + TOTAL_PASOS;
+
+  document.querySelector('.progress-bar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/** Junta todo lo escrito hasta ahora. */
+function datosActuales() {
+  const fd = new FormData(document.getElementById('form'));
+  const data = {};
+  for (const [k, v] of fd.entries()) {
+    if (data[k] === undefined) data[k] = v;
+    else if (Array.isArray(data[k])) data[k].push(v);
+    else data[k] = [data[k], v];
+  }
+  data.temas = [...document.querySelectorAll('input[name="temas"]:checked')].map(i => i.value);
+  data.fijo = normalizarTel(data.fijo);
+  data.celular = normalizarTel(data.celular);
+  data.timestamp = new Date().toISOString();
+  data.userAgent = navigator.userAgent;
+  return data;
+}
+
+/**
+ * Manda lo que haya al backend. La primera vez crea la inscripción; las
+ * siguientes actualizan la misma fila (el backend busca por correo).
+ * Si dos guardados quedaran idénticos, no se repite el envío.
+ */
+async function guardar() {
+  const data = datosActuales();
+  const huella = JSON.stringify(data.temas) + '|' + Object.keys(data).sort()
+    .filter(k => k !== 'timestamp' && k !== 'userAgent').map(k => k + '=' + data[k]).join('|');
+  if (huella === ultimoEnvio) return data;
+  if (!APPS_SCRIPT_URL) { console.warn('APPS_SCRIPT_URL no configurada. Datos:', data); return data; }
+  await fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ action: 'guardar_inscripcion_bn', data })
+  });
+  ultimoEnvio = huella;
+  return data;
+}
+
+/** Espera lo que falte para no disparar el filtro anti-robot. */
+function esperarMinimo() {
+  const tLoad = parseInt(document.getElementById('t_load').value, 10);
+  const falta = 1500 - (Date.now() - tLoad);
+  return falta > 0 ? new Promise(r => setTimeout(r, falta)) : Promise.resolve();
+}
+
+async function avanzar() {
+  if (document.getElementById('hp_website').value) return; // trampa para robots
+  if (guardando) return;
+
+  if (pasoActual === 1 && !validarObligatorios()) {
+    const primero = document.querySelector('.error-msg.show');
+    if (primero) primero.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  revisarFijo();
+
+  const btn = document.getElementById('btnSiguiente');
+  const etiqueta = btn.querySelector('.lbl-txt');
+  guardando = true;
+  btn.classList.add('loading');
+  btn.disabled = true;
+  etiqueta.textContent = pasoActual === 1 ? 'Reservando…' : 'Guardando…';
+
+  try {
+    await esperarMinimo();
+    const data = await guardar();
+
+    if (!yaInscrito) {
+      yaInscrito = true;
+      document.getElementById('avisoInscrito').hidden = false;
+    }
+
+    if (pasoActual === TOTAL_PASOS) { showThanks(data); return; }
+    mostrarPaso(pasoActual + 1);
+  } catch (err) {
+    console.error(err);
+    alert('Hubo un problema al guardar. Revisa tu conexión e inténtalo de nuevo, o escríbenos a contacto@opencluster-tech.cl');
+  } finally {
+    guardando = false;
+    btn.classList.remove('loading');
+    btn.disabled = false;
+    etiqueta.textContent = ETIQUETAS[pasoActual];
+  }
+}
+
+document.getElementById('btnSiguiente').addEventListener('click', avanzar);
+document.getElementById('btnAtras').addEventListener('click', () => {
+  if (pasoActual > 1) mostrarPaso(pasoActual - 1);
+});
+// Enter dentro del formulario avanza, no recarga la página
+document.getElementById('form').addEventListener('submit', (e) => { e.preventDefault(); avanzar(); });
+
+mostrarPaso(1);
+
+function showThanks(data) {
+  document.getElementById('formScreen').classList.add('hide');
+  document.getElementById('thanks').classList.add('show');
+  document.getElementById('thanksEmail').textContent = data.email || 'tu correo';
+
+  const summary = document.getElementById('thanksSummary');
+  summary.innerHTML = `
+    <div><strong>Establecimiento:</strong> ${escapeHtml(data.establecimiento)} · ${escapeHtml(data.comuna)}</div>
+    <div><strong>Contacto:</strong> ${escapeHtml(data.fijo)}${data.celular ? ' · Cel ' + escapeHtml(data.celular) : ''}</div>
+    <div><strong>Tipo:</strong> ${escapeHtml(data.tipoEstablecimiento)}${data.tipoOtro ? ' — ' + escapeHtml(data.tipoOtro) : ''} · ${escapeHtml(data.dependencia)}${data.dependenciaOtra ? ' — ' + escapeHtml(data.dependenciaOtra) : ''}</div>
+    <div><strong>Cargo:</strong> ${escapeHtml(data.cargo)}${data.cargoOtro ? ' — ' + escapeHtml(data.cargoOtro) : ''}</div>
+    <div><strong>Tema(s):</strong> ${(data.temas||[]).map(escapeHtml).join(' · ')}</div>
+  `;
+
+  const url = window.location.href.split('?')[0];
+  const shareText = `Webinar gratuito para equipos PIE y profesionales de la educación: «El entorno multisensorial», viernes 14 de agosto. ${url}`;
+  document.getElementById('btnWhatsApp').href = 'https://wa.me/?text=' + encodeURIComponent(shareText);
+  document.getElementById('btnCopy').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      const b = document.getElementById('btnCopy');
+      const span = b.querySelector('span');
+      const old = span.textContent;
+      span.textContent = '¡Copiado!';
+      setTimeout(() => span.textContent = old, 1800);
+    } catch { prompt('Copia este link:', url); }
+  });
+
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function normalizarTel(v) {
+  let d = String(v || '').replace(/\D/g, '');
+  if (!d) return '';
+  if (d.length === 11 && d.slice(0, 2) === '56') d = d.slice(2);
+  return '+56' + d;
+}
+
+function escapeHtml(s) {
+  return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+</script>
+<a class="btn-flotante" id="btnFlotante" href="#formScreen">Quiero mi cupo</a>
+<script>
+// El boton flotante aparece cuando el encabezado ya se perdio de vista, y se
+// esconde al llegar a la pantalla de gracias (ahi ya no hay nada que reservar).
+(function () {
+  const btn = document.getElementById('btnFlotante');
+  const hero = document.querySelector('.hero');
+  const gracias = document.getElementById('thanks');
+  if (!btn || !hero) return;
+  function actualizar() {
+    const pasoElHero = hero.getBoundingClientRect().bottom < 0;
+    const yaSeInscribio = gracias && gracias.classList.contains('show');
+    btn.classList.toggle('visible', pasoElHero && !yaSeInscribio);
+  }
+  window.addEventListener('scroll', actualizar, { passive: true });
+  window.addEventListener('resize', actualizar);
+  actualizar();
+})();
+</script>
+</body>
+</html>

@@ -346,6 +346,24 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
   }
   .btn-atras:hover { border-color:#8fa6bf; color:#1a2535; }
   .nav-nota { margin-top:10px; text-align:right; font-size:12.5px; color:#7b8ca1; }
+  /* ── Lista propia para los desplegables ──────────────────────────
+     El selector nativo de Android (y de algunos navegadores de escritorio)
+     no se cierra al elegir: obliga a tocar "Realizado". Con lista propia,
+     un toque elige y cierra. El <select> real sigue en el HTML, oculto:
+     así el formulario, la validación y el campo "¿Cuál?" siguen leyendo
+     exactamente lo mismo que antes. */
+  select.con-lista-propia { position:absolute; opacity:0; pointer-events:none; height:0; width:0; }
+  .combo-boton {
+    width:100%; padding:9px 34px 9px 12px; border:1.5px solid var(--mgray); border-radius:8px;
+    font-family:'Open Sans',sans-serif; font-size:13px; color:var(--text);
+    background:#F7F9FC; text-align:left; cursor:pointer; position:relative;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2364748b' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 14px center;
+  }
+  .combo-boton:focus { outline:none; border-color:var(--sky); box-shadow:0 0 0 3px rgba(6,179,253,0.15); background-color:white; }
+  .combo-boton.vacio { color:#9aa8bb; }
+  .combo-boton.invalid { border-color:var(--err); background-color:#fff5f6; }
+
   /* ── Micrófono para dictar ──
      Solo aparece si el navegador sabe hacerlo (Chrome y Edge sí; Firefox no) y
      únicamente sobre HTTPS. El atributo `hidden` no basta con display explícito,
@@ -929,6 +947,61 @@ document.querySelectorAll('button[data-mic]').forEach(function (btn) {
   texto.addEventListener('input', function () { if (oyendo) base = texto.value; });
 });
 
+// ── Lista propia para los desplegables ──────────────────────────────
+// Rayen (1-ago-2026): en Android el desplegable nativo no se cierra al elegir,
+// hay que tocar "Realizado". Se arma una lista propia por encima del <select>,
+// que queda oculto pero vivo: FormData, la validación, comunasVigentes() y el
+// campo "¿Cuál?" siguen leyendo el <select> como siempre.
+// OJO: sin filtro de '.field'. El desplegable de Diagnóstico no vive dentro de
+// un .field como los otros cuatro, y con ese filtro se quedaba con el selector
+// nativo — justo el que Rayen reportó.
+document.querySelectorAll('select').forEach(function (sel) {
+  sel.classList.add('con-lista-propia');
+
+  const caja = document.createElement('div');
+  caja.className = 'combo';
+  const boton = document.createElement('button');
+  boton.type = 'button';
+  boton.className = 'combo-boton';
+  const lista = document.createElement('div');
+  lista.className = 'combo-list';
+  caja.appendChild(boton);
+  caja.appendChild(lista);
+  sel.parentNode.insertBefore(caja, sel.nextSibling);
+
+  const opciones = [...sel.options].filter(function (o) { return o.value !== ''; });
+  lista.innerHTML = opciones.map(function (o) {
+    return '<div class="item" data-v="' + o.value.replace(/"/g, '&quot;') + '">' + o.textContent + '</div>';
+  }).join('');
+
+  function pintar() {
+    const elegida = sel.value ? [...sel.options].find(function (o) { return o.value === sel.value; }) : null;
+    boton.textContent = elegida ? elegida.textContent : (sel.options[0] ? sel.options[0].textContent : 'Selecciona una opción…');
+    boton.classList.toggle('vacio', !sel.value);
+  }
+
+  function abrir(v) { lista.classList.toggle('open', v); }
+
+  boton.addEventListener('click', function () { abrir(!lista.classList.contains('open')); });
+  boton.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') abrir(false);
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(!lista.classList.contains('open')); }
+  });
+  lista.addEventListener('click', function (e) {
+    const item = e.target.closest('.item');
+    if (!item) return;
+    sel.value = item.dataset.v;
+    sel.dispatchEvent(new Event('change', { bubbles: true }));
+    pintar();
+    abrir(false);          // un toque elige Y cierra: esto es lo que faltaba
+    boton.focus();
+  });
+  document.addEventListener('click', function (e) { if (!caja.contains(e.target)) abrir(false); });
+  sel.addEventListener('change', pintar);   // por si lo cambia otro código (la región del enlace)
+
+  pintar();
+});
+
 // ── Campos "¿Cuál?" de los DESPLEGABLES ──
 // La opción "Otro" lleva data-other con el id del campo de texto que revela.
 document.querySelectorAll('select').forEach(sel => {
@@ -1256,7 +1329,17 @@ function escapeHtml(s) {
     const pasoElHero = hero.getBoundingClientRect().bottom < 0 || hero.offsetParent === null;
     const yaSeInscribio = (gracias && gracias.classList.contains('show')) ||
                           (typeof yaInscrito !== 'undefined' && yaInscrito);
-    btn.classList.toggle('visible', pasoElHero && !yaSeInscribio);
+    // Rayen (1-ago-2026): en el paso 1 se veían DOS botones "Quiero mi cupo",
+    // el azul del formulario y este flotante, uno encima del otro. El flotante
+    // existe para cuando el botón real no está a la vista; si está, sobra.
+    const real = document.getElementById('btnSiguiente');
+    let botonRealALaVista = false;
+    if (real) {
+      const r = real.getBoundingClientRect();
+      const alto = window.innerHeight || document.documentElement.clientHeight;
+      botonRealALaVista = r.top < alto && r.bottom > 0;
+    }
+    btn.classList.toggle('visible', pasoElHero && !yaSeInscribio && !botonRealALaVista);
   }
   window.actualizarFlotante = actualizar;
   window.addEventListener('scroll', actualizar, { passive: true });

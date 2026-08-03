@@ -1285,7 +1285,10 @@ function showThanks(data) {
   `;
 
   const url = window.location.href.split('?')[0];
-  const shareText = `Webinar gratuito para equipos PIE y profesionales de la educación: «El entorno multisensorial», viernes 14 de agosto. ${url}`;
+  // Texto aprobado el 2-ago-2026. Va IGUAL en el botón de compartir del correo 3.
+  const shareText = `Te comparto esto por si te sirve. Webinar gratis sobre entornos multisensoriales, para equipos PIE y escuelas especiales.
+
+Lo harán terapeutas ocupacionales y muestran el espacio sensorial de una escuela funcionando. Es el viernes 14 a las 16:00, online, dura una hora. Sortean 2 licencias de TD Snap. Yo ya me inscribí: ${url}`;
   document.getElementById('btnWhatsApp').href = 'https://wa.me/?text=' + encodeURIComponent(shareText);
   document.getElementById('btnCopy').addEventListener('click', async () => {
     try {

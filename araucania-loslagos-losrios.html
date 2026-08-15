@@ -1279,13 +1279,25 @@ function mostrarPaso(n) {
   //    cambia el alto de la ventana DESPUÉS del desplazamiento.
   // Por eso ahora se cierra el teclado, se espera a que el navegador rehaga el
   // dibujo (ya sin encabezado ni video) y recién ahí se calcula la posición.
+  // Corregido el 15-ago-2026: el destino era siempre `.paso`, pero el aviso verde
+  // "Tu cupo ya está reservado" vive ENTRE la barra de progreso y el formulario, así
+  // que al pasar al paso 2 quedaba por encima del borde de la pantalla y había que
+  // subir a mano para leerlo. Es justo el mensaje que confirma que la inscripción
+  // quedó hecha: si no se ve, la persona no sabe si alcanzó a guardarse.
+  // Ahora, cuando el aviso está visible, el destino es el aviso.
   if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
   requestAnimationFrame(function () {
     const barra = document.querySelector('.progress-bar');
-    const primeraSeccion = document.querySelector('.paso:not([hidden])') || barra;
-    if (!primeraSeccion) return;
+    const aviso = document.getElementById('avisoInscrito');
+    const avisoVisible = aviso && !aviso.hidden && aviso.offsetParent !== null;
+    const destinoEl = (avisoVisible ? aviso : null)
+      || document.querySelector('.paso:not([hidden])')
+      || barra;
+    if (!destinoEl) return;
+    // La barra es sticky (top:8px), así que tapa lo que quede debajo: hay que
+    // descontar su alto, más un margen para que el bloque no quede pegado a ella.
     const altoBarra = barra ? barra.getBoundingClientRect().height : 0;
-    const destino = primeraSeccion.getBoundingClientRect().top + window.pageYOffset - altoBarra - 24;
+    const destino = destinoEl.getBoundingClientRect().top + window.pageYOffset - altoBarra - 24;
     window.scrollTo({ top: Math.max(0, destino), behavior: 'smooth' });
   });
 }

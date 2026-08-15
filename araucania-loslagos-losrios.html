@@ -1235,7 +1235,18 @@ const ETIQUETAS = {
   3: 'Guardar y terminar'
 };
 
-function mostrarPaso(n) {
+/**
+ * Muestra el paso `n` del formulario.
+ *
+ * `sinScroll` = true se usa SOLO en la llamada de arranque. Sin eso, al terminar de
+ * cargar la página se desplazaba sola hasta el formulario y el encabezado quedaba
+ * fuera de la pantalla: el título, el botón, y —lo que más importa— los chips con
+ * la FECHA y la HORA del webinar. Quien llegaba desde el correo aterrizaba en el
+ * paso 1 sin haber visto nunca cuándo era.
+ * Medido el 15-ago-2026: la página arrancaba en scrollY=421 y el chip «Viernes 4 de
+ * septiembre» quedaba en y=-181.
+ */
+function mostrarPaso(n, sinScroll) {
   pasoActual = n;
   document.querySelectorAll('.paso').forEach(s => {
     s.hidden = Number(s.dataset.paso) !== n;
@@ -1285,6 +1296,7 @@ function mostrarPaso(n) {
   // subir a mano para leerlo. Es justo el mensaje que confirma que la inscripción
   // quedó hecha: si no se ve, la persona no sabe si alcanzó a guardarse.
   // Ahora, cuando el aviso está visible, el destino es el aviso.
+  if (sinScroll) return;   // arranque: la persona tiene que ver el encabezado primero
   if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
   requestAnimationFrame(function () {
     const barra = document.querySelector('.progress-bar');
@@ -1394,7 +1406,7 @@ document.getElementById('btnAtras').addEventListener('click', () => {
 // Enter dentro del formulario avanza, no recarga la página
 document.getElementById('form').addEventListener('submit', (e) => { e.preventDefault(); avanzar(); });
 
-mostrarPaso(1);
+mostrarPaso(1, true);   // true = NO desplazar: la página tiene que abrir en el encabezado
 
 function showThanks(data) {
   document.getElementById('formScreen').classList.add('hide');

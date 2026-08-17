@@ -153,6 +153,26 @@ var PREGUNTAS = ASISTIO
 // ── Pintar ──────────────────────────────────────────────────────────────
 var cont = document.getElementById('preguntas');
 
+// Si la persona llegó apretando uno de los botones del correo (&i=…), su
+// respuesta se registra sola al abrir y se le confirma arriba de todo.
+var INTERES = {
+  si:      'Sí, estoy interesado',
+  no:      'No me interesa',
+  horario: 'Sí, pero en un horario diferente',
+  finde:   'Sí, durante el fin de semana',
+  tema:    'Sí, pero con un tema diferente'
+};
+var desdeCorreo = params.get('i');
+if (desdeCorreo && INTERES[desdeCorreo]) {
+  var aviso = document.createElement('div');
+  aviso.className = 'q';
+  aviso.innerHTML = '<h2>Listo, quedó registrado</h2><div class="hecho">Anotamos tu respuesta: <b>' +
+                    INTERES[desdeCorreo] + '</b>. Gracias por contestar.</div>' +
+                    '<p class="intro" style="margin-top:12px;">Si quieres, puedes responder las preguntas de aquí abajo. Son de un clic.</p>';
+  cont.appendChild(aviso);
+  guardar('interes', INTERES[desdeCorreo], function () {});
+}
+
 PREGUNTAS.forEach(function (q, i) {
   var caja = document.createElement('div');
   caja.className = 'q';

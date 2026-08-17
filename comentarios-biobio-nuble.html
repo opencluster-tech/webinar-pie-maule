@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gracias por responder — Webinar PIE Biobío y Ñuble 2026 · OpenCluster Tech</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --azul:#001a60; --celeste:#06b3fd; --naranjo:#ff7e00; --fondo:#f4f8fc; --texto:#1a2535; --gris:#5b6b7f; --linea:#e6edf5; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--fondo); font-family:'Open Sans',Arial,sans-serif; color:var(--texto); }
+  .wrap{ max-width:720px; margin:0 auto; padding:24px 14px 60px; }
+  .card{ background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 10px 34px rgba(0,26,96,.10); }
+  .head{ background:linear-gradient(135deg,#001a60,#002b8c); padding:28px 30px 30px; color:#eaf2ff; }
+  .head .dash{ width:44px; height:3px; background:var(--celeste); border-radius:2px; margin-bottom:14px; }
+  .head .eyebrow{ font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:var(--celeste); text-transform:uppercase; }
+  .head h1{ font-family:'Montserrat',sans-serif; font-size:27px; font-weight:800; margin:8px 0 0; line-height:1.2; }
+  .head p{ margin:8px 0 0; font-size:14px; color:#cfe8ff; }
+  .body{ padding:26px 30px 32px; }
+  .hola{ font-family:'Montserrat',sans-serif; font-size:20px; font-weight:800; color:var(--azul); }
+  .intro{ font-size:14.5px; color:var(--gris); margin:10px 0 0; line-height:1.65; }
+  .q{ border:1px solid var(--linea); border-radius:16px; padding:20px 22px; margin-top:20px; }
+  .q h2{ font-family:'Montserrat',sans-serif; font-size:16.5px; font-weight:800; color:var(--azul); margin:0 0 14px; line-height:1.35; }
+  .ops{ display:flex; flex-wrap:wrap; gap:10px; }
+  .op{ font-family:'Open Sans',sans-serif; font-size:14px; font-weight:600; color:var(--azul); background:#fff;
+       border:1.5px solid #cdd8e6; border-radius:12px; padding:11px 18px; cursor:pointer; transition:.15s; }
+  .op:hover{ border-color:var(--celeste); background:#f2faff; }
+  .op[disabled]{ cursor:default; opacity:.55; }
+  .hecho{ background:#f2faff; border:1px solid #cfe8ff; border-radius:12px; padding:12px 16px; font-size:14px; color:var(--azul); }
+  .hecho b{ color:var(--celeste); }
+  .sub{ margin-top:14px; padding-top:14px; border-top:1px dashed var(--linea); }
+  .sub p{ margin:0 0 10px; font-size:14px; font-weight:600; color:var(--texto); }
+  textarea, input[type=text]{ width:100%; border:1.5px solid #cdd8e6; border-radius:12px; padding:12px 14px;
+       font-family:'Open Sans',sans-serif; font-size:14.5px; color:var(--texto); resize:vertical; }
+  textarea:focus, input:focus{ outline:none; border-color:var(--celeste); }
+  .cta{ display:inline-block; border:0; background:linear-gradient(90deg,#06b3fd,#0a7fd6); color:#eaf2ff;
+        font-family:'Montserrat',sans-serif; font-size:14.5px; font-weight:700; padding:13px 30px; border-radius:12px; cursor:pointer; margin-top:12px; }
+  .cta:hover{ filter:brightness(1.06); }
+  .cta[disabled]{ opacity:.5; cursor:default; filter:none; }
+  .ig{ margin-top:14px; background:linear-gradient(135deg,#f9f0ff,#fff4ec); border:1px solid #ffd9bd; border-radius:14px; padding:18px 20px; }
+  .ig h3{ font-family:'Montserrat',sans-serif; font-size:16px; color:var(--azul); margin:0 0 6px; }
+  .ig p{ margin:0 0 12px; font-size:14px; color:var(--gris); line-height:1.6; }
+  .ig a{ display:inline-block; background:var(--naranjo); color:#fff; text-decoration:none; font-family:'Montserrat',sans-serif;
+         font-weight:700; font-size:14px; padding:12px 24px; border-radius:12px; }
+  .cierre{ margin-top:24px; font-size:14.5px; color:var(--gris); line-height:1.65; }
+  .pie{ margin-top:22px; padding-top:18px; border-top:1px solid var(--linea); display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  .pie span{ font-size:11.5px; color:#94a3b8; line-height:1.5; }
+  .pie img{ height:22px; opacity:.65; }
+  .err{ color:#b91c1c; font-size:13px; margin-top:8px; }
+  @media (max-width:560px){ .head,.body{ padding-left:20px; padding-right:20px; } .head h1{ font-size:23px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <div class="dash"></div>
+      <div class="eyebrow">Webinar PIE Biobío y Ñuble 2026</div>
+      <h1>El entorno multisensorial</h1>
+      <p>Gracias por acompañarnos. Te escuchamos.</p>
+    </div>
+    <div class="body">
+      <div class="hola" id="hola">¡Hola!</div>
+      <p class="intro" id="intro">Son preguntas de un clic: eliges una opción y queda registrada sola. Al final puedes dejarnos un comentario o una pregunta para los expositores.</p>
+
+      <div id="preguntas"></div>
+
+      <div class="q" id="bloqueAbierto">
+        <h2>Déjanos tus comentarios</h2>
+        <p class="intro" style="margin-top:-6px;">Y si lo deseas, hazle a nuestros expositores esa pregunta que te haya quedado pendiente. Nos aseguraremos de que recibas una respuesta.</p>
+        <textarea id="comentario" rows="4" maxlength="800" placeholder="Escribe aquí…"></textarea>
+        <button class="cta" id="btnComentario">Enviar</button>
+        <div class="err" id="errComentario"></div>
+      </div>
+
+      <div class="cierre" id="cierre">
+        Ha sido un placer compartir juntos esta experiencia. Muchas gracias por confiar en nosotros.<br>
+        Un gran saludo,<br><strong>Rayen Ogalde</strong> · OpenCluster Tech
+      </div>
+
+      <div class="pie">
+        <span>Open Cluster Tech<br>Campaña PIE Biobío y Ñuble 2026</span>
+        <img src="assets/oct-logo.png" alt="OpenCluster Tech">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Dónde se guardan las respuestas ─────────────────────────────────────
+// Pegar acá la URL /exec del proyecto "Feedback Webinars OCT" (la de Rayen).
+var BACKEND = 'https://script.google.com/macros/s/AKfycbxVcZVFRqA53_3pbx7fQhs7tHu-YD0P_NcO0_DkYvjBSlMOS-3WHHxB0rQmP7WwdyMq/exec';
+
+var INSTAGRAM = 'https://www.instagram.com/opencluster_tech/';
+
+// ── Quién está respondiendo ─────────────────────────────────────────────
+var params = new URLSearchParams(location.search);
+var EMAIL = '';
+try { EMAIL = params.get('e') ? atob(params.get('e')) : ''; } catch (err) { EMAIL = ''; }
+var NOMBRE = params.get('n') || '';
+var ASISTIO = params.get('s') !== 'no';
+
+if (NOMBRE) document.getElementById('hola').textContent = '¡Hola, ' + NOMBRE + '!';
+
+// ── Las preguntas ───────────────────────────────────────────────────────
+var Q_UTIL = {
+  campo: 'utilidad',
+  titulo: '¿Qué tan útil te resultó para tu trabajo en el aula?',
+  opciones: ['Muy útil', 'Útil', 'Esperaba más'],
+  // Si marca "Esperaba más" se abre esta pregunta de seguimiento.
+  sigue: {
+    valor: 'Esperaba más',
+    campo: 'falto',
+    titulo: '¿Qué te habría gustado encontrar?',
+    opciones: ['Más ejemplos concretos de aula', 'Más tiempo para preguntas',
+               'Menos producto y más contenido pedagógico', 'Más profundidad técnica'],
+    libre: 'Otra cosa'
+  }
+};
+
+var Q_FACILITA = {
+  campo: 'facilita',
+  titulo: '¿Qué facilitaría tu asistencia a un siguiente webinar?',
+  opciones: ['Horario de mañana', 'Un recordatorio por WhatsApp', 'Un tema diferente']
+};
+
+var Q_TEMA = {
+  campo: 'tema',
+  titulo: '¿Qué tema te gustaría que tratemos en el próximo webinar?',
+  opciones: ['Comunicación aumentativa (CAA)', 'Cómo implementar una sala multisensorial',
+             'Regulación sensorial en el aula, parte 2'],
+  libre: 'Tema diferente',
+  campoLibre: 'tema_texto'
+};
+
+var Q_PROYECTO = {
+  campo: 'proyecto',
+  titulo: '¿Te interesa que te apoyemos gratuitamente en la elaboración de un proyecto para conseguir ayudas técnicas o un espacio sensorial?',
+  opciones: ['Sí', 'No']
+};
+
+var Q_RECOMIENDA = {
+  campo: 'recomienda',
+  titulo: '¿Nos recomendarías?',
+  opciones: ['Sí', 'No'],
+  instagramSi: true
+};
+
+var PREGUNTAS = ASISTIO
+  ? [Q_UTIL, Q_TEMA, Q_PROYECTO, Q_RECOMIENDA]
+  : [Q_FACILITA, Q_TEMA, Q_PROYECTO, Q_RECOMIENDA];
+
+// ── Pintar ──────────────────────────────────────────────────────────────
+var cont = document.getElementById('preguntas');
+
+PREGUNTAS.forEach(function (q, i) {
+  var caja = document.createElement('div');
+  caja.className = 'q';
+  caja.id = 'q' + i;
+
+  var h = document.createElement('h2');
+  h.textContent = q.titulo;
+  caja.appendChild(h);
+
+  var ops = document.createElement('div');
+  ops.className = 'ops';
+  var todas = q.opciones.concat(q.libre ? [q.libre] : []);
+  todas.forEach(function (texto) {
+    var b = document.createElement('button');
+    b.className = 'op';
+    b.textContent = texto;
+    b.onclick = function () { responder(q, caja, ops, texto); };
+    ops.appendChild(b);
+  });
+  caja.appendChild(ops);
+  cont.appendChild(caja);
+});
+
+function responder(q, caja, ops, texto) {
+  // "Tema diferente" (o "Otra cosa"): primero pide escribirlo.
+  if (q.libre && texto === q.libre) { pedirTexto(q, caja, ops); return; }
+
+  guardar(q.campo, texto, function (ok) {
+    if (!ok) { avisoError(caja); return; }
+    marcarHecho(caja, ops, texto);
+    if (q.sigue && texto === q.sigue.valor) pintarSeguimiento(q.sigue, caja);
+    if (q.instagramSi) pintarCierreRecomienda(caja, texto === 'Sí');
+  });
+}
+
+function pedirTexto(q, caja, ops) {
+  ops.style.display = 'none';
+  var sub = document.createElement('div');
+  sub.className = 'sub';
+  sub.innerHTML = '<p>Cuéntanos cuál:</p>';
+  var input = document.createElement('input');
+  input.type = 'text';
+  input.maxLength = 200;
+  input.placeholder = 'Escribe el tema…';
+  var btn = document.createElement('button');
+  btn.className = 'cta';
+  btn.textContent = 'Enviar';
+  btn.onclick = function () {
+    var val = input.value.trim();
+    if (!val) { input.focus(); return; }
+    btn.disabled = true;
+    guardar(q.campo, q.libre, function (ok) {
+      guardar(q.campoLibre || 'tema_texto', val, function () {
+        sub.remove();
+        marcarHecho(caja, ops, q.libre + ': ' + val);
+      });
+    });
+  };
+  sub.appendChild(input);
+  sub.appendChild(btn);
+  caja.appendChild(sub);
+  input.focus();
+}
+
+function pintarSeguimiento(s, caja) {
+  var sub = document.createElement('div');
+  sub.className = 'sub';
+  sub.innerHTML = '<p>' + s.titulo + '</p>';
+  var ops = document.createElement('div');
+  ops.className = 'ops';
+  s.opciones.concat([s.libre]).forEach(function (texto) {
+    var b = document.createElement('button');
+    b.className = 'op';
+    b.textContent = texto;
+    b.onclick = function () {
+      if (texto === s.libre) {
+        ops.style.display = 'none';
+        var input = document.createElement('input');
+        input.type = 'text'; input.maxLength = 300; input.placeholder = 'Cuéntanos…';
+        var btn = document.createElement('button');
+        btn.className = 'cta'; btn.textContent = 'Enviar';
+        btn.onclick = function () {
+          var val = input.value.trim(); if (!val) { input.focus(); return; }
+          btn.disabled = true;
+          guardar(s.campo, val, function () { sub.innerHTML = '<div class="hecho">Gracias, lo anotamos.</div>'; });
+        };
+        sub.appendChild(input); sub.appendChild(btn); input.focus();
+      } else {
+        guardar(s.campo, texto, function () {
+          sub.innerHTML = '<div class="hecho">Anotamos: <b>' + texto + '</b>. Gracias, nos sirve mucho.</div>';
+        });
+      }
+    };
+    ops.appendChild(b);
+  });
+  sub.appendChild(ops);
+  caja.appendChild(sub);
+}
+
+function pintarCierreRecomienda(caja, dijoSi) {
+  var extra = document.createElement('div');
+  if (dijoSi) {
+    extra.className = 'ig';
+    extra.innerHTML = '<h3>¡Gracias! Nos ayudas muchísimo</h3>' +
+      '<p>Síguenos en Instagram y comparte nuestro contenido: así llegamos a más equipos PIE que lo necesitan.</p>' +
+      '<a href="' + INSTAGRAM + '" target="_blank" rel="noopener">Seguir a @opencluster_tech</a>';
+  } else {
+    extra.className = 'hecho';
+    extra.style.marginTop = '14px';
+    extra.textContent = 'Muchas gracias por responder.';
+  }
+  caja.appendChild(extra);
+}
+
+function marcarHecho(caja, ops, texto) {
+  ops.style.display = 'none';
+  var ok = document.createElement('div');
+  ok.className = 'hecho';
+  ok.innerHTML = 'Anotamos: <b>' + texto + '</b>';
+  caja.insertBefore(ok, ops);
+}
+
+function avisoError(caja) {
+  var e = document.createElement('div');
+  e.className = 'err';
+  e.textContent = 'No pudimos guardar tu respuesta. Revisa tu conexión e inténtalo de nuevo.';
+  caja.appendChild(e);
+}
+
+// ── Comentario abierto ──────────────────────────────────────────────────
+document.getElementById('btnComentario').onclick = function () {
+  var txt = document.getElementById('comentario').value.trim();
+  var err = document.getElementById('errComentario');
+  if (!txt) { document.getElementById('comentario').focus(); return; }
+  this.disabled = true;
+  var btn = this;
+  guardar('comentario', txt, function (ok) {
+    if (!ok) { err.textContent = 'No pudimos enviarlo. Inténtalo de nuevo.'; btn.disabled = false; return; }
+    document.getElementById('bloqueAbierto').innerHTML =
+      '<h2>Recibimos tu mensaje</h2><div class="hecho">Gracias. Si dejaste una pregunta, se la llevamos a los expositores y te respondemos por correo.</div>';
+  });
+};
+
+// ── Guardar ─────────────────────────────────────────────────────────────
+function guardar(campo, valor, cb) {
+  if (!EMAIL) { cb(false); return; }
+  fetch(BACKEND, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ email: EMAIL, nombre: NOMBRE, asistio: ASISTIO, campo: campo, valor: valor })
+  })
+  .then(function (r) { return r.json(); })
+  .then(function (r) { cb(!!(r && r.ok)); })
+  .catch(function () { cb(false); });
+}
+</script>
+</body>
+</html>

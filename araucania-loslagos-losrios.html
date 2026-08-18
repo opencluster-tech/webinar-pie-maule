@@ -909,7 +909,8 @@ document.getElementById('t_load').value = Date.now();
 // ── Rastreo de origen ──
 // Primero ?src=... (nuestro parámetro), y si no viene, ?utm_source=... como
 // respaldo. Sin esto no se puede medir qué canal convierte: el enlace de los
-// correos trae ?src=correo-presentacion-975.
+// correos trae ?src=correo-presentacion-1444 (hasta el 17-ago-2026 decía "-975",
+// que era el número de destinatarios de Biobío, no de esta campaña).
 function obtenerOrigen() {
   const params = new URLSearchParams(window.location.search);
   const src = params.get('src') || params.get('utm_source') || '';

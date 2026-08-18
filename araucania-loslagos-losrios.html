@@ -810,7 +810,15 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
       <div class="nav-nota" id="navNota">Paso 1 de 3 · solo cuatro campos</div>
 
       <input type="hidden" name="t_load" id="t_load">
-      <input type="hidden" name="origen" id="origen" value="webinar-pie-biobio-nuble-2026">
+      <!-- 17-ago-2026. Acá quedó "webinar-pie-biobio-nuble-2026" al copiar la página: como
+           este campo solo se sobrescribe si el enlace trae ?src= o ?utm_source=, TODA
+           inscripción de tráfico directo —Instagram, WhatsApp, dirección escrita a mano—
+           entraba a la planilla etiquetada como de la campaña anterior.
+           Va VACÍO a propósito: los tres lectores de KPIs mapean vacío -> "directo", que es
+           la etiqueta que se quiere ver en la tabla por canal. El backend también escribe
+           vacío en los dos lados (doPost y registrarVisita). LOS TRES TIENEN QUE
+           COINCIDIR: obtenerKPIsConversion() cruza los canales por texto exacto. -->
+      <input type="hidden" name="origen" id="origen" value="">
     </form>
   </div>
 
@@ -1146,7 +1154,10 @@ document.querySelectorAll('input[data-other]').forEach(inp => {
   sincronizar();
 });
 
-// ── Región premarcada según el enlace del correo (?region=biobio | nuble) ──
+// ── Región premarcada según el enlace del correo ──
+//    (?region=araucania | loslagos | losrios). Decía "biobio | nuble" hasta el
+//    17-ago-2026: era el comentario de la campaña anterior, el mapa de abajo
+//    siempre estuvo bien.
 (function regionDesdeUrl() {
   const q = (new URLSearchParams(location.search).get('region') || '').toLowerCase().trim();
   const mapa = {

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Caracterización de las familias · Escuela Ignacio Verdugo Cavada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;600;700&display=swap">
+</head>
+<body>
+<script src="backend.js"></script>
+<style id="app-css">
+:root{
+  --ground:#EEF1F0; --surface:#FFFFFF; --surface-2:#F6F8F7;
+  --ink:#11201E; --ink-soft:#4A5C59; --line:#D3DCD9;
+  --brand:#0E4749; --brand-soft:#DCE8E6; --ok:#1F6E4E; --ok-bg:#DFF0E7;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0C1211; --surface:#151E1C; --surface-2:#1B2523;
+    --ink:#E7EDEB; --ink-soft:#9DB0AC; --line:#2A3835;
+    --brand:#7FC4BE; --brand-soft:#1C302E; --ok:#6FD3A2; --ok-bg:#173226;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0C1211; --surface:#151E1C; --surface-2:#1B2523;
+  --ink:#E7EDEB; --ink-soft:#9DB0AC; --line:#2A3835;
+  --brand:#7FC4BE; --brand-soft:#1C302E; --ok:#6FD3A2; --ok-bg:#173226;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Public Sans","Segoe UI",system-ui,sans-serif; font-size:17px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;}
+.wrap{max-width:640px; margin:0 auto; padding:28px 18px 72px; display:flex; flex-direction:column; gap:22px}
+.eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); font-weight:600}
+h1{font-family:Newsreader,Georgia,serif; font-weight:600; font-size:clamp(28px,6vw,40px);
+  line-height:1.1; margin:6px 0 0; text-wrap:balance}
+.intro{margin:0; color:var(--ink-soft); max-width:60ch}
+.q{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px;
+  display:flex; flex-direction:column; gap:11px}
+.qt{font-weight:600; line-height:1.35}
+.qh{margin:0; font-size:14px; color:var(--ink-soft)}
+.opts{display:flex; flex-wrap:wrap; gap:8px}
+.opts button{font:inherit; font-size:15px; cursor:pointer; min-width:46px;
+  padding:9px 15px; border-radius:99px; border:1px solid var(--line);
+  background:var(--surface-2); color:var(--ink); transition:.12s}
+.opts button:hover{border-color:var(--brand)}
+.opts button[aria-pressed="true"]{background:var(--brand); border-color:var(--brand); color:var(--ground); font-weight:600}
+.opts button:focus-visible, .txt:focus-visible, .go:focus-visible{outline:2px solid var(--brand); outline-offset:2px}
+.txt{font:inherit; font-size:16px; padding:11px 13px; border-radius:10px;
+  border:1px solid var(--line); background:var(--surface-2); color:var(--ink); width:100%}
+.go{font:inherit; font-size:17px; font-weight:600; cursor:pointer; padding:14px 22px;
+  border-radius:99px; border:1px solid var(--brand); background:var(--brand); color:var(--ground)}
+.go[disabled]{opacity:.45; cursor:not-allowed}
+.foot{display:flex; flex-direction:column; gap:10px; align-items:flex-start}
+.msg{font-size:14.5px; color:var(--ink-soft); min-height:1.3em}
+.done{background:var(--ok-bg); border-radius:14px; padding:26px 22px; display:flex; flex-direction:column; gap:10px}
+.done h2{font-family:Newsreader,Georgia,serif; font-weight:600; font-size:26px; margin:0}
+.done p{margin:0; color:var(--ink-soft)}
+.tally{font-size:14px; color:var(--ink-soft); border-top:1px solid var(--line); padding-top:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script id="app-state" type="application/json">{"respuestas":[]}</script>
+
+<script id="app-js">
+(function(){
+  var N10 = ["1","2","3","4","5","6","7","8","9","10","más de 10"];
+  var N0  = ["0","1","2","3","4","5","6","7","8","9","10"];
+  var TRAMOS = ["Tramo 1 · 0% a 40%","Tramo 2 · 41% a 50%","Tramo 3 · 51% a 60%","Tramo 4 · 61% a 70%","Tramo 5 · 71% a 80%","Tramo 6 · 81% a 90%","Tramo 7 · 91% a 100%","No tengo o no conozco mi tramo"];
+  var PREG = [
+    {k:"nombre", t:"Nombre y apellido de quien responde", tipo:"texto"},
+    {k:"comuna", t:"Comuna donde vive", tipo:"texto"},
+    {k:"hogar", t:"¿Cuántas personas viven en su casa, incluida usted?", tipo:"opts", o:N10},
+    {k:"asisten", t:"¿Cuántas personas de su casa reciben apoyo en la escuela?", tipo:"opts", o:N10},
+    {k:"mujeres", t:"De ellas, ¿cuántas son mujeres?", tipo:"opts", o:N0},
+    {k:"hombres", t:"De ellos, ¿cuántos son hombres?", tipo:"opts", o:N0},
+    {k:"edades", t:"¿Qué edades tienen?", h:"Solo los números, separados por guion. Por ejemplo 6-9-12", tipo:"texto"},
+    {k:"pueblo", t:"¿Alguna de ellas pertenece a un pueblo originario?", tipo:"opts", o:["Sí","No"]},
+    {k:"pueblo_n", t:"¿Cuántas pertenecen a un pueblo originario?", tipo:"opts", o:N0},
+    {k:"tramo", t:"¿En qué tramo del Registro Social de Hogares se encuentra?", tipo:"opts", o:TRAMOS},
+    {k:"rnd", t:"¿Está inscrita en el Registro Nacional de la Discapacidad?", h:"Es la credencial de discapacidad. Si no está seguro, marque No lo sé.", tipo:"opts", o:["Sí","No","No lo sé"]}
+  ];
+  var app = document.getElementById("app");
+  var state; try{ state = JSON.parse(document.getElementById("app-state").textContent); }catch(e){ state={respuestas:[]}; }
+  if(!state.respuestas) state.respuestas = [];
+  var actual = {}, enviando = false, listo = false;
+  var ESCUELA = "Escuela Ignacio Verdugo Cavada, Mulchen";
+  function enviar(){
+    var url = window.FNDR_BACKEND;
+    if(!url) return Promise.reject(new Error("sin backend"));
+    return fetch(url, {
+      method: "POST",
+      headers: {"Content-Type": "text/plain;charset=utf-8"},
+      body: JSON.stringify({tipo:"familia", escuela: ESCUELA, respuesta: actual})
+    }).then(function(r){ return r.json(); }).then(function(j){
+      if(!j || !j.ok) throw new Error(j && j.error ? j.error : "error del servidor");
+      return j;
+    });
+  }
+
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  function render(){
+    if(listo){
+      app.innerHTML = '<div class="done"><h2>Listo, muchas gracias</h2>'+
+        '<p>Sus respuestas quedaron guardadas. No hay que hacer nada más.</p></div>'+
+        '<p class="intro">Si se equivocó en algo, avísele a la escuela y lo corregimos.</p>';
+      return;
+    }
+    var bloques = PREG.map(function(p){
+      if(p.k === "pueblo_n" && actual.pueblo !== "Sí") return "";
+      var cuerpo;
+      if(p.tipo === "texto"){
+        cuerpo = '<input class="txt" type="text" data-k="'+p.k+'" value="'+esc(actual[p.k]||"")+'">';
+      } else {
+        cuerpo = '<div class="opts">'+p.o.map(function(o){
+          return '<button type="button" data-k="'+p.k+'" data-o="'+esc(o)+'" aria-pressed="'+(actual[p.k]===o)+'">'+esc(o)+'</button>';
+        }).join("")+'</div>';
+      }
+      return '<div class="q"><div class="qt">'+esc(p.t)+'</div>'+
+        (p.h ? '<p class="qh">'+esc(p.h)+'</p>' : '')+cuerpo+'</div>';
+    }).join("");
+
+    var falta = !actual.nombre || !actual.hogar || !actual.asisten || !actual.tramo;
+    app.innerHTML =
+      '<header><div class="eyebrow">Escuela Ignacio Verdugo Cavada · Mulchén</div>'+
+      '<h1>Caracterización de las familias</h1></header>'+
+      '<p class="intro">Con la información que usted nos entrega podemos caracterizar a nuestra población y así postular a proyectos que beneficien a nuestras niñas, niños y adolescentes. Toma menos de cinco minutos.</p>'+
+      bloques+
+      '<div class="foot"><button class="go" id="enviar"'+(falta?" disabled":"")+'>Enviar mis respuestas</button>'+
+      '<div class="msg" id="msg">'+(falta ? "Faltan el nombre, las personas de la casa, las que reciben apoyo y el tramo." : "")+'</div>'+
+      '</div>';
+  }
+
+  
+  app.addEventListener("click", function(e){
+    var b = e.target.closest("button[data-o]");
+    if(b){ actual[b.getAttribute("data-k")] = b.getAttribute("data-o"); render(); return; }
+    if(!e.target.closest("#enviar")) return;
+    if(enviando) return;
+    enviando = true;
+    document.getElementById("msg").textContent = "Enviando…";
+    actual.fecha = new Date().toLocaleString("es-CL",{day:"2-digit",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"});
+    enviar().then(function(){ listo = true; render(); })
+      .catch(function(){
+        enviando = false;
+        document.getElementById("msg").textContent = "No se pudo enviar. Revise su conexión e intente de nuevo.";
+      });
+  });
+
+  app.addEventListener("input", function(e){
+    var i = e.target;
+    if(!i.matches || !i.matches("input[data-k]")) return;
+    actual[i.getAttribute("data-k")] = i.value;
+    var btn = document.getElementById("enviar");
+    if(btn) btn.disabled = !actual.nombre || !actual.hogar || !actual.asisten || !actual.tramo;
+  });
+
+  render();
+  })();
+</script>
+
+</body>
+</html>

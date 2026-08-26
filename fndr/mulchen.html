@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;600;700&display=swap">
 </head>
 <body>
+<script src="backend.js"></script>
 <style id="app-css">
 :root{
   --ground:#EEF1F0; --surface:#FFFFFF; --surface-2:#F6F8F7;
@@ -209,7 +210,30 @@ footer strong{color:var(--ink)}
   if(!state.items) state.items = {};
   if(!state.datos) state.datos = {};
   var canWrite = true, pending = false, timer = null;
-  var api = { publish: function(){ try{ localStorage.setItem("carpeta-ivc", JSON.stringify(state)); }catch(e){} return Promise.resolve(); } };
+  var ESCUELA = "Escuela Ignacio Verdugo Cavada, Mulchen";
+  function paquete(){
+    var documentos = DOCS.map(function(d,i){ return {nombre: d[0], estado: LABELS[stateOf(i)]}; });
+    var datos = [];
+    GRUPOS.forEach(function(g){
+      g[g.length-1].forEach(function(c){
+        datos.push({nombre: c[1], valor: state.datos[c[0]] || ""});
+      });
+    });
+    return {tipo:"carpeta", escuela: ESCUELA, documentos: documentos, datos: datos};
+  }
+  var api = { publish: function(){
+    try{ localStorage.setItem("carpeta-ivc", JSON.stringify(state)); }catch(e){}
+    var url = window.FNDR_BACKEND;
+    if(!url) return Promise.resolve();
+    return fetch(url, {
+      method: "POST",
+      headers: {"Content-Type": "text/plain;charset=utf-8"},
+      body: JSON.stringify(paquete())
+    }).then(function(r){ return r.json(); }).then(function(j){
+      if(!j || !j.ok) throw new Error("servidor");
+      return j;
+    });
+  } };
   try{ var _s = localStorage.getItem("carpeta-ivc"); if(_s){ var _o = JSON.parse(_s); state.items = _o.items || {}; state.datos = _o.datos || {}; state.updated = _o.updated || ""; } }catch(e){}
 
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }

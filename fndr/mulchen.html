@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="description" content="Documentos y datos para la postulacion al FNDR 8% Biobio, fondo Inclusion y Discapacidad 2026.">
+<title>Carpeta del Centro de Padres · Escuela Ignacio Verdugo Cavada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;600;700&display=swap">
+</head>
+<body>
+<style id="app-css">
+:root{
+  --ground:#EEF1F0; --surface:#FFFFFF; --surface-2:#F6F8F7;
+  --ink:#11201E; --ink-soft:#4A5C59; --line:#D3DCD9;
+  --brand:#0E4749; --brand-soft:#DCE8E6;
+  --ok:#1F6E4E; --ok-bg:#DFF0E7;
+  --wait:#8A5A06; --wait-bg:#F8ECD5;
+  --stop:#8C2F27; --stop-bg:#F7E0DD;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0C1211; --surface:#151E1C; --surface-2:#1B2523;
+    --ink:#E7EDEB; --ink-soft:#9DB0AC; --line:#2A3835;
+    --brand:#7FC4BE; --brand-soft:#1C302E;
+    --ok:#6FD3A2; --ok-bg:#173226;
+    --wait:#E5B45C; --wait-bg:#332711;
+    --stop:#E88C82; --stop-bg:#331A17;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0C1211; --surface:#151E1C; --surface-2:#1B2523;
+  --ink:#E7EDEB; --ink-soft:#9DB0AC; --line:#2A3835;
+  --brand:#7FC4BE; --brand-soft:#1C302E;
+  --ok:#6FD3A2; --ok-bg:#173226;
+  --wait:#E5B45C; --wait-bg:#332711;
+  --stop:#E88C82; --stop-bg:#331A17;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Public Sans","Segoe UI",system-ui,sans-serif;
+  font-size:17px; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:780px; margin:0 auto; padding:32px 20px 80px; display:flex; flex-direction:column; gap:28px}
+header{display:flex; flex-direction:column; gap:10px}
+.eyebrow{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); font-weight:600}
+h1{
+  font-family:Newsreader,Georgia,serif; font-weight:600; font-size:clamp(30px,5.5vw,44px);
+  line-height:1.1; margin:0; text-wrap:balance; letter-spacing:-.01em;
+}
+.sub{margin:0; color:var(--ink-soft); font-size:16px}
+.meter{display:flex; flex-direction:column; gap:8px; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 20px}
+.meter-top{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap}
+.count{font-family:Newsreader,Georgia,serif; font-size:26px; font-variant-numeric:tabular-nums}
+.count b{font-weight:600}
+.bar{height:10px; border-radius:99px; background:var(--brand-soft); overflow:hidden}
+.bar span{display:block; height:100%; background:var(--brand); border-radius:99px; transition:width .35s ease}
+.saving{font-size:13px; color:var(--ink-soft); min-height:1.2em}
+.gate{background:var(--stop-bg); border:1px solid var(--line); border-left:5px solid var(--stop); border-radius:12px; padding:20px 22px; display:flex; flex-direction:column; gap:12px}
+.gate h2{margin:0; font-size:17px; font-family:"Public Sans",sans-serif; letter-spacing:.01em}
+.gate ol{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:8px}
+.gate p{margin:0; font-size:15px; color:var(--ink-soft)}
+h2.section{font-family:Newsreader,Georgia,serif; font-weight:600; font-size:24px; margin:8px 0 0}
+h2.parte{
+  font-family:Newsreader,Georgia,serif; font-weight:600; font-size:clamp(24px,4vw,32px);
+  margin:26px 0 0; padding-top:22px; border-top:3px solid var(--brand);
+  display:flex; flex-direction:column; gap:4px; line-height:1.15;
+}
+h2.parte span{
+  font-family:"Public Sans",sans-serif; font-size:12px; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--brand);
+}
+.donde{
+  font-size:14px; color:var(--ink-soft);
+  border-left:2px solid var(--line); padding-left:11px;
+  display:flex; flex-direction:column; gap:6px; align-items:flex-start;
+}
+.donde p{margin:0}
+.donde span{font-size:11px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; color:var(--brand)}
+.dl{
+  font:inherit; font-size:14px; font-weight:700; color:var(--brand); text-decoration:none;
+  border:1px solid var(--brand); border-radius:99px; padding:6px 14px;
+  background:transparent; cursor:pointer; display:inline-block; line-height:1.4;
+}
+.dl:hover{background:var(--brand); color:var(--ground)}
+.dl:focus-visible{outline:2px solid var(--brand); outline-offset:2px}
+.nuevo{background:var(--ok-bg); border:1px solid var(--line); border-left:5px solid var(--ok);
+  border-radius:12px; padding:18px 20px; display:flex; flex-direction:column; gap:9px}
+.nuevo .src-head{color:var(--ok)}
+.nuevo p{margin:0; font-size:15.5px}
+.recursos{background:var(--surface); border:1px solid var(--line); border-radius:14px;
+  padding:16px 18px; display:flex; flex-direction:column; gap:10px}
+.recursos .links{display:flex; flex-wrap:wrap; gap:8px}
+.avisos{display:flex; flex-direction:column; gap:9px; font-size:15px; color:var(--ink-soft)}
+.avisos p{margin:0}
+.avisos strong{color:var(--ink)}
+.list{display:flex; flex-direction:column; gap:12px; list-style:none; margin:0; padding:0}
+.doc{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; display:flex; gap:14px; align-items:flex-start}
+.doc[data-state="listo"]{background:var(--ok-bg); border-color:transparent}
+.doc[data-state="duda"]{background:var(--wait-bg); border-color:transparent}
+.num{font-variant-numeric:tabular-nums; font-size:13px; font-weight:700; color:var(--ink-soft); padding-top:3px; min-width:20px}
+.body{display:flex; flex-direction:column; gap:8px; flex:1; min-width:0}
+.name{font-weight:600; line-height:1.35}
+.why{margin:0; font-size:14.5px; color:var(--ink-soft)}
+.pills{display:flex; gap:8px; flex-wrap:wrap}
+button.pill{
+  font:inherit; font-size:14px; font-weight:600; cursor:pointer;
+  border:1px solid var(--line); background:var(--surface-2); color:var(--ink-soft);
+  padding:6px 13px; border-radius:99px; transition:.15s;
+}
+button.pill:hover{border-color:var(--brand)}
+button.pill:focus-visible{outline:2px solid var(--brand); outline-offset:2px}
+.doc[data-state="listo"] .pill[data-v="listo"]{background:var(--ok); border-color:var(--ok); color:var(--surface)}
+.doc[data-state="duda"] .pill[data-v="duda"]{background:var(--wait); border-color:var(--wait); color:var(--surface)}
+.doc[data-state="falta"] .pill[data-v="falta"]{background:var(--brand); border-color:var(--brand); color:var(--ground)}
+.lead{margin:-12px 0 0; color:var(--ink-soft); font-size:15.5px; max-width:62ch}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px}
+.field{display:flex; flex-direction:column; gap:5px}
+.flabel{font-size:14px; font-weight:600; line-height:1.3; display:flex; flex-direction:column; gap:2px}
+.flabel em{font-style:normal; font-weight:400; font-size:12.5px; color:var(--ink-soft)}
+.field input{
+  font:inherit; font-size:16px; font-variant-numeric:tabular-nums;
+  padding:9px 12px; border-radius:9px; border:1px solid var(--line);
+  background:var(--surface-2); color:var(--ink); width:100%;
+}
+.field input:focus-visible{outline:2px solid var(--brand); outline-offset:1px; border-color:var(--brand)}
+.send{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.go{
+  font:inherit; font-size:15px; font-weight:600; cursor:pointer; text-decoration:none;
+  padding:10px 18px; border-radius:99px; border:1px solid var(--brand);
+  background:var(--brand); color:var(--ground); display:inline-block;
+}
+.go.alt{background:transparent; color:var(--brand)}
+.go:focus-visible{outline:2px solid var(--brand); outline-offset:2px}
+.urgente{background:var(--brand-soft); border:1px solid var(--line); border-left:5px solid var(--brand);
+  border-radius:12px; padding:18px 20px; display:flex; flex-direction:column; gap:10px}
+.urgente p{margin:0; font-size:15.5px}
+.enlace a{font-size:17px; font-weight:700; color:var(--brand)}
+.src{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:10px}
+.src-head{font-weight:700; font-size:14px; letter-spacing:.02em; color:var(--brand)}
+:root[data-theme="dark"] .src-head, :root:not([data-theme="light"]) .src-head{color:var(--brand)}
+.src-note{margin:0; font-size:14.5px; color:var(--ink-soft)}
+.src-list{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:7px; font-size:15px}
+footer{border-top:1px solid var(--line); padding-top:20px; display:flex; flex-direction:column; gap:8px; font-size:14.5px; color:var(--ink-soft)}
+footer strong{color:var(--ink)}
+.ro{background:var(--wait-bg); border-radius:10px; padding:10px 14px; font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+
+<div class="wrap" id="app"></div>
+
+<script id="app-state" type="application/json">
+{"items":{},"updated":""}
+</script>
+
+<script id="app-files" type="application/json">{}</script>
+
+<script id="app-js">
+(function(){
+  var DOCS = [
+    ["Certificado de personalidad jurídica vigente","El centro de padres debe tener más de 2 años de constituido y el certificado no puede tener más de 60 días de emitido.","Se pide en el Registro Civil, en la sección de certificados de personas jurídicas sin fines de lucro. Se puede sacar en línea con la ClaveÚnica del representante legal, o presencialmente en cualquier oficina llevando el RUT del centro de padres. Fíjate en la fecha de emisión: si tiene más de 60 días cuando postulen, hay que sacarlo de nuevo.","Ir al Registro Civil|https://www.registrocivil.cl/"],
+    ["Copia de los estatutos timbrados","Copia completa de los estatutos, con el timbre de la entidad que los emitió.","Los debe tener la directiva, normalmente en la carpeta que quedó cuando se constituyó el centro de padres. Si nadie los encuentra, se piden en el Registro Civil o en la municipalidad donde se hizo el trámite. Tiene que ser la copia completa, no una hoja suelta, y con el timbre visible.","Ir al Registro Civil|https://www.registrocivil.cl/"],
+    ["Objetivos de los estatutos ligados al proyecto","Los objetivos del centro de padres según sus estatutos tienen que estar relacionados con el proyecto que se postula.","No es un documento aparte: sale de los mismos estatutos del punto 2. Solo hay que revisar que entre los objetivos aparezca algo como apoyar a los estudiantes, mejorar sus condiciones de aprendizaje o colaborar con el establecimiento. Si lo encuentras, avísame y lo usamos textual al redactar el proyecto.",""],
+    ["Certificado de directiva vigente","Acredita quiénes componen la directiva y confirma quién es el representante legal. Tampoco puede tener más de 60 días de emitido.","Se pide en el Registro Civil junto con el anterior, en el mismo trámite. Ojo: la directiva que aparezca ahí tiene que ser la que está funcionando hoy. Si hubo cambio de directiva y no se informó al Registro Civil, primero hay que actualizarlo, y eso toma días.","Ir al Registro Civil|https://www.registrocivil.cl/"],
+    ["Cédula de cada miembro del directorio titular","De todos los del directorio titular, según la nómina que aparece en el certificado de vigencia.","Las tiene cada persona. Una foto o escaneo por ambos lados es suficiente, siempre que se lea bien y la cédula esté vigente. Tienen que ser exactamente los nombres que salen en el certificado del punto 4, ni uno más ni uno menos.",""],
+    ["Declaración jurada de la directiva completa","Declaran que no tienen inhabilidades ni parentesco con funcionarios del Gobierno Regional.","El Gobierno Regional entrega el documento ya escrito. Arriba hay que llenar cuatro datos: FONDO, que se escribe Inclusión y Discapacidad; el nombre del proyecto; la institución y su RUT. Después viene una tabla donde va cargo, nombre completo, RUT y firma de cada integrante del directorio titular, incluidos la presidenta, el tesorero y el secretario. Se agregan tantas líneas como directores haya. No hay que ir a notaría: es declaración jurada simple.","Descargar la declaración jurada|documentos/declaracion-jurada-directiva.docx|declaracion"],
+    ["Copia del RUT de la organización","El RUT del centro de padres, no el del colegio.","Se descarga gratis en el sitio del Servicio de Impuestos Internos, en la sección de RUT e inicio de actividades. Se llama cédula RUT electrónica o e-RUT. Se necesita la clave tributaria del centro de padres. Si nadie tiene esa clave, se recupera en el mismo sitio o en una oficina del SII.","Ir al Servicio de Impuestos Internos|https://www.sii.cl/"],
+    ["Carta de presentación de la institución","Tiene que decir el nombre del fondo, el monto que postulan y quién postula. La firma debe ser igual a la de la cédula del representante legal.","No hay que redactarla: el Gobierno Regional la tiene ya escrita. Va dirigida al Gobernador Regional, don Sergio Giacaman García. En la tabla hay que marcar con una X el fondo DISCAPACIDAD E INCLUSIÓN, escribir el nombre del proyecto y el monto. El monto lo definimos juntas antes de que la firmes. Ojo con un detalle: además de la firma del representante legal, la carta lleva el TIMBRE de la institución.","Descargar la carta tipo|documentos/carta-de-presentacion.docx|carta"],
+    ["Certificado de receptor de fondos públicos","Tiene que aparecer el nombre del representante legal vigente.","Se saca gratis y al instante en el sitio registros19862.cl. Si el centro de padres nunca se ha inscrito ahí, primero hay que registrarlo en ese mismo sitio y después descargar el certificado. Es un trámite en línea, no hay que ir a ninguna oficina.","Ir a registros19862.cl|https://www.registros19862.cl/"],
+    ["Documento bancario de cuenta vigente","Debe verse el tipo de cuenta, el banco, el RUT y el número. La cuenta tiene que estar a nombre del centro de padres.","Sirve una cartola descargada desde la banca en línea o una copia de la libreta de ahorro. No sirve la cuenta del colegio, ni la de la presidenta, ni la de ningún apoderado: tiene que estar a nombre del centro de padres con su propio RUT. Si no existe esa cuenta, hay que abrirla en el banco y eso toma varios días.",""],
+    ["Certificado de experiencia en proyectos del área","Acredita que el centro de padres o su equipo ya ejecutó algo parecido.","Primero revisen si tienen un certificado de quien les entregó fondos alguna vez, un comprobante de depósito de proyecto o un comprobante municipal. Si no tienen ninguno, el Gobierno Regional acepta un certificado propio: se descarga el formato y lo firma el representante legal. Se llena una tabla con el nombre del proyecto, la fecha en que se ejecutó, quién lo financió o apoyó y una breve descripción. Atención con esto, porque no está en las bases y es obligatorio: el documento dice que hay que ADJUNTAR FOTOGRAFÍAS de los proyectos que se describan. Vayan buscándolas desde ya.","Descargar el certificado de experiencia|documentos/certificado-de-experiencia.docx|experiencia"],
+    ["Acreditar domicilio en la Región del Biobío","Sede, sucursal o representatividad en la región.","El más fácil es el mismo RUT del punto 7, porque ahí aparece el domicilio. Si el domicilio que figura no está en la región, sirve un certificado de residencia, que lo emite gratis la junta de vecinos del sector o la municipalidad.",""],
+    ["Cotización de referencia sobre $300.000","Para los productos y servicios que cuesten más de $300.000.","La entrega OpenCluster Tech con los productos del proyecto. No tienes que hacer nada, solo confirmarme qué van a pedir.",""]
+  ];
+  var LABELS = {falta:"Nos falta", listo:"Lo tenemos", duda:"No sabemos"};
+  var GRUPOS = [
+    ["Las personas que atienden", [
+      ["familias","Número de familias",""],
+      ["hogar_total","Total de personas que viven en esos hogares","Contando a todos los que viven en la casa, no solo al estudiante"],
+      ["atendidos","Cuántas personas atienden en total",""],
+      ["mujeres","De ellas, cuántas son mujeres",""],
+      ["hombres","De ellos, cuántos son hombres",""],
+      ["edades","Qué edades tienen","Solo los números, separados por guion. Por ejemplo 6-7-9-12"]
+    ]],
+    ["Pueblos originarios", [
+      ["etnias_n","Cuántas de esas personas pertenecen a un pueblo originario",""]
+    ]],
+    ["Registro Social de Hogares","Cuántas familias hay en cada tramo. Son los tramos oficiales del Registro Social de Hogares.", [
+      ["t1","Tramo 1 · 0% a 40%",""],
+      ["t2","Tramo 2 · 41% a 50%",""],
+      ["t3","Tramo 3 · 51% a 60%",""],
+      ["t4","Tramo 4 · 61% a 70%",""],
+      ["t5","Tramo 5 · 71% a 80%",""],
+      ["t6","Tramo 6 · 81% a 90%",""],
+      ["t7","Tramo 7 · 91% a 100%",""],
+      ["tsin","No conocen su tramo",""]
+    ]],
+    ["Discapacidad acreditada","El fondo exige, por cada beneficiario de ayudas técnicas, estar inscrito en el Registro Nacional de la Discapacidad y tener indicación médica de menos de 8 meses.", [
+      ["rnd","Cuántos están inscritos en el Registro Nacional de la Discapacidad",""],
+      ["receta","Cuántos tienen indicación médica de menos de 8 meses",""]
+    ]]
+  ];
+  var app = document.getElementById("app");
+  var raw = document.getElementById("app-state").textContent;
+  var state; try { state = JSON.parse(raw); } catch(e) { state = {items:{},updated:""}; }
+  if(!state.items) state.items = {};
+  if(!state.datos) state.datos = {};
+  var canWrite = true, pending = false, timer = null;
+  var api = { publish: function(){ try{ localStorage.setItem("carpeta-ivc", JSON.stringify(state)); }catch(e){} return Promise.resolve(); } };
+  try{ var _s = localStorage.getItem("carpeta-ivc"); if(_s){ var _o = JSON.parse(_s); state.items = _o.items || {}; state.datos = _o.datos || {}; state.updated = _o.updated || ""; } }catch(e){}
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  var FILES = {};
+  try{ FILES = JSON.parse(document.getElementById("app-files").textContent); }catch(e){ FILES = {}; }
+
+  function boton(spec){
+    var p = spec.split("|"), texto = p[0], url = p[1], key = p[2];
+    if(key && FILES[key]) return '<button class="dl" data-file="'+esc(key)+'" data-url="'+esc(url)+'">'+esc(texto)+'</button>';
+    return '<a class="dl" href="'+esc(url)+'" target="_blank" rel="noopener">'+esc(texto)+'</a>';
+  }
+
+  function bytes(b64){
+    var bin = atob(b64), n = bin.length, arr = new Uint8Array(n);
+    for(var i=0;i<n;i++) arr[i] = bin.charCodeAt(i);
+    return arr;
+  }
+  function stateOf(i){ return state.items[i] || "falta"; }
+
+  function render(){
+    var done = 0;
+    for(var i=0;i<DOCS.length;i++){ if(stateOf(i)==="listo") done++; }
+    var pct = Math.round(done/DOCS.length*100);
+    var rows = DOCS.map(function(d,i){
+      var st = stateOf(i);
+      var pills = ["falta","listo","duda"].map(function(v){
+        return '<button class="pill" data-v="'+v+'" data-i="'+i+'">'+LABELS[v]+'</button>';
+      }).join("");
+      return '<li class="doc" data-state="'+st+'"><div class="num">'+(i+1)+'</div><div class="body">'+
+        '<div class="name">'+esc(d[0])+'</div><p class="why">'+esc(d[1])+'</p>'+
+        '<div class="donde"><span>Dónde se consigue</span><p>'+esc(d[2])+'</p>'+
+        (d[3] ? boton(d[3]) : '')+'</div>'+
+        '<div class="pills">'+pills+'</div></div></li>';
+    }).join("");
+
+    app.innerHTML =
+      '<header><div class="eyebrow">FNDR 8% Biobío · Inclusión y Discapacidad 2026</div>'+
+      '<h1>Carpeta del Centro de Padres</h1>'+
+      '<p class="sub">Escuela Ignacio Verdugo Cavada, Mulchén</p>'+
+      '<p class="sub">Estimada Ingrid, he preparado esta página para ti para hacer el proceso lo más expedito y sencillo posible dentro de las circunstancias. Puedes marcar más abajo cada documento cuando ya lo tengas y verás que se guarda automáticamente. Revisa por favor la información que te entrego y si tienes cualquier duda, házmelo saber.</p></header>'+
+      '<div class="meter"><div class="meter-top"><div class="count"><b>'+done+'</b> de '+DOCS.length+' listos</div>'+
+      '<div class="saving" id="saving"></div></div><div class="bar"><span style="width:'+pct+'%"></span></div></div>'+
+      (canWrite ? '' : '<div class="ro">Estás viendo la carpeta en modo lectura, así que los cambios no alcanzan a guardarse. Avísame y lo dejo habilitado al tiro.</div>')+
+      '<div class="nuevo"><div class="src-head">Buenas noticias: cambió la fecha de cierre</div>'+
+      '<p>El fondo ya no cierra el 28 de agosto. La nueva fecha de cierre es el <strong>4 de septiembre a las 23:59</strong>, lo que nos da más tiempo y nos tiene muy contentas.</p>'+
+      '<p>Con esos días adicionales alcanzamos a que las familias respondan la encuesta y a conseguir los documentos con calma. Aun así te pido que mantengamos el mismo ritmo: no dejemos el proyecto para el final.</p></div>'+
+      '<h2 class="parte"><span>Parte 1</span>Los documentos de la postulación</h2>'+
+      '<div class="gate"><h2>Antes de juntar un solo papel, hay tres cosas que necesitamos saber</h2><ol>'+
+      '<li>¿El centro de padres tiene personalidad jurídica con más de 2 años? Si se constituyó después, no pueden postular.</li>'+
+      '<li>¿Tienen cuenta bancaria a nombre del centro de padres? No sirve la del colegio ni la de una persona.</li>'+
+      '<li>¿Han ejecutado antes algún proyecto que puedan acreditar por escrito?</li>'+
+      '</ol><p><strong>Qué cuenta como proyecto acreditado por escrito:</strong> cualquier iniciativa que el centro de padres haya ejecutado con recursos que le entregó otra institución. Por ejemplo un fondo municipal, un FONDEVE, un proyecto de una junta de vecinos, un aporte de una empresa o de una fundación.</p>'+
+      '<p>El papel que lo acredita puede ser el certificado de la institución que entregó los fondos, un comprobante de depósito del proyecto o un comprobante municipal. Y si no tienen ninguno de esos, las bases aceptan un <strong>certificado propio</strong>: lo emite el mismo centro de padres usando el formato tipo que está en gorebiobio.cl/fondos-concursables. También se puede acreditar la experiencia del equipo responsable, no solo la de la organización.</p></div>'+
+      '<div class="recursos"><div class="src-head">Por si quieres leer las bases tú misma</div>'+
+      '<p class="src-note">No es obligatorio: todo lo importante ya está resumido más abajo. Te los dejo por si quieres revisarlos.</p>'+
+      '<div class="links"><a class="dl" href="https://gorebiobio.cl/wp-content/uploads/2026/07/BASES-INCLUSION-Y-DISCAPACIDAD-2026.pdf" target="_blank" rel="noopener">Bases del fondo</a>'+
+      boton("Ficha resumen del fondo|documentos/ficha-resumen-inclusion-discapacidad.pdf|ficha")+
+      '<a class="dl" href="https://gorebiobio.cl/wp-content/uploads/2026/07/MANUAL-GENERAL-SUBVENCIONES-2026.pdf" target="_blank" rel="noopener">Manual general</a>'+
+      '<a class="dl" href="https://subvenciones.gorebiobio.cl" target="_blank" rel="noopener">Plataforma para postular</a></div></div>'+
+      '<h2 class="section">Los 13 documentos</h2>'+
+      '<ul class="list">'+rows+'</ul>'+
+      '<div class="avisos"><p>Si falta uno solo de estos documentos, el proyecto queda <strong>inadmisible</strong> en la primera revisión y no alcanza a ser evaluado. Por eso te insisto tanto con la lista.</p>'+
+      '<p>La postulación se hace en subvenciones.gorebiobio.cl con la <strong>ClaveÚnica del representante legal</strong> del centro de padres. Nadie más puede abrir el formulario.</p></div>'+
+      '<h2 class="parte"><span>Parte 2</span>La información que nos falta</h2>'+
+      '<p class="lead">Ingrid, estos datos son esenciales para poder presentar el proyecto, así que te agradecería muchísimo que los completes lo antes posible. Se van guardando solos mientras escribes y yo los veo al abrir esta misma página. Si alguno no lo tienes a mano, déjalo en blanco y lo vemos juntas.</p>'+
+      GRUPOS.map(function(g){
+        var titulo = g[0], nota = (g.length===3 ? g[1] : ""), campos = g[g.length-1];
+        return '<div class="src"><div class="src-head">'+esc(titulo)+'</div>'+
+          (nota ? '<p class="src-note">'+esc(nota)+'</p>' : '')+
+          '<div class="grid">'+campos.map(function(c){
+            var v = state.datos && state.datos[c[0]] ? state.datos[c[0]] : "";
+            return '<label class="field"><span class="flabel">'+esc(c[1])+
+              (c[2] ? '<em>'+esc(c[2])+'</em>' : '')+'</span>'+
+              '<input type="text" inputmode="'+(c[0]==="edades"?"text":"numeric")+'" data-k="'+c[0]+'" value="'+esc(v)+'"></label>';
+          }).join("")+'</div></div>';
+      }).join("")+
+      '<div class="send"><button class="go" id="copiar">Copiar las respuestas</button>'+
+      '<a class="go alt" href="mailto:rayen.ogalde@opencluster-tech.cl?subject=Datos%20de%20beneficiarios%20-%20Escuela%20Ignacio%20Verdugo%20Cavada">Escribirle a Rayen</a>'+
+      '<span class="saving" id="copiado"></span></div>'+
+      '<div class="urgente"><div class="src-head">Y esto hay que mandárselo a las familias</div>'+
+      '<p>Te agradecería enormemente que les hagas llegar este enlace a las familias por WhatsApp. Es esencial que lo respondan <strong>dentro de las próximas 24 horas, a más tardar</strong>, para que podamos hacer una caracterización correcta de los estudiantes. Son 11 preguntas y se responden desde el teléfono en pocos minutos.</p>'+
+      '<div class="send"><button class="go" id="copiarlink">Copiar el enlace para las familias</button>'+
+      '<a class="go alt" href="https://claude.ai/code/artifact/abd2b970-2c50-4eed-aee5-48c43d84f607" target="_blank" rel="noopener">Ver la encuesta</a>'+
+      '<span class="saving" id="linkcopiado"></span></div>'+
+      '<p class="src-note">Aprieta el botón y pega el enlace en el grupo de WhatsApp de las familias.</p></div>'+
+      (state.updated ? '<footer><div>Última actualización: '+esc(state.updated)+'</div></footer>' : '');
+  }
+
+  function buildDoc(){
+    var css = document.getElementById("app-css").textContent;
+    var js = document.getElementById("app-js").textContent;
+    return '<!doctype html><html lang="es"><head><meta charset="utf-8">'+
+      '<meta name="viewport" content="width=device-width,initial-scale=1">'+
+      '<title>Carpeta del Centro de Padres</title>'+
+      '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'+
+      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;600;700&display=swap">'+
+      '<style id="app-css">'+css+'</style></head><body><div class="wrap" id="app"></div>'+
+      '<script id="app-state" type="application/json">'+JSON.stringify(state)+'<\/script>'+
+      '<script id="app-files" type="application/json">'+document.getElementById("app-files").textContent+'<\/script>'+
+      '<script id="app-js">'+js+'<\/script></body></html>';
+  }
+
+  function flash(msg){
+    var el = document.getElementById("saving");
+    if(el) el.textContent = msg;
+  }
+
+  function save(){
+    if(!api || !canWrite) return;
+    clearTimeout(timer);
+    timer = setTimeout(function(){
+      if(pending) return;
+      pending = true; flash("Guardando…");
+      api.publish().then(function(){
+        pending = false; flash("Guardado");
+        setTimeout(function(){ flash(""); }, 2000);
+      }).catch(function(err){
+        pending = false;
+        if(err && err.code === "conflict"){ flash("Alguien más lo actualizó primero"); }
+        else if(err && (err.code === "not_granted" || err.code === "not_writer")){ canWrite = false; render(); }
+        else { flash("No se pudo guardar"); }
+      });
+    }, 600);
+  }
+
+  app.addEventListener("click", function(e){
+    var b = e.target.closest("button.pill");
+    if(!b) return;
+    var i = b.getAttribute("data-i"), v = b.getAttribute("data-v");
+    state.items[i] = v;
+    state.updated = new Date().toLocaleString("es-CL", {day:"2-digit", month:"long", hour:"2-digit", minute:"2-digit"});
+    render();
+    save();
+  });
+
+  app.addEventListener("input", function(e){
+    var inp = e.target;
+    if(!inp.matches || !inp.matches("input[data-k]")) return;
+    state.datos[inp.getAttribute("data-k")] = inp.value;
+    state.updated = new Date().toLocaleString("es-CL", {day:"2-digit", month:"long", hour:"2-digit", minute:"2-digit"});
+    save();
+  });
+
+  function textoRespuestas(){
+    var out = ["Datos de beneficiarios - Escuela Ignacio Verdugo Cavada, Mulchén",""];
+    GRUPOS.forEach(function(g){
+      var campos = g[g.length-1], lineas = [];
+      campos.forEach(function(c){
+        var v = state.datos[c[0]];
+        if(v && String(v).trim()) lineas.push("  " + c[1] + ": " + v);
+      });
+      if(lineas.length){ out.push(g[0]); out.push.apply(out, lineas); out.push(""); }
+    });
+    if(out.length <= 2) out.push("(todavía no hay datos completados)");
+    return out.join("\n");
+  }
+
+  app.addEventListener("click", function(e){
+    if(!e.target.closest) return;
+    var fb = e.target.closest("button[data-file]");
+    if(fb){
+      var f = FILES[fb.getAttribute("data-file")], url = fb.getAttribute("data-url");
+      var original = fb.textContent;
+      fb.textContent = "Preparando…";
+      var restore = function(msg){ fb.textContent = msg || original; if(msg) setTimeout(function(){ fb.textContent = original; }, 3500); };
+      (window.claude && window.claude.use ? window.claude.use("downloads") : Promise.resolve(null))
+        .then(function(dl){
+          if(!dl) throw {code:"unavailable"};
+          return dl.save({filename: f.n, data: bytes(f.d)});
+        })
+        .then(function(){ restore("Descargado"); })
+        .catch(function(err){
+          var c = err && err.code;
+          if(c === "declined" || c === "rate_limited"){ restore(); return; }
+          window.open(url, "_blank", "noopener");
+          restore("Abriendo la web del GORE");
+        });
+      return;
+    }
+    if(e.target.closest("#copiarlink")){
+      var av = document.getElementById("linkcopiado");
+      var url = "https://claude.ai/code/artifact/abd2b970-2c50-4eed-aee5-48c43d84f607";
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(url).then(function(){
+          av.textContent = "Enlace copiado. Ya puedes pegarlo en WhatsApp.";
+          setTimeout(function(){ av.textContent = ""; }, 5000);
+        }).catch(function(){ av.textContent = "No se pudo copiar. Usa el botón Ver la encuesta."; });
+      } else { av.textContent = "No se pudo copiar. Usa el botón Ver la encuesta."; }
+      return;
+    }
+    if(!e.target.closest("#copiar")) return;
+    var aviso = document.getElementById("copiado");
+    var txt = textoRespuestas();
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){
+        aviso.textContent = "Copiado. Péguenlo en el correo.";
+        setTimeout(function(){ aviso.textContent = ""; }, 4000);
+      }).catch(function(){ aviso.textContent = "No se pudo copiar."; });
+    } else {
+      aviso.textContent = "No se pudo copiar.";
+    }
+  });
+
+  render();
+
+  
+})();
+</script>
+
+</body>
+</html>

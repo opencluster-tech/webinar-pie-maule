@@ -209,14 +209,16 @@ body {
    tarjeta, en la misma columna. En pantallas chicas no aplica nada de esto: el
    orden del HTML ya es el bueno y el video baja al flujo. Cambiado el 7-sep-2026. */
 @media (min-width:1025px) {
-  /* Flex y no grid: con grid la pista flexible no absorbía el espacio sobrante
-     y la columna izquierda se quedaba clavada en su ancho de contenido.
-     El botón va en una segunda línea del propio flex, así que queda bajo la
-     columna izquierda sin depender de ningún cálculo. */
-  .hero-inner { display:flex; flex-wrap:wrap; align-items:flex-start; column-gap:34px; }
-  .hero-col-izq { flex:1 1 0; min-width:0; }
-  .hero-inner > .hero-intro { flex:0 0 320px; margin-top:0; max-width:none; }
-  .hero-inner > .btn-hero { flex:0 0 auto; margin-top:22px; }
+  /* Ni grid ni flex: en los dos, la columna flexible se quedaba clavada en su
+     ancho de contenido (436px) y sobraban 330px sin repartir. Con reserva de
+     espacio + posición absoluta el resultado es determinista: el contenido
+     ocupa todo menos los 354px de la derecha (320 de tarjeta + 34 de aire), y
+     la tarjeta se ancla a ese hueco. Cambiado el 7-sep-2026. */
+  .hero-inner { position:relative; padding-right:354px; }
+  .hero-inner > .hero-intro {
+    position:absolute; top:0; right:0;
+    width:320px; max-width:none; margin:0;
+  }
 }
 
 /* ── Video: bajo el banner, en la misma columna derecha que la tarjeta ── */

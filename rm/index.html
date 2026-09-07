@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Webinar PIE Región Metropolitana 2026</title>
+<link rel="canonical" href="https://webinar.opencluster-tech.cl/region-metropolitana.html">
+<meta name="robots" content="noindex">
+<script>
+// Dirección corta del webinar de la Región Metropolitana (2-oct-2026).
+// Se sube como rm/index.html, así que responde en /rm y en /rm/.
+//
+// Existe para lo que se lee, se escribe o se dicta: el video de invitación,
+// Instagram y los WhatsApp. En los correos va la dirección larga, que ahí es
+// un clic y da lo mismo.
+//
+// Mismo patrón que biobio.html y nuble.html: conserva ?src= y utm_source para
+// no perder la medición por canal. Si nadie trae ?src=, se etiqueta como
+// "corto", así que las visitas que llegan por la dirección escrita NO se
+// confunden con el tráfico directo.
+(function () {
+  var p = new URLSearchParams(location.search);
+  var destino = new URL('https://webinar.opencluster-tech.cl/region-metropolitana.html');
+  destino.searchParams.set('src', p.get('src') || 'corto');
+  if (p.get('utm_source')) destino.searchParams.set('utm_source', p.get('utm_source'));
+  location.replace(destino.toString());
+})();
+</script>
+</head>
+<body style="font-family:Arial,sans-serif;padding:40px;text-align:center;color:#1a2535;">
+  <p>Te estamos llevando al formulario de inscripción…</p>
+  <p><a href="https://webinar.opencluster-tech.cl/region-metropolitana.html?src=corto">Webinar PIE Región Metropolitana — inscripción</a></p>
+</body>
+</html>

@@ -215,6 +215,10 @@ body {
      ocupa todo menos los 354px de la derecha (320 de tarjeta + 34 de aire), y
      la tarjeta se ancla a ese hueco. Cambiado el 7-sep-2026. */
   .hero-inner { position:relative; padding-right:354px; }
+  /* El video mide unos 645px de alto y arranca bajo el banner: sin esto su borde
+     inferior se monta sobre el pie de pagina. Medido el 7-sep-2026: sobraban 131px. */
+  body.con-video .stage { padding-bottom:180px; }
+  body.sin-hero .stage { padding-bottom:0; }
   .hero-inner > .hero-intro {
     position:absolute; top:0; right:0;
     width:320px; max-width:none; margin:0;
@@ -1043,6 +1047,10 @@ const VIDEO_INVITACION_URL = ''; // PENDIENTE: pegar aqui el video de ESTA campa
   if (!frame || !cont) return;
   frame.src = src;
   cont.classList.add('show');
+  // Marca el body para que el CSS reserve espacio al pie: el video es alto y sin
+  // este colchon se monta sobre el pie de pagina en escritorio. Solo se agrega
+  // cuando el video existe de verdad, asi que sin video no sobra ningun hueco.
+  document.body.classList.add('con-video');
 })();
 
 

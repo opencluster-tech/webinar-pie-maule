@@ -198,9 +198,12 @@ body {
 .wrap { max-width:1120px; margin:-44px auto 16px; padding:0 16px; position:relative; z-index:2; }
 .layout { display:block; }
 .main-col { max-width:660px; }
-/* En escritorio reservo el lado derecho del banner para el video. */
+/* La reserva de 330px del lado derecho se quitó el 7-sep-2026. Era del diseño
+   anterior, cuando el video flotaba SOBRE el banner. Ahora ese lado lo ocupa la
+   tarjeta de detalles, que reserva su propio espacio en .hero-fila; mantener las
+   dos reservas las sumaba y dejaba la columna izquierda en 436px de 1120. */
 @media (min-width:1025px) {
-  .hero-inner { padding-right:330px; }
+  .hero-inner { padding-right:0; }
   /* Botón del banner al ancho del formulario (660px + 16px del padding del .wrap). */
   .btn-hero { max-width:676px; }
 }
@@ -209,11 +212,6 @@ body {
    tarjeta, en la misma columna. En pantallas chicas no aplica nada de esto: el
    orden del HTML ya es el bueno y el video baja al flujo. Cambiado el 7-sep-2026. */
 @media (min-width:1025px) {
-  /* Ni grid ni flex: en los dos, la columna flexible se quedaba clavada en su
-     ancho de contenido (436px) y sobraban 330px sin repartir. Con reserva de
-     espacio + posición absoluta el resultado es determinista: el contenido
-     ocupa todo menos los 354px de la derecha (320 de tarjeta + 34 de aire), y
-     la tarjeta se ancla a ese hueco. Cambiado el 7-sep-2026. */
   /* La tarjeta ya no cuelga del borde superior: vive en la misma fila que los
      chips de fecha y hora, así que baja o sube con ellos aunque el título se
      parta en más líneas. La reserva de 354px (320 de tarjeta + 34 de aire) va

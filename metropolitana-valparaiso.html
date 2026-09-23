@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Webinar Metropolitana y Valparaíso 2026</title>
+<link rel="canonical" href="https://webinar.opencluster-tech.cl/region-metropolitana.html">
+<meta name="robots" content="noindex">
+<script>
+// Segunda dirección del webinar del 2-oct-2026, la que nombra las DOS regiones.
+// Pedida por Rayen el 22-sep-2026: la dirección original dice solo "region-
+// metropolitana" y la campaña cubre también Valparaíso.
+//
+// ⚠ NO REEMPLAZA a region-metropolitana.html, la AGREGA. La original tiene que
+//   seguir viva: está escrita en LINK_FORM del backend, en más de 1.600 correos
+//   ya enviados y en las 39 etiquetas ?src= de los difusores. Renombrarla mata
+//   todos esos enlaces.
+//
+// Esta dirección es para lo que se mande DE AQUÍ EN ADELANTE.
+//
+// Mismo patrón que rm/index.html: conserva ?src= y utm_source para no perder la
+// medición por canal. Si nadie trae ?src=, se etiqueta como "rmv", así que el
+// tráfico de esta dirección se puede separar del de la original y del directo.
+(function () {
+  var p = new URLSearchParams(location.search);
+  var destino = new URL('https://webinar.opencluster-tech.cl/region-metropolitana.html');
+  destino.searchParams.set('src', p.get('src') || 'rmv');
+  if (p.get('utm_source')) destino.searchParams.set('utm_source', p.get('utm_source'));
+  location.replace(destino.toString());
+})();
+</script>
+</head>
+<body style="font-family:Arial,sans-serif;padding:40px;text-align:center;color:#1a2535;">
+  <p>Te estamos llevando al formulario de inscripción…</p>
+  <p><a href="https://webinar.opencluster-tech.cl/region-metropolitana.html?src=rmv">Webinar Metropolitana y Valparaíso — inscripción</a></p>
+</body>
+</html>

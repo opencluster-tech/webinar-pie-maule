@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<!--
+  ⚠ ESTE ARCHIVO SE PUBLICA EN DOS DIRECCIONES, con el MISMO contenido:
+      /region-metropolitana.html      ← la de siempre. Esta en LINK_FORM del backend,
+                                        en mas de 1.600 correos ya enviados y en las
+                                        39 etiquetas ?src= de los difusores. NO se toca.
+      /metropolitana-valparaiso.html  ← la que nombra las dos regiones (22-sep-2026).
+
+  No es un redirect: las dos sirven la pagina y la direccion NO cambia en la barra.
+  Por eso los dos archivos tienen que quedar IDENTICOS. Al publicar un cambio hay que
+  copiar este archivo a las DOS rutas del repositorio, o quedan descoordinadas.
+-->
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -20,6 +31,7 @@
 <meta http-equiv="Expires" content="0">
 <title>Webinar Metropolitana y Valparaíso 2026 — El entorno multisensorial</title>
 <meta name="description" content="Webinar gratuito «El entorno multisensorial», viernes 2 de octubre. Para equipos PIE, escuelas especiales y profesionales del área de educación de la Región Metropolitana y la Región de Valparaíso.">
+<link rel="canonical" href="https://webinar.opencluster-tech.cl/region-metropolitana.html">
 <meta property="og:title" content="Webinar Metropolitana y Valparaíso 2026 — El entorno multisensorial">
 <meta property="og:description" content="Viernes 2 de octubre, 16:00 h. Online y gratuito.">
 <meta property="og:type" content="website">
@@ -1057,10 +1069,20 @@ document.getElementById('t_load').value = Date.now();
 // respaldo. Sin esto no se puede medir qué canal convierte: el enlace de los
 // correos trae ?src=correo-presentacion-1444 (hasta el 17-ago-2026 decía "-975",
 // que era el número de destinatarios de Biobío, no de esta campaña).
+/**
+ * De donde viene la visita.
+ *
+ * Esta MISMA pagina se publica en DOS direcciones (ver el aviso del <head>). Cuando
+ * nadie trae ?src=, la etiqueta la decide la direccion por la que entraron: asi el
+ * trafico de metropolitana-valparaiso.html se puede separar del de la original sin
+ * tener dos archivos distintos que mantener. La original se sigue comportando
+ * exactamente como antes: devuelve cadena vacia y el backend la cuenta como directo.
+ */
 function obtenerOrigen() {
   const params = new URLSearchParams(window.location.search);
   const src = params.get('src') || params.get('utm_source') || '';
-  return src.trim().slice(0, 60);
+  if (src.trim()) return src.trim().slice(0, 60);
+  return /metropolitana-valparaiso/.test(window.location.pathname) ? 'rmv' : '';
 }
 
 (function capturarOrigen() {

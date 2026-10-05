@@ -728,13 +728,6 @@ input.invalid, textarea.invalid, select.invalid { border-color:var(--err); backg
           </div>
           <div class="hint">Solo lo usamos para recordarte el webinar a tiempo.</div>
           <div class="error-msg" data-for="celular">Ingresa tu celular (8 dígitos, sin el +56).</div>
-          <!-- 2-oct-2026: consentimiento para escribir por WhatsApp. Desmarcada por defecto
-               a propósito: el consentimiento tiene que ser activo. Se guarda como «Sí» o «No»
-               en la columna «Consentimiento WhatsApp». -->
-          <label class="opt" style="margin-top:10px;">
-            <input type="checkbox" id="consentimientoWsp" name="consentimientoWsp" value="Sí">
-            <span class="opt-text">Acepto que me escriban por WhatsApp para recordarme el webinar</span>
-          </label>
         </div>
       </section>
 
@@ -1556,7 +1549,6 @@ function datosActuales() {
   data.temas = [...document.querySelectorAll('input[name="temas"]:checked')].map(i => i.value);
   data.fijo = normalizarTel(data.fijo);
   data.celular = normalizarTel(data.celular);
-  data.consentimientoWsp = document.getElementById('consentimientoWsp').checked ? 'Sí' : 'No';
   data.timestamp = new Date().toISOString();
   data.userAgent = navigator.userAgent;
   return data;
@@ -1577,7 +1569,7 @@ async function guardar() {
     method: 'POST',
     mode: 'no-cors',
     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify({ action: 'guardar_inscripcion_rm', data })
+    body: JSON.stringify({ action: 'guardar_inscripcion', data })
   });
   ultimoEnvio = huella;
   return data;

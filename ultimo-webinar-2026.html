@@ -1100,7 +1100,7 @@ function obtenerOrigen() {
 // comparar cuántos correos se enviaron contra cuántos abrieron de verdad.
 (function registrarVisita() {
   if (!APPS_SCRIPT_URL) return;
-  fetch(APPS_SCRIPT_URL + '?action=registrar_visita&webinar=Inscritos_30oct_2026&src=' + encodeURIComponent(obtenerOrigen()), { mode: 'no-cors' })
+  fetch(APPS_SCRIPT_URL + '?action=registrar_visita&webinar=Inscritos_29oct_2026&src=' + encodeURIComponent(obtenerOrigen()), { mode: 'no-cors' })
     .catch(() => {});
 })();
 

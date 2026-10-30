@@ -331,5 +331,29 @@ function guardar(campo, valor, cb) {
   .catch(function () { cb(false); });
 }
 </script>
+<script>
+// ── Seguimiento: cuándo abre esta página y cuánto rato se queda ─────────
+(function () {
+  var E = params.get('e'); if (!E) return;
+  var SID = Date.now().toString(36) + Math.random().toString(36).slice(2, 8), INI = Date.now(), total = 0, cambio = true;
+  var ua = navigator.userAgent;
+  var DISP = (/iPad|Tablet/i.test(ua) ? 'Tablet' : /Mobi|Android|iPhone/i.test(ua) ? 'Celular' : 'Computador');
+  function manda(obj, salida) {
+    obj.t = 'seg'; obj.e = E; obj.n = NOMBRE; obj.o = 'webinar-29oct'; obj.pag = 'Comentarios';
+    var cuerpo = JSON.stringify(obj);
+    try {
+      if (salida && navigator.sendBeacon && navigator.sendBeacon(BACKEND, new Blob([cuerpo], { type: 'text/plain' }))) return;
+      fetch(BACKEND, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: cuerpo }).catch(function () {});
+    } catch (x) {}
+  }
+  function resumen(salida) { if (!cambio && !salida) return; cambio = false; manda({ tipo: 'visita', sid: SID, ini: INI, total: total, seg: { 'Página de comentarios': total }, disp: DISP }, salida); }
+  setInterval(function () { if (document.visibilityState === 'visible') { total++; cambio = true; } }, 1000);
+  setInterval(function () { resumen(false); }, 15000);
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') resumen(true); });
+  addEventListener('pagehide', function () { resumen(true); });
+  manda({ tipo: 'evento', que: 'Abrió comentarios' + (desdeCorreo ? ' (botón: ' + desdeCorreo + ')' : '') });
+  resumen(false);
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grabación del webinar · OpenCluster Tech</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --azul:#001a60; --celeste:#06b3fd; --fondo:#f4f8fc; --texto:#1a2535; --gris:#5b6b7f; --linea:#e6edf5; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--fondo); font-family:'Open Sans',Arial,sans-serif; color:var(--texto); }
+  .wrap{ max-width:960px; margin:0 auto; padding:24px 14px 60px; }
+  .card{ background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 10px 34px rgba(0,26,96,.10); }
+  .head{ background:linear-gradient(135deg,#001a60,#002b8c); padding:26px 30px 28px; color:#eaf2ff; }
+  .head .dash{ width:44px; height:3px; background:var(--celeste); border-radius:2px; margin-bottom:14px; }
+  .head .eyebrow{ font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; color:var(--celeste); text-transform:uppercase; }
+  .head h1{ font-family:'Montserrat',sans-serif; font-size:27px; font-weight:800; margin:8px 0 0; line-height:1.2; }
+  .head p{ margin:8px 0 0; font-size:14px; color:#cfe8ff; }
+  .body{ padding:24px 30px 30px; }
+  .video{ position:relative; width:100%; padding-top:56.25%; background:#000; border-radius:14px; overflow:hidden; }
+  .video > div, .video iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .falta{ padding:40px 20px; text-align:center; color:var(--gris); font-size:15px; }
+  .salas{ margin-top:24px; background:linear-gradient(160deg,#001a60,#002b8c); border-radius:16px; padding:24px 26px; color:#eaf2ff; text-align:center; }
+  .salas .pill{ display:inline-block; font-family:'Montserrat',sans-serif; font-size:10.5px; font-weight:700; letter-spacing:2px; color:#001a60; background:var(--celeste); border-radius:20px; padding:5px 14px; text-transform:uppercase; }
+  .salas h2{ font-family:'Montserrat',sans-serif; font-size:19px; font-weight:800; margin:12px 0 0; }
+  .salas p{ font-size:14px; color:#cfe8ff; line-height:1.65; margin:8px auto 0; max-width:600px; }
+  .salas a{ display:inline-block; margin-top:16px; background:linear-gradient(90deg,#06b3fd,#0a7fd6); color:#eaf2ff; text-decoration:none;
+            font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; padding:14px 30px; border-radius:12px; }
+  .pie{ margin-top:22px; padding-top:18px; border-top:1px solid var(--linea); display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  .pie span{ font-size:11.5px; color:#94a3b8; line-height:1.5; }
+  .pie img{ height:22px; opacity:.65; }
+  @media (max-width:560px){ .head,.body{ padding-left:18px; padding-right:18px; } .head h1{ font-size:23px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <div class="dash"></div>
+      <div class="eyebrow">Webinar PIE 2026</div>
+      <h1>El entorno multisensorial</h1>
+      <p id="saludo">Grabación del webinar.</p>
+    </div>
+    <div class="body">
+      <div class="video" id="caja"><div id="player"></div></div>
+
+      <div class="salas" id="salas" hidden>
+        <span class="pill">Salas a medida</span>
+        <h2>Diseñadas para cada escuela</h2>
+        <p>Conoce nuestras salas y las distintas alternativas para tu escuela, según el espacio con que cuentan.</p>
+        <a id="btnSalas" href="https://opencluster-tech.github.io/propuestas/salas-escuelas/" target="_blank" rel="noopener">Explora las alternativas para tu escuela</a>
+      </div>
+
+      <div class="pie">
+        <span>Open Cluster Tech<br>Campaña PIE 2026</span>
+        <img src="assets/oct-logo.png" alt="OpenCluster Tech">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Datos que trae el enlace del correo ─────────────────────────────────
+// v = video de YouTube · e = código de la persona · n = nombre · o = de dónde viene
+var SEG = 'https://script.google.com/macros/s/AKfycbxVcZVFRqA53_3pbx7fQhs7tHu-YD0P_NcO0_DkYvjBSlMOS-3WHHxB0rQmP7WwdyMq/exec';
+var q = new URLSearchParams(location.search);
+var V = (q.get('v') || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 11);
+var E = q.get('e') || '', N = q.get('n') || '', O = q.get('o') || '';
+
+if (N) document.getElementById('saludo').textContent = 'Hola, ' + N + '. Aquí está la grabación del webinar.';
+if (!V) document.getElementById('caja').outerHTML = '<div class="falta">No encontramos el video. Responde el correo y te lo enviamos de otra forma.</div>';
+
+// Botón a Salas para escuelas, con el mismo código de la persona.
+var salas = document.getElementById('btnSalas');
+if (E) salas.href += '?e=' + encodeURIComponent(E) + '&n=' + encodeURIComponent(N) + '&o=' + encodeURIComponent(O);
+document.getElementById('salas').hidden = false;
+
+// ── Seguimiento (solo si viene el código de la persona) ─────────────────
+var SID = Date.now().toString(36) + Math.random().toString(36).slice(2, 8), INI = Date.now();
+var ua = navigator.userAgent;
+var DISP = (/iPad|Tablet/i.test(ua) ? 'Tablet' : /Mobi|Android|iPhone/i.test(ua) ? 'Celular' : 'Computador') + ' · ' +
+           (/Edg\//.test(ua) ? 'Edge' : /SamsungBrowser/.test(ua) ? 'Samsung' : /CriOS|Chrome\//.test(ua) ? 'Chrome' : /Firefox|FxiOS/.test(ua) ? 'Firefox' : /Safari/.test(ua) ? 'Safari' : 'Otro');
+function manda(obj, salida) {
+  if (!E) return;
+  obj.t = 'seg'; obj.e = E; obj.n = N; obj.o = O; obj.pag = 'Grabación';
+  var cuerpo = JSON.stringify(obj);
+  try {
+    if (salida && navigator.sendBeacon && navigator.sendBeacon(SEG, new Blob([cuerpo], { type: 'text/plain' }))) return;
+    fetch(SEG, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: cuerpo }).catch(function () {});
+  } catch (x) {}
+}
+function evento(que) { manda({ tipo: 'evento', que: que }); }
+
+var total = 0, visto = 0, maxPct = 0, dur = 0, seg = {}, cambio = true, hitos = {}, player = null, yaPlay = false;
+setInterval(function () {
+  if (document.visibilityState !== 'visible') return;
+  var reproduciendo = player && player.getPlayerState && player.getPlayerState() === 1;
+  total++; cambio = true;
+  var parte = reproduciendo ? 'Viendo el video' : 'En la página, video detenido';
+  seg[parte] = (seg[parte] || 0) + 1;
+  if (reproduciendo) {
+    visto++;
+    dur = Math.round(player.getDuration() || dur);
+    var pct = dur ? Math.round(player.getCurrentTime() / dur * 100) : 0;
+    if (pct > maxPct) maxPct = Math.min(100, pct);
+    [25, 50, 75, 95].forEach(function (h) { if (maxPct >= h && !hitos[h]) { hitos[h] = 1; evento('Llegó al ' + h + '% del video'); } });
+  }
+}, 1000);
+function resumen(salida) {
+  if (!cambio && !salida) return;
+  cambio = false;
+  manda({ tipo: 'visita', sid: SID, ini: INI, total: total, seg: seg, disp: DISP, video: { visto: visto, max: maxPct, dur: dur } }, salida);
+}
+setInterval(function () { resumen(false); }, 15000);
+document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') resumen(true); });
+addEventListener('pagehide', function () { resumen(true); });
+salas.addEventListener('click', function () { evento('Apretó: Explora las alternativas para tu escuela'); resumen(true); });
+evento('Abrió la grabación');
+resumen(false);
+
+// ── Reproductor de YouTube ──────────────────────────────────────────────
+function onYouTubeIframeAPIReady() {
+  if (!V) return;
+  player = new YT.Player('player', {
+    videoId: V,
+    playerVars: { rel: 0, modestbranding: 1, playsinline: 1 },
+    events: {
+      onStateChange: function (ev) {
+        if (ev.data === 1 && !yaPlay) { yaPlay = true; evento('Le dio play al video'); }
+        if (ev.data === 0) { maxPct = 100; evento('Terminó el video'); resumen(true); }
+      }
+    }
+  });
+}
+if (V) {
+  var s = document.createElement('script');
+  s.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(s);
+}
+</script>
+</body>
+</html>

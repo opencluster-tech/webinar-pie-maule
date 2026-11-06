@@ -252,14 +252,18 @@ chkOtro.addEventListener('change', function () {
   document.getElementById('cajaOtro').hidden = !chkOtro.checked;
   if (chkOtro.checked) document.getElementById('txtOtro').focus();
 });
-// Preguntas que se abren y se cierran: una abierta a la vez; al elegir una opción única pasa sola a la siguiente.
+// Preguntas que se abren y se cierran. Al responder una, se abre sola la siguiente:
+// si era de una sola opción, la anterior se cierra; si era de varias, queda abierta para seguir marcando
+// hasta que responda la siguiente. Al tocar el título se abre o se cierra esa pregunta.
 var PREGS = [].slice.call(document.querySelectorAll('#formEnc .preg'));
-function abrirPreg(p, abrir) {
-  PREGS.forEach(function (x) {
-    var on = (x === p) && abrir;
-    x.classList.toggle('abierta', on);
-    x.querySelector('.pregT').setAttribute('aria-expanded', on ? 'true' : 'false');
-  });
+function ponerPreg(x, on) {
+  x.classList.toggle('abierta', on);
+  x.querySelector('.pregT').setAttribute('aria-expanded', on ? 'true' : 'false');
+}
+function abrirPreg(p, abrir) { ponerPreg(p, abrir); }
+function avanzar(i, cerrarActual) {
+  PREGS.forEach(function (x, j) { if (j < i || (j === i && cerrarActual)) ponerPreg(x, false); });
+  if (PREGS[i + 1]) ponerPreg(PREGS[i + 1], true);
 }
 function resumirPreg(p) {
   var marcadas = [].slice.call(p.querySelectorAll('input:checked')).map(function (i) { return i.value; });
@@ -271,7 +275,8 @@ PREGS.forEach(function (p, i) {
   p.querySelector('.pregT').addEventListener('click', function () { abrirPreg(p, !p.classList.contains('abierta')); });
   p.addEventListener('change', function (ev) {
     resumirPreg(p);
-    if (ev.target.type === 'radio' && PREGS[i + 1]) setTimeout(function () { abrirPreg(PREGS[i + 1], true); }, 250);
+    if (ev.target.type === 'text') return;   // el «Otro tema» escrito no abre la siguiente
+    setTimeout(function () { avanzar(i, ev.target.type === 'radio'); }, 250);
   });
   p.addEventListener('input', function () { resumirPreg(p); });
 });

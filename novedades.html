@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Novedades para tu escuela · OpenCluster Tech</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Marca OpenCluster: azul marino de fondo de títulos, celeste de acento. Colores planos, sin degradados. */
+  :root{
+    --marino:#001a60; --azul:#0a7fd6; --celeste:#06b3fd; --texto:#1a2535; --suave:#3a4a60;
+    --gris:#5b6b80; --linea:#e1e9f3; --fondo:#f4f8fd; --blanco:#ffffff; --wa:#25d366;
+    --t-display:'Montserrat',Arial,sans-serif; --t-texto:'Open Sans',Arial,sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--fondo); color:var(--texto); font-family:var(--t-texto); font-size:15px; line-height:1.55; }
+  img{ max-width:100%; display:block; }
+  a{ color:var(--azul); }
+
+  .barra{ position:sticky; top:0; z-index:5; background:var(--blanco); border-bottom:1px solid var(--linea); }
+  .barra-in{ max-width:760px; margin:0 auto; padding:10px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .volver{ font-family:var(--t-display); font-weight:700; font-size:13px; color:var(--marino); background:none; border:1.5px solid var(--linea);
+           border-radius:20px; padding:7px 14px; cursor:pointer; }
+  .volver:hover{ border-color:var(--azul); }
+  .volver:focus-visible, .tab:focus-visible, .btn:focus-visible{ outline:2px solid var(--celeste); outline-offset:2px; }
+  .barra img{ height:30px; width:auto; }
+  .aviso{ max-width:760px; margin:0 auto; padding:0 18px 10px; font-size:13px; color:var(--gris); }
+
+  .tabs{ max-width:760px; margin:18px auto 0; padding:0 18px; display:flex; gap:6px; flex-wrap:wrap; }
+  .tab{ font-family:var(--t-display); font-weight:700; font-size:13px; color:var(--suave); background:var(--blanco);
+        border:1px solid var(--linea); border-radius:10px; padding:9px 14px; cursor:pointer; text-decoration:none; }
+  .tab[aria-selected="true"]{ background:var(--marino); color:var(--blanco); border-color:var(--marino); }
+
+  main{ max-width:760px; margin:14px auto 40px; padding:0 18px; }
+  .panel{ background:var(--blanco); border:1px solid var(--linea); border-radius:16px; overflow:hidden; }
+  .hero{ aspect-ratio:2/1; width:100%; object-fit:cover; }
+  .cuerpo{ padding:26px 30px 30px; }
+  .rotulo{ font-family:var(--t-display); font-weight:600; font-size:13px; color:var(--azul); margin:0; }
+  h1{ font-family:var(--t-display); font-weight:800; font-size:25px; line-height:1.25; color:var(--marino); margin:4px 0 0; text-wrap:balance; }
+  .lead{ font-size:16px; color:var(--suave); margin:10px 0 0; max-width:62ch; }
+  h2{ font-family:var(--t-display); font-weight:800; font-size:17px; color:var(--marino); margin:28px 0 8px; }
+  p{ margin:8px 0 0; max-width:65ch; }
+  ul.lista{ margin:8px 0 0; padding:0; list-style:none; display:grid; gap:10px; }
+  ul.lista li{ padding-left:22px; position:relative; max-width:65ch; }
+  ul.lista li::before{ content:""; position:absolute; left:4px; top:9px; width:8px; height:8px; border-radius:50%; background:var(--celeste); }
+  ol.pasos{ margin:8px 0 0; padding:0; list-style:none; counter-reset:p; display:grid; gap:12px; }
+  ol.pasos li{ counter-increment:p; display:grid; grid-template-columns:30px 1fr; gap:10px; align-items:start; }
+  ol.pasos li::before{ content:counter(p); font-family:var(--t-display); font-weight:800; font-size:14px; color:var(--marino);
+        width:30px; height:30px; border-radius:50%; border:1.5px solid var(--celeste); display:flex; align-items:center; justify-content:center; }
+  ol.pasos b{ color:var(--marino); }
+
+  .opciones{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:10px; }
+  .op{ border:1px solid var(--linea); border-radius:12px; overflow:hidden; min-width:0; }
+  .op img{ aspect-ratio:4/3; width:100%; object-fit:cover; }
+  .op div{ padding:10px 12px 12px; font-size:13.5px; color:var(--suave); }
+  .op b{ display:block; font-family:var(--t-display); font-size:14px; color:var(--marino); margin-bottom:2px; }
+
+  .mosaico{ background:var(--blanco); border-bottom:1px solid var(--linea); padding:24px 30px 26px; display:grid; gap:18px; }
+  .mosaico-t{ font-family:var(--t-display); font-weight:800; font-size:17px; color:var(--marino); margin:0; max-width:none; }
+  .grupo{ display:grid; gap:8px; }
+  .grupo-t{ font-family:var(--t-display); font-weight:600; font-size:12.5px; color:var(--azul); margin:0; }
+  .ayudas{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
+  .ayudas figure{ margin:0; background:var(--fondo); border-radius:12px; padding:12px 8px 10px; min-width:0; display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .ayudas img{ aspect-ratio:1/1; width:84%; object-fit:contain; mix-blend-mode:multiply; border-radius:6px; }
+  .ayudas figcaption{ font-family:var(--t-display); font-weight:600; font-size:11px; color:var(--marino); text-align:center; line-height:1.3; text-wrap:balance; }
+  .ayudas figure[role=button]{ cursor:pointer; transition:background .15s, box-shadow .15s; }
+  .ayudas figure[role=button]:hover{ background:#e6f1fc; box-shadow:inset 0 0 0 1px #b9d8f3; }
+  .ayudas figure[role=button]:focus-visible{ outline:2px solid var(--celeste); outline-offset:2px; }
+  .mosaico-sub{ font-size:13px; color:var(--gris); margin:-12px 0 0; max-width:none; }
+  .ficha{ border:0; padding:0; border-radius:16px; width:min(560px, calc(100% - 32px)); max-height:calc(100% - 40px); box-shadow:0 20px 60px rgba(0,26,96,.25); }
+  .ficha::backdrop{ background:rgba(0,26,96,.45); }
+  .ficha-in{ position:relative; padding:22px 24px 24px; }
+  .ficha-x{ position:absolute; top:10px; right:12px; width:34px; height:34px; border:0; border-radius:50%; background:var(--fondo); color:var(--marino); font-size:22px; line-height:1; cursor:pointer; }
+  .ficha-cab{ display:grid; grid-template-columns:104px minmax(0,1fr); gap:16px; align-items:center; padding-right:30px; }
+  .ficha-cab img{ width:104px; height:104px; object-fit:contain; background:var(--fondo); border-radius:12px; padding:8px; mix-blend-mode:multiply; }
+  .ficha-g{ font-family:var(--t-display); font-weight:600; font-size:12px; color:var(--azul); margin:0; }
+  .ficha h3{ font-family:var(--t-display); font-weight:800; font-size:19px; color:var(--marino); margin:2px 0 0; line-height:1.25; }
+  .ficha-que{ font-size:14px; color:var(--suave); margin:6px 0 0; line-height:1.5; }
+  .ficha-sec{ margin-top:14px; }
+  .ficha-sec h4{ font-family:var(--t-display); font-weight:700; font-size:13.5px; color:var(--marino); margin:0; }
+  .ficha-sec p{ font-size:14px; margin:3px 0 0; line-height:1.55; }
+  .ficha-aula{ background:var(--fondo); border-left:3px solid var(--celeste); border-radius:0 10px 10px 0; padding:10px 14px; }
+  .ficha-wa{ display:inline-block; margin-top:18px; background:var(--wa); color:#fff; text-decoration:none; font-family:var(--t-display); font-weight:700; font-size:13.5px; padding:11px 20px; border-radius:22px; }
+  @media (max-width:600px){ .ficha-cab{ grid-template-columns:76px minmax(0,1fr); } .ficha-cab img{ width:76px; height:76px; } .ficha-in{ padding:18px 16px 20px; } }
+  .salas2{ border-bottom:1px solid var(--linea); display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--linea); }
+  .salas2 img{ aspect-ratio:1.4/1; width:100%; object-fit:cover; }
+  @media (max-width:600px){ .ayudas{ grid-template-columns:repeat(3,minmax(0,1fr)); } .mosaico{ padding:20px 18px 22px; } }
+  .mat{ display:grid; gap:10px; margin-top:10px; }
+  .mat div{ border-left:3px solid var(--celeste); padding:2px 0 2px 12px; }
+  .mat b{ font-family:var(--t-display); color:var(--marino); font-size:14px; }
+
+  .cita{ margin:12px 0 0; padding:14px 16px; background:var(--fondo); border-radius:10px; font-size:14px; color:var(--suave); }
+  .cita small{ display:block; margin-top:6px; font-size:12px; color:var(--gris); }
+
+  .aporte{ margin-top:28px; padding:18px 20px; background:var(--marino); color:#e6f0ff; border-radius:12px; }
+  .aporte p{ margin:0; max-width:none; }
+  .aporte strong{ color:var(--blanco); font-family:var(--t-display); }
+
+  .propuesta{ margin-top:22px; background:var(--marino); border-radius:14px; overflow:hidden; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); }
+  .propuesta img{ width:100%; height:100%; min-height:210px; object-fit:cover; }
+  .propuesta .txt{ padding:22px 24px 24px; display:flex; flex-direction:column; justify-content:center; }
+  .propuesta h2{ color:var(--blanco); margin:0; font-size:18px; line-height:1.3; text-wrap:balance; }
+  .propuesta p{ color:#cfe8ff; font-size:14px; line-height:1.6; margin:8px 0 0; }
+  .propuesta a{ align-self:flex-start; margin-top:16px; background:var(--celeste); color:var(--marino); text-decoration:none;
+                font-family:var(--t-display); font-weight:700; font-size:14px; padding:12px 22px; border-radius:10px; }
+  @media (max-width:600px){ .propuesta{ grid-template-columns:1fr; } .propuesta img{ min-height:0; aspect-ratio:16/9; } .propuesta .txt{ padding:18px 18px 20px; } }
+  .acciones{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; align-items:center; }
+  .btn{ font-family:var(--t-display); font-weight:700; font-size:14px; text-decoration:none; border-radius:22px; padding:11px 18px; display:inline-flex; align-items:center; gap:8px; }
+  .btn-wa{ background:var(--wa); color:var(--blanco); }
+  .btn-sec{ border:1.5px solid var(--linea); color:var(--marino); background:var(--blanco); }
+  .contacto{ font-size:13px; color:var(--gris); margin-top:10px; max-width:none; }
+  .contacto .tel{ white-space:nowrap; }
+
+  .pie{ text-align:center; padding:10px 18px 30px; }
+  .pie img{ width:300px; max-width:80%; margin:0 auto; opacity:.55; }
+
+  @media (max-width:600px){
+    .cuerpo{ padding:20px 18px 24px; } h1{ font-size:21px; }
+    .opciones{ grid-template-columns:1fr; }
+  }
+  @media (prefers-reduced-motion:no-preference){ .panel{ transition:opacity .15s; } }
+</style>
+</head>
+<body>
+
+<div class="barra"><div class="barra-in">
+  <button type="button" class="volver" id="volver">&larr; Volver al correo</button>
+  <img src="assets/oct-logo.png" alt="OpenCluster Tech">
+</div>
+<div class="aviso" id="aviso" hidden>Ya puedes cerrar esta pestaña. Tu correo sigue abierto en la pestaña anterior.</div>
+</div>
+
+<nav class="tabs" role="tablist" aria-label="Novedades">
+  <a class="tab" role="tab" id="t-capacitacion" href="#capacitacion" aria-controls="p-capacitacion">Capacitación</a>
+  <a class="tab" role="tab" id="t-salas" href="#salas" aria-controls="p-salas">Salas y estación móvil</a>
+  <a class="tab" role="tab" id="t-proyectos" href="#proyectos" aria-controls="p-proyectos">Proyectos con fondos</a>
+</nav>
+
+<main>
+
+<!-- Capacitación -->
+<section class="panel" id="p-capacitacion" role="tabpanel" aria-labelledby="t-capacitacion">
+  <img class="hero" src="assets/nov-cap-hero.jpg" alt="Niña sonriendo mientras usa TD Snap en una tablet, junto a su educadora">
+  <div class="cuerpo">
+    <p class="rotulo">Capacitación personalizada sin costo</p>
+    <h1>Comunicación aumentativa para tu equipo</h1>
+    <p class="lead">Una hora de capacitación personalizada con nuestros terapeutas, para los profesionales de la educación que trabajan con inclusión.</p>
+
+    <h2>Qué vas a aprender</h2>
+    <ul class="lista">
+      <li>Qué opciones de comunicación aumentativa existen hoy en el mercado y para qué sirve cada una.</li>
+      <li>Cómo funciona TD Snap y cómo sacarle provecho en el trabajo diario.</li>
+      <li>Cómo usar esta tecnología al educar a estudiantes no verbales.</li>
+    </ul>
+
+    <h2>Cómo la coordinamos</h2>
+    <ol class="pasos">
+      <li><span><b>Nos escribes</b> y nos cuentas quiénes participarían de tu equipo.</span></li>
+      <li><span><b>Acordamos el día y el horario</b> que le acomode a tu establecimiento.</span></li>
+      <li><span><b>Uno de nuestros terapeutas</b> los capacita durante una hora y responde sus preguntas.</span></li>
+    </ol>
+
+    <div class="aporte"><p>¿Por qué sin costo? Porque estamos realmente comprometidos con la inclusión. Durante este año, decenas de colegios ya se beneficiaron de estas capacitaciones, y queremos que muchos más estudiantes no verbales tengan cómo comunicarse. Es nuestro aporte. Así seguimos <strong>Construyendo Inclusión</strong>.</p></div>
+
+    <div class="acciones">
+      <a class="btn btn-wa" data-que="WhatsApp capacitación" target="_blank" rel="noopener"
+         href="https://wa.me/56956294723?text=Hola%20Rayen%2C%20quiero%20agendar%20la%20capacitaci%C3%B3n%20sin%20costo%20en%20comunicaci%C3%B3n%20aumentativa%20para%20mi%20equipo.">Agendar por WhatsApp</a>
+    </div>
+    <p class="contacto">También puedes escribirme a rayen.ogalde@opencluster-tech.cl o llamarme al <span class="tel">+56 9 5629 4723</span>.</p>
+  </div>
+</section>
+
+<!-- Salas -->
+<section class="panel" id="p-salas" role="tabpanel" aria-labelledby="t-salas" hidden>
+  <div class="salas2">
+    <img src="assets/sala-luminea-rincon.jpg" alt="Rincón Luminea con columnas de burbujas">
+    <img src="assets/sala-luminea-tablet2.jpg" alt="Piscina de pelotas Luminea manejada desde una tablet" style="object-position:left center">
+  </div>
+  <div class="cuerpo">
+    <p class="rotulo">Salas multisensoriales</p>
+    <h1>Estación sensorial móvil y salas multisensoriales para tu escuela</h1>
+    <p class="lead">Diseñadas para cada espacio y para las necesidades de cada establecimiento.</p>
+
+    <h2>Tres caminos según tu espacio</h2>
+    <div class="opciones">
+      <div class="op"><img src="https://opencluster-tech.github.io/propuestas/salas-escuelas/SalasMultisensoriales_Recortadas/opcion-shx1-sala.jpg" alt="Sala multisensorial completa" loading="lazy"><div><b>Una sala completa</b>Todo el espacio pensado para tus estudiantes.</div></div>
+      <div class="op"><img src="https://opencluster-tech.github.io/propuestas/salas-escuelas/SalasMultisensoriales_Recortadas/qinera-sala-calma.jpg" alt="Sala de calma" loading="lazy"><div><b>Una sala por etapas</b>Parten con una primera etapa y suman a su ritmo. La sala funciona desde el primer día.</div></div>
+      <div class="op"><img src="https://opencluster-tech.github.io/propuestas/salas-escuelas/SalasMultisensoriales_Recortadas/estacion-tubo-nina.jpg" alt="Estación sensorial móvil" loading="lazy"><div><b>Estación sensorial móvil</b>Si no tienen espacio para una sala: todo en un mueble con ruedas que va de una sala a otra.</div></div>
+    </div>
+
+    <div class="propuesta">
+      <img src="https://opencluster-tech.github.io/propuestas/salas-escuelas/SalasMultisensoriales_Recortadas/qinera-sala-shx.jpg" alt="Sala multisensorial con proyección de un panda rojo y asientos de colores" loading="lazy">
+      <div class="txt">
+        <h2>Opciones de salas y estaciones sensoriales que hemos diseñado para ti</h2>
+        <p>Preparamos distintas alternativas para escuelas, según el espacio que tienen y las necesidades de sus estudiantes. Van desde una sala completa hasta una estación sensorial móvil que se lleva de una sala a otra.</p>
+        <a id="btnSalas" data-que="Conoce las opciones (propuesta salas)" target="_blank" rel="noopener" href="https://opencluster-tech.github.io/propuestas/salas-escuelas/">Conoce las opciones</a>
+      </div>
+    </div>
+
+    <h2>Materiales que cuidan la salud de tus estudiantes</h2>
+    <p>Tus estudiantes tocan, abrazan y se recuestan sobre estos materiales todos los días. Por eso elegimos materiales con certificaciones internacionales.</p>
+    <div class="mat">
+      <div><b>Tela que no deja pasar líquidos.</b> Un laboratorio independiente en Europa la puso a prueba con orina y sangre. El líquido se queda en la superficie y se limpia con un paño.</div>
+      <div><b>Tela sin sustancias dañinas para la piel.</b> Lo confirmó un análisis de laboratorio.</div>
+      <div><b>Espuma con la certificación europea que se exige a productos para bebés.</b> Es el nivel más estricto, porque los bebés se llevan todo a la boca.</div>
+      <div><b>Equipos con marcado CE.</b> Cumplen las reglas de seguridad eléctrica de la Unión Europea.</div>
+    </div>
+
+    <div class="aporte"><p>El diseño de la sala no tiene costo. Nuestros profesionales evalúan las necesidades de tu comunidad y proponen el espacio adecuado. Así seguimos <strong>Construyendo Inclusión</strong>.</p></div>
+
+    <div class="acciones">
+      <a class="btn btn-wa" data-que="WhatsApp salas" target="_blank" rel="noopener"
+         href="https://wa.me/56956294723?text=Hola%20Rayen%2C%20quiero%20conocer%20las%20alternativas%20de%20salas%20multisensoriales%20y%20la%20estaci%C3%B3n%20sensorial%20m%C3%B3vil%20para%20mi%20escuela.">Conversemos por WhatsApp</a>
+    </div>
+    <p class="contacto">También puedes escribirme a rayen.ogalde@opencluster-tech.cl o llamarme al <span class="tel">+56 9 5629 4723</span>.</p>
+  </div>
+</section>
+
+<!-- Proyectos -->
+<section class="panel" id="p-proyectos" role="tabpanel" aria-labelledby="t-proyectos" hidden>
+  <div class="mosaico">
+    <p class="mosaico-t">Algunas ayudas técnicas que tu establecimiento puede conseguir</p>
+    <p class="mosaico-sub">Toca cada una para saber para quién es y cómo se usa en la escuela.</p>
+    <div class="grupo">
+      <p class="grupo-t">Comunicación</p>
+      <div class="ayudas">
+        <figure><img src="assets/at-tdsnap-tablero.jpg" alt="Comunicador TD Snap" loading="lazy"><figcaption>Comunicador TD Snap</figcaption></figure>
+        <figure><img src="assets/at-comuniqa.jpg" alt="Comunicador ComuniQa con lector ocular" loading="lazy"><figcaption>ComuniQa con lector ocular</figcaption></figure>
+        <figure><img src="assets/at-tdsnap-app.jpg" alt="Software TD Snap" loading="lazy"><figcaption>Software TD Snap</figcaption></figure>
+        <figure><img src="assets/at-pceye.jpg" alt="Lector ocular" loading="lazy"><figcaption>Lector ocular</figcaption></figure>
+        <figure><img src="assets/at-eyefx.jpg" alt="Software Eye FX" loading="lazy"><figcaption>Software Eye FX</figcaption></figure>
+      </div>
+    </div>
+    <div class="grupo">
+      <p class="grupo-t">Uso del computador</p>
+      <div class="ayudas">
+        <figure><img src="assets/at-cefalico.jpg" alt="Mouse cefálico" loading="lazy"><figcaption>Mouse cefálico</figcaption></figure>
+        <figure><img src="assets/at-trackball.jpg" alt="Mouse trackball" loading="lazy"><figcaption>Mouse trackball</figcaption></figure>
+        <figure><img src="assets/at-teclado.jpg" alt="Teclado de teclas grandes" loading="lazy"><figcaption>Teclado de teclas grandes</figcaption></figure>
+        <figure><img src="assets/at-pulsador.jpg" alt="Pulsador adaptado" loading="lazy"><figcaption>Pulsador adaptado</figcaption></figure>
+        <figure><img src="assets/at-notebook.jpg" alt="Notebook" loading="lazy"><figcaption>Notebook</figcaption></figure>
+      </div>
+    </div>
+    <div class="grupo">
+      <p class="grupo-t">Para estudiantes ciegos o con baja visión</p>
+      <div class="ayudas">
+        <figure><img src="assets/at-lupa.jpg" alt="Lupa digital" loading="lazy"><figcaption>Lupa digital</figcaption></figure>
+        <figure><img src="assets/at-telescopio.jpg" alt="Telescopio monocular" loading="lazy"><figcaption>Telescopio monocular</figcaption></figure>
+        <figure><img src="assets/at-braille.jpg" alt="Máquina de escribir braille" loading="lazy"><figcaption>Máquina de escribir braille</figcaption></figure>
+        <figure><img src="assets/at-lineabraille.jpg" alt="Línea braille" loading="lazy"><figcaption>Línea braille</figcaption></figure>
+        <figure><img src="assets/at-lectorpantalla.jpg" alt="Lector de pantalla JAWS" loading="lazy"><figcaption>Lector de pantalla JAWS</figcaption></figure>
+      </div>
+    </div>
+    <div class="grupo">
+      <p class="grupo-t">Más apoyos para el aula</p>
+      <div class="ayudas">
+        <figure><img src="assets/at-openbook.jpg" alt="Software OpenBook" loading="lazy"><figcaption>Software OpenBook</figcaption></figure>
+        <figure><img src="assets/at-calculadora.jpg" alt="Calculadora parlante" loading="lazy"><figcaption>Calculadora parlante</figcaption></figure>
+        <figure><img src="assets/at-voz.jpg" alt="Reconocedor de voz" loading="lazy"><figcaption>Reconocedor de voz</figcaption></figure>
+        <figure><img src="assets/at-grabadora.jpg" alt="Comunicador de mensajes grabados" loading="lazy"><figcaption>Comunicador de mensajes grabados</figcaption></figure>
+        <figure><img src="assets/at-laringe.jpg" alt="Laringe electrónica" loading="lazy"><figcaption>Laringe electrónica</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <div class="cuerpo">
+    <p class="rotulo">Asesoría y apoyo sin costo</p>
+    <h1>Ayudas técnicas y salas con fondos del Gobierno</h1>
+    <p class="lead">Colaboramos en la elaboración de proyectos en base a tus necesidades, para que postules a fondos gubernamentales y consigas en tu establecimiento las ayudas técnicas que necesitan tus estudiantes y salas multisensoriales completas.</p>
+
+    <h2>Caminos para financiarlo</h2>
+    <ul class="lista">
+      <li><b>Subvención Escolar Preferencial (SEP).</b> Se incluye en el Plan de Mejoramiento Educativo (PME).</li>
+      <li><b>Subvención del Programa de Integración (PIE)</b> o FAEP, conversándolo con el sostenedor (DAEM, corporación o Servicio Local).</li>
+      <li><b>Fondos concursables</b>, como el FNDR de los gobiernos regionales.</li>
+      <li><b>SENADIS</b>, para ayudas técnicas.</li>
+    </ul>
+    <div class="cita">«Adquirir equipamiento para responder a diversas necesidades de los estudiantes, para habilitar espacios tales como salas multisensoriales y rincones de calma…»<small>Mineduc, Orientaciones del Plan de Mejoramiento Educativo 2026, gastos posibles con la SEP.</small></div>
+
+    <h2>Cómo lo hacemos contigo</h2>
+    <ol class="pasos">
+      <li><span><b>Te asesoramos sobre los fondos disponibles:</b> cuáles puede usar tu establecimiento, cuál le conviene y cuándo postular.</span></li>
+      <li><span><b>Elaboramos el proyecto.</b> Nuestros profesionales definen la sala o las ayudas técnicas según tus estudiantes, y preparamos las especificaciones técnicas y la cotización.</span></li>
+      <li><span><b>Postulamos contigo</b> y te acompañamos hasta la instalación.</span></li>
+    </ol>
+
+    <div class="aporte"><p>¿Por qué sin costo? Porque estamos realmente comprometidos con la inclusión. Poner a nuestros expertos a tu disposición para elaborar el proyecto es nuestro aporte. Así seguimos <strong>Construyendo Inclusión</strong>.</p></div>
+
+    <div class="acciones">
+      <a class="btn btn-wa" data-que="WhatsApp proyectos" target="_blank" rel="noopener"
+         href="https://wa.me/56956294723?text=Hola%20Rayen%2C%20quiero%20asesor%C3%ADa%20para%20postular%20a%20fondos%20y%20conseguir%20ayudas%20t%C3%A9cnicas%20o%20una%20sala%20para%20mi%20establecimiento.">Pedir asesoría por WhatsApp</a>
+    </div>
+    <p class="contacto">También puedes escribirme a rayen.ogalde@opencluster-tech.cl o llamarme al <span class="tel">+56 9 5629 4723</span>.</p>
+  </div>
+</section>
+
+</main>
+
+<div class="pie"><img src="assets/oct-logo.png" alt="OpenCluster Tech · Construyendo Inclusión"></div>
+
+<script>
+// Pestañas: se elige con #capacitacion, #salas o #proyectos (lo trae el enlace de cada tarjeta del correo).
+var PAGS = { capacitacion: 'Capacitación', salas: 'Salas y estación móvil', proyectos: 'Proyectos con fondos' };
+function mostrar() {
+  var id = (location.hash || '').slice(1);
+  if (!PAGS[id]) id = 'capacitacion';
+  Object.keys(PAGS).forEach(function (k) {
+    document.getElementById('p-' + k).hidden = (k !== id);
+    document.getElementById('t-' + k).setAttribute('aria-selected', k === id ? 'true' : 'false');
+  });
+  return id;
+}
+var actual = mostrar();
+
+// Volver al correo: cierra esta pestaña (se abrió desde el correo). Si el navegador no deja, avisamos.
+document.getElementById('volver').addEventListener('click', function () {
+  evento('Apretó: Volver al correo');
+  resumen(true);
+  window.close();
+  setTimeout(function () { document.getElementById('aviso').hidden = false; }, 300);
+});
+
+// Seguimiento, igual que la página de la grabación (solo si el enlace trae el código de la persona).
+var SEG = 'https://script.google.com/macros/s/AKfycbxVcZVFRqA53_3pbx7fQhs7tHu-YD0P_NcO0_DkYvjBSlMOS-3WHHxB0rQmP7WwdyMq/exec';
+var q = new URLSearchParams(location.search);
+var E = q.get('e') || '', N = q.get('n') || '', O = q.get('o') || '';
+var btnSalas = document.getElementById('btnSalas');
+if (E) btnSalas.href += '?e=' + encodeURIComponent(E) + '&n=' + encodeURIComponent(N) + '&o=' + encodeURIComponent(O);
+
+var SID = Date.now().toString(36) + Math.random().toString(36).slice(2, 8), INI = Date.now();
+var ua = navigator.userAgent;
+var DISP = (/iPad|Tablet/i.test(ua) ? 'Tablet' : /Mobi|Android|iPhone/i.test(ua) ? 'Celular' : 'Computador') + ' · ' +
+           (/Edg\//.test(ua) ? 'Edge' : /SamsungBrowser/.test(ua) ? 'Samsung' : /CriOS|Chrome\//.test(ua) ? 'Chrome' : /Firefox|FxiOS/.test(ua) ? 'Firefox' : /Safari/.test(ua) ? 'Safari' : 'Otro');
+function manda(obj, salida) {
+  if (!E) return;
+  obj.t = 'seg'; obj.e = E; obj.n = N; obj.o = O; obj.pag = 'Novedades';
+  var cuerpo = JSON.stringify(obj);
+  try {
+    if (salida && navigator.sendBeacon && navigator.sendBeacon(SEG, new Blob([cuerpo], { type: 'text/plain' }))) return;
+    fetch(SEG, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: cuerpo }).catch(function () {});
+  } catch (x) {}
+}
+function evento(que) { manda({ tipo: 'evento', que: que }); }
+var total = 0, seg = {}, cambio = true;
+setInterval(function () {
+  if (document.visibilityState !== 'visible') return;
+  total++; cambio = true;
+  var parte = PAGS[actual];
+  seg[parte] = (seg[parte] || 0) + 1;
+}, 1000);
+function resumen(salida) {
+  if (!cambio && !salida) return;
+  cambio = false;
+  manda({ tipo: 'visita', sid: SID, ini: INI, total: total, seg: seg, disp: DISP, video: { visto: 0, max: 0, dur: 0 } }, salida);
+}
+setInterval(function () { resumen(false); }, 15000);
+document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') resumen(true); });
+addEventListener('pagehide', function () { resumen(true); });
+addEventListener('hashchange', function () { actual = mostrar(); window.scrollTo(0, 0); evento('Miró: ' + PAGS[actual]); });
+document.querySelectorAll('[data-que]').forEach(function (a) {
+  a.addEventListener('click', function () { evento('Apretó: ' + a.getAttribute('data-que')); resumen(true); });
+});
+evento('Abrió novedades: ' + PAGS[actual]);
+resumen(false);
+</script>
+<dialog class="ficha" id="ficha" aria-labelledby="fichaT">
+  <div class="ficha-in">
+    <button type="button" class="ficha-x" id="fichaX" aria-label="Cerrar">&times;</button>
+    <div class="ficha-cab">
+      <img id="fichaImg" src="" alt="">
+      <div>
+        <p class="ficha-g" id="fichaG"></p>
+        <h3 id="fichaT"></h3>
+        <p class="ficha-que" id="fichaQue"></p>
+      </div>
+    </div>
+    <div class="ficha-sec"><h4>Para quién es</h4><p id="fichaPara"></p></div>
+    <div class="ficha-sec"><h4>Cómo se usa</h4><p id="fichaComo"></p></div>
+    <div class="ficha-sec ficha-aula"><h4>En la escuela</h4><p id="fichaAula"></p></div>
+    <a class="ficha-wa" id="fichaWa" target="_blank" rel="noopener" href="#">Quiero postular a esta ayuda</a>
+  </div>
+</dialog>
+
+<script>
+// Fichas de las ayudas técnicas (pestaña Proyectos). Textos tomados de la capacitación de gestores
+// y del catálogo de la Fundación Te Apoyamos; los que no estaban, de las fichas de nuestro catálogo.
+var FICHAS = {
+  'tdsnap-tablero': {
+    que: 'Una tablet que habla por el estudiante. En la pantalla hay dibujos y palabras. El estudiante toca lo que quiere decir y la tablet lo dice en voz alta. A esto se le llama comunicación aumentativa y alternativa (CAA), que son todas las formas de comunicarse que apoyan o reemplazan el habla.',
+    para: 'Un niño que no habla y que, para pedir algo, te toma de la mano y te lleva. Una niña que dice pocas palabras y solo la entiende su familia. Un estudiante que se frustra, llora o se enoja porque no logra explicar lo que le pasa.',
+    como: 'Toca el dibujo de «quiero», después el de «agua», y la tablet dice «quiero agua». Las palabras se van sumando en la barra de arriba. Se le pueden agregar fotos de su familia, de su sala y de lo que le gusta.',
+    aula: 'Puede responder en clases, elegir una actividad o avisar que algo le duele o que está cansado. Cuando un estudiante logra decir lo que necesita, muchas veces baja la frustración y puede concentrarse en aprender. La carcasa resiste golpes.' },
+  'comuniqa': {
+    que: 'Un comunicador que se maneja con los ojos. Es una tablet Surface con un lector que sigue la mirada y un programa de comunicación instalado (Communicator 5).',
+    para: 'Un estudiante que no habla y tampoco puede mover bien las manos para tocar una pantalla, pero entiende todo y sigue lo que pasa con la mirada. Por ejemplo, un niño en silla de ruedas que no controla los movimientos de sus brazos.',
+    como: 'El estudiante mira un dibujo o una palabra en la pantalla y mantiene la mirada un momento. El equipo lo dice en voz alta. Así arma frases solo con los ojos.',
+    aula: 'Puede responder preguntas, participar en la clase y conversar con su profesor y sus compañeros.' },
+  'tdsnap-app': {
+    que: 'Es el programa que hace hablar al Comunicador TD Snap. Funciona con pictogramas, que son dibujos simples que representan palabras, como «comer», «baño» o «jugar».',
+    para: 'Estudiantes que no hablan o que hablan muy poco y necesitan otra forma de decir lo que piensan, lo que quieren y lo que sienten.',
+    como: 'Viene con vocabulario listo para empezar, con palabras básicas, temas y frases rápidas. El equipo de la escuela lo va ajustando a cada estudiante, con sus botones, su voz y sus propias fotos.',
+    aula: 'Se compra como licencia digital. Sirve cuando la escuela ya tiene un equipo compatible donde instalarlo.' },
+  'pceye': {
+    que: 'Una barra delgada que se pone bajo la pantalla del computador y sigue el movimiento de los ojos. Donde el estudiante mira, va el mouse. Si mantiene la mirada un momento, hace clic.',
+    para: 'Un estudiante que no puede mover las manos ni los brazos, pero entiende todo y sigue lo que pasa con la mirada.',
+    como: 'Se conecta al computador por USB. La primera vez, el estudiante mira unos puntos en la pantalla para que el equipo aprenda cómo se mueven sus ojos. Después escribe con un teclado en pantalla, abre programas y navega solo mirando.',
+    aula: 'Puede hacer sus tareas en el computador como sus compañeros. Pesa 93 gramos y viene con estuche, así que se lleva de una sala a otra.' },
+  'eyefx': {
+    que: 'Un programa de juegos visuales que se manejan con la mirada. Sirve para aprender a usar los ojos como si fueran un mouse.',
+    para: 'Un estudiante que va a empezar a usar un lector ocular y todavía no descubre que su mirada puede mover cosas en la pantalla.',
+    como: 'El estudiante mira la pantalla y lo que mira reacciona. Así descubre que cuando mira, algo pasa. Eso se llama causa y efecto, y es lo primero que se aprende para usar la mirada.',
+    aula: 'Es el paso previo para que después use la mirada para comunicarse o hacer tareas en el computador.' },
+  'cefalico': {
+    que: 'Un mouse pequeño, de 23 gramos, que va en la cabeza. Cuando el estudiante gira la cabeza, el cursor se mueve en la pantalla.',
+    para: 'Un estudiante que mueve bien la cabeza pero no puede usar las manos para manejar un mouse. Por ejemplo, una joven en silla de ruedas que no mueve los brazos.',
+    como: 'Se pone en la cabeza con un cintillo y con pequeños giros se mueve el cursor. Para hacer clic se deja el cursor quieto un momento, o se aprieta un pulsador.',
+    aula: 'Funciona en computador, tablet y celular sin instalar nada. No tiene cables y su batería dura hasta 60 horas.' },
+  'trackball': {
+    que: 'Un mouse que no hay que arrastrar. La base queda quieta sobre la mesa y el estudiante mueve el cursor girando una bola grande.',
+    para: 'Un niño al que el mouse común se le arranca de la mano. Una estudiante con poca fuerza o con movimientos poco precisos, que se cansa rápido en el computador.',
+    como: 'Se conecta por USB. Se gira la bola con la mano, el brazo o incluso el pie, y se hace clic con dos botones grandes de distinto color, fáciles de diferenciar.',
+    aula: 'La bola mide 7,6 cm y sirve tanto para movimientos pequeños como amplios, así que se adapta a cada estudiante.' },
+  'teclado': {
+    que: 'Un teclado con teclas 30% más grandes y letras hasta cuatro veces más grandes, en amarillo sobre negro para que se vean mejor.',
+    para: 'Una niña que ve poco y no distingue las letras de un teclado común. Un niño que aprieta la tecla equivocada o la deja apretada sin querer. Estudiantes que están aprendiendo a escribir en el computador.',
+    como: 'Se conecta por USB como cualquier teclado. Tiene un interruptor para que cada tecla escriba una sola letra, aunque el estudiante la deje apretada.',
+    aula: 'Es de acero, resiste derrames y aguanta más de 50 millones de pulsaciones, así que dura con el uso diario de la sala.' },
+  'pulsador': {
+    que: 'Un botón grande y fácil de apretar que reemplaza al teclado o al mouse. Con un solo toque, el estudiante activa un juguete, un comunicador o el computador.',
+    para: 'Un estudiante que se mueve muy poco y no puede usar un teclado ni un mouse, pero sí puede apretar un botón con la mano, el codo o la cabeza.',
+    como: 'Se conecta a un comunicador, a un juguete adaptado o al computador con un adaptador, y se pone donde el estudiante lo alcance mejor.',
+    aula: 'Sirve para enseñar causa y efecto. El estudiante aprieta el botón y algo pasa, por ejemplo un juguete se mueve o suena un mensaje. Es el primer paso para que después use otras ayudas.' },
+  'notebook': {
+    que: 'Un computador portátil para usar con las ayudas técnicas de esta lista, como el lector ocular, el mouse cefálico o los programas que leen y escriben por voz.',
+    para: 'Escuelas que van a postular a una ayuda técnica que funciona con computador y no tienen un equipo para el estudiante.',
+    como: 'Lo entregamos con el programa de la ayuda técnica ya instalado.',
+    aula: 'El estudiante tiene su propio equipo, preparado para él, y lo usa en la sala o donde lo necesite.' },
+  'lupa': {
+    que: 'Una pantalla pequeña con cámara. Se pone sobre el cuaderno o el libro y muestra la letra mucho más grande, como una lupa pero en pantalla.',
+    para: 'Una niña que ve muy poco y, aunque use lentes, no logra leer la letra del libro. Un estudiante que se acerca mucho el cuaderno a la cara para poder leer.',
+    como: 'Se apoya sobre el texto y se elige el aumento, de 4 a 32 veces. También se cambia el color, por ejemplo letra amarilla sobre fondo negro, que a muchos estudiantes les cuesta menos leer.',
+    aula: 'Puede leer el libro, las guías y su propio cuaderno sin ayuda. También se conecta al televisor para verlo todavía más grande.' },
+  'telescopio': {
+    que: 'Un telescopio pequeño, de una sola lente, que acerca 8 veces lo que está lejos. Cabe en el bolsillo.',
+    para: 'Un estudiante que ve poco de lejos y no alcanza a leer la pizarra ni a ver lo que muestra el profesor adelante.',
+    como: 'Se lleva al ojo y se enfoca hasta ver nítido.',
+    aula: 'Puede leer la pizarra desde su puesto, sin pararse ni pedirle a un compañero que le dicte.' },
+  'braille': {
+    que: 'Una máquina para escribir en braille, el sistema de lectura con puntos en relieve que usan las personas ciegas. Tiene seis teclas, una por cada punto.',
+    para: 'Un estudiante ciego o que ve muy poco, que ya usa braille o lo está aprendiendo.',
+    como: 'Se aprietan juntas las teclas de los puntos de cada letra y los puntos quedan marcados en relieve en el papel. Una campana avisa cuando se acerca el final de la línea.',
+    aula: 'Puede escribir sus tareas y sus pruebas y leerlas de inmediato con los dedos. Es metálica y dura años en el colegio.' },
+  'lineabraille': {
+    que: 'Una barra que se conecta al computador y muestra en braille lo que hay en la pantalla. Tiene 40 espacios con puntitos que suben y bajan para formar las letras.',
+    para: 'Un estudiante ciego que lee braille y necesita usar el computador.',
+    como: 'Se conecta por Bluetooth o USB al computador, la tablet o el celular, y funciona junto a un programa lector de pantalla, como JAWS.',
+    aula: 'El estudiante lee con los dedos lo mismo que sus compañeros leen en la pantalla.' },
+  'lectorpantalla': {
+    que: 'Un programa que lee en voz alta todo lo que aparece en la pantalla del computador, como menús, correos, páginas web y documentos.',
+    para: 'Un estudiante ciego o que ve tan poco que no puede leer la pantalla, aunque la agrande.',
+    como: 'Se usa con el teclado, sin mouse. El estudiante se mueve con las flechas y el programa le va diciendo dónde está y qué dice cada parte.',
+    aula: 'Funciona con Word, Google Docs y los navegadores más usados, así que puede hacer los mismos trabajos que sus compañeros. También muestra el texto en una línea braille.' },
+  'openbook': {
+    que: 'Un programa que, junto a un escáner, convierte una hoja impresa en voz. Se escanea la página y el computador la lee en voz alta, en español.',
+    para: 'Un estudiante ciego o con baja visión que recibe guías, pruebas y libros impresos que no puede leer.',
+    como: 'Se pone la hoja o el libro abierto en el escáner. El programa reconoce las letras y el computador las lee.',
+    aula: 'Las guías y los libros de la clase quedan listos para escucharlos. Para quien ve poco, también agranda la página hasta 5 veces.' },
+  'calculadora': {
+    que: 'Una calculadora de bolsillo que dice en voz alta cada número y cada operación que se aprieta.',
+    para: 'Un estudiante ciego o con baja visión que no puede ver los números de una calculadora común.',
+    como: 'Se usa como cualquier calculadora. Cada tecla que el estudiante aprieta, la calculadora la dice en voz alta.',
+    aula: 'Puede hacer los cálculos de matemáticas solo, sin que otra persona le lea la pantalla.' },
+  'voz': {
+    que: 'Un programa que escribe lo que el estudiante dice. Habla frente al micrófono y el texto aparece escrito en el computador.',
+    para: 'Un estudiante que habla bien pero no puede escribir con las manos, o le cuesta tanto que se demora mucho más que sus compañeros.',
+    como: 'Se instala en un computador con Windows y micrófono. El estudiante dicta con su voz normal y el texto aparece en Word, el correo o el chat. También puede corregir y guardar dándole órdenes con la voz.',
+    aula: 'Según el fabricante, dictar es hasta 3 veces más rápido que escribir en el teclado.' },
+  'grabadora': {
+    que: 'Un botón grande que reproduce mensajes grabados, uno después del otro. Es una de las formas más simples de comunicación aumentativa.',
+    para: 'Un niño que no habla y está empezando a comunicarse, por ejemplo un estudiante que todavía no usa dibujos ni tablet.',
+    como: 'Un adulto graba varios mensajes seguidos. Cada vez que el estudiante aprieta el botón, suena el mensaje siguiente.',
+    aula: 'Puede saludar en la mañana, cantar su parte de una canción o contar lo que hizo el fin de semana, con mensajes que grabó su familia o sus compañeros.' },
+  'laringe': {
+    que: 'Un aparato que se apoya en el cuello y produce el sonido de la voz para quien no puede hablar con su propia voz.',
+    para: 'Personas que perdieron la voz por una enfermedad o una operación en la garganta.',
+    como: 'Se apoya en el cuello y la persona mueve la boca como si hablara. El aparato produce el sonido y la boca lo transforma en palabras.',
+    aula: 'Le permite volver a hablar en voz alta. Se pide con anticipación, porque la entrega toma entre 25 y 30 días.' }
+};
+
+(function () {
+  var dlg = document.getElementById('ficha');
+  if (!dlg || !dlg.showModal) return;
+  var WA = 'https://wa.me/56956294723?text=';
+  document.querySelectorAll('.ayudas figure').forEach(function (fig) {
+    var img = fig.querySelector('img');
+    var clave = (img.getAttribute('src').match(/at-([a-z0-9-]+)\.jpg/) || [])[1];
+    if (!FICHAS[clave]) return;
+    var nombre = fig.querySelector('figcaption').textContent;
+    var grupo = fig.closest('.grupo').querySelector('.grupo-t').textContent;
+    fig.setAttribute('role', 'button');
+    fig.setAttribute('tabindex', '0');
+    fig.setAttribute('aria-label', nombre + ', ver para quién es y cómo se usa');
+    function abrir() {
+      var f = FICHAS[clave];
+      document.getElementById('fichaImg').src = img.src;
+      document.getElementById('fichaImg').alt = nombre;
+      document.getElementById('fichaG').textContent = grupo;
+      document.getElementById('fichaT').textContent = nombre;
+      document.getElementById('fichaQue').textContent = f.que;
+      document.getElementById('fichaPara').textContent = f.para;
+      document.getElementById('fichaComo').textContent = f.como;
+      document.getElementById('fichaAula').textContent = f.aula;
+      document.getElementById('fichaWa').href = WA + encodeURIComponent('Hola Rayen, quiero asesoría para postular a fondos y conseguir esta ayuda técnica para mi establecimiento: ' + nombre + '.');
+      document.getElementById('fichaWa').setAttribute('data-ayuda', nombre);
+      dlg.showModal();
+      if (typeof evento === 'function') evento('Abrió ficha: ' + nombre);
+    }
+    fig.addEventListener('click', abrir);
+    fig.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(); } });
+  });
+  document.getElementById('fichaX').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  document.getElementById('fichaWa').addEventListener('click', function () {
+    if (typeof evento === 'function') evento('Apretó: WhatsApp desde ficha (' + this.getAttribute('data-ayuda') + ')');
+  });
+})();
+</script>
+</body>
+</html>

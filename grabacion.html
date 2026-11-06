@@ -214,7 +214,7 @@ resumen(false);
 // ── Encuesta temas 2027 (se guarda en la pestaña Encuesta_Webinars2027) ──
 // Solo aparece si el enlace trae el código de la persona; así sabemos quién responde.
 var EMAIL = '';
-try { EMAIL = E ? atob(E) : ''; } catch (x) { EMAIL = ''; }
+try { EMAIL = E ? atob(E.replace(/-/g, '+').replace(/_/g, '/')) : ''; } catch (x) { EMAIL = ''; }
 var enc = document.getElementById('encuesta');
 if (EMAIL) enc.hidden = false;
 var chkOtro = document.getElementById('chkOtro');

@@ -35,9 +35,29 @@
   .enc{ margin-top:22px; border:1px solid var(--linea); border-radius:16px; padding:18px 22px 20px; background:#fff; }
   .enc h2{ font-family:'Montserrat',sans-serif; font-size:18px; font-weight:800; color:var(--azul); margin:0; line-height:1.3; }
   .enc .intro{ font-size:13.5px; color:var(--gris); line-height:1.5; margin:4px 0 0; }
-  .preg{ margin-top:14px; }
-  .preg legend{ font-family:'Montserrat',sans-serif; font-size:14px; font-weight:700; color:var(--azul); padding:0; margin-bottom:6px; }
-  .preg .ayuda{ font-size:12px; color:var(--gris); margin:-4px 0 6px; }
+  .preg{ margin:8px 0 0; padding:0; min-width:0; border:1px solid var(--linea); border-radius:12px; background:#fff; }
+  .preg:first-child{ margin-top:14px; }
+  .preg legend{ float:left; width:100%; padding:0; margin:0; }
+  .pregT{ width:100%; display:flex; align-items:center; gap:10px; background:none; border:0; padding:11px 14px; cursor:pointer; text-align:left;
+          font-family:'Montserrat',sans-serif; font-size:14px; font-weight:700; color:var(--azul); line-height:1.3; }
+  .pregT .q{ flex:1 1 auto; min-width:0; }
+  .pregT .resp{ flex:0 1 42%; min-width:0; font-family:'Open Sans',Arial,sans-serif; font-size:12.5px; font-weight:600; color:#0a7fd6;
+                text-align:right; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .pregT .mas{ flex:none; width:22px; height:22px; border-radius:50%; border:1px solid var(--linea); display:grid; place-items:center;
+               font-family:'Open Sans',Arial,sans-serif; font-size:15px; font-weight:600; color:var(--azul); line-height:1; }
+  .pregT .mas::before{ content:'+'; }
+  .preg.abierta .pregT .mas::before{ content:'−'; }
+  .preg.abierta .pregT .resp{ display:none; }
+  .pregT:focus-visible{ outline:2px solid #0a7fd6; outline-offset:-2px; border-radius:12px; }
+  .preg .cuerpo{ clear:both; padding:0 14px 12px; }
+  @media (max-width:560px){
+    .pregT{ flex-wrap:wrap; row-gap:3px; }
+    .pregT .q{ flex:1 1 0; }
+    .pregT .mas{ order:2; }
+    .pregT .resp{ order:3; flex:1 0 100%; text-align:left; white-space:normal; }
+  }
+  .preg:not(.abierta) .cuerpo{ display:none; }
+  .preg .ayuda{ font-size:12px; color:var(--gris); margin:0 0 6px; }
   fieldset{ border:0; margin:0; padding:0; min-width:0; }
   .opc{ display:grid; gap:5px; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); }
   .opc label{ display:flex; align-items:center; gap:8px; font-size:13px; line-height:1.3; color:var(--texto); background:var(--fondo);
@@ -78,7 +98,8 @@
         <p class="intro">Queremos que los webinars del próximo año traten lo que de verdad necesitas en tu escuela. Son cuatro preguntas y te toman un minuto. Con tus respuestas elegimos los temas.</p>
         <form id="formEnc" novalidate>
           <fieldset class="preg">
-            <legend>¿Qué temas te gustaría que tratemos?</legend>
+            <legend><button type="button" class="pregT" aria-expanded="false"><span class="q">¿Qué temas te gustaría que tratemos?</span><span class="resp"></span><span class="mas" aria-hidden="true"></span></button></legend>
+            <div class="cuerpo">
             <p class="ayuda">Puedes marcar varios.</p>
             <div class="opc">
               <label><input type="checkbox" name="tema" value="Comunicación aumentativa y alternativa (CAA)">Comunicación aumentativa y alternativa (CAA)</label>
@@ -89,28 +110,34 @@
               <label><input type="checkbox" name="tema" value="Otro tema" id="chkOtro">Otro tema</label>
             </div>
             <div class="otro" id="cajaOtro" hidden><input type="text" id="txtOtro" maxlength="200" placeholder="¿Qué tema te gustaría que tratemos?"></div>
+            </div>
           </fieldset>
 
           <fieldset class="preg">
-            <legend>¿Cómo prefieres participar?</legend>
+            <legend><button type="button" class="pregT" aria-expanded="false"><span class="q">¿Cómo prefieres participar?</span><span class="resp"></span><span class="mas" aria-hidden="true"></span></button></legend>
+            <div class="cuerpo">
             <div class="opc">
               <label><input type="radio" name="formato" value="En vivo, para poder hacer preguntas">En vivo, para poder hacer preguntas</label>
               <label><input type="radio" name="formato" value="Con la grabación, para verla cuando pueda">Con la grabación, para verla cuando pueda</label>
               <label><input type="radio" name="formato" value="Con todo mi equipo, en una capacitación para la escuela">Con todo mi equipo, en una capacitación para la escuela</label>
             </div>
+            </div>
           </fieldset>
 
           <fieldset class="preg">
-            <legend>¿Qué horario te acomoda más?</legend>
+            <legend><button type="button" class="pregT" aria-expanded="false"><span class="q">¿Qué horario te acomoda más?</span><span class="resp"></span><span class="mas" aria-hidden="true"></span></button></legend>
+            <div class="cuerpo">
             <div class="opc">
               <label><input type="radio" name="horario" value="En la mañana, entre 9:00 y 12:00">En la mañana, entre 9:00 y 12:00</label>
               <label><input type="radio" name="horario" value="Después de almuerzo, entre 14:00 y 16:30">Después de almuerzo, entre 14:00 y 16:30</label>
               <label><input type="radio" name="horario" value="Luego del horario laboral, entre 18:00 y 20:00">Luego del horario laboral, entre 18:00 y 20:00</label>
             </div>
+            </div>
           </fieldset>
 
           <fieldset class="preg">
-            <legend>¿Qué día de la semana te acomoda más?</legend>
+            <legend><button type="button" class="pregT" aria-expanded="false"><span class="q">¿Qué día de la semana te acomoda más?</span><span class="resp"></span><span class="mas" aria-hidden="true"></span></button></legend>
+            <div class="cuerpo">
             <p class="ayuda">Puedes marcar varios.</p>
             <div class="opc dias">
               <label><input type="checkbox" name="dia" value="Lunes">Lunes</label>
@@ -120,13 +147,16 @@
               <label><input type="checkbox" name="dia" value="Viernes">Viernes</label>
               <label><input type="checkbox" name="dia" value="Sábado">Sábado</label>
             </div>
+            </div>
           </fieldset>
 
-          <div class="preg">
-            <label for="txtComentario" style="display:block; font-family:'Montserrat',sans-serif; font-size:14px; font-weight:700; color:var(--azul); margin-bottom:6px;">¿Quieres contarnos cuáles son los desafíos de tu establecimiento?</label>
+          <fieldset class="preg">
+            <legend><button type="button" class="pregT" aria-expanded="false"><span class="q">¿Quieres contarnos cuáles son los desafíos de tu establecimiento?</span><span class="resp"></span><span class="mas" aria-hidden="true"></span></button></legend>
+            <div class="cuerpo">
             <p class="ayuda">Los retos de tu equipo de trabajo, tus desafíos en el aula, lo que más les cuesta hoy. Todo lo que nos cuentes nos ayuda a saber cómo apoyarte mejor.</p>
-            <textarea id="txtComentario" maxlength="1500" rows="2" placeholder="Escribe aquí"></textarea>
-          </div>
+            <textarea id="txtComentario" maxlength="1500" rows="2" placeholder="Escribe aquí" aria-label="Desafíos de tu establecimiento"></textarea>
+            </div>
+          </fieldset>
 
           <div class="enviar">
             <button type="submit" id="btnEnc">Enviar mis respuestas</button>
@@ -222,6 +252,31 @@ chkOtro.addEventListener('change', function () {
   document.getElementById('cajaOtro').hidden = !chkOtro.checked;
   if (chkOtro.checked) document.getElementById('txtOtro').focus();
 });
+// Preguntas que se abren y se cierran: una abierta a la vez; al elegir una opción única pasa sola a la siguiente.
+var PREGS = [].slice.call(document.querySelectorAll('#formEnc .preg'));
+function abrirPreg(p, abrir) {
+  PREGS.forEach(function (x) {
+    var on = (x === p) && abrir;
+    x.classList.toggle('abierta', on);
+    x.querySelector('.pregT').setAttribute('aria-expanded', on ? 'true' : 'false');
+  });
+}
+function resumirPreg(p) {
+  var marcadas = [].slice.call(p.querySelectorAll('input:checked')).map(function (i) { return i.value; });
+  var txt = p.querySelector('textarea');
+  var r = marcadas.length ? marcadas.join(', ') : (txt && txt.value.trim() ? 'Escrito' : '');
+  p.querySelector('.resp').textContent = r;
+}
+PREGS.forEach(function (p, i) {
+  p.querySelector('.pregT').addEventListener('click', function () { abrirPreg(p, !p.classList.contains('abierta')); });
+  p.addEventListener('change', function (ev) {
+    resumirPreg(p);
+    if (ev.target.type === 'radio' && PREGS[i + 1]) setTimeout(function () { abrirPreg(PREGS[i + 1], true); }, 250);
+  });
+  p.addEventListener('input', function () { resumirPreg(p); });
+});
+abrirPreg(PREGS[0], true);
+
 function guardarEnc(campo, valor) {
   return fetch(SEG, {
     method: 'POST',
@@ -239,7 +294,7 @@ document.getElementById('formEnc').addEventListener('submit', function (ev) {
   var dias = [].slice.call(f.querySelectorAll('input[name=dia]:checked')).map(function (i) { return i.value; });
   var comentario = document.getElementById('txtComentario').value.trim();
   if (!temas.length && !formato && !horario && !dias.length && !comentario) { msg.textContent = 'Marca al menos una respuesta.'; return; }
-  if (chkOtro.checked && !otro) { msg.textContent = 'Cuéntanos qué otro tema te interesa.'; document.getElementById('txtOtro').focus(); return; }
+  if (chkOtro.checked && !otro) { msg.textContent = 'Cuéntanos qué otro tema te interesa.'; abrirPreg(PREGS[0], true); document.getElementById('txtOtro').focus(); return; }
   msg.textContent = ''; btn.disabled = true; btn.textContent = 'Enviando…';
   var envios = [];
   if (temas.length) envios.push(['temas_2027', temas.join(' · ')]);

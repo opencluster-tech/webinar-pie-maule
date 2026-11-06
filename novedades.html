@@ -131,16 +131,10 @@
 <div class="aviso" id="aviso" hidden>Ya puedes cerrar esta pestaña. Tu correo sigue abierto en la pestaña anterior.</div>
 </div>
 
-<nav class="tabs" role="tablist" aria-label="Novedades">
-  <a class="tab" role="tab" id="t-capacitacion" href="#capacitacion" aria-controls="p-capacitacion">Capacitación</a>
-  <a class="tab" role="tab" id="t-salas" href="#salas" aria-controls="p-salas">Salas y estación móvil</a>
-  <a class="tab" role="tab" id="t-proyectos" href="#proyectos" aria-controls="p-proyectos">Proyectos con fondos</a>
-</nav>
-
 <main>
 
 <!-- Capacitación -->
-<section class="panel" id="p-capacitacion" role="tabpanel" aria-labelledby="t-capacitacion">
+<section class="panel" id="p-capacitacion">
   <img class="hero" src="assets/nov-cap-hero.jpg" alt="Niña sonriendo mientras usa TD Snap en una tablet, junto a su educadora">
   <div class="cuerpo">
     <p class="rotulo">Capacitación personalizada sin costo</p>
@@ -172,7 +166,7 @@
 </section>
 
 <!-- Salas -->
-<section class="panel" id="p-salas" role="tabpanel" aria-labelledby="t-salas" hidden>
+<section class="panel" id="p-salas" hidden>
   <div class="salas2">
     <img src="assets/sala-luminea-rincon.jpg" alt="Rincón Luminea con columnas de burbujas">
     <img src="assets/sala-luminea-tablet2.jpg" alt="Piscina de pelotas Luminea manejada desde una tablet" style="object-position:left center">
@@ -218,7 +212,7 @@
 </section>
 
 <!-- Proyectos -->
-<section class="panel" id="p-proyectos" role="tabpanel" aria-labelledby="t-proyectos" hidden>
+<section class="panel" id="p-proyectos" hidden>
   <div class="mosaico">
     <p class="mosaico-t">Algunas ayudas técnicas que tu establecimiento puede conseguir</p>
     <p class="mosaico-sub">Toca cada una para saber para quién es y cómo se usa en la escuela.</p>
@@ -238,7 +232,7 @@
         <figure><img src="assets/at-cefalico.jpg" alt="Mouse cefálico" loading="lazy"><figcaption>Mouse cefálico</figcaption></figure>
         <figure><img src="assets/at-trackball.jpg" alt="Mouse trackball" loading="lazy"><figcaption>Mouse trackball</figcaption></figure>
         <figure><img src="assets/at-teclado.jpg" alt="Teclado de teclas grandes" loading="lazy"><figcaption>Teclado de teclas grandes</figcaption></figure>
-        <figure><img src="assets/at-pulsador.jpg" alt="Pulsador adaptado" loading="lazy"><figcaption>Pulsador adaptado</figcaption></figure>
+        <figure><img src="assets/at-joystick.jpg" alt="Mouse de palanca con botones grandes" loading="lazy"><figcaption>Mouse de palanca</figcaption></figure>
         <figure><img src="assets/at-notebook.jpg" alt="Notebook" loading="lazy"><figcaption>Notebook</figcaption></figure>
       </div>
     </div>
@@ -259,7 +253,7 @@
         <figure><img src="assets/at-calculadora.jpg" alt="Calculadora parlante" loading="lazy"><figcaption>Calculadora parlante</figcaption></figure>
         <figure><img src="assets/at-voz.jpg" alt="Reconocedor de voz" loading="lazy"><figcaption>Reconocedor de voz</figcaption></figure>
         <figure><img src="assets/at-grabadora.jpg" alt="Comunicador de mensajes grabados" loading="lazy"><figcaption>Comunicador de mensajes grabados</figcaption></figure>
-        <figure><img src="assets/at-laringe.jpg" alt="Laringe electrónica" loading="lazy"><figcaption>Laringe electrónica</figcaption></figure>
+        <figure><img src="assets/at-pulsador.jpg" alt="Pulsador adaptado" loading="lazy"><figcaption>Pulsador adaptado</figcaption></figure>
       </div>
     </div>
   </div>
@@ -299,14 +293,13 @@
 <div class="pie"><img src="assets/oct-logo.png" alt="OpenCluster Tech · Construyendo Inclusión"></div>
 
 <script>
-// Pestañas: se elige con #capacitacion, #salas o #proyectos (lo trae el enlace de cada tarjeta del correo).
+// Cada tarjeta del correo abre solo su parte: #capacitacion, #salas o #proyectos.
 var PAGS = { capacitacion: 'Capacitación', salas: 'Salas y estación móvil', proyectos: 'Proyectos con fondos' };
 function mostrar() {
   var id = (location.hash || '').slice(1);
   if (!PAGS[id]) id = 'capacitacion';
   Object.keys(PAGS).forEach(function (k) {
     document.getElementById('p-' + k).hidden = (k !== id);
-    document.getElementById('t-' + k).setAttribute('aria-selected', k === id ? 'true' : 'false');
   });
   return id;
 }
@@ -389,7 +382,7 @@ var FICHAS = {
     que: 'Una tablet que habla por el estudiante. En la pantalla hay dibujos y palabras. El estudiante toca lo que quiere decir y la tablet lo dice en voz alta. A esto se le llama comunicación aumentativa y alternativa (CAA), que son todas las formas de comunicarse que apoyan o reemplazan el habla.',
     para: 'Un niño que no habla y que, para pedir algo, te toma de la mano y te lleva. Una niña que dice pocas palabras y solo la entiende su familia. Un estudiante que se frustra, llora o se enoja porque no logra explicar lo que le pasa.',
     como: 'Toca el dibujo de «quiero», después el de «agua», y la tablet dice «quiero agua». Las palabras se van sumando en la barra de arriba. Se le pueden agregar fotos de su familia, de su sala y de lo que le gusta.',
-    aula: 'Puede responder en clases, elegir una actividad o avisar que algo le duele o que está cansado. Cuando un estudiante logra decir lo que necesita, muchas veces baja la frustración y puede concentrarse en aprender. La carcasa resiste golpes.' },
+    aula: 'Puede responder en clases, elegir una actividad o avisar que algo le duele o que está cansado. Cuando el estudiante tiene cómo pedir lo que necesita, se frustra menos, porque ya no depende del llanto, los gritos o el enojo para que lo entiendan. Estudios hechos en escuelas muestran que estas conductas disminuyen cuando el estudiante aprende a comunicarse con estas ayudas. La carcasa resiste golpes.' },
   'comuniqa': {
     que: 'Un comunicador que se maneja con los ojos. Es una tablet Surface con un lector que sigue la mirada y un programa de comunicación instalado (Communicator 5).',
     para: 'Un estudiante que no habla y tampoco puede mover bien las manos para tocar una pantalla, pero entiende todo y sigue lo que pasa con la mirada. Por ejemplo, un niño en silla de ruedas que no controla los movimientos de sus brazos.',
@@ -426,10 +419,15 @@ var FICHAS = {
     como: 'Se conecta por USB como cualquier teclado. Tiene un interruptor para que cada tecla escriba una sola letra, aunque el estudiante la deje apretada.',
     aula: 'Es de acero, resiste derrames y aguanta más de 50 millones de pulsaciones, así que dura con el uso diario de la sala.' },
   'pulsador': {
-    que: 'Un botón grande y fácil de apretar que reemplaza al teclado o al mouse. Con un solo toque, el estudiante activa un juguete, un comunicador o el computador.',
-    para: 'Un estudiante que se mueve muy poco y no puede usar un teclado ni un mouse, pero sí puede apretar un botón con la mano, el codo o la cabeza.',
-    como: 'Se conecta a un comunicador, a un juguete adaptado o al computador con un adaptador, y se pone donde el estudiante lo alcance mejor.',
-    aula: 'Sirve para enseñar causa y efecto. El estudiante aprieta el botón y algo pasa, por ejemplo un juguete se mueve o suena un mensaje. Es el primer paso para que después use otras ayudas.' },
+    que: 'Un botón grande, de casi 13 cm, que se activa con una presión suave. Al apretarlo hace un clic que se escucha y se siente, así el estudiante sabe que lo logró. Trae tapas de cuatro colores y una tapa transparente para poner encima un dibujo o un símbolo.',
+    para: 'Un estudiante que se mueve muy poco y no puede usar un teclado ni un mouse, pero sí puede apretar un botón con la mano, el codo, el pie o la cabeza.',
+    como: 'Por sí solo no hace nada. Se conecta a otro equipo, como un comunicador de mensajes grabados, un juguete adaptado o el computador, a través de un mouse adaptado. Se pone en la mesa o en la silla de ruedas, donde el estudiante lo alcance mejor.',
+    aula: 'Se usa mucho para enseñar causa y efecto. El estudiante aprieta el botón y algo pasa, por ejemplo un juguete se mueve, suena un mensaje o cambia la pantalla. Así descubre que él puede hacer que las cosas pasen. Con un dibujo encima, el estudiante relaciona el botón con una acción o con un mensaje.' },
+  'joystick': {
+    que: 'Un mouse que se maneja con una palanca, como la de un juego, y cuatro botones grandes de colores para hacer clic. Es muy firme y resiste el uso diario.',
+    para: 'Un estudiante con movimientos poco precisos, al que el mouse común se le escapa o no logra dejarlo quieto para hacer clic. Por ejemplo, un niño con los músculos muy rígidos o una niña que mueve los brazos sin querer.',
+    como: 'Se conecta por USB y funciona sin instalar nada. Al mover la palanca, el cursor avanza siempre a la misma velocidad, aunque la palanca se empuje fuerte, y eso lo hace más fácil de controlar. Los botones tienen una tapa transparente que evita los clics sin querer. También se le pueden conectar hasta cuatro pulsadores.',
+    aula: 'Mientras el estudiante aprende, se puede dejar que el cursor vaya solo hacia arriba, abajo y a los lados. Lo que se ajusta queda guardado en el mismo mouse, así que funciona igual en cualquier computador de la escuela.' },
   'notebook': {
     que: 'Un computador portátil para usar con las ayudas técnicas de esta lista, como el lector ocular, el mouse cefálico o los programas que leen y escriben por voz.',
     para: 'Escuelas que van a postular a una ayuda técnica que funciona con computador y no tienen un equipo para el estudiante.',
@@ -441,10 +439,10 @@ var FICHAS = {
     como: 'Se apoya sobre el texto y se elige el aumento, de 4 a 32 veces. También se cambia el color, por ejemplo letra amarilla sobre fondo negro, que a muchos estudiantes les cuesta menos leer.',
     aula: 'Puede leer el libro, las guías y su propio cuaderno sin ayuda. También se conecta al televisor para verlo todavía más grande.' },
   'telescopio': {
-    que: 'Un telescopio pequeño, de una sola lente, que acerca 8 veces lo que está lejos. Cabe en el bolsillo.',
+    que: 'Un telescopio pequeño, de una sola lente, que acerca 8 veces lo que se mira. Sirve para ver de lejos y también de cerca, desde unos 30 cm. Cabe en el bolsillo y pesa unos 110 gramos.',
     para: 'Un estudiante que ve poco de lejos y no alcanza a leer la pizarra ni a ver lo que muestra el profesor adelante.',
-    como: 'Se lleva al ojo y se enfoca hasta ver nítido.',
-    aula: 'Puede leer la pizarra desde su puesto, sin pararse ni pedirle a un compañero que le dicte.' },
+    como: 'Se lleva al ojo, se apunta a lo que se quiere ver y se gira para enfocar hasta que se vea nítido. Al principio cuesta encontrar lo que se busca y enfocar, por eso conviene practicarlo con el profesor o con quien acompaña al estudiante.',
+    aula: 'Lo usa para mirar la pizarra, la pantalla o los afiches de la sala desde su puesto, sin pararse ni pedirle a un compañero que le dicte. Lo ideal es que un especialista en baja visión evalúe antes al estudiante, para saber qué aumento necesita.' },
   'braille': {
     que: 'Una máquina para escribir en braille, el sistema de lectura con puntos en relieve que usan las personas ciegas. Tiene seis teclas, una por cada punto.',
     para: 'Un estudiante ciego o que ve muy poco, que ya usa braille o lo está aprendiendo.',
@@ -479,12 +477,7 @@ var FICHAS = {
     que: 'Un botón grande que reproduce mensajes grabados, uno después del otro. Es una de las formas más simples de comunicación aumentativa.',
     para: 'Un niño que no habla y está empezando a comunicarse, por ejemplo un estudiante que todavía no usa dibujos ni tablet.',
     como: 'Un adulto graba varios mensajes seguidos. Cada vez que el estudiante aprieta el botón, suena el mensaje siguiente.',
-    aula: 'Puede saludar en la mañana, cantar su parte de una canción o contar lo que hizo el fin de semana, con mensajes que grabó su familia o sus compañeros.' },
-  'laringe': {
-    que: 'Un aparato que se apoya en el cuello y produce el sonido de la voz para quien no puede hablar con su propia voz.',
-    para: 'Personas que perdieron la voz por una enfermedad o una operación en la garganta.',
-    como: 'Se apoya en el cuello y la persona mueve la boca como si hablara. El aparato produce el sonido y la boca lo transforma en palabras.',
-    aula: 'Le permite volver a hablar en voz alta. Se pide con anticipación, porque la entrega toma entre 25 y 30 días.' }
+    aula: 'Puede saludar en la mañana, cantar su parte de una canción o contar lo que hizo el fin de semana, con mensajes que grabó su familia o sus compañeros.' }
 };
 
 (function () {

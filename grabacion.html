@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Grabación del webinar · OpenCluster Tech</title>
+<meta property="og:title" content="Grabación del webinar PIE 2026 · OpenCluster Tech">
+<meta property="og:description" content="Mira la grabación de nuestro último webinar del año para equipos PIE y profesionales de la educación.">
+<meta property="og:image" content="https://webinar.opencluster-tech.cl/assets/cabecera-mosaico.jpg">
+<meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{ --azul:#001a60; --celeste:#06b3fd; --fondo:#f4f8fc; --texto:#1a2535; --gris:#5b6b7f; --linea:#e6edf5; }
@@ -190,8 +194,23 @@ var SEG = 'https://script.google.com/macros/s/AKfycbxVcZVFRqA53_3pbx7fQhs7tHu-YD
 var q = new URLSearchParams(location.search);
 var V = (q.get('v') || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 11);
 var E = q.get('e') || '', N = q.get('n') || '', O = q.get('o') || '';
+var NOMBRE_VISIBLE = N;   // el nombre que se muestra en la página (vacío en el enlace general)
 
-if (N) document.getElementById('saludo').textContent = 'Hola, ' + N + '. Aquí está la grabación del webinar.';
+// Enlace general (redes sociales): sin código de persona. Cada navegador recibe un código anónimo
+// propio que se guarda, así sus visitas se juntan en una sola fila «Visita desde redes».
+if (!E) {
+  var anon = '';
+  try { anon = localStorage.getItem('oct_visita_anonima') || ''; } catch (x) {}
+  if (!anon) {
+    anon = 'visita-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8) + '@redes.opencluster-tech.cl';
+    try { localStorage.setItem('oct_visita_anonima', anon); } catch (x) {}
+  }
+  O = O || 'redes';
+  N = 'Visita desde redes (' + O + ')';
+  E = btoa(anon).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+if (NOMBRE_VISIBLE) document.getElementById('saludo').textContent = 'Hola, ' + NOMBRE_VISIBLE + '. Aquí está la grabación del webinar.';
 if (!V) document.getElementById('caja').outerHTML = '<div class="falta">No encontramos el video. Responde el correo y te lo enviamos de otra forma.</div>';
 
 // Botón a Salas para escuelas, con el mismo código de la persona.
@@ -315,7 +334,7 @@ document.getElementById('formEnc').addEventListener('submit', function (ev) {
   }, Promise.resolve(true)).then(function (ok) {
     if (!ok) { btn.disabled = false; btn.textContent = 'Enviar mis respuestas'; msg.textContent = 'No pudimos guardar tus respuestas. Revisa tu conexión e inténtalo de nuevo.'; return; }
     evento('Respondió la encuesta 2027');
-    f.outerHTML = '<div class="gracias"><b>Gracias' + (N ? ', ' + N.replace(/[<>&"]/g, '') : '') + '.</b> Con tus respuestas vamos a preparar los webinars 2027. Te avisaremos por correo cuando abramos las inscripciones.</div>';
+    f.outerHTML = '<div class="gracias"><b>Gracias' + (NOMBRE_VISIBLE ? ', ' + NOMBRE_VISIBLE.replace(/[<>&"]/g, '') : '') + '.</b> Con tus respuestas vamos a preparar los webinars 2027. Te avisaremos por correo cuando abramos las inscripciones.</div>';
   });
 });
 
